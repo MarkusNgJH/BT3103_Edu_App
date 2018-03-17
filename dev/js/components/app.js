@@ -5,18 +5,17 @@ import firebase from 'firebase';
 require('../../scss/style.scss');
 
 var config = {
-    apiKey: "AIzaSyD9ECClGpGSF6KW30daXa37BiUqWrIpDxA",
-    authDomain: "testfirebasebuild.firebaseapp.com",
-    databaseURL: "https://testfirebasebuild.firebaseio.com",
-    projectId: "testfirebasebuild",
-    storageBucket: "testfirebasebuild.appspot.com",
-    messagingSenderId: "214448176410"
+    apiKey: "AIzaSyAp5KgeDweFK8PQ1l6o-V2eaqLeOYN0GlY",
+    authDomain: "bt3103-edu-app.firebaseapp.com",
+    databaseURL: "https://bt3103-edu-app.firebaseio.com",
+    projectId: "bt3103-edu-app",
+    storageBucket: "bt3103-edu-app.appspot.com",
+    messagingSenderId: "478259615153"
   };
   try {
     firebase.initializeApp(config);
   } catch (error) {}
   
-var db = firebase.database().ref();
 
 // new syntax for esx to create functions
 class App extends Component {
@@ -27,11 +26,11 @@ class App extends Component {
         };
     }
     componentDidMount(){
-        const rootRef = firebase.database().ref().child('testfirebasebuild');
+        const rootRef = firebase.database().ref("/");
         const valueRef = rootRef.child('value');
-        valueRef.on('value', snap => {
+        valueRef.on('value', (snapshot) => {
             this.setState({
-                speed: snap.val()
+                speed: snapshot.val()
             });
         });
         // everytime data changes on valueRef, assign value to speed.
