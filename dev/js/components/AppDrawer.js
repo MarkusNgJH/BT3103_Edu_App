@@ -1,11 +1,17 @@
 import React from 'react';
-import Drawer from 'material-ui/Drawer';
-import MenuItem from 'material-ui/MenuItem';
-import RaisedButton from 'material-ui/RaisedButton';
+import PropTypes from "prop-types";
+
+import withStyles from "material-ui/styles/withStyles";
+import Drawer from "material-ui/Drawer";
+import Hidden from "material-ui/Hidden";
+
+import IconButton from "material-ui/IconButton";
+import ChevronLeftIcon from "material-ui-icons/ChevronLeft";
 import { DrawerItems } from './DrawerItems'
 
 const styles = theme => ({
     paper: {
+        width: '100%',
         backgroundColor: theme.palette.background.paper
     },
     anchor: {
@@ -19,50 +25,60 @@ const styles = theme => ({
     }
 });
 
-class AppDrawer extends React.Component {
+function AppDrawer(props, context) {
+    const { classes, className, mobileDrawerOpen, onRequestClose } = props;
 
-    constructor(props) {
-        super(props);
-        this.state = { open: false };
-    }
-
-    handleToggle() {
-        this.setState({ open: !this.state.open });
-    }
-    handleClose() {
-        this.setState({ open: false });
-    }
-
-    render() {
-        const drawer = (
-            <Drawer
-                variant="persistent"
-                anchor={anchor}
-                open={open}
-                classes={{
-                    paper: classes.drawerPaper,
-                }}
-            >
-                <div className={classes.drawerHeader}>
-                    <IconButton onClick={this.handleDrawerClose}>
-                        {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+    const drawer = (
+        <div>
+            <div className={classes.drawerHeader}>
+                <Hidden lgUp implementation="css">
+                    <IconButton onClick={onRequestClose}>
+                        <ChevronLeftIcon />
                     </IconButton>
-                </div>
-                <Divider />
-                <List>
-                    <ListItem primaryText="Menu item 1" leftIcon={<ContentInbox />} />
-                    <ListItem primaryText="Menu item 2" leftIcon={<ActionGrade />} />
-                    <ListItem primaryText="Menu item 3" leftIcon={<ContentSend />} />
-                    <ListItem primaryText="Menu item 4" leftIcon={<ContentDrafts />} />
-                    <ListItem primaryText="Menu item 5" leftIcon={<ContentInbox />} />
-                </List>
-            </Drawer>
-        );
-        return (
-            <div>
+                </Hidden>
             </div>
-        );
-    }
+            {DrawerItems}
+        </div>
+    );
+
+    return (
+        <div className={className}>
+            <Hidden lgUp>
+                <Drawer
+                    classes={{
+                        paper: classes.paper
+                    }}
+                    type="temporary"
+                    open={mobileDrawerOpen}
+                    onRequestClose={onRequestClose}
+                    ModalProps={{
+                        keepMounted: true
+                    }}
+                >
+                    {drawer}
+                </Drawer>
+            </Hidden>
+
+            <Hidden lgDown implementation="css">
+                <Drawer
+                    classes={{
+                        paper: classes.paper
+                    }}
+                    type="permanent"
+                    open
+                >
+                    {drawer}
+                </Drawer>
+            </Hidden>
+        </div>
+    );
 }
 
-export default AppDrawer
+AppDrawer.propTypes = {
+    classes: PropTypes.object.isRequired,
+    className: PropTypes.string,
+    mobileDrawerOpen: PropTypes.bool.isRequired,
+    onRequestClose: PropTypes.func.isRequired
+};
+
+export default withStyles(styles)(AppDrawer);
