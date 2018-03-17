@@ -11,10 +11,9 @@ import firebase from 'firebase';
 const store = createStore(allReducers);
 
 ReactDOM.render(
-    <Provider store ={store}>
-        <App />
-    </Provider>
-   ,
+    <Provider store={store}>
+        <App />    
+    </Provider> ,
     document.getElementById('root')
 );
 // we assign a store to provider which supplies data to the componenets in App
