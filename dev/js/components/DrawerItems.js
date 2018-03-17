@@ -8,9 +8,16 @@ import StarIcon from 'material-ui-icons/Star'
 
 export const DrawerItems = (
     <div>
-        <MenuItem >Menu Item</MenuItem>
-        <MenuItem >Menu Item 2</MenuItem>
-        <MenuItem >Menu Item 3</MenuItem>
-        <MenuItem >Menu Item 4</MenuItem>
+        <Divider />
+        <List>
+            <ListItem button>
+                <ListItemIcon><StarIcon /></ListItemIcon>
+                <ListItemText primary="ReCharts" />
+            </ListItem>
+            <ListItem button>
+                <ListItemIcon><StarIcon /></ListItemIcon>
+                <ListItemText primary="Victory" />
+            </ListItem>
+        </List>
     </div>
 )

@@ -4,6 +4,21 @@ import MenuItem from 'material-ui/MenuItem';
 import RaisedButton from 'material-ui/RaisedButton';
 import { DrawerItems } from './DrawerItems'
 
+const styles = theme => ({
+    paper: {
+        backgroundColor: theme.palette.background.paper
+    },
+    anchor: {
+        color: theme.palette.text.secondary
+    },
+    drawerHeader: {
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "flex-end",
+        padding: "0 8px",
+    }
+});
+
 class AppDrawer extends React.Component {
 
     constructor(props) {
@@ -19,23 +34,32 @@ class AppDrawer extends React.Component {
     }
 
     render() {
+        const drawer = (
+            <Drawer
+                variant="persistent"
+                anchor={anchor}
+                open={open}
+                classes={{
+                    paper: classes.drawerPaper,
+                }}
+            >
+                <div className={classes.drawerHeader}>
+                    <IconButton onClick={this.handleDrawerClose}>
+                        {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+                    </IconButton>
+                </div>
+                <Divider />
+                <List>
+                    <ListItem primaryText="Menu item 1" leftIcon={<ContentInbox />} />
+                    <ListItem primaryText="Menu item 2" leftIcon={<ActionGrade />} />
+                    <ListItem primaryText="Menu item 3" leftIcon={<ContentSend />} />
+                    <ListItem primaryText="Menu item 4" leftIcon={<ContentDrafts />} />
+                    <ListItem primaryText="Menu item 5" leftIcon={<ContentInbox />} />
+                </List>
+            </Drawer>
+        );
         return (
             <div>
-                <RaisedButton
-                    label="Toggle Drawer"
-                    onClick={this.handleToggle.bind(this)}
-                />
-
-                <Drawer
-                    docked={false}
-                    width={200}
-                    open={this.state.open}
-                    onRequestChange={(open) => this.setState({ open })}
-                >
-                    {DrawerItems}
-                    {/* <MenuItem onClick={this.handleClose}>Menu Item</MenuItem>
-                    <MenuItem onClick={this.handleClose}>Menu Item 2</MenuItem> */}
-                </Drawer>
             </div>
         );
     }
