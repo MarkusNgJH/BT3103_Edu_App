@@ -4,6 +4,7 @@ import UserList from '../containers/user-list';
 import UserDetail from '../containers/user-details';
 import firebase from 'firebase';
 import AppFrame from './AppFrame';
+import Dashboard from './dashboard';
 require('../../scss/style.scss');
 
 var config = {
@@ -48,7 +49,7 @@ class App extends Component {
                 <h2> User Details:</h2>
                 <UserDetail />
                 <h2> Print Database:</h2>
-                <h2> {this.state.speed} </h2>
+                <h2> <Dashboard /> </h2>
             </div>
         );
     }
