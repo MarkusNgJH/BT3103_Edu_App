@@ -4,6 +4,7 @@ import UserList from '../containers/user-list';
 import UserDetail from '../containers/user-details';
 import firebase from 'firebase';
 import AppFrame from './AppFrame';
+import Recharts from '../containers/recharts';
 require('../../scss/style.scss');
 
 var config = {
@@ -38,10 +39,9 @@ class App extends Component {
         // everytime data changes on valueRef, assign value to speed.
     }
     render() {
-        return (
-            <div>
-                <AppFrame />
 
+        const body = (
+            <div>
                 <h2> Username List: </h2>
                 <UserList />
                 <hr />
@@ -49,6 +49,13 @@ class App extends Component {
                 <UserDetail />
                 <h2> Print Database:</h2>
                 <h2> {this.state.speed} </h2>
+                <hr />
+                <Recharts/>
+            </div>
+        )
+        return (
+            <div>
+                <AppFrame children={body} />
             </div>
         );
     }

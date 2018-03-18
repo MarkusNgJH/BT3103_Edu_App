@@ -1,84 +1,72 @@
 import React from 'react';
-import {GridList, GridTile} from 'material-ui/GridList';
+import PropTypes from 'prop-types';
+import { withStyles } from 'material-ui/styles';
+import GridList, { GridListTile } from 'material-ui/GridList';
 import IconButton from 'material-ui/IconButton';
-import Subheader from 'material-ui/Subheader';
-import StarBorder from 'material-ui/svg-icons/toggle/star-border';
+import Icon from 'material-ui/Icon';
+import DeleteIcon from 'material-ui-icons/Delete';
+import AddShoppingCartIcon from 'material-ui-icons/AddShoppingCart';
+import PhotoCamera from 'material-ui-icons/PhotoCamera';
 
-const styles = {
+const styles = theme => ({
   root: {
     display: 'flex',
     flexWrap: 'wrap',
     justifyContent: 'space-around',
+    overflow: 'hidden',
+    backgroundColor: theme.palette.background.paper,
   },
   gridList: {
-    width: 500,
-    height: 450,
-    overflowY: 'auto',
+    width: '100%',
+    height: '100%',
   },
-};
+  subheader: {
+    width: '100%',
+  },
+});
 
 const tilesData = [
   {
-    img: 'images/grid-list/00-52-29-429_640.jpg',
-    title: 'Breakfast',
-    author: 'jill111',
+    img: 'Chart 1'
   },
   {
-    img: 'images/grid-list/burger-827309_640.jpg',
-    title: 'Tasty burger',
-    author: 'pashminu',
+    img: 'Chart 2'
   },
   {
-    img: 'images/grid-list/camera-813814_640.jpg',
-    title: 'Camera',
-    author: 'Danson67',
+    img: 'Chart 3'
   },
   {
-    img: 'images/grid-list/morning-819362_640.jpg',
-    title: 'Morning',
-    author: 'fancycrave1',
+    img: 'Chart 4',
   },
   {
-    img: 'images/grid-list/hats-829509_640.jpg',
-    title: 'Hats',
-    author: 'Hans',
+    img: 'Chart 5'
   },
   {
-    img: 'images/grid-list/honey-823614_640.jpg',
-    title: 'Honey',
-    author: 'fancycravel',
+    img: 'Chart 6'
   },
   {
-    img: 'images/grid-list/vegetables-790022_640.jpg',
-    title: 'Vegetables',
-    author: 'jill111',
-  },
-  {
-    img: 'images/grid-list/water-plant-821293_640.jpg',
-    title: 'Water plant',
-    author: 'BkrmadtyaKarki',
+    img: 'Chart 7'
   },
 ];
 
-const GridListExampleSimple = () => (
-  <div style={styles.root}>
-    <GridList
-      cellHeight={180}
-      style={styles.gridList}
-    >
-      <Subheader>December</Subheader>
-      {tilesData.map((tile) => (
-        <GridTile
-          key={tile.img}
-          title={tile.title}
-          subtitle={<span>by <b>{tile.author}</b></span>}
-          actionIcon={<IconButton><StarBorder color="white" /></IconButton>}
-        >
-          <img src={tile.img} />
-        </GridTile>
-      ))}
-    </GridList>
-  </div>
-);
+function ImageGridList(props) {
+  const { classes } = props;
 
-export default GridListExampleSimple;
+  return (
+    <div className={classes.root}>
+      <GridList cellHeight={160} className={classes.gridList} cols={3}>
+        {tilesData.map(tile => (
+          <GridListTile cols={tile.cols || 1}>
+            <span>{tile.img}</span>
+          </GridListTile>
+        ))}
+      </GridList>
+    </div>
+  );
+}
+
+ImageGridList.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
+
+export default withStyles(styles)(ImageGridList);

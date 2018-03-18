@@ -1,29 +1,28 @@
-import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import PropTypes from 'prop-types'
-
-import { withStyles } from 'material-ui/styles'
+import React from 'react';
+import PropTypes from 'prop-types';
+import { withStyles } from 'material-ui/styles';
 import classNames from 'classnames';
-import Typography from 'material-ui/Typography'
-import AppBar from 'material-ui/AppBar'
-import Toolbar from 'material-ui/Toolbar'
-import Hidden from 'material-ui/Hidden'
-import Menu from 'material-ui/Menu'
+import Drawer from 'material-ui/Drawer';
+import AppBar from 'material-ui/AppBar';
+import Toolbar from 'material-ui/Toolbar';
+import List from 'material-ui/List';
+import { MenuItem } from 'material-ui/Menu';
+import Typography from 'material-ui/Typography';
+import TextField from 'material-ui/TextField';
+import Divider from 'material-ui/Divider';
+import IconButton from 'material-ui/IconButton';
+import MenuIcon from 'material-ui-icons/Menu';
+import ChevronLeftIcon from 'material-ui-icons/ChevronLeft';
+import ChevronRightIcon from 'material-ui-icons/ChevronRight';
 
-import IconButton from 'material-ui/IconButton'
-import MenuIcon from 'material-ui-icons/Menu'
-import MoreVertIcon from 'material-ui-icons/MoreVert'
-import { Color } from 'material-ui'
+import { AppDrawerElements } from "./AppDrawerElements";
 
-import AppDrawer from './AppDrawer'
-import { AppDrawerElements } from './AppDrawerElements'
-
-import { APP_SETTING } from './config'
+const drawerWidth = 240;
 
 const styles = theme => ({
     '@global': {
         html: {
-            backgroundColor: 'theme.palette.background.default',
+            background: theme.palette.background.default,
             WebkitFontSmoothing: 'antialiased',
             MozOsxFontSmoothing: 'grayscale',
             boxSizing: 'border-box',
@@ -55,14 +54,24 @@ const styles = theme => ({
         height: '100%',
     },
     appBar: {
-        [theme.breakpoints.up('lg')]: {
-            width: 'calc(100% - ' + APP_SETTING.DrawerWidth + 'px)',
-        },
+        position: 'absolute',
+        transition: theme.transitions.create(['margin', 'width'], {
+            easing: theme.transitions.easing.sharp,
+            duration: theme.transitions.duration.leavingScreen,
+        }),
     },
-    drawer: {
-        [theme.breakpoints.up('lg')]: {
-            width: APP_SETTING.DrawerWidth,
-        },
+    appBarShift: {
+        // width: `calc(100% - ${drawerWidth}px)`,
+        transition: theme.transitions.create(['margin', 'width'], {
+            easing: theme.transitions.easing.easeOut,
+            duration: theme.transitions.duration.enteringScreen,
+        }),
+    },
+    drawerHeader: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'flex-end',
+        padding: '0 8px',
     },
     content: {
         width: '100%',
@@ -70,7 +79,7 @@ const styles = theme => ({
         height: 'calc(100% - 56px)',
         marginTop: 56,
         [theme.breakpoints.up('lg')]: {
-            width: 'calc(100% - ' + APP_SETTING.DrawerWidth + 'px)',
+            width: 'calc(100% - ' + drawerWidth + 'px)',
         },
         [theme.breakpoints.up('sm')]: {
             height: 'calc(100% - 64px)',
@@ -80,88 +89,80 @@ const styles = theme => ({
     },
 });
 
-class AppFrame extends Component {
+class PersistentDrawer extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            mobileDrawerOpen: false,
-            dropdownAnchorEl: null,
-            dropdownMenuOpen: false,
+            open: false,
         }
     }
 
+    handleDrawerOpen() {
+        this.setState({ open: true });
+    };
+
     handleDrawerClose() {
-        this.setState({ mobileDrawerOpen: false });
-    };
-
-    handleDrawerToggle() {
-        this.setState({ mobileDrawerOpen: !this.state.mobileDrawerOpen });
-    };
-
-    handleMenuOpen() {
-        this.setState({ dropdownMenuOpen: true, dropdownAnchorEl: event.currentTarget });
-    };
-
-    handleMenuclose() {
-        this.setState({ dropdownMenuOpen: false });
+        this.setState({ open: false });
     };
 
     render() {
-        const { children, classes } = this.props;
+        const { classes, theme } = this.props;
+        const { anchor, open } = this.state;
+
+        const drawer = (
+            <Drawer
+                variant="persistent"
+                anchor={anchor}
+                open={open}
+                classes={{
+                    paper: classes.drawerPaper,
+                }}
+            >
+                <div className={classes.drawerHeader}>
+                    <IconButton onClick={this.handleDrawerClose.bind(this)}>
+                        {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+                    </IconButton>
+                </div>
+                <Divider />
+                {AppDrawerElements}
+            </Drawer>
+        );
+
         return (
             <div className={classes.root}>
                 <div className={classes.appFrame}>
-                    <AppBar className={classes.appBar}>
-                        <Toolbar>
-                            <Hidden lgUp implementation="css">
-                                <IconButton
-                                    color="contrast"
-                                    aria-label="Open Drawer"
-                                    onClick={this.handleDrawerToggle.bind(this)}
-                                >
-                                    <MenuIcon />
-                                </IconButton>
-                            </Hidden>
-                            <Typography className={classes.appBarTitle} type="title" color="inherit" noWrap>
-                                Firebase and Redux
-                            </Typography>
+                    <AppBar
+                        className={classNames(classes.appBar, {
+                            [classes.appBarShift]: open,
+                        })}
+                    >
+                        <Toolbar disableGutters={!open}>
                             <IconButton
-                                aria-label="More"
-                                aria-owns="Open right Menu"
-                                aria-haspopup="true"
-                                onClick={this.handleMenuOpen.bind(this)}
-                                className={classes.menuButtonRight}
+                                color="inherit"
+                                aria-label="open drawer"
+                                onClick={this.handleDrawerOpen.bind(this)}
+                                className={classNames(classes.menuButton, open && classes.hide)}
                             >
-                                <MoreVertIcon />
+                                <MenuIcon />
                             </IconButton>
-
-                            <Menu
-                                id="menuRight"
-                                anchorEl={this.state.dropdownAnchorEl}
-                                open={this.state.dropdownMenuOpen}
-                                onRequestClose={this.handleMenuclose.bind(this)}
-                            >
-                                <AppDrawerElements onClick={this.handleMenuclose.bind(this)} />
-                            </Menu>
+                            <Typography variant="title" color="inherit" noWrap>
+                                Persistent drawer
+              </Typography>
                         </Toolbar>
                     </AppBar>
-                    <AppDrawer
-                        className={classes.drawer}
-                        onRequestClose={this.handleDrawerClose.bind(this)}
-                        mobileDrawerOpen={this.state.mobileDrawerOpen}
-                    />
+                    {drawer}
                     <main className={classes.content}>
-                        <Typography>{'You think water moves fast? You should see ice.'}</Typography>
+                        {this.props.children}
                     </main>
                 </div>
             </div>
-        )
+        );
     }
 }
 
-AppFrame.propTypes = {
-    // children: PropTypes.node.isRequired,
+PersistentDrawer.propTypes = {
     classes: PropTypes.object.isRequired,
+    theme: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(AppFrame);
+export default withStyles(styles, { withTheme: true })(PersistentDrawer);
