@@ -9,12 +9,16 @@ export const AppDrawerElements = (
     <div>
         <List>
             <ListItem button>
-                <ListItemIcon><StarIcon /></ListItemIcon>
-                <ListItemText primary="Item 1" />
+                <Link to="/">
+                    <ListItemIcon><StarIcon /></ListItemIcon>
+                    <ListItemText primary="The New Boston" />
+                </Link>
             </ListItem>
             <ListItem button>
-                <ListItemIcon><StarIcon /></ListItemIcon>
-                <ListItemText primary="Item 2" />
+                <Link to="/page2">
+                    <ListItemIcon><StarIcon /></ListItemIcon>
+                    <ListItemText primary="Page 2" />
+                </Link>
             </ListItem>
         </List>
     </div>

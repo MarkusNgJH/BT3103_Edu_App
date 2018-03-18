@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
+import { Switch, Route } from 'react-router-dom';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import UserList from '../containers/user-list';
 import UserDetail from '../containers/user-details';
 import firebase from 'firebase';
 import AppFrame from './AppFrame';
-<<<<<<< HEAD
 import Recharts from '../containers/recharts';
-=======
 import Dashboard from './dashboard';
->>>>>>> 4d512312fddbd77c2fd6be3036eef0f43a5c14a3
+import TheNewBoston from './thenewboston';
+import PageTwo from './page-two';
 require('../../scss/style.scss');
 
 var config = {
@@ -46,24 +46,17 @@ class App extends Component {
 
         const body = (
             <div>
-                <h2> Username List: </h2>
-                <UserList />
-                <hr />
-                <h2> User Details:</h2>
-                <UserDetail />
-                <h2> Print Database:</h2>
-<<<<<<< HEAD
+                <Switch>
+                    <Route exact path='/' component={TheNewBoston} />
+                    <Route exact path='/page2' component={PageTwo} />
+                </Switch>
                 <h2> {this.state.speed} </h2>
-                <hr />
-                <Recharts/>
             </div>
         )
         return (
             <div>
                 <AppFrame children={body} />
-=======
-                <h2> <Dashboard /> </h2>
->>>>>>> 4d512312fddbd77c2fd6be3036eef0f43a5c14a3
+                {/* <h2> <Dashboard /> </h2> */}
             </div>
         );
     }

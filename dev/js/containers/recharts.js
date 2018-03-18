@@ -56,7 +56,7 @@ function ImageGridList(props) {
     <div className={classes.root}>
       <GridList cellHeight={160} className={classes.gridList} cols={3}>
         {tilesData.map(tile => (
-          <GridListTile cols={tile.cols || 1}>
+          <GridListTile cols={tile.cols || 1} key={tile.img}>
             <span>{tile.img}</span>
           </GridListTile>
         ))}
