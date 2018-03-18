@@ -40,9 +40,7 @@ class App extends Component {
     render() {
         return (
             <div>
-                <MuiThemeProvider>
-                    <AppFrame />
-                </MuiThemeProvider>
+                <AppFrame />
 
                 <h2> Username List: </h2>
                 <UserList />

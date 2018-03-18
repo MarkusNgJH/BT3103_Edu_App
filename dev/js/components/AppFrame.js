@@ -1,28 +1,29 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import PropTypes from 'prop-types';
-import AppBar from 'material-ui/AppBar';
-import { Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle } from 'material-ui/Toolbar';
-import Drawer from 'material-ui/Drawer';
-import DropDownMenu from 'material-ui/DropDownMenu';
-import Menu from 'material-ui/Menu';
-import MenuItem from 'material-ui/MenuItem';
-import MenuIcon from 'material-ui-icons/Menu';
-import RaisedButton from 'material-ui/RaisedButton';
-import IconButton from 'material-ui/IconButton';
-import IconMenu from 'material-ui/IconMenu';
-import FontIcon from 'material-ui/FontIcon';
-import NavigationExpandMoreIcon from 'material-ui/svg-icons/navigation/expand-more';
-import FlatButton from 'material-ui/FlatButton';
-import ActionHome from 'material-ui/svg-icons/action/home';
-import MoreVertIcon from 'material-ui-icons/MoreVert';
+import PropTypes from 'prop-types'
+
+import { withStyles } from 'material-ui/styles'
+import classNames from 'classnames';
+import Typography from 'material-ui/Typography'
+import AppBar from 'material-ui/AppBar'
+import Toolbar from 'material-ui/Toolbar'
 import Hidden from 'material-ui/Hidden'
-import AppDrawer from './AppDrawer';
+import Menu from 'material-ui/Menu'
+
+import IconButton from 'material-ui/IconButton'
+import MenuIcon from 'material-ui-icons/Menu'
+import MoreVertIcon from 'material-ui-icons/MoreVert'
+import { Color } from 'material-ui'
+
+import AppDrawer from './AppDrawer'
+import { AppDrawerElements } from './AppDrawerElements'
+
+import { APP_SETTING } from './config'
 
 const styles = theme => ({
     '@global': {
         html: {
-            background: theme.palette.background.default,
+            backgroundColor: 'theme.palette.background.default',
             WebkitFontSmoothing: 'antialiased',
             MozOsxFontSmoothing: 'grayscale',
             boxSizing: 'border-box',
@@ -79,7 +80,7 @@ const styles = theme => ({
     },
 });
 
-class AppFrame extends React.Component {
+class AppFrame extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -89,7 +90,7 @@ class AppFrame extends React.Component {
         }
     }
 
-    handleDrawerClose(){
+    handleDrawerClose() {
         this.setState({ mobileDrawerOpen: false });
     };
 
@@ -123,7 +124,7 @@ class AppFrame extends React.Component {
                             </Hidden>
                             <Typography className={classes.appBarTitle} type="title" color="inherit" noWrap>
                                 Firebase and Redux
-                </Typography>
+                            </Typography>
                             <IconButton
                                 aria-label="More"
                                 aria-owns="Open right Menu"
@@ -138,19 +139,19 @@ class AppFrame extends React.Component {
                                 id="menuRight"
                                 anchorEl={this.state.dropdownAnchorEl}
                                 open={this.state.dropdownMenuOpen}
-                                onRequestClose={this.handleMenuclose}
+                                onRequestClose={this.handleMenuclose.bind(this)}
                             >
-                                <AppBarMenuItemsExport onClick={this.handleMenuclose.bind(this)} />
+                                <AppDrawerElements onClick={this.handleMenuclose.bind(this)} />
                             </Menu>
                         </Toolbar>
                     </AppBar>
                     <AppDrawer
                         className={classes.drawer}
-                        onRequestClose={this.handleDrawerClose}
+                        onRequestClose={this.handleDrawerClose.bind(this)}
                         mobileDrawerOpen={this.state.mobileDrawerOpen}
                     />
                     <main className={classes.content}>
-                        {children}
+                        <Typography>{'You think water moves fast? You should see ice.'}</Typography>
                     </main>
                 </div>
             </div>
@@ -159,7 +160,7 @@ class AppFrame extends React.Component {
 }
 
 AppFrame.propTypes = {
-    children: PropTypes.node.isRequired,
+    // children: PropTypes.node.isRequired,
     classes: PropTypes.object.isRequired,
 };
 

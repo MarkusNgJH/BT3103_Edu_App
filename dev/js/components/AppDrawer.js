@@ -7,11 +7,13 @@ import Hidden from "material-ui/Hidden";
 
 import IconButton from "material-ui/IconButton";
 import ChevronLeftIcon from "material-ui-icons/ChevronLeft";
-import { DrawerItems } from './DrawerItems'
+import { Color } from 'material-ui'
+import { AppDrawerElements } from './AppDrawerElements'
+import { APP_SETTING } from "./config";
 
 const styles = theme => ({
     paper: {
-        width: '100%',
+        width: APP_SETTING.DrawerWidth,
         backgroundColor: theme.palette.background.paper
     },
     anchor: {
@@ -37,7 +39,7 @@ function AppDrawer(props, context) {
                     </IconButton>
                 </Hidden>
             </div>
-            {DrawerItems}
+            {AppDrawerElements}
         </div>
     );
 

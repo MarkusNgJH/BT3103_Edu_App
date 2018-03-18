@@ -5,16 +5,16 @@ import Divider from 'material-ui/Divider';
 import { MenuItem } from 'material-ui/Menu';
 import StarIcon from 'material-ui-icons/Star';
 
-export const DrawerItems = (
+export const AppDrawerElements = (
     <div>
         <List>
             <ListItem button>
                 <ListItemIcon><StarIcon /></ListItemIcon>
-                <ListItemText primary="ReCharts" />
+                <ListItemText primary="Item 1" />
             </ListItem>
             <ListItem button>
                 <ListItemIcon><StarIcon /></ListItemIcon>
-                <ListItemText primary="Victory" />
+                <ListItemText primary="Item 2" />
             </ListItem>
         </List>
     </div>
