@@ -11,9 +11,8 @@ class Dashboard extends Component {
         this.state = {
             items: []
         }
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleChange.bind(this);
     }
+    
     componentDidMount() {
         const rootRef = firebase.database().ref('sampleData01');
         rootRef.on('value', (snapshot) => {
@@ -33,19 +32,21 @@ class Dashboard extends Component {
         // everytime data changes on valueRef, assign value to speed.
     }
     render() {
+        const output = this.state.items
         return (
-            <div> 
-                <ul>
-                {this.state.items.map((item) => {
-                    return (
-                        <li key={item.id}>
-                            <h3>Level:{item.level}</h3>
-                            <p>Players:{item.numPlayers}</p>
-                        </li>
-                    )
-                })} 
-                </ul>
-            </div>
+            // <div> 
+            //     <ul>
+            //     {this.state.items.map((item) => {
+            //         return (
+            //             <li key={item.id}>
+            //                 <h3>Level:{item.level}</h3>
+            //                 <p>Players:{item.numPlayers}</p>
+            //             </li>
+            //         )
+            //     })} 
+            //     </ul>
+            // </div>
+            output
         );
     }
 }

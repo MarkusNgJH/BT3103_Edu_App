@@ -2,11 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import GridList, { GridListTile } from 'material-ui/GridList';
-import IconButton from 'material-ui/IconButton';
-import Icon from 'material-ui/Icon';
-import DeleteIcon from 'material-ui-icons/Delete';
-import AddShoppingCartIcon from 'material-ui-icons/AddShoppingCart';
-import PhotoCamera from 'material-ui-icons/PhotoCamera';
+import Dashboard from '../components/dashboard';
+import { type } from 'os';
 
 const styles = theme => ({
   root: {
@@ -27,37 +24,48 @@ const styles = theme => ({
 
 const tilesData = [
   {
+    id: '1',
     img: 'Chart 1'
   },
   {
+    id: '2',
     img: 'Chart 2'
   },
   {
+    id: '3',
     img: 'Chart 3'
   },
   {
+    id: '4',
     img: 'Chart 4',
   },
   {
+    id: '5',
     img: 'Chart 5'
   },
   {
+    id: '6',
     img: 'Chart 6'
   },
   {
+    id: '7',
     img: 'Chart 7'
   },
 ];
 
 function ImageGridList(props) {
   const { classes } = props;
-
+  
   return (
     <div className={classes.root}>
       <GridList cellHeight={160} className={classes.gridList} cols={3}>
         {tilesData.map(tile => (
-          <GridListTile cols={tile.cols || 1}>
-            <span>{tile.img}</span>
+          <GridListTile key={tile.id} cols={tile.cols || 1}>
+            <span>
+              <h3>Level:{tile.level}</h3>
+              <p>Players:{tile.numPlayers}</p>
+              {tile.img}
+            </span>
           </GridListTile>
         ))}
       </GridList>
