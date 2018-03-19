@@ -57,7 +57,7 @@ class App extends Component {
         return (
             <div>
                 <AppFrame children={body} />
-                {/* <h2> <Dashboard /> </h2> */}
+                <h2> <Dashboard /> </h2>
             </div>
         );
     }

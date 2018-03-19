@@ -12,7 +12,7 @@ class Dashboard extends Component {
             items: []
         }
     }
-    
+
     componentDidMount() {
         const rootRef = firebase.database().ref('sampleData01');
         rootRef.on('value', (snapshot) => {
@@ -34,19 +34,18 @@ class Dashboard extends Component {
     render() {
         const output = this.state.items
         return (
-            // <div> 
-            //     <ul>
-            //     {this.state.items.map((item) => {
-            //         return (
-            //             <li key={item.id}>
-            //                 <h3>Level:{item.level}</h3>
-            //                 <p>Players:{item.numPlayers}</p>
-            //             </li>
-            //         )
-            //     })} 
-            //     </ul>
-            // </div>
-            output
+            <div> 
+                <ul>
+                {this.state.items.map((item) => {
+                    return (
+                        <li key={item.id}>
+                            <h3>Level:{item.level}</h3>
+                            <p>Players:{item.numPlayers}</p>
+                        </li>
+                    )
+                })} 
+                </ul>
+            </div>
         );
     }
 }
