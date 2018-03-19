@@ -4,11 +4,8 @@ import UserList from '../containers/user-list';
 import UserDetail from '../containers/user-details';
 import firebase from 'firebase';
 import AppFrame from './AppFrame';
-<<<<<<< HEAD
 import Recharts from '../containers/recharts';
-=======
 import Dashboard from './dashboard';
->>>>>>> 4d512312fddbd77c2fd6be3036eef0f43a5c14a3
 require('../../scss/style.scss');
 
 var config = {
@@ -47,13 +44,11 @@ class App extends Component {
         const body = (
             <div>
                 <h2> Username List: </h2>
-                <UserList />
+                {/* <UserList /> */}
                 <hr />
                 <h2> User Details:</h2>
-                <UserDetail />
+                {/* <UserDetail /> */}
                 <h2> Print Database:</h2>
-<<<<<<< HEAD
-                <h2> {this.state.speed} </h2>
                 <hr />
                 <Recharts/>
             </div>
@@ -61,9 +56,7 @@ class App extends Component {
         return (
             <div>
                 <AppFrame children={body} />
-=======
                 <h2> <Dashboard /> </h2>
->>>>>>> 4d512312fddbd77c2fd6be3036eef0f43a5c14a3
             </div>
         );
     }

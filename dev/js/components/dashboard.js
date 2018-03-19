@@ -3,7 +3,10 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import UserList from '../containers/user-list';
 import UserDetail from '../containers/user-details';
 import firebase from 'firebase';
-import AppFrame from './AppFrame';
+import {PieChart, BarChart, Bar, Pie, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
+// import AppFrame from './AppFrame';
+// import Store from '../index.js';
+import {connect} from 'react-redux';
 
 class Dashboard extends Component {
     constructor() {
@@ -11,8 +14,8 @@ class Dashboard extends Component {
         this.state = {
             items: []
         }
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleChange.bind(this);
+        // this.handleChange = this.handleChange.bind(this);
+        // this.handleSubmit = this.handleChange.bind(this);
     }
     componentDidMount() {
         const rootRef = firebase.database().ref('sampleData01');
@@ -45,9 +48,24 @@ class Dashboard extends Component {
                     )
                 })} 
                 </ul>
+                <BarChart width={700} height={400} data={this.state.items}>
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis dataKey="level" />
+                    <YAxis label={{ value: 'Players', angle: -90, position: 'insideLeft' }} />
+                    <Tooltip/>
+                    <Legend />
+                    <Bar dataKey= 'numPlayers' fill="#8884d8" />
+                </BarChart>
             </div>
         );
     }
 }
 
-export default Dashboard;
+const mapStateToProps = state => {
+    return {charts : state}
+}
+
+const mapDispatchToProps = dispatch => {}
+
+export default connect(mapStateToProps)(Dashboard);
+// export default Dashboard;
