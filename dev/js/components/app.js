@@ -10,19 +10,6 @@ import TheNewBoston from './thenewboston';
 import PageTwo from './page-two';
 require('../../scss/style.scss');
 
-var config = {
-    apiKey: "AIzaSyAp5KgeDweFK8PQ1l6o-V2eaqLeOYN0GlY",
-    authDomain: "bt3103-edu-app.firebaseapp.com",
-    databaseURL: "https://bt3103-edu-app.firebaseio.com",
-    projectId: "bt3103-edu-app",
-    storageBucket: "bt3103-edu-app.appspot.com",
-    messagingSenderId: "478259615153"
-};
-try {
-    firebase.initializeApp(config);
-} catch (error) { }
-
-
 // new syntax for esx to create functions
 class App extends Component {
     constructor() {

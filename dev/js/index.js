@@ -8,8 +8,29 @@ import allReducers from './reducers';
 import UserReducer from './reducers/reducer-users';
 import App from './components/app';
 import firebase from 'firebase';
+import store from "./store";
 //wrapping createStore in {} makes it usuable without declaring a var
-const store = createStore(allReducers);
+
+var config = {
+    apiKey: "AIzaSyAp5KgeDweFK8PQ1l6o-V2eaqLeOYN0GlY",
+    authDomain: "bt3103-edu-app.firebaseapp.com",
+    databaseURL: "https://bt3103-edu-app.firebaseio.com",
+    projectId: "bt3103-edu-app",
+    storageBucket: "bt3103-edu-app.appspot.com",
+    messagingSenderId: "478259615153"
+};
+try {
+    firebase.initializeApp(config);
+} catch (error) { }
+
+var db = firebase.database();
+db.ref("/newCharts").on("value", data => {
+  if (data.val()) {
+    store.dispatch({ type: "SET_VAL", payload: data.val() });
+    console.log("dispatched & displaying getstate:");
+    console.log(store.getState());
+  }
+});
 
 ReactDOM.render(
     <BrowserRouter>
