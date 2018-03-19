@@ -60,17 +60,12 @@ function ImageGridList(props) {
     <div className={classes.root}>
       <GridList cellHeight={160} className={classes.gridList} cols={3}>
         {tilesData.map(tile => (
-<<<<<<< HEAD
-          <GridListTile cols={tile.cols || 1} key={tile.img}>
-            <span>{tile.img}</span>
-=======
           <GridListTile key={tile.id} cols={tile.cols || 1}>
             <span>
               <h3>Level:{tile.level}</h3>
               <p>Players:{tile.numPlayers}</p>
               {tile.img}
             </span>
->>>>>>> 2d8c8528ccd532f565039c00fe05090ab1c6701f
           </GridListTile>
         ))}
       </GridList>
