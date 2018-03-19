@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import UserList from '../containers/user-list';
-import UserDetail from '../containers/user-details';
 import firebase from 'firebase';
 import {PieChart, BarChart, Bar, Pie, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 // import AppFrame from './AppFrame';
@@ -14,8 +12,6 @@ class Dashboard extends Component {
         this.state = {
             items: []
         }
-        // this.handleChange = this.handleChange.bind(this);
-        // this.handleSubmit = this.handleChange.bind(this);
     }
     componentDidMount() {
         const rootRef = firebase.database().ref('sampleData01');
