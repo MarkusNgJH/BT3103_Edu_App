@@ -7,8 +7,11 @@ import firebase from 'firebase';
 import AppFrame from './AppFrame';
 import Recharts from '../containers/recharts';
 import Dashboard from './dashboard';
+<<<<<<< HEAD
 import TheNewBoston from './thenewboston';
 import PageTwo from './page-two';
+=======
+>>>>>>> 2d8c8528ccd532f565039c00fe05090ab1c6701f
 require('../../scss/style.scss');
 
 var config = {
@@ -46,17 +49,33 @@ class App extends Component {
 
         const body = (
             <div>
+<<<<<<< HEAD
                 <Switch>
                     <Route exact path='/' component={TheNewBoston} />
                     <Route exact path='/page2' component={PageTwo} />
                 </Switch>
                 <h2> {this.state.speed} </h2>
+=======
+                <h2> Username List: </h2>
+                <UserList />
+                <hr />
+                <h2> User Details:</h2>
+                <UserDetail />
+                <h2> Print Database:</h2>
+                <h2> {this.state.speed} </h2>
+                <hr />
+                <Recharts />
+>>>>>>> 2d8c8528ccd532f565039c00fe05090ab1c6701f
             </div>
         )
         return (
             <div>
                 <AppFrame children={body} />
+<<<<<<< HEAD
                 {/* <h2> <Dashboard /> </h2> */}
+=======
+                <h2> <Dashboard /> </h2>
+>>>>>>> 2d8c8528ccd532f565039c00fe05090ab1c6701f
             </div>
         );
     }
