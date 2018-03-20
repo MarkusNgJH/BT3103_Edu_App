@@ -29,6 +29,7 @@
     "react-addons-test-utils": "^15.1.0",
     "react-dazzle": "^1.2.7",
     "react-dom": "^16.2.0",
+    "react-google-login-component": "^0.9.3",
     "react-lifecycles-compat": "^1.0.2",
     "react-redux": "^4.4.8",
     "react-router-dom": "^4.2.2",
