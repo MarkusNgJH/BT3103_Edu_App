@@ -5,7 +5,7 @@ import UserList from '../containers/user-list';
 import UserDetail from '../containers/user-details';
 import firebase from 'firebase';
 import AppFrame from './AppFrame';
-import Recharts from '../containers/recharts';
+import Recharts from '../containers/gridList';
 import TheNewBoston from './thenewboston';
 import PageTwo from './page-two';
 require('../../scss/style.scss');
