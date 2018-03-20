@@ -78,9 +78,9 @@ const styles = theme => ({
         padding: theme.spacing.unit,
         height: 'calc(100% - 56px)',
         marginTop: 56,
-        [theme.breakpoints.up('lg')]: {
-            width: 'calc(100% - ' + drawerWidth + 'px)',
-        },
+        // [theme.breakpoints.up('lg')]: {
+        //     width: 'calc(100% - ' + drawerWidth + 'px)',
+        // },
         [theme.breakpoints.up('sm')]: {
             height: 'calc(100% - 64px)',
             marginTop: 64,
