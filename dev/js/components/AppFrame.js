@@ -1,12 +1,13 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import classNames from 'classnames';
 import Drawer from 'material-ui/Drawer';
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
-import List from 'material-ui/List';
 import { MenuItem } from 'material-ui/Menu';
+import List, { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
 import Typography from 'material-ui/Typography';
 import TextField from 'material-ui/TextField';
 import Divider from 'material-ui/Divider';
@@ -14,8 +15,7 @@ import IconButton from 'material-ui/IconButton';
 import MenuIcon from 'material-ui-icons/Menu';
 import ChevronLeftIcon from 'material-ui-icons/ChevronLeft';
 import ChevronRightIcon from 'material-ui-icons/ChevronRight';
-
-import { AppDrawerElements } from "./AppDrawerElements";
+import StarIcon from 'material-ui-icons/Star';
 
 const drawerWidth = 240;
 
@@ -107,12 +107,12 @@ class PersistentDrawer extends React.Component {
 
     render() {
         const { classes, theme } = this.props;
-        const { anchor, open } = this.state;
+        const { open } = this.state;
 
         const drawer = (
             <Drawer
                 variant="persistent"
-                anchor={anchor}
+                anchor="left"
                 open={open}
                 classes={{
                     paper: classes.drawerPaper,
@@ -124,7 +124,20 @@ class PersistentDrawer extends React.Component {
                     </IconButton>
                 </div>
                 <Divider />
-                {AppDrawerElements}
+                <List>
+                    <ListItem button onClick={this.handleDrawerClose.bind(this)}>
+                        <Link to="/">
+                            <ListItemIcon><StarIcon /></ListItemIcon>
+                            <ListItemText primary="The New Boston" />
+                        </Link>
+                    </ListItem>
+                    <ListItem button onClick={this.handleDrawerClose.bind(this)}>
+                        <Link to="/page2" >
+                            <ListItemIcon><StarIcon /></ListItemIcon>
+                            <ListItemText primary="Page 2" />
+                        </Link>
+                    </ListItem>
+                </List>
             </Drawer>
         );
 
