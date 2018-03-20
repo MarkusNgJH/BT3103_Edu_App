@@ -84,10 +84,7 @@ class RechartsChartComp extends React.Component {
                     })
                 }</div>
             </div>
-                
-                
-                
-
+            
         );
     }
 }
