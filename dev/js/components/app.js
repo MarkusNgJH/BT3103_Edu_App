@@ -8,7 +8,10 @@ import AppFrame from './AppFrame';
 import Recharts from '../containers/gridList';
 import TheNewBoston from './thenewboston';
 import PageTwo from './page-two';
+
 require('../../scss/style.scss');
+const provider = new firebase.auth.GoogleAuthProvider();
+
 
 // new syntax for esx to create functions
 class App extends Component {
@@ -16,7 +19,10 @@ class App extends Component {
         super();
         this.state = {
             speed: 11,
-        };
+            user: null
+        }
+        this.login = this.login.bind(this);
+        this.logout = this.logout.bind(this);
     }
     componentDidMount() {
         const rootRef = firebase.database().ref("/");
@@ -28,21 +34,55 @@ class App extends Component {
         });
         // everytime data changes on valueRef, assign value to speed.
     }
-    render() {
 
+    handleChange(e) {
+        /* ... */
+      }
+    logout() {
+        firebase.auth().signOut()
+        .then(() => {
+          this.setState({
+            user: null
+          });
+        });
+      }
+    login() {
+        firebase.auth().signInWithPopup(provider) 
+          .then((result) => {
+            const user = result.user;
+            console.log(user)
+            console.log(user.email)
+            this.setState({
+              user
+            });
+          });
+      }
+
+    render() {
+        
         const body = (
             <div>
+                
                 <Switch>
                     <Route exact path='/' component={TheNewBoston} />
                     <Route exact path='/page2' component={PageTwo} />
                 </Switch>
+            
                 <hr />
                 <h4>"<strong>{this.state.speed}</strong>" is rendered from Firebase and will be seen on every page.</h4>
             </div>
         )
         return (
             <div>
-                <AppFrame children={body} />
+                {this.state.user ?
+                    <div>
+                        <button onClick={this.logout}>Log Out</button>
+                        <AppFrame children={body} />       
+                    </div>       
+                    :
+                    <button onClick={this.login}>Log In</button>              
+                }
+                
             </div>
         );
     }

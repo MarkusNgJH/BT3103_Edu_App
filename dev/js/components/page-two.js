@@ -6,7 +6,7 @@ import Login from './login'
 const PageTwo = () => (
     <div>
         <h1>Welcome to page 2 of our app!</h1>
-        <Login />
+        {/* <Login /> */}
         <h2>Recharts Component:</h2>
         <Recharts/>
         <hr />
@@ -15,4 +15,4 @@ const PageTwo = () => (
     </div>
 );
 
-export default PageTwo;
+export default PageTwo;s
