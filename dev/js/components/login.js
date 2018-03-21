@@ -16,13 +16,13 @@ class Login extends React.Component{
     this.login = this.login.bind(this);
     this.logout = this.logout.bind(this);
   }
- 
-  responseGoogle (googleUser) {
+
+  responseGoogle(googleUser) {
     var id_token = googleUser.getAuthResponse().id_token;
     var googleId = googleUser.getId();
-    
+
     console.log({ googleId });
-    console.log({accessToken: id_token});
+    console.log({ accessToken: id_token });
     //anything else you want to do(save to localStorage)...
   }
 
@@ -66,7 +66,7 @@ class Login extends React.Component{
       </div>
     );
   }
- 
+
 }
 
 export default Login;

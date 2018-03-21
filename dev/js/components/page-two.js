@@ -1,5 +1,5 @@
 import React from 'react';
-import Recharts from '../containers/recharts';
+import Recharts from '../containers/gridList';
 import Dashboard from './dashboard';
 import Login from './login'
 
