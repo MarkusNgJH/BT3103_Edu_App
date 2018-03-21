@@ -11,7 +11,6 @@ const styles = theme => ({
     flexWrap: 'wrap',
     justifyContent: 'space-around',
     overflow: 'hidden',
-    backgroundColor: theme.palette.background.paper,
   },
   gridList: {
     width: '100%',
@@ -20,6 +19,9 @@ const styles = theme => ({
   subheader: {
     width: '100%',
   },
+  tile: {
+    marginTop: '10px'
+  }
 });
 
 const tilesData = [
@@ -55,12 +57,16 @@ const tilesData = [
 
 function ImageGridList(props) {
   const { classes } = props;
-  
+
   return (
     <div className={classes.root}>
-      <GridList cellHeight={160} className={classes.gridList} cols={3}>
+      <GridList cols={5} spacing={10} className={classes.gridList}>
         {tilesData.map(tile => (
-          <GridListTile key={tile.id} cols={tile.cols || 1}>
+          <GridListTile key={tile.id} cols={tile.cols || 1} className={classes.tile}>
+            {/*TODO: Implement functions to these buttons to get tile ID and change the chart words  */}
+            <button>Filter</button> &nbsp;
+            <button>Sort</button> &nbsp;
+            <button>Drilldown</button> &nbsp;
             <span>
               <h3>Level:{tile.level}</h3>
               <p>Players:{tile.numPlayers}</p>
