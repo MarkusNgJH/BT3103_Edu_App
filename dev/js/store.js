@@ -3,6 +3,7 @@ import allReducers from './reducers/index.js';
 import {combineReducers} from 'redux';
 import UserReducer from './reducers/reducer-users';
 import ActiveUserReducer from './reducers/reducer-active-user';
+import firebase from 'firebase';
 
 const reducer = (state = {}, action) => {
   switch (action.type) {

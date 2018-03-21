@@ -15,7 +15,7 @@ class App extends Component {
     constructor() {
         super();
         this.state = {
-            speed: 11
+            speed: 11,
         };
     }
     componentDidMount() {
