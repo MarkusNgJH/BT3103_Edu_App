@@ -19,14 +19,17 @@ class App extends Component {
         super();
         this.state = {
             speed: 11,
-            user: null
+            user: "Instructor B"
         }
         this.login = this.login.bind(this);
         this.logout = this.logout.bind(this);
     }
     componentDidMount() {
-        const rootRef = firebase.database().ref("/");
-        const valueRef = rootRef.child('value');
+        const rootRef = firebase.database().ref("/Instructor");
+        var branch = this.state.user;
+        console.log("branch is")
+        console.log(branch)
+        const valueRef = rootRef.child(String(branch));
         valueRef.on('value', (snapshot) => {
             this.setState({
                 speed: snapshot.val()
@@ -52,17 +55,27 @@ class App extends Component {
             const user = result.user;
             console.log(user)
             console.log(user.email)
+            console.log(user.uid)
             this.setState({
-              user
+              user: user.uid  
+            });
+            console.log(this.state.user)
+            const rootRef = firebase.database().ref("/Instructor");
+            var branch = this.state.user;
+            console.log("branch is")
+            console.log(branch)
+            const valueRef = rootRef.child(String(branch));
+            valueRef.on('value', (snapshot) => {
+                this.setState({
+                    speed: snapshot.val()
+                });
             });
           });
       }
 
     render() {
-        
         const body = (
             <div>
-                
                 <Switch>
                     <Route exact path='/' component={TheNewBoston} />
                     <Route exact path='/page2' component={PageTwo} />

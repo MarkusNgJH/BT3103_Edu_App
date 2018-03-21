@@ -48,6 +48,8 @@ class RechartsChartComp extends React.Component {
     }
 
     componentWillReceiveProps(newProps) {
+        console.log("componentWillReceiveProps")
+        console.log(newProps)
         if (newProps != this.props) {
           this.props = newProps
           var ind = 0

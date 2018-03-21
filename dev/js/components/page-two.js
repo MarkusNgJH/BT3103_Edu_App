@@ -15,4 +15,4 @@ const PageTwo = () => (
     </div>
 );
 
-export default PageTwo;s
+export default PageTwo;

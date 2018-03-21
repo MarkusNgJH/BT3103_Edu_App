@@ -11,7 +11,7 @@ class Login extends React.Component{
   constructor (props, context) {
     super(props, context);
     this.state = {
-      user: nulls
+      user: null
     }
     this.login = this.login.bind(this);
     this.logout = this.logout.bind(this);
