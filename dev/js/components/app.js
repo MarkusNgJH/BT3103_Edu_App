@@ -86,17 +86,18 @@ class App extends Component {
             </div>
         )
         return (
-            <div>
-                {this.state.user ?
-                    <div>
-                        <button onClick={this.logout}>Log Out</button>
-                        <AppFrame children={body} />       
-                    </div>       
-                    :
-                    <button onClick={this.login}>Log In</button>              
-                }
+            <AppFrame children={body} />
+            // <div>
+            //     {this.state.user ?
+            //         <div>
+            //             <button onClick={this.logout}>Log Out</button>
+            //             <AppFrame children={body} />       
+            //         </div>       
+            //         :
+            //         <button onClick={this.login}>Log In</button>              
+            //     }
                 
-            </div>
+            // </div>
         );
     }
 }

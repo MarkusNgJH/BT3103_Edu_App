@@ -5,9 +5,9 @@ import UserReducer from './reducers/reducer-users';
 import ActiveUserReducer from './reducers/reducer-active-user';
 import firebase from 'firebase';
 
-const reducer = (state = {}, action) => {
+const reducerNewCharts = (state = {}, action) => {
   switch (action.type) {
-    case 'SET_VAL':
+    case 'SET_VAL_newCharts':
     //   console.log("reducer-Set-Val")
     //   console.log(state)
     //   console.log(action.payload)
@@ -23,10 +23,29 @@ const reducer = (state = {}, action) => {
   }
 };
 
+const reducerAcheivement = (state = {}, action) => {
+  switch (action.type) {
+    case 'SET_VAL_acheivements':
+       console.log("reducer-Set-Val")
+       console.log(state)
+       console.log(action.payload)
+      return {
+        state,
+        val: action.payload
+      };
+
+    // Handle other actions here
+    default:
+    //   console.log("reducer-default")
+      return state;
+  }
+};
+
 const combReducers = combineReducers({
     users: UserReducer, 
     activeUser: ActiveUserReducer,
-    reCharts: reducer
+    reCharts: reducerNewCharts,
+    acheivement: reducerAcheivement
 });
 
 const store = createStore(combReducers);

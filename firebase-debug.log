@@ -1,0 +1,32 @@
+[debug] [2018-03-23T01:54:23.310Z] ----------------------------------------------------------------------
+[debug] [2018-03-23T01:54:23.316Z] Command:       /usr/local/bin/node /usr/local/bin/firebase deploy
+[debug] [2018-03-23T01:54:23.317Z] CLI Version:   3.17.6
+[debug] [2018-03-23T01:54:23.317Z] Platform:      darwin
+[debug] [2018-03-23T01:54:23.317Z] Node Version:  v6.9.0
+[debug] [2018-03-23T01:54:23.320Z] Time:          Fri Mar 23 2018 09:54:23 GMT+0800 (SGT)
+[debug] [2018-03-23T01:54:23.320Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2018-03-23T01:54:23.359Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2018-03-23T01:54:23.359Z] > authorizing via signed-in user
+[debug] [2018-03-23T01:54:23.362Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/bt3103-edu-app  
+  
+ Fri Mar 23 2018 09:54:23 GMT+0800 (SGT)
+[debug] [2018-03-23T01:54:24.411Z] <<< HTTP RESPONSE 200
+[debug] [2018-03-23T01:54:24.414Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/bt3103-edu-app/tokens  
+  
+ Fri Mar 23 2018 09:54:24 GMT+0800 (SGT)
+[debug] [2018-03-23T01:54:25.220Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Deploying to 'bt3103-edu-app'...
+[info] 
+[info] i  deploying database, hosting
+[info] i  database: checking rules syntax...
+[debug] [2018-03-23T01:54:26.266Z] >>> HTTP REQUEST PUT https://bt3103-edu-app.firebaseio.com/.settings/rules.json?dryRun=true  
+ {
+  "rules": {
+    ".read": "auth != null",
+    ".write": "auth != null"
+  }
+}
+ 
+ Fri Mar 23 2018 09:54:26 GMT+0800 (SGT)

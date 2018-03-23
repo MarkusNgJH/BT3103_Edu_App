@@ -26,11 +26,18 @@ try {
 var db = firebase.database();
 db.ref("/newCharts").on("value", data => {
   if (data.val()) {
-    store.dispatch({ type: "SET_VAL", payload: data.val() });
+    store.dispatch({ type: "SET_VAL_newCharts", payload: data.val() });
     console.log("dispatched & displaying getstate:");
     console.log(store.getState());
   }
 });
+db.ref("/DevTeam").on("value", data => {
+    if (data.val()) {
+      store.dispatch({ type: "SET_VAL_acheivements", payload: data.val() });
+      console.log("acheivement getstate:");
+      console.log(store.getState().acheivement.val);
+    }
+  });
 
 ReactDOM.render(
     <BrowserRouter>

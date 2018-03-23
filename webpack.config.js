@@ -4,8 +4,11 @@ var webpack = require('webpack');
 module.exports = {
     devServer: {
         inline: true,
-        contentBase: './src',
-        port: 3000
+        // contentBase: './src',
+        port: 3000,
+        historyApiFallback: true,
+        contentBase: './',
+        hot: true
     },
     devtool: 'cheap-module-eval-source-map',
     entry: './dev/js/index.js',

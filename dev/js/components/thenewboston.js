@@ -1,6 +1,7 @@
 import React from 'react';
 import UserList from '../containers/user-list';
 import UserDetail from '../containers/user-details';
+// import Acheivement from '../containers/assignment';
 
 const TheNewBoston = () => (
     <div>
@@ -9,6 +10,7 @@ const TheNewBoston = () => (
         <hr />
         <h2>User Details:</h2>
         <UserDetail />
+        {/* <Acheivement /> */}
     </div>
 );
 
