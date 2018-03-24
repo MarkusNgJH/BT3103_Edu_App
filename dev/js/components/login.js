@@ -6,9 +6,9 @@ import firebase from 'firebase';
 
 const provider = new firebase.auth.GoogleAuthProvider();
 
-class Login extends React.Component{
- 
-  constructor (props, context) {
+class Login extends React.Component {
+
+  constructor(props, context) {
     super(props, context);
     this.state = {
       user: null
@@ -31,14 +31,14 @@ class Login extends React.Component{
   }
   logout() {
     firebase.auth().signOut()
-    .then(() => {
-      this.setState({
-        user: null
+      .then(() => {
+        this.setState({
+          user: null
+        });
       });
-    });
   }
   login() {
-    firebase.auth().signInWithPopup(provider) 
+    firebase.auth().signInWithPopup(provider)
       .then((result) => {
         const user = result.user;
         console.log(user)
@@ -48,21 +48,21 @@ class Login extends React.Component{
         });
       });
   }
- 
-  render () {
+
+  render() {
     return (
       <div>
         <GoogleLogin socialId="478259615153-vjji81662n00jrj7qnc6fb8ti3dvodf2.apps.googleusercontent.com"
-                     className="google-login"
-                     scope="profile"
-                     fetchBasicProfile={false}
-                     responseHandler={this.responseGoogle}
-                     buttonText="Login With Google"/>
-         {this.state.user ?
-            <button onClick={this.logout}>Log Out</button>                
-            :
-            <button onClick={this.login}>Log In</button>              
-          }
+          className="google-login"
+          scope="profile"
+          fetchBasicProfile={false}
+          responseHandler={this.responseGoogle}
+          buttonText="Login With Google" />
+        {this.state.user ?
+          <button onClick={this.logout}>Log Out</button>
+          :
+          <button onClick={this.login}>Log In</button>
+        }
       </div>
     );
   }
