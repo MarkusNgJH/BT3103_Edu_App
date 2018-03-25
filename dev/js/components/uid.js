@@ -4,7 +4,7 @@ import { TextField } from 'material-ui';
 
 const Uid = () => (
     <div>
-        <textarea></textarea>
+        <input type="text" placeholder="Enter your email here" /> <br />
         <button>Enter</button>
     </div>
 );

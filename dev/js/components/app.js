@@ -8,6 +8,8 @@ import AppFrame from './AppFrame';
 import Recharts from '../containers/gridList';
 import TheNewBoston from './thenewboston';
 import PageTwo from './page-two';
+import LoginPage from './loginPage';
+import Uid from './uid';
 
 require('../../scss/style.scss');
 const provider = new firebase.auth.GoogleAuthProvider();
@@ -40,64 +42,72 @@ class App extends Component {
 
     handleChange(e) {
         /* ... */
-      }
+    }
     logout() {
         firebase.auth().signOut()
-        .then(() => {
-          this.setState({
-            user: null
-          });
-        });
-      }
-    login() {
-        firebase.auth().signInWithPopup(provider) 
-          .then((result) => {
-            const user = result.user;
-            console.log(user)
-            console.log(user.email)
-            console.log(user.uid)
-            this.setState({
-              user: user.uid  
-            });
-            console.log(this.state.user)
-            const rootRef = firebase.database().ref("/Instructor");
-            var branch = this.state.user;
-            console.log("branch is")
-            console.log(branch)
-            const valueRef = rootRef.child(String(branch));
-            valueRef.on('value', (snapshot) => {
+            .then(() => {
                 this.setState({
-                    speed: snapshot.val()
+                    user: null
                 });
             });
-          });
-      }
+    }
+    login() {
+        firebase.auth().signInWithPopup(provider)
+            .then((result) => {
+                const user = result.user;
+                console.log(user)
+                console.log(user.email)
+                console.log(user.uid)
+                this.setState({
+                    user: user.uid
+                });
+                console.log(this.state.user)
+                const rootRef = firebase.database().ref("/Instructor");
+                var branch = this.state.user;
+                console.log("branch is")
+                console.log(branch)
+                const valueRef = rootRef.child(String(branch));
+                valueRef.on('value', (snapshot) => {
+                    this.setState({
+                        speed: snapshot.val()
+                    });
+                });
+            });
+    }
 
     render() {
         const body = (
             <div>
+                {/* Tell the page which component to display depending on the URL path */}
                 <Switch>
                     <Route exact path='/' component={TheNewBoston} />
                     <Route exact path='/page2' component={PageTwo} />
                 </Switch>
-            
+                {/*  */}
+
                 <hr />
                 <h4>"<strong>{this.state.speed}</strong>" is rendered from Firebase and will be seen on every page.</h4>
             </div>
         )
         return (
-            <AppFrame children={body} />
-            // <div>
-            //     {this.state.user ?
-            //         <div>
-            //             <button onClick={this.logout}>Log Out</button>
-            //             <AppFrame children={body} />       
-            //         </div>       
-            //         :
-            //         <button onClick={this.login}>Log In</button>              
-            //     }
-                
-            // </div>
+            <div>
+                {this.state.user ?
+                    <div>
+                        <button onClick={this.logout}>Log Out</button> <br/><br/>
+                        <Uid />
+                        <AppFrame children={body} />
+                    </div>
+                    :
+                    <div>
+                        {/* Put login page here */}
+                        <h1>Welcome to Edu App</h1>
+                        <LoginPage login={this.login}/>
+                        {/* <button onClick={this.login}>Log In</button> */}
+                    </div>
+
+                }
+
+            </div>
         );
     }
 }
