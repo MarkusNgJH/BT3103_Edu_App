@@ -93,18 +93,18 @@ class App extends Component {
             <div>
                 {this.state.user ?
                     <div>
-                        <button onClick={this.logout}>Log Out</button> <br/><br/>
-                        <Uid />
+                        <button onClick={this.logout}>Log Out</button> <br /><br />
+                        <Uid /> <br />
                         <AppFrame children={body} />
                     </div>
+                    // <div>
+                    //     <Uid />
+                    // </div>
                     :
                     <div>
                         {/* Put login page here */}
-                        <h1>Welcome to Edu App</h1>
-                        <LoginPage login={this.login}/>
-                        {/* <button onClick={this.login}>Log In</button> */}
+                        <LoginPage login={this.login} />
                     </div>
-
                 }
 
             </div>
