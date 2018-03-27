@@ -59,7 +59,7 @@ class LoginPage extends React.Component {
                     </Toolbar>
                 </AppBar>
 
-                <div align="center">
+                <div style={{ width: '20%', height: 'auto', position: 'relative', margin: '0px auto', padding: '10px' }}>
                     <FormControl className={styles.formControl} aria-describedby="name-helper-text">
                         <InputLabel htmlFor="name-helper">Email</InputLabel>
                         <Input id="email" placeholder="Enter your email here" />
@@ -71,6 +71,7 @@ class LoginPage extends React.Component {
                         <InputLabel htmlFor="adornment-password">Password</InputLabel>
                         <Input
                             id="adornment-password"
+                            placeholder="Enter your password here"
                             type={this.state.showPassword ? 'text' : 'password'}
                             value={this.state.password}
                             onChange={this.handleChange('password')}
@@ -89,7 +90,7 @@ class LoginPage extends React.Component {
                     </FormControl>
 
                     <br /> <br />
-                    <button onClick={this.props.login}>Log In</button>
+                    <button style={{ float: 'right' }} onClick={this.props.login}>Log In</button>
                 </div>
 
             </div>

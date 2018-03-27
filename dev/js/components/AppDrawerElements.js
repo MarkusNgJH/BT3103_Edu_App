@@ -8,10 +8,6 @@ import { MenuItem } from 'material-ui/Menu';
 import StarIcon from 'material-ui-icons/Star';
 
 class AppDrawerElements extends Component {
-    handleClose() {
-        this.setState({ open: false });
-        console.log(this.state.open);
-    }
 
     render() {
         return (
