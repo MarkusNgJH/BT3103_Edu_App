@@ -36,6 +36,7 @@
     "recharts": "^1.0.0-beta.10",
     "recompose": "^0.26.0",
     "redux": "^3.5.2",
+    "redux-form-material-ui": "^4.3.3",
     "redux-logger": "^2.6.1",
     "redux-promise": "^0.5.3",
     "redux-thunk": "^2.1.0",

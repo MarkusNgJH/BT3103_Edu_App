@@ -13,6 +13,7 @@ import VisibilityOff from 'material-ui-icons/VisibilityOff';
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
+import profileSetting from './profileSetting';
 
 const styles = theme => ({
     container: {
@@ -92,7 +93,6 @@ class LoginPage extends React.Component {
                     <br /> <br />
                     <button style={{ float: 'right' }} onClick={this.props.login}>Log In</button>
                 </div>
-
             </div>
         )
     }

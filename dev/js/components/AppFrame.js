@@ -6,6 +6,7 @@ import classNames from 'classnames';
 import Drawer from 'material-ui/Drawer';
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
+import ToolbarSeparator from 'material-ui/Toolbar';
 import List, { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
 import Typography from 'material-ui/Typography';
 import TextField from 'material-ui/TextField';
@@ -124,13 +125,15 @@ class PersistentDrawer extends React.Component {
                         >
                             <MenuIcon />
                         </IconButton>
-
+                        
                         <Typography variant="title" color="inherit" style={{ flex: 1 }}>
                             Edu App
                             </Typography>
+                        <ToolbarSeparator />
                         User ID: {this.props.uid}
+                        <ToolbarSeparator />
                         Email: {this.props.email}
-                        {}
+                    
                         {/* The profile settings, logout menu */}
                         {auth && (
                             <div>

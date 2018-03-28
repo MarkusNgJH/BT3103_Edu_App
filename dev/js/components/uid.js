@@ -40,7 +40,7 @@ class UidPage extends React.Component {
     handleChange(e) {
         // store.dispatch({ type: "SET_VAL_uid", payload: e.target.value });
         // console.log(store.getState());
-        this.setState({ uid:  e.target.value})
+        this.setState({ uid: e.target.value})
         console.log(e.target.value)
     }
 

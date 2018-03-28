@@ -10,7 +10,7 @@ import TheNewBoston from './thenewboston';
 import PageTwo from './page-two';
 import LoginPage from './loginPage';
 import UidPage from './uid';
-import profileSetting from './profileSetting';
+import ProfileSetting from './profileSetting';
 
 require('../../scss/style.scss');
 const provider = new firebase.auth.GoogleAuthProvider();
@@ -40,6 +40,13 @@ class App extends Component {
             });
         });
         // everytime data changes on valueRef, assign value to speed.
+    }
+    componentWillMount() { //persists the login auth
+        firebase.auth().onAuthStateChanged((user) => {
+            if (user) {
+              this.setState({ user: user.email, uid: this.state.uid });
+            } 
+          });
     }
 
     handleChange(e) {
@@ -97,7 +104,7 @@ class App extends Component {
                 <Switch>
                     <Route exact path='/' component={TheNewBoston} />
                     <Route exact path='/page2' component={PageTwo} />
-                    <Route exact path='/profileSetting' component={profileSetting} />
+                    <Route exact path='/profileSetting' component={ProfileSetting} />
                 </Switch>
                 {/*  */}
 
@@ -114,6 +121,7 @@ class App extends Component {
                                 <AppFrame uid={this.state.uid} email={this.state.user} changeLogOut={this.changeLogOut.bind(this)}  body={body}/> <br />
                                 (AppFrame) state uid is
                                 {this.state.uid}
+                                <ProfileSetting />
                             </div>
                             :
                             <div>
