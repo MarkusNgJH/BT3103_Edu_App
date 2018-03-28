@@ -128,7 +128,9 @@ class PersistentDrawer extends React.Component {
                         <Typography variant="title" color="inherit" style={{ flex: 1 }}>
                             Edu App
                             </Typography>
-
+                        User ID: {this.props.uid}
+                        Email: {this.props.email}
+                        {}
                         {/* The profile settings, logout menu */}
                         {auth && (
                             <div>
@@ -154,8 +156,13 @@ class PersistentDrawer extends React.Component {
                                     open={menuOpen}
                                     onClose={this.handleClose}
                                 >
-                                    <MenuItem>Profile Settings</MenuItem>
-                                    <MenuItem onClick={this.props.logout}>Log out</MenuItem>
+                                    <MenuItem>
+                                        <Link to="/profileSetting" >
+                                        Profile Settings    
+                                        </Link>    
+                                    </MenuItem>
+                        
+                                    <MenuItem onClick={this.props.changeLogOut}>Log out</MenuItem>
                                 </Menu>
                             </div>
                         )}
