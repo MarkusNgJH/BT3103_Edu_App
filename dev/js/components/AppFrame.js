@@ -133,7 +133,8 @@ class PersistentDrawer extends React.Component {
                         User ID: {this.props.uid}
                         <ToolbarSeparator />
                         Email: {this.props.email}
-                    
+                        <ToolbarSeparator />
+                        View: {this.props.view}
                         {/* The profile settings, logout menu */}
                         {auth && (
                             <div>

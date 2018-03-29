@@ -31,9 +31,32 @@ const styles = theme => ({
 
 class profileSetting extends React.Component {
     state = {
-        userID: '',
-        ViewType: false,
+        uid: '',
+        view: false,
     };
+
+    handleUIDChange(e) {
+        // store.dispatch({ type: "SET_VAL_uid", payload: e.target.value });
+        // console.log(store.getState());
+        this.setState({ uid: e.target.value})
+        console.log(e.target.value)
+    }
+
+    handleChange = () => {
+        // store.dispatch({ type: "SET_VAL_uid", payload: this.state.uid });
+        // console.log("uid is: " + this.state.uid)
+        // Sends uid to database to pull the correct user info 
+        this.props.changeUid(this.state.uid)
+        console.log("uid is: " + this.state.uid)
+        this.props.changeView(this.state.view)
+        console.log("View is: " + this.state.view)
+
+    };
+
+    handleViewChange(e) {
+        this.setState({ view: e.target.value})
+        console.log(e.target.value)
+    }
 
     render(){
         return(
@@ -42,17 +65,17 @@ class profileSetting extends React.Component {
                 <div style={{ width: '20%', height: 'auto', position: 'relative', margin: '0px auto', padding: '10px' }}>
                     <FormControl className={styles.formControl} aria-describedby="name-helper-text">
                         <InputLabel htmlFor="name-helper">User ID</InputLabel>
-                        <Input id="userId" placeholder="Enter your User ID here" />
+                        <Input id="userId" onChange={this.handleUIDChange.bind(this)} placeholder="Enter your User ID here" />
                     </FormControl>
 
                     <br /> <br />
                     <FormControl className={classNames(styles.margin, styles.textField)}>
                         <label>
                             Select your View Type
-                            <select name="view">
-                            <option value="stu">Student</option>
-                            <option value="ins">Instructor</option>
-                            <option value="adm">Administrator</option>
+                            <select name="view" onChange={this.handleViewChange.bind(this)}>
+                            <option value="student">Student</option>
+                            <option value="instructor">Instructor</option>
+                            <option value="adminstrator">Administrator</option>
                             </select>
                         </label>
                         
@@ -63,7 +86,7 @@ class profileSetting extends React.Component {
                     </FormControl>
 
                     <br /> <br />
-                    <button style={{ float: 'right' }}>Submit</button>
+                    <button style={{ float: 'right' }} onClick={this.handleChange.bind(this)} >Submit</button>
                 </div>
 
             </div>

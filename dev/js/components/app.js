@@ -23,7 +23,8 @@ class App extends Component {
         this.state = {
             speed: 11,
             user: "Instructor B",
-            uid: ""
+            uid: "",
+            view: "administrator"
         }
         this.login = this.login.bind(this);
         this.logout = this.logout.bind(this);
@@ -88,6 +89,11 @@ class App extends Component {
           uid: newValue,
         });
       }
+    changeView(newValue) {
+        this.setState({
+          view: newValue,
+        });
+      }
     changeLogOut(){
         firebase.auth().signOut()
             .then(() => {
@@ -105,6 +111,7 @@ class App extends Component {
                     <Route exact path='/' component={TheNewBoston} />
                     <Route exact path='/page2' component={PageTwo} />
                     <Route exact path='/profileSetting' component={ProfileSetting} />
+                    <Route exact path='/overview' component={ProfileSetting} />
                 </Switch>
                 {/*  */}
 
@@ -118,10 +125,17 @@ class App extends Component {
                     <div>
                         {this.state.uid.length != 0 ?
                             <div> 
-                                <AppFrame uid={this.state.uid} email={this.state.user} changeLogOut={this.changeLogOut.bind(this)}  body={body}/> <br />
+                                <AppFrame uid={this.state.uid} email={this.state.user} view={this.state.view}
+                                changeLogOut={this.changeLogOut.bind(this)}  body={body}/> <br />
                                 (AppFrame) state uid is
                                 {this.state.uid}
-                                <ProfileSetting />
+                                <br/>
+                                (AppFrame) View Type is
+                                {this.state.view}
+                                <ProfileSetting 
+                                uid={this.state.uid} changeUid={this.changeUid.bind(this)} 
+                                view={this.state.view} changeView={this.changeView.bind(this)} 
+                                />
                             </div>
                             :
                             <div>
