@@ -11,6 +11,7 @@ import PageTwo from './page-two';
 import LoginPage from './loginPage';
 import UidPage from './uid';
 import ProfileSetting from './profileSetting';
+import Overview from './overview';
 
 require('../../scss/style.scss');
 const provider = new firebase.auth.GoogleAuthProvider();
@@ -143,6 +144,7 @@ class App extends Component {
                                 <UidPage uid={this.state.uid} changeUid={this.changeUid.bind(this)} body={body}/> <br />
                                 (UidPage)state uid is
                                 {this.state.uid}
+                                <Overview />
                             </div>
                         }
                     </div>
