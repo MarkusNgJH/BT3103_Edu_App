@@ -9,7 +9,7 @@ import Recharts from '../containers/gridList';
 import TheNewBoston from './thenewboston';
 import PageTwo from './page-two';
 import LoginPage from './loginPage';
-import UidPage from './uid';
+import Uid from './uid';
 
 require('../../scss/style.scss');
 const provider = new firebase.auth.GoogleAuthProvider();
@@ -21,8 +21,7 @@ class App extends Component {
         super();
         this.state = {
             speed: 11,
-            user: "Instructor B",
-            uid: ''
+            user: "Instructor B"
         }
         this.login = this.login.bind(this);
         this.logout = this.logout.bind(this);
@@ -91,17 +90,21 @@ class App extends Component {
             </div>
         )
         return (
-            <div id="main">
+            <div>
                 {this.state.user ?
                     <div>
-                        <button onClick={this.logout}>Log Out</button> <br /><br />
-                        <UidPage body={body}/> <br />
+                        <button onClick={this.logout}>Log Out</button> <br/><br/>
+                        <Uid />
+                        <AppFrame children={body} />
                     </div>
                     :
                     <div>
                         {/* Put login page here */}
-                        <LoginPage login={this.login} />
+                        <h1>Welcome to Edu App</h1>
+                        <LoginPage login={this.login}/>
+                        {/* <button onClick={this.login}>Log In</button> */}
                     </div>
+
                 }
 
             </div>

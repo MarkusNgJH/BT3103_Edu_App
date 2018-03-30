@@ -129,7 +129,7 @@ class RechartsComp extends React.Component {
         </AppFrame>
       );
     }
-
+ 
   }
 }
 
