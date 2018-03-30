@@ -9,7 +9,13 @@ import Recharts from '../containers/gridList';
 import TheNewBoston from './thenewboston';
 import PageTwo from './page-two';
 import LoginPage from './loginPage';
+<<<<<<< HEAD
 import Uid from './uid';
+=======
+import UidPage from './uid';
+import ProfileSetting from './profileSetting';
+import Overview from './overview';
+>>>>>>> add8a59c34f594606f90a4bd3ea81058055304e8
 
 require('../../scss/style.scss');
 const provider = new firebase.auth.GoogleAuthProvider();
@@ -21,7 +27,13 @@ class App extends Component {
         super();
         this.state = {
             speed: 11,
+<<<<<<< HEAD
             user: "Instructor B"
+=======
+            user: "Instructor B",
+            uid: "",
+            view: "administrator"
+>>>>>>> add8a59c34f594606f90a4bd3ea81058055304e8
         }
         this.login = this.login.bind(this);
         this.logout = this.logout.bind(this);
@@ -38,6 +50,13 @@ class App extends Component {
             });
         });
         // everytime data changes on valueRef, assign value to speed.
+    }
+    componentWillMount() { //persists the login auth
+        firebase.auth().onAuthStateChanged((user) => {
+            if (user) {
+              this.setState({ user: user.email, uid: this.state.uid });
+            } 
+          });
     }
 
     handleChange(e) {
@@ -59,7 +78,7 @@ class App extends Component {
                 console.log(user.email)
                 console.log(user.uid)
                 this.setState({
-                    user: user.uid
+                    user: user.email
                 });
                 console.log(this.state.user)
                 const rootRef = firebase.database().ref("/Instructor");
@@ -74,6 +93,24 @@ class App extends Component {
                 });
             });
     }
+    changeUid(newValue) {
+        this.setState({
+          uid: newValue,
+        });
+      }
+    changeView(newValue) {
+        this.setState({
+          view: newValue,
+        });
+      }
+    changeLogOut(){
+        firebase.auth().signOut()
+            .then(() => {
+                this.setState({
+                    user: null
+                });
+            });
+    }
 
     render() {
         const body = (
@@ -82,6 +119,8 @@ class App extends Component {
                 <Switch>
                     <Route exact path='/' component={TheNewBoston} />
                     <Route exact path='/page2' component={PageTwo} />
+                    <Route exact path='/profileSetting' component={ProfileSetting} />
+                    <Route exact path='/overview' component={ProfileSetting} />
                 </Switch>
                 {/*  */}
 
@@ -93,6 +132,7 @@ class App extends Component {
             <div>
                 {this.state.user ?
                     <div>
+<<<<<<< HEAD
                         <button onClick={this.logout}>Log Out</button> <br/><br/>
                         <Uid />
                         <AppFrame children={body} />
@@ -103,6 +143,35 @@ class App extends Component {
                         <h1>Welcome to Edu App</h1>
                         <LoginPage login={this.login}/>
                         {/* <button onClick={this.login}>Log In</button> */}
+=======
+                        {this.state.uid.length != 0 ?
+                            <div> 
+                                <AppFrame uid={this.state.uid} email={this.state.user} view={this.state.view}
+                                changeLogOut={this.changeLogOut.bind(this)}  body={body}/> <br />
+                                (AppFrame) state uid is
+                                {this.state.uid}
+                                <br/>
+                                (AppFrame) View Type is
+                                {this.state.view}
+                                <ProfileSetting 
+                                uid={this.state.uid} changeUid={this.changeUid.bind(this)} 
+                                view={this.state.view} changeView={this.changeView.bind(this)} 
+                                />
+                            </div>
+                            :
+                            <div>
+                                <button onClick={this.logout}>Log Out</button> <br /><br />
+                                <UidPage uid={this.state.uid} changeUid={this.changeUid.bind(this)} body={body}/> <br />
+                                (UidPage)state uid is
+                                {this.state.uid}
+                                <Overview />
+                            </div>
+                        }
+                    </div>
+                    :
+                    <div>
+                        <LoginPage login={this.login} />
+>>>>>>> add8a59c34f594606f90a4bd3ea81058055304e8
                     </div>
 
                 }

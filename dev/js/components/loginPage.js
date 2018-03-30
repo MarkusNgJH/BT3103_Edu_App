@@ -10,6 +10,13 @@ import TextField from 'material-ui/TextField';
 import MenuItem from 'material-ui/Menu/MenuItem';
 import Visibility from 'material-ui-icons/Visibility';
 import VisibilityOff from 'material-ui-icons/VisibilityOff';
+<<<<<<< HEAD
+=======
+import AppBar from 'material-ui/AppBar';
+import Toolbar from 'material-ui/Toolbar';
+import Typography from 'material-ui/Typography';
+import profileSetting from './profileSetting';
+>>>>>>> add8a59c34f594606f90a4bd3ea81058055304e8
 
 const styles = theme => ({
     container: {
@@ -67,6 +74,7 @@ class LoginPage extends React.Component {
     render() {
         return (
             <div>
+<<<<<<< HEAD
                 <Input
                     placeholder="Placeholder"
                     className={styles.margin}
@@ -97,6 +105,49 @@ class LoginPage extends React.Component {
                 </FormControl>
                 <br /> <br />
                 <button onClick={this.props.login}>Log In</button>
+=======
+                <AppBar position="static" color="primary">
+                    <Toolbar>
+                        <Typography variant="title" color="inherit" align="center">
+                            Welcome to Edu App!
+          </Typography>
+                    </Toolbar>
+                </AppBar>
+
+                <div style={{ width: '20%', height: 'auto', position: 'relative', margin: '0px auto', padding: '10px' }}>
+                    <FormControl className={styles.formControl} aria-describedby="name-helper-text">
+                        <InputLabel htmlFor="name-helper">Email</InputLabel>
+                        <Input id="email" placeholder="Enter your email here" />
+                        {/* <FormHelperText id="email-helper-text">Some important helper text</FormHelperText> */}
+                    </FormControl>
+
+                    <br /> <br />
+                    <FormControl className={classNames(styles.margin, styles.textField)}>
+                        <InputLabel htmlFor="adornment-password">Password</InputLabel>
+                        <Input
+                            id="adornment-password"
+                            placeholder="Enter your password here"
+                            type={this.state.showPassword ? 'text' : 'password'}
+                            value={this.state.password}
+                            onChange={this.handleChange('password')}
+                            endAdornment={
+                                <InputAdornment position="end">
+                                    <IconButton
+                                        aria-label="Toggle password visibility"
+                                        onClick={this.handleClickShowPasssword}
+                                        onMouseDown={this.handleMouseDownPassword}
+                                    >
+                                        {this.state.showPassword ? <VisibilityOff /> : <Visibility />}
+                                    </IconButton>
+                                </InputAdornment>
+                            }
+                        />
+                    </FormControl>
+
+                    <br /> <br />
+                    <button style={{ float: 'right' }} onClick={this.props.login}>Log In</button>
+                </div>
+>>>>>>> add8a59c34f594606f90a4bd3ea81058055304e8
             </div>
         )
     }

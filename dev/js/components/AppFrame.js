@@ -6,7 +6,11 @@ import classNames from 'classnames';
 import Drawer from 'material-ui/Drawer';
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
+<<<<<<< HEAD
 import { MenuItem } from 'material-ui/Menu';
+=======
+import ToolbarSeparator from 'material-ui/Toolbar';
+>>>>>>> add8a59c34f594606f90a4bd3ea81058055304e8
 import List, { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
 import Typography from 'material-ui/Typography';
 import TextField from 'material-ui/TextField';
@@ -143,11 +147,86 @@ class PersistentDrawer extends React.Component {
 
         return (
             <div className={classes.root}>
+<<<<<<< HEAD
                 <div className={classes.appFrame}>
                     <AppBar
                         className={classNames(classes.appBar, {
                             [classes.appBarShift]: open,
                         })}
+=======
+                <AppBar
+                    className={classes.appBar}
+                >
+                    <Toolbar>
+                        <IconButton
+                            color="inherit"
+                            aria-label="open drawer"
+                            onClick={this.handleDrawerToggle.bind(this)}
+                            className={classes.navIconHide}
+                        >
+                            <MenuIcon />
+                        </IconButton>
+                        
+                        <Typography variant="title" color="inherit" style={{ flex: 1 }}>
+                            Edu App
+                            </Typography>
+                        <ToolbarSeparator />
+                        User ID: {this.props.uid}
+                        <ToolbarSeparator />
+                        Email: {this.props.email}
+                        <ToolbarSeparator />
+                        View: {this.props.view}
+                        {/* The profile settings, logout menu */}
+                        {auth && (
+                            <div>
+                                <IconButton
+                                    aria-owns={menuOpen ? 'menu-appbar' : null}
+                                    aria-haspopup="true"
+                                    onClick={this.handleMenu}
+                                    color="inherit"
+                                >
+                                    <AccountCircle />
+                                </IconButton>
+                                <Menu
+                                    id="menu-appbar"
+                                    anchorEl={anchorEl}
+                                    anchorOrigin={{
+                                        vertical: 'top',
+                                        horizontal: 'right',
+                                    }}
+                                    transformOrigin={{
+                                        vertical: 'top',
+                                        horizontal: 'right',
+                                    }}
+                                    open={menuOpen}
+                                    onClose={this.handleClose}
+                                >
+                                    <MenuItem>
+                                        <Link to="/profileSetting" >
+                                        Profile Settings    
+                                        </Link>    
+                                    </MenuItem>
+                        
+                                    <MenuItem onClick={this.props.changeLogOut}>Log out</MenuItem>
+                                </Menu>
+                            </div>
+                        )}
+                    </Toolbar>
+                </AppBar>
+
+                <Hidden mdUp>>
+                        <Drawer
+                        variant="temporary"
+                        anchor="left"
+                        open={this.state.mobileOpen}
+                        onClose={this.handleDrawerToggle.bind(this)}
+                        classes={{
+                            paper: classes.drawerPaper,
+                        }}
+                        ModalProps={{
+                            keepMounted: true, // Better open performance on mobile.
+                        }}
+>>>>>>> add8a59c34f594606f90a4bd3ea81058055304e8
                     >
                         <Toolbar disableGutters={!open}>
                             <IconButton
