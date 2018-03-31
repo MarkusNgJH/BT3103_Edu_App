@@ -171,7 +171,7 @@ class PersistentDrawer extends React.Component {
                             >
                                 <MenuIcon />
                             </IconButton>
-                            <Typography variant="title" color="inherit" style={{ flex: 1, }} noWrap>
+                            <Typography variant="title" color="inherit" style={{flex: 1}} noWrap>
                                 Edu App
               </Typography>
                             {auth && (
@@ -181,6 +181,7 @@ class PersistentDrawer extends React.Component {
                                         aria-haspopup="true"
                                         onClick={this.handleMenu}
                                         color="inherit"
+                                        style={{right: '20px'}}
                                     >
                                         <AccountCircle />
                                     </IconButton>
