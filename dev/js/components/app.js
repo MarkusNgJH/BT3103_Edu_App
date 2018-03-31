@@ -6,16 +6,13 @@ import UserDetail from '../containers/user-details';
 import firebase from 'firebase';
 import AppFrame from './AppFrame';
 import Recharts from '../containers/gridList';
-import TheNewBoston from './thenewboston';
 import PageTwo from './page-two';
 import LoginPage from './loginPage';
-<<<<<<< HEAD
-import Uid from './uid';
-=======
 import UidPage from './uid';
 import ProfileSetting from './profileSetting';
 import Overview from './overview';
->>>>>>> add8a59c34f594606f90a4bd3ea81058055304e8
+import Dashboard from './dashboard';
+import nullPage from './nullPage';
 
 require('../../scss/style.scss');
 const provider = new firebase.auth.GoogleAuthProvider();
@@ -27,13 +24,9 @@ class App extends Component {
         super();
         this.state = {
             speed: 11,
-<<<<<<< HEAD
-            user: "Instructor B"
-=======
             user: "Instructor B",
-            uid: "",
+            uid: 0,
             view: "administrator"
->>>>>>> add8a59c34f594606f90a4bd3ea81058055304e8
         }
         this.login = this.login.bind(this);
         this.logout = this.logout.bind(this);
@@ -117,61 +110,40 @@ class App extends Component {
             <div>
                 {/* Tell the page which component to display depending on the URL path */}
                 <Switch>
-                    <Route exact path='/' component={TheNewBoston} />
-                    <Route exact path='/page2' component={PageTwo} />
-                    <Route exact path='/profileSetting' component={ProfileSetting} />
-                    <Route exact path='/overview' component={ProfileSetting} />
+                    <Route exact path='/' component={nullPage} />
+                    <Route exact path='/mydashboard' component={Dashboard} />
                 </Switch>
                 {/*  */}
 
-                <hr />
-                <h4>"<strong>{this.state.speed}</strong>" is rendered from Firebase and will be seen on every page.</h4>
+                <Overview />
             </div>
         )
         return (
             <div>
                 {this.state.user ?
                     <div>
-<<<<<<< HEAD
-                        <button onClick={this.logout}>Log Out</button> <br/><br/>
-                        <Uid />
-                        <AppFrame children={body} />
-                    </div>
-                    :
-                    <div>
-                        {/* Put login page here */}
-                        <h1>Welcome to Edu App</h1>
-                        <LoginPage login={this.login}/>
-                        {/* <button onClick={this.login}>Log In</button> */}
-=======
-                        {this.state.uid.length != 0 ?
+                        {this.state.uid == 0 ?
+                            // Default view
                             <div> 
                                 <AppFrame uid={this.state.uid} email={this.state.user} view={this.state.view}
-                                changeLogOut={this.changeLogOut.bind(this)}  body={body}/> <br />
-                                (AppFrame) state uid is
-                                {this.state.uid}
-                                <br/>
-                                (AppFrame) View Type is
-                                {this.state.view}
-                                <ProfileSetting 
+                                changeLogOut={this.changeLogOut.bind(this)}  body={body} logout={this.logout.bind(this)}/> <br />
+
+                                {/* <ProfileSetting 
                                 uid={this.state.uid} changeUid={this.changeUid.bind(this)} 
                                 view={this.state.view} changeView={this.changeView.bind(this)} 
-                                />
+                                /> */}
                             </div>
                             :
                             <div>
-                                <button onClick={this.logout}>Log Out</button> <br /><br />
-                                <UidPage uid={this.state.uid} changeUid={this.changeUid.bind(this)} body={body}/> <br />
-                                (UidPage)state uid is
-                                {this.state.uid}
-                                <Overview />
+                                {/* pass in uid and user role to Overview for it to render the correct view for that user */}
+                                <Overview uid={this.state.uid} view={this.state.view}/>
+                                <h1>Requires uid</h1>
                             </div>
                         }
                     </div>
                     :
                     <div>
                         <LoginPage login={this.login} />
->>>>>>> add8a59c34f594606f90a4bd3ea81058055304e8
                     </div>
 
                 }

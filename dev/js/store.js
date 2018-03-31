@@ -8,9 +8,6 @@ import firebase from 'firebase';
 const reducerNewCharts = (state = {}, action) => {
   switch (action.type) {
     case 'SET_VAL_newCharts':
-    //   console.log("reducer-Set-Val")
-    //   console.log(state)
-    //   console.log(action.payload)
       return {
         state,
         val: action.payload
@@ -18,7 +15,6 @@ const reducerNewCharts = (state = {}, action) => {
 
     // Handle other actions here
     default:
-    //   console.log("reducer-default")
       return state;
   }
 };
@@ -36,7 +32,6 @@ const reducerAcheivement = (state = {}, action) => {
 
     // Handle other actions here
     default:
-    //   console.log("reducer-default")
       return state;
   }
 };

@@ -39,7 +39,7 @@ class UidPage extends React.Component {
     handleChange(e) {
         // store.dispatch({ type: "SET_VAL_uid", payload: e.target.value });
         // console.log(store.getState());
-        this.setState({ uid: e.target.value})
+        this.setState({ uid: e.target.value })
         console.log(e.target.value)
     }
 
@@ -53,7 +53,6 @@ class UidPage extends React.Component {
     };
 
     render() {
-        // const state = store.getState();
 
         return (
             <div style={{ width: '30%', height: 'auto', position: 'relative', margin: '0px auto', padding: '10px' }}>
@@ -67,26 +66,9 @@ class UidPage extends React.Component {
 
                 <br /> <br />
                 <button style={{ float: 'right' }} onClick={this.handleUID.bind(this)}>Show my Charts</button>
+            </div>
+        )
+    }
+}
 
-                {/* {this.state.uid=='0' ?
-                    <div>
-                        <AppFrame children={this.props.body}/>
-                    </div>
-                    :
-                    <div>
-                        <FormControl className={styles.formControl} aria-describedby="name-helper-text">
-                            <InputLabel htmlFor="name-helper">User ID</InputLabel>
-
-                            <Input id="email" onChange={this.handleChange.bind(this)} placeholder="Enter your user ID here" />
-
-                            <FormHelperText id="email-helper-text">Enter your User ID</FormHelperText>
-                        </FormControl>
-
-const Uid = () => (
-    <div>
-        <input type="text" placeholder="Enter your email here" /> <br />
-        <button>Enter</button>
-    </div>
-);
-
-export default Uid;
+export default UidPage;
