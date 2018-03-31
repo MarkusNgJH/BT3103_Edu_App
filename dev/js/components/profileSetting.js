@@ -71,7 +71,7 @@ class profileSetting extends React.Component {
                     <br /> <br />
                     <FormControl className={classNames(styles.margin, styles.textField)}>
                         <label>
-                            Select your View Type
+                            Select your View Type:<br/> 
                             <select name="view" onChange={this.handleViewChange.bind(this)}>
                             <option value="student">Student</option>
                             <option value="instructor">Instructor</option>

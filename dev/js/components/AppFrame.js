@@ -17,6 +17,10 @@ import ChevronRightIcon from 'material-ui-icons/ChevronRight';
 import StarIcon from 'material-ui-icons/Star';
 import AccountCircle from 'material-ui-icons/AccountCircle';
 import Menu, { MenuItem } from 'material-ui/Menu';
+import Collapse from 'material-ui/transitions/Collapse';
+import ExpandLess from 'material-ui-icons/ExpandLess';
+import ExpandMore from 'material-ui-icons/ExpandMore';
+import AppFrameItems from './AppFrameItems';
 
 const drawerWidth = 240;
 
@@ -97,7 +101,9 @@ class PersistentDrawer extends React.Component {
             open: false,
             auth: true,
             anchorEl: null,
+            overviewOpen: false,
         }
+        this.charts = ["chart 1", "chart 2", "chart 3"]
     }
 
     handleDrawerOpen() {
@@ -106,6 +112,10 @@ class PersistentDrawer extends React.Component {
 
     handleDrawerClose() {
         this.setState({ open: false });
+    };
+
+    handleDrawerToggleNested() {
+        this.setState({ overviewOpen: !this.state.overviewOpen });
     };
 
     // functions for user account menu 
@@ -121,6 +131,7 @@ class PersistentDrawer extends React.Component {
         const { open } = this.state;
         const { auth, anchorEl } = this.state; // for user account menu
         const menuOpen = Boolean(anchorEl); // for user account menu
+        const { overviewOpen } = this.state;
 
         const drawer = (
             <Drawer
@@ -137,20 +148,12 @@ class PersistentDrawer extends React.Component {
                     </IconButton>
                 </div>
                 <Divider />
-                <List>
-                    <ListItem button onClick={this.handleDrawerClose.bind(this)}>
-                        <Link to="/">
-                            <ListItemIcon><StarIcon /></ListItemIcon>
-                            <ListItemText primary="Homepage" />
-                        </Link>
-                    </ListItem>
-                    <ListItem button onClick={this.handleDrawerClose.bind(this)}>
-                        <Link to="/mydashboard" >
-                            <ListItemIcon><StarIcon /></ListItemIcon>
-                            <ListItemText primary="My Dashboard" />
-                        </Link>
-                    </ListItem>
-                </List>
+                <AppFrameItems
+                    handleDrawerToggleNested={this.handleDrawerToggleNested.bind(this)}
+                    handleDrawerClose={this.handleDrawerClose.bind(this)}
+                    overviewOpen={this.state.overviewOpen}
+                    charts={this.charts}
+                />
             </Drawer>
         );
 
@@ -171,7 +174,7 @@ class PersistentDrawer extends React.Component {
                             >
                                 <MenuIcon />
                             </IconButton>
-                            <Typography variant="title" color="inherit" style={{flex: 1}} noWrap>
+                            <Typography variant="title" color="inherit" style={{ flex: 1 }} noWrap>
                                 Edu App
               </Typography>
                             {auth && (
@@ -181,7 +184,7 @@ class PersistentDrawer extends React.Component {
                                         aria-haspopup="true"
                                         onClick={this.handleMenu}
                                         color="inherit"
-                                        style={{right: '20px'}}
+                                        style={{ right: '20px' }}
                                     >
                                         <AccountCircle />
                                     </IconButton>
@@ -199,7 +202,7 @@ class PersistentDrawer extends React.Component {
                                         open={menuOpen}
                                         onClose={this.handleClose}
                                     >
-                                        <MenuItem onClick={this.handleClose}>Profile Settings</MenuItem>
+                                        <MenuItem onClick={this.handleClose} component={Link} to="/profilesettings">Profile Settings</MenuItem>
                                         <MenuItem onClick={this.props.logout.bind(this)}>Log Out</MenuItem>
                                     </Menu>
                                 </div>

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom'
 import Grid from 'material-ui/Grid';
 import Paper from 'material-ui/Paper';
 import Button from 'material-ui/Button';
@@ -65,7 +66,7 @@ class GridExample extends Component {
                 </Typography>
                 </CardContent>
                 <CardActions>
-                <Button variant="raised" size="small" color = {this.chooseColor(1,2)}> {this.chooseText(1,2)} </Button>
+                <Button component={Link} to="/mydashboard" variant="raised" size="small" color = {this.chooseColor(1,2)}> {this.chooseText(1,2)} </Button>
                 </CardActions>
             </Card>
         </Grid>
