@@ -16,14 +16,14 @@ class RechartsChartComp extends React.Component {
         }
         this.chartsArr = [];
 
-        var ind=0
-        for(var key in props.newCharts){
+        var ind = 0
+        for (var key in props.newCharts) {
             // console.log('within loop')
             // console.log(key, props.newCharts[key])
-        if(this.props.newCharts[key].style =='recharts')
-        {this.chartsArr[ind]=this.props.newCharts[key]
-        ind=ind+1
-        }
+            if (this.props.newCharts[key].style == 'recharts') {
+            this.chartsArr[ind] = this.props.newCharts[key]
+                ind = ind + 1
+            }
 
         }
     }
@@ -33,7 +33,7 @@ class RechartsChartComp extends React.Component {
         rootRef.on('value', (snapshot) => {
             let items = snapshot.val();
             let newState = [];
-            for (let item in items){
+            for (let item in items) {
                 newState.push({
                     id: item,
                     level: items[item].level,
@@ -51,41 +51,43 @@ class RechartsChartComp extends React.Component {
         console.log("componentWillReceiveProps")
         console.log(newProps)
         if (newProps != this.props) {
-          this.props = newProps
-          var ind = 0
-          for (var key in this.props.newCharts) {
-            if (this.props.newCharts[key].style == 'recharts') {
-            this.chartsArr[ind] = this.props.newCharts[key]
-              ind = ind + 1
+            this.props = newProps
+            var ind = 0
+            for (var key in this.props.newCharts) {
+                if (this.props.newCharts[key].style == 'recharts') {
+                    this.chartsArr[ind] = this.props.newCharts[key]
+                    ind = ind + 1
+                }
             }
-          }
         }
-      }
+    }
 
     render() {
         const output = this.state.items
         return (
             <div>
-                <div>{
-                    this.chartsArr.map(function(chart, index){
-                    // Adding each chart from passed in data. 
-                    return <RechartsComp key={index} charts={chart} />;
-                    })
-                }</div>
+                <div>
+                    {
+                        this.chartsArr.map(function (chart, index) {
+                            // Adding each chart from passed in data. 
+                            return <RechartsComp key={index} charts={chart} />;
+                        })
+                    }
+                </div>
             </div>
-            
+
         );
     }
 }
 
 const mapStateToProps = state => {
     return { newCharts: state.reCharts.val }
-  }
-  
+}
+
 const mapDispatchToProps = dispatch => { }
-  
+
 const Dashboard = connect(
     mapStateToProps,
 )(RechartsChartComp)
-  
+
 export default Dashboard;

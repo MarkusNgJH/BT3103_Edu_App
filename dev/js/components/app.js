@@ -17,8 +17,6 @@ import nullPage from './nullPage';
 require('../../scss/style.scss');
 const provider = new firebase.auth.GoogleAuthProvider();
 
-
-// new syntax for esx to create functions
 class App extends Component {
     constructor() {
         super();
@@ -47,9 +45,9 @@ class App extends Component {
     componentWillMount() { //persists the login auth
         firebase.auth().onAuthStateChanged((user) => {
             if (user) {
-              this.setState({ user: user.email, uid: this.state.uid });
-            } 
-          });
+                this.setState({ user: user.email, uid: this.state.uid });
+            }
+        });
     }
 
     handleChange(e) {
@@ -89,16 +87,16 @@ class App extends Component {
 
     changeUid(newValue) {
         this.setState({
-          uid: newValue,
+            uid: newValue,
         });
       }
 
     changeView(newValue) {
         this.setState({
-          view: newValue,
+            view: newValue,
         });
-      }
-    changeLogOut(){
+    }
+    changeLogOut() {
         firebase.auth().signOut()
             .then(() => {
                 this.setState({
@@ -118,6 +116,7 @@ class App extends Component {
                 </Switch>
             </div>
         )
+        
         return (
             <div id="main">
                 {this.state.user ?
