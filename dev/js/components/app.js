@@ -9,9 +9,13 @@ import Recharts from '../containers/gridList';
 import TheNewBoston from './thenewboston';
 import PageTwo from './page-two';
 import LoginPage from './loginPage';
+<<<<<<< HEAD
+import Uid from './uid';
+=======
 import UidPage from './uid';
 import ProfileSetting from './profileSetting';
 import Overview from './overview';
+>>>>>>> add8a59c34f594606f90a4bd3ea81058055304e8
 
 require('../../scss/style.scss');
 const provider = new firebase.auth.GoogleAuthProvider();
@@ -23,9 +27,13 @@ class App extends Component {
         super();
         this.state = {
             speed: 11,
+<<<<<<< HEAD
+            user: "Instructor B"
+=======
             user: "Instructor B",
             uid: "",
             view: "administrator"
+>>>>>>> add8a59c34f594606f90a4bd3ea81058055304e8
         }
         this.login = this.login.bind(this);
         this.logout = this.logout.bind(this);
@@ -119,9 +127,21 @@ class App extends Component {
             </div>
         )
         return (
-            <div id="main">
+            <div>
                 {this.state.user ?
                     <div>
+<<<<<<< HEAD
+                        <button onClick={this.logout}>Log Out</button> <br/><br/>
+                        <Uid />
+                        <AppFrame children={body} />
+                    </div>
+                    :
+                    <div>
+                        {/* Put login page here */}
+                        <h1>Welcome to Edu App</h1>
+                        <LoginPage login={this.login}/>
+                        {/* <button onClick={this.login}>Log In</button> */}
+=======
                         {this.state.uid.length != 0 ?
                             <div> 
                                 <AppFrame uid={this.state.uid} email={this.state.user} view={this.state.view}
@@ -149,7 +169,9 @@ class App extends Component {
                     :
                     <div>
                         <LoginPage login={this.login} />
+>>>>>>> add8a59c34f594606f90a4bd3ea81058055304e8
                     </div>
+
                 }
 
             </div>

@@ -26,7 +26,22 @@ const styles = {
   };
 
 class GridExample extends Component {
-
+  chooseColor(val, threshold){
+    if(val>threshold){
+        return "default"
+    }
+    else{
+        return "secondary"
+    }
+  }  
+  chooseText(val, threshold){
+    if(val>threshold){
+        return "Explore"
+    }
+    else{
+        return "Investigate"
+    }
+  }  
   render(){
     return(
       <div>
@@ -36,21 +51,21 @@ class GridExample extends Component {
             <Card>
                 <CardContent>
                 <Typography color="textSecondary">
-                    Word of the Day
-                </Typography>
-                <Typography variant="headline" component="h2">
                     Metrics 1
                 </Typography>
+                <Typography variant="headline" component="h2">
+                    Performance
+                </Typography>
                 <Typography color="textSecondary">
-                    adjective
+                    Identify Top/Bottom Students
                 </Typography>
                 <Typography component="p">
-                    well meaning and kindly.<br />
-                    {'"a benevolent smile"'}
+                    insert information here<br />
+                    {'"detail"'}
                 </Typography>
                 </CardContent>
                 <CardActions>
-                <Button size="small">Learn More</Button>
+                <Button variant="raised" size="small" color = {this.chooseColor(1,2)}> {this.chooseText(1,2)} </Button>
                 </CardActions>
             </Card>
         </Grid>
@@ -58,21 +73,21 @@ class GridExample extends Component {
             <Card>
                 <CardContent>
                 <Typography color="textSecondary">
-                    Word of the Day
+                    Metrics 2
                 </Typography>
                 <Typography variant="headline" component="h2">
-                Metrics 2
+                    Submission Status
                 </Typography>
                 <Typography color="textSecondary">
-                    adjective
+                    Track number of submissions
                 </Typography>
                 <Typography component="p">
-                    well meaning and kindly.<br />
-                    {'"a benevolent smile"'}
+                    insert information here<br />
+                    {'"detail"'}
                 </Typography>
                 </CardContent>
                 <CardActions>
-                <Button size="small">Learn More</Button>
+                <Button variant="raised" size="small" color = {this.chooseColor(5,2)}> {this.chooseText(5,2)} </Button>
                 </CardActions>
             </Card>
         </Grid>
@@ -80,21 +95,21 @@ class GridExample extends Component {
             <Card>
                 <CardContent>
                 <Typography color="textSecondary">
-                    Word of the Day
+                  Metrics 3
                 </Typography>
                 <Typography variant="headline" component="h2">
-                Metrics 3
+                    Student Satifaction  
                 </Typography>
                 <Typography color="textSecondary">
-                    adjective
+                    Measure students happiness with classes
                 </Typography>
                 <Typography component="p">
-                    well meaning and kindly.<br />
-                    {'"a benevolent smile"'}
+                    insert information here<br />
+                    {'"detail"'}
                 </Typography>
                 </CardContent>
                 <CardActions>
-                <Button size="small">Learn More</Button>
+                <Button variant="raised" size="small" color = {this.chooseColor(5,2)} > {this.chooseText(5,2)} </Button>
                 </CardActions>
             </Card>
          </Grid>
@@ -111,12 +126,12 @@ class GridExample extends Component {
                     adjective
                 </Typography>
                 <Typography component="p">
-                    well meaning and kindly.<br />
-                    {'"a benevolent smile"'}
+                    insert information here<br />
+                    {'"detail"'}
                 </Typography>
                 </CardContent>
                 <CardActions>
-                <Button size="small">Learn More</Button>
+                <Button  variant="raised" size="small" color = {this.chooseColor(1,2)} > {this.chooseText(1,2)} </Button>
                 </CardActions>
             </Card>
          </Grid>

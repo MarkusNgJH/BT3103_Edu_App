@@ -41,29 +41,11 @@ const reducerAcheivement = (state = {}, action) => {
   }
 };
 
-const reducerUid = (state = { uid: '0'}, action) => {
-  switch (action.type) {
-    case 'SET_VAL_uid':
-      console.log("reducer-Set-UID")
-      console.log(state)
-      console.log(action.payload)
-      return {
-        state,
-        uid: action.payload
-      };
-
-    // Handle other actions here
-    default:
-      return state;
-  }
-};
-
 const combReducers = combineReducers({
     users: UserReducer, 
     activeUser: ActiveUserReducer,
     reCharts: reducerNewCharts,
-    acheivement: reducerAcheivement,
-    uid: reducerUid,
+    acheivement: reducerAcheivement
 });
 
 const store = createStore(combReducers);
