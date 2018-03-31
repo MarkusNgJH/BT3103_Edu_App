@@ -199,7 +199,11 @@ class PersistentDrawer extends React.Component {
                                         open={menuOpen}
                                         onClose={this.handleClose}
                                     >
-                                        <MenuItem onClick={this.handleClose}>Profile Settings</MenuItem>
+                                        <MenuItem onClick={this.handleClose}>
+                                            <Link to="/profilesetting" >
+                                                Profile Settings
+                                            </Link>
+                                        </MenuItem>
                                         <MenuItem onClick={this.props.logout.bind(this)}>Log Out</MenuItem>
                                     </Menu>
                                 </div>

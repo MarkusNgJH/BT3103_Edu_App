@@ -25,7 +25,7 @@ class App extends Component {
         this.state = {
             speed: 11,
             user: "Instructor B",
-            uid: 0,
+            uid: "default",
             view: "administrator"
         }
         this.login = this.login.bind(this);
@@ -86,11 +86,13 @@ class App extends Component {
                 });
             });
     }
+
     changeUid(newValue) {
         this.setState({
           uid: newValue,
         });
       }
+
     changeView(newValue) {
         this.setState({
           view: newValue,
@@ -110,36 +112,17 @@ class App extends Component {
             <div>
                 {/* Tell the page which component to display depending on the URL path */}
                 <Switch>
-                    <Route exact path='/' component={nullPage} />
+                    <Route exact path='/' component={Overview} />
                     <Route exact path='/mydashboard' component={Dashboard} />
+                    <Route exact path='/profilesetting' component={ProfileSetting} />
                 </Switch>
-                {/*  */}
-
-                <Overview />
             </div>
         )
         return (
             <div id="main">
                 {this.state.user ?
                     <div>
-                        {this.state.uid == 0 ?
-                            // Default view
-                            <div> 
-                                <AppFrame uid={this.state.uid} email={this.state.user} view={this.state.view}
-                                changeLogOut={this.changeLogOut.bind(this)}  body={body} logout={this.logout.bind(this)}/> <br />
-
-                                {/* <ProfileSetting 
-                                uid={this.state.uid} changeUid={this.changeUid.bind(this)} 
-                                view={this.state.view} changeView={this.changeView.bind(this)} 
-                                /> */}
-                            </div>
-                            :
-                            <div>
-                                {/* pass in uid and user role to Overview for it to render the correct view for that user */}
-                                <Overview uid={this.state.uid} view={this.state.view}/>
-                                <h1>Requires uid</h1>
-                            </div>
-                        }
+                        <AppFrame uid={this.state.uid} email={this.state.user} view={this.state.view} changeUid = {this.changeUid.bind(this)} changeView = {this.changeView.bind(this)} changeLogOut={this.changeLogOut.bind(this)} logout={this.logout.bind(this)} body={body}/> 
                     </div>
                     :
                     <div>
