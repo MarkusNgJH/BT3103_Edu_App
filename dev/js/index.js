@@ -12,13 +12,13 @@ import store from "./store";
 //wrapping createStore in {} makes it usuable without declaring a var
 
 var config = {
-    apiKey: "AIzaSyDDPOX8IjXbhO9pTJUEF5gTCcWjQwsHh5E",
-    authDomain: "bt3103-education-app.firebaseapp.com",
-    databaseURL: "https://bt3103-education-app.firebaseio.com",
-    projectId: "bt3103-education-app",
-    storageBucket: "bt3103-education-app.appspot.com",
-    messagingSenderId: "549069820798"
-};
+    apiKey: "AIzaSyDQQWrnzVTRzEpe22LQBtP16ic78AA1bag",
+    authDomain: "bt3103-education-app-2.firebaseapp.com",
+    databaseURL: "https://bt3103-education-app-2.firebaseio.com",
+    projectId: "bt3103-education-app-2",
+    storageBucket: "bt3103-education-app-2.appspot.com",
+    messagingSenderId: "821115163051"
+  };
 
 try {
     firebase.initializeApp(config);
