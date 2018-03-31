@@ -33,8 +33,7 @@ class App extends Component {
     componentDidMount() {
         const rootRef = firebase.database().ref("/Instructor");
         var branch = this.state.user;
-        console.log("branch is")
-        console.log(branch)
+        console.log("branch:\n" + branch);
         const valueRef = rootRef.child(String(branch));
         valueRef.on('value', (snapshot) => {
             this.setState({
@@ -66,17 +65,16 @@ class App extends Component {
         firebase.auth().signInWithPopup(provider)
             .then((result) => {
                 const user = result.user;
-                console.log(user)
-                console.log(user.email)
-                console.log(user.uid)
+                console.log("user:\n" + user);
+                console.log("user.email:\n" + user.email);
+                console.log("user.uid:\n" + user.uid);
                 this.setState({
                     user: user.email
                 });
-                console.log(this.state.user)
+                console.log("this.state.user:\n" + this.state.user);
                 const rootRef = firebase.database().ref("/Instructor");
                 var branch = this.state.user;
-                console.log("branch is")
-                console.log(branch)
+                console.log("branch:\n" + branch);
                 const valueRef = rootRef.child(String(branch));
                 valueRef.on('value', (snapshot) => {
                     this.setState({
