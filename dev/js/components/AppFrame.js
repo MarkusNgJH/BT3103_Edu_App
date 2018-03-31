@@ -6,7 +6,6 @@ import classNames from 'classnames';
 import Drawer from 'material-ui/Drawer';
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
-import ToolbarSeparator from 'material-ui/Toolbar';
 import List, { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
 import Typography from 'material-ui/Typography';
 import TextField from 'material-ui/TextField';
@@ -18,199 +17,200 @@ import ChevronRightIcon from 'material-ui-icons/ChevronRight';
 import StarIcon from 'material-ui-icons/Star';
 import AccountCircle from 'material-ui-icons/AccountCircle';
 import Menu, { MenuItem } from 'material-ui/Menu';
-import Hidden from 'material-ui/Hidden';
 
 const drawerWidth = 240;
 
 const styles = theme => ({
+    '@global': {
+        html: {
+            background: theme.palette.background.default,
+            WebkitFontSmoothing: 'antialiased',
+            MozOsxFontSmoothing: 'grayscale',
+            boxSizing: 'border-box',
+        },
+        '*, *:before, *:after': {
+            boxSizing: 'inherit',
+        },
+        body: {
+            height: '100%',
+            margin: 0,
+        },
+        'div[id=root]': {
+            height: '100%'
+        },
+    },
     root: {
-        flexGrow: 1,
-        height: 'auto',
-        zIndex: 1,
-        overflow: 'hidden',
+        display: 'flex',
+        alignItems: 'stretch',
+        minHeight: '100%',
+        width: '100%',
+    },
+    appBarTitle: {
+        flex: 1,
+    },
+    appFrame: {
         position: 'relative',
         display: 'flex',
         width: '100%',
+        height: '100%',
     },
     appBar: {
         position: 'absolute',
-        marginLeft: drawerWidth,
-        [theme.breakpoints.up('md')]: {
-            width: `calc(100% - ${drawerWidth}px)`,
-        },
+        transition: theme.transitions.create(['margin', 'width'], {
+            easing: theme.transitions.easing.sharp,
+            duration: theme.transitions.duration.leavingScreen,
+        }),
     },
-    navIconHide: {
-        [theme.breakpoints.up('md')]: {
-            display: 'none',
-        },
+    appBarShift: {
+        // width: `calc(100% - ${drawerWidth}px)`,
+        transition: theme.transitions.create(['margin', 'width'], {
+            easing: theme.transitions.easing.easeOut,
+            duration: theme.transitions.duration.enteringScreen,
+        }),
     },
-    toolbar: theme.mixins.toolbar,
-    drawerPaper: {
-        width: drawerWidth,
-        [theme.breakpoints.up('md')]: {
-            position: 'relative',
-        },
+    drawerHeader: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'flex-end',
+        padding: '0 8px',
     },
     content: {
-        flexGrow: 1,
-        backgroundColor: theme.palette.background.default,
-        padding: theme.spacing.unit * 3,
-    },
-    flex: {
-        flex: 1,
+        width: '100%',
+        padding: theme.spacing.unit,
+        height: 'calc(100% - 56px)',
+        marginTop: 56,
+        // [theme.breakpoints.up('lg')]: {
+        //     width: 'calc(100% - ' + drawerWidth + 'px)',
+        // },
+        [theme.breakpoints.up('sm')]: {
+            height: 'calc(100% - 64px)',
+            marginTop: 64,
+            padding: theme.spacing.unit * 3,
+        },
     },
 });
 
 class PersistentDrawer extends React.Component {
-    state = {
-        mobileOpen: false,
-    };
     constructor(props) {
         super(props);
         this.state = {
-            mobileOpen: false,
+            open: false,
             auth: true,
             anchorEl: null,
         }
     }
 
-    handleDrawerToggle = () => {
-        this.setState({ mobileOpen: !this.state.mobileOpen });
+    handleDrawerOpen() {
+        this.setState({ open: true });
     };
 
+    handleDrawerClose() {
+        this.setState({ open: false });
+    };
+
+    // functions for user account menu 
     handleMenu = event => {
         this.setState({ anchorEl: event.currentTarget });
     };
-
     handleClose = () => {
         this.setState({ anchorEl: null });
     };
 
     render() {
         const { classes, theme } = this.props;
-        // Drawer stuffs
-        const { auth, anchorEl } = this.state;
-        const menuOpen = Boolean(anchorEl);
+        const { open } = this.state;
+        const { auth, anchorEl } = this.state; // for user account menu
+        const menuOpen = Boolean(anchorEl); // for user account menu
 
         const drawer = (
-            <div>
+            <Drawer
+                variant="persistent"
+                anchor="left"
+                open={open}
+                classes={{
+                    paper: classes.drawerPaper,
+                }}
+            >
+                <div className={classes.drawerHeader}>
+                    <IconButton onClick={this.handleDrawerClose.bind(this)}>
+                        {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+                    </IconButton>
+                </div>
+                <Divider />
                 <List>
-                    <ListItem button onClick={this.handleDrawerToggle.bind(this)}>
+                    <ListItem button onClick={this.handleDrawerClose.bind(this)}>
                         <Link to="/">
                             <ListItemIcon><StarIcon /></ListItemIcon>
-                            <ListItemText primary="The New Boston" />
+                            <ListItemText primary="Homepage" />
                         </Link>
                     </ListItem>
-                    <ListItem button onClick={this.handleDrawerToggle.bind(this)}>
-                        <Link to="/page2" >
+                    <ListItem button onClick={this.handleDrawerClose.bind(this)}>
+                        <Link to="/mydashboard" >
                             <ListItemIcon><StarIcon /></ListItemIcon>
-                            <ListItemText primary="Page 2" />
+                            <ListItemText primary="My Dashboard" />
                         </Link>
                     </ListItem>
                 </List>
-            </div>
+            </Drawer>
         );
 
         return (
             <div className={classes.root}>
-                <AppBar
-                    className={classes.appBar}
-                >
-                    <Toolbar>
-                        <IconButton
-                            color="inherit"
-                            aria-label="open drawer"
-                            onClick={this.handleDrawerToggle.bind(this)}
-                            className={classes.navIconHide}
-                        >
-                            <MenuIcon />
-                        </IconButton>
-                        
-                        <Typography variant="title" color="inherit" style={{ flex: 1 }}>
-                            Edu App
-                            </Typography>
-                        <ToolbarSeparator />
-                        User ID: {this.props.uid}
-                        <ToolbarSeparator />
-                        Email: {this.props.email}
-                        <ToolbarSeparator />
-                        View: {this.props.view}
-                        {/* The profile settings, logout menu */}
-                        {auth && (
-                            <div>
-                                <IconButton
-                                    aria-owns={menuOpen ? 'menu-appbar' : null}
-                                    aria-haspopup="true"
-                                    onClick={this.handleMenu}
-                                    color="inherit"
-                                >
-                                    <AccountCircle />
-                                </IconButton>
-                                <Menu
-                                    id="menu-appbar"
-                                    anchorEl={anchorEl}
-                                    anchorOrigin={{
-                                        vertical: 'top',
-                                        horizontal: 'right',
-                                    }}
-                                    transformOrigin={{
-                                        vertical: 'top',
-                                        horizontal: 'right',
-                                    }}
-                                    open={menuOpen}
-                                    onClose={this.handleClose}
-                                >
-                                    <MenuItem>
-                                        <Link to="/profileSetting" >
-                                        Profile Settings    
-                                        </Link>    
-                                    </MenuItem>
-                        
-                                    <MenuItem onClick={this.props.changeLogOut}>Log out</MenuItem>
-                                </Menu>
-                            </div>
-                        )}
-                    </Toolbar>
-                </AppBar>
-
-                <Hidden mdUp>>
-                        <Drawer
-                        variant="temporary"
-                        anchor="left"
-                        open={this.state.mobileOpen}
-                        onClose={this.handleDrawerToggle.bind(this)}
-                        classes={{
-                            paper: classes.drawerPaper,
-                        }}
-                        ModalProps={{
-                            keepMounted: true, // Better open performance on mobile.
-                        }}
+                <div className={classes.appFrame}>
+                    <AppBar
+                        className={classNames(classes.appBar, {
+                            [classes.appBarShift]: open,
+                        })}
                     >
-                        <div className={classes.drawerHeader}>
-                            <IconButton onClick={this.handleDrawerToggle.bind(this)}>
-                                {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+                        <Toolbar disableGutters={!open}>
+                            <IconButton
+                                color="inherit"
+                                aria-label="open drawer"
+                                onClick={this.handleDrawerOpen.bind(this)}
+                                className={classNames(classes.menuButton, open && classes.hide)}
+                            >
+                                <MenuIcon />
                             </IconButton>
-                        </div>
-                        <Divider />
-                        {drawer}
-                    </Drawer>
-                </Hidden>
-
-                <Hidden smDown implementation="css">
-                    <Drawer
-                        variant="permanent"
-                        open
-                        classes={{
-                            paper: classes.drawerPaper,
-                        }}
-                    >
-                        {drawer}
-                    </Drawer>
-                </Hidden>
-                <main className={classes.content}>
-                    <div className={classes.toolbar} />
-                    {this.props.children}
-                </main>
+                            <Typography variant="title" color="inherit" style={{flex: 1}} noWrap>
+                                Edu App
+              </Typography>
+                            {auth && (
+                                <div>
+                                    <IconButton
+                                        aria-owns={menuOpen ? 'menu-appbar' : null}
+                                        aria-haspopup="true"
+                                        onClick={this.handleMenu}
+                                        color="inherit"
+                                        style={{right: '20px'}}
+                                    >
+                                        <AccountCircle />
+                                    </IconButton>
+                                    <Menu
+                                        id="menu-appbar"
+                                        anchorEl={anchorEl}
+                                        anchorOrigin={{
+                                            vertical: 'top',
+                                            horizontal: 'right',
+                                        }}
+                                        transformOrigin={{
+                                            vertical: 'top',
+                                            horizontal: 'right',
+                                        }}
+                                        open={menuOpen}
+                                        onClose={this.handleClose}
+                                    >
+                                        <MenuItem onClick={this.handleClose}>Profile Settings</MenuItem>
+                                        <MenuItem onClick={this.props.logout.bind(this)}>Log Out</MenuItem>
+                                    </Menu>
+                                </div>
+                            )}
+                        </Toolbar>
+                    </AppBar>
+                    {drawer}
+                    <main className={classes.content}>
+                        {this.props.body}
+                    </main>
+                </div>
             </div>
         );
     }

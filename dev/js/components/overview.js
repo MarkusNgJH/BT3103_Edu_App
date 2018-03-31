@@ -45,7 +45,7 @@ class GridExample extends Component {
   render(){
     return(
       <div>
-      <h1> This is the Overview </h1>  
+      <h1> Overview </h1>  
       <Grid container spacing={8}>
         <Grid item xs={6}>
             <Card>

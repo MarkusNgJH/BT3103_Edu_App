@@ -66,19 +66,6 @@ class RechartsChartComp extends React.Component {
         const output = this.state.items
         return (
             <div>
-                <div> 
-                    <ul>
-                    {this.state.items.map((item) => {
-                        return (
-                            <li key={item.id}>
-                                <h3>Level:{item.level}</h3>
-                                <p>Players:{item.numPlayers}</p>
-                            </li>
-                        )
-                    })} 
-                    </ul>
-                </div>
-
                 <div>{
                     this.chartsArr.map(function(chart, index){
                     // Adding each chart from passed in data. 
