@@ -110,12 +110,10 @@ class App extends Component {
             <div>
                 {/* Tell the page which component to display depending on the URL path */}
                 <Switch>
-                    <Route exact path='/' component={nullPage} />
+                    <Route exact path='/' component={Overview} />
                     <Route exact path='/mydashboard' component={Dashboard} />
+                    <Route exact path='/profilesetting' component={ProfileSetting} />
                 </Switch>
-                {/*  */}
-
-                <Overview />
             </div>
         )
         return (
