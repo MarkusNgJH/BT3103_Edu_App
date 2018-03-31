@@ -141,7 +141,7 @@ class PersistentDrawer extends React.Component {
                     <ListItem button onClick={this.handleDrawerClose.bind(this)}>
                         <Link to="/">
                             <ListItemIcon><StarIcon /></ListItemIcon>
-                            <ListItemText primary="Overview" />
+                            <ListItemText primary="Homepage" />
                         </Link>
                     </ListItem>
                     <ListItem button onClick={this.handleDrawerClose.bind(this)}>

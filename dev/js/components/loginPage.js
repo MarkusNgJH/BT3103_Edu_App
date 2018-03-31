@@ -20,6 +20,9 @@ const styles = theme => ({
         display: 'flex',
         flexWrap: 'wrap',
     },
+    formControl: {
+        margin: theme.spacing.unit,
+    },
     margin: {
         margin: theme.spacing.unit,
     },
@@ -29,12 +32,8 @@ const styles = theme => ({
 });
 
 class LoginPage extends React.Component {
-
     state = {
-        amount: '',
         password: '',
-        weight: '',
-        weightRange: '',
         showPassword: false,
     };
 

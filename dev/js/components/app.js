@@ -10,8 +10,8 @@ import PageTwo from './page-two';
 import LoginPage from './loginPage';
 import UidPage from './uid';
 import ProfileSetting from './profileSetting';
-import Overview from './overview';
 import Dashboard from './dashboard';
+import Overview from './overview';
 import nullPage from './nullPage';
 
 require('../../scss/style.scss');
@@ -119,7 +119,7 @@ class App extends Component {
             </div>
         )
         return (
-            <div>
+            <div id="main">
                 {this.state.user ?
                     <div>
                         {this.state.uid == 0 ?
@@ -145,7 +145,6 @@ class App extends Component {
                     <div>
                         <LoginPage login={this.login} />
                     </div>
-
                 }
 
             </div>
