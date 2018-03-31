@@ -9,13 +9,9 @@ import Recharts from '../containers/gridList';
 import TheNewBoston from './thenewboston';
 import PageTwo from './page-two';
 import LoginPage from './loginPage';
-<<<<<<< HEAD
-import Uid from './uid';
-=======
 import UidPage from './uid';
 import ProfileSetting from './profileSetting';
 import Overview from './overview';
->>>>>>> add8a59c34f594606f90a4bd3ea81058055304e8
 
 require('../../scss/style.scss');
 const provider = new firebase.auth.GoogleAuthProvider();
@@ -27,13 +23,9 @@ class App extends Component {
         super();
         this.state = {
             speed: 11,
-<<<<<<< HEAD
-            user: "Instructor B"
-=======
             user: "Instructor B",
             uid: "",
             view: "administrator"
->>>>>>> add8a59c34f594606f90a4bd3ea81058055304e8
         }
         this.login = this.login.bind(this);
         this.logout = this.logout.bind(this);
@@ -41,7 +33,8 @@ class App extends Component {
     componentDidMount() {
         const rootRef = firebase.database().ref("/Instructor");
         var branch = this.state.user;
-        console.log("branch:\n" + branch);
+        console.log("branch is")
+        console.log(branch)
         const valueRef = rootRef.child(String(branch));
         valueRef.on('value', (snapshot) => {
             this.setState({
@@ -73,16 +66,17 @@ class App extends Component {
         firebase.auth().signInWithPopup(provider)
             .then((result) => {
                 const user = result.user;
-                console.log("user:\n" + user);
-                console.log("user.email:\n" + user.email);
-                console.log("user.uid:\n" + user.uid);
+                console.log(user)
+                console.log(user.email)
+                console.log(user.uid)
                 this.setState({
                     user: user.email
                 });
-                console.log("this.state.user:\n" + this.state.user);
+                console.log(this.state.user)
                 const rootRef = firebase.database().ref("/Instructor");
                 var branch = this.state.user;
-                console.log("branch:\n" + branch);
+                console.log("branch is")
+                console.log(branch)
                 const valueRef = rootRef.child(String(branch));
                 valueRef.on('value', (snapshot) => {
                     this.setState({
@@ -127,21 +121,9 @@ class App extends Component {
             </div>
         )
         return (
-            <div>
+            <div id="main">
                 {this.state.user ?
                     <div>
-<<<<<<< HEAD
-                        <button onClick={this.logout}>Log Out</button> <br/><br/>
-                        <Uid />
-                        <AppFrame children={body} />
-                    </div>
-                    :
-                    <div>
-                        {/* Put login page here */}
-                        <h1>Welcome to Edu App</h1>
-                        <LoginPage login={this.login}/>
-                        {/* <button onClick={this.login}>Log In</button> */}
-=======
                         {this.state.uid.length != 0 ?
                             <div> 
                                 <AppFrame uid={this.state.uid} email={this.state.user} view={this.state.view}
@@ -163,15 +145,14 @@ class App extends Component {
                                 (UidPage)state uid is
                                 {this.state.uid}
                                 <Overview />
+                                {this.props.body}
                             </div>
                         }
                     </div>
                     :
                     <div>
                         <LoginPage login={this.login} />
->>>>>>> add8a59c34f594606f90a4bd3ea81058055304e8
                     </div>
-
                 }
 
             </div>

@@ -1,3 +1,4 @@
+import Login from './login'
 import React from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
@@ -82,11 +83,11 @@ class UidPage extends React.Component {
                             <FormHelperText id="email-helper-text">Enter your User ID</FormHelperText>
                         </FormControl>
 
-const Uid = () => (
-    <div>
-        <input type="text" placeholder="Enter your email here" /> <br />
-        <button>Enter</button>
-    </div>
-);
+                        <br /> <br />
+                        <button style={{ float: 'right' }} onClick={this.handleUID.bind(this)}>Show my Charts</button> */}
+            </div>
+        )
+    }
+}
 
-export default Uid;
+export default UidPage;
