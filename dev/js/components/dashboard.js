@@ -7,6 +7,7 @@ import UserDetail from '../containers/user-details';
 import firebase from 'firebase';
 import AppFrame from './AppFrame';
 import RechartsComp from './RechartsChart.js';
+import Grid from 'material-ui/Grid';
 import {
     PieChart,
     Pie,
@@ -102,7 +103,8 @@ class RechartsChartComp extends React.Component {
         // const output = this.state.items
         return (
             <div>
-                <div>
+                <Grid container spacing={8}>
+                <Grid item xs={6}>
                 <BarChart
                     width={600}
                     height={300}
@@ -130,8 +132,67 @@ class RechartsChartComp extends React.Component {
                     <Legend />
                     <Bar dataKey="Value" fill="#8884d8" />
                 </BarChart>
-                </div>
-            </div>
+                </Grid>
+                <Grid item xs={6}>
+                <BarChart
+                    width={600}
+                    height={300}
+                    data={this.props.firebase.R6nSbDVly8PUnC6jQFcseDS9sgJ3.BT3103.HighLowPerformance.data.chart05}
+                    margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+                    >
+                    <XAxis
+                    dataKey="Name"
+                    label={
+                        <AxisLabel axisType="xAxis" width={600} height={300}>
+                        xAxis
+                        </AxisLabel>
+                    }
+                    />
+                    <YAxis
+                    dataKey="Value"
+                    label={
+                        <AxisLabel axisType="yAxis" width={600} height={300}>
+                        yAxis
+                        </AxisLabel>
+                    }
+                    />
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <Tooltip />
+                    <Legend />
+                    <Bar dataKey="Value" fill="#8884d8" />
+                </BarChart>
+                </Grid>
+                <Grid item xs={6}>
+                <BarChart
+                    width={600}
+                    height={300}
+                    data={this.props.firebase.R6nSbDVly8PUnC6jQFcseDS9sgJ3.BT3103.HighLowPerformance.data.chart07}
+                    margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+                    >
+                    <XAxis
+                    dataKey="Name"
+                    label={
+                        <AxisLabel axisType="xAxis" width={600} height={300}>
+                        xAxis
+                        </AxisLabel>
+                    }
+                    />
+                    <YAxis
+                    dataKey="Value"
+                    label={
+                        <AxisLabel axisType="yAxis" width={600} height={300}>
+                        yAxis
+                        </AxisLabel>
+                    }
+                    />
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <Tooltip />
+                    <Legend />
+                    <Bar dataKey="Value" fill="#8884d8" />
+                </BarChart>
+                </Grid>
+                </Grid>
+            </div> 
 
         );
     }
