@@ -45,21 +45,26 @@ class DrawerItems extends React.Component {
             <List>
                 <ListItem button onClick={this.props.handleDrawerToggleNested.bind(this)}>
                     <Link to="/">
-                        <ListItemIcon><StarIcon /></ListItemIcon>
                         <ListItemText primary="Homepage" />
                     </Link>
                     {this.props.overviewOpen ? <ExpandLess /> : <ExpandMore />}
                 </ListItem>
                 <Collapse in={this.props.overviewOpen} timeout="auto" unmountOnExit>
                     <List disablePadding>
-                        <ListItem button onClick={this.props.handleDrawerClose.bind(this)} style={{ left: "30%" }}>
-                            <ListItemText primary={this.charts[0]} />
+                        <ListItem button onClick={this.props.handleDrawerClose.bind(this)} style={{ paddingLeft: "60px" }}>
+                            <Link to="/mydashboard">
+                                <ListItemText primary="Performance" />
+                            </Link>
                         </ListItem>
-                        <ListItem button onClick={this.props.handleDrawerClose.bind(this)} style={{ left: "30%" }}>
-                            <ListItemText primary={this.charts[1]} />
+                        <ListItem button onClick={this.props.handleDrawerClose.bind(this)} style={{ paddingLeft: "60px" }}>
+                            <Link to="/mydashboard">
+                                <ListItemText primary="Submission Status" />
+                            </Link>
                         </ListItem>
-                        <ListItem button onClick={this.props.handleDrawerClose.bind(this)} style={{ left: "30%" }}>
-                            <ListItemText primary={this.charts[2]} />
+                        <ListItem button onClick={this.props.handleDrawerClose.bind(this)} style={{ paddingLeft: "60px" }}>
+                            <Link to="/mydashboard">
+                                <ListItemText primary="Student Satisfaction" />
+                            </Link>
                         </ListItem>
 
                         {
@@ -79,7 +84,6 @@ class DrawerItems extends React.Component {
 
                 <ListItem button onClick={this.props.handleDrawerClose.bind(this)}>
                     <Link to="/mydashboard" >
-                        <ListItemIcon><StarIcon /></ListItemIcon>
                         <ListItemText primary="My Dashboard" />
                     </Link>
                 </ListItem>
