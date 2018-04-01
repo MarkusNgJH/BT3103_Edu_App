@@ -11,7 +11,7 @@ import Visibility from 'material-ui-icons/Visibility';
 import VisibilityOff from 'material-ui-icons/VisibilityOff';
 import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
-
+import UsersTable from '../containers/users-table';
 
 const styles = theme => ({
     container: {
@@ -88,7 +88,7 @@ class profileSetting extends React.Component {
                     <br /> <br />
                     <button style={{ float: 'right' }} onClick={this.handleChange.bind(this)} >Submit</button>
                 </div>
-
+                <UsersTable />
             </div>
         )
     }

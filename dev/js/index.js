@@ -24,6 +24,23 @@ try {
 } catch (error) { }
 
 var db = firebase.database();
+
+// converts firebase obj to array
+function snapshotToArray(snapshot) {
+    console.log(snapshotToArray);
+    console.log(snapshot);
+    var returnArr = [];
+
+    snapshot.forEach(function(childSnapshot) {
+        var item = childSnapshot.val();
+        item.key = childSnapshot.key;
+
+        returnArr.push(item);
+    });
+
+    return returnArr;
+};
+
 db.ref("/newCharts").on("value", data => {
     if (data.val()) {
         store.dispatch({ type: "SET_VAL_newCharts", payload: data.val() });
@@ -36,6 +53,13 @@ db.ref("/DevTeam").on("value", data => {
         store.dispatch({ type: "SET_VAL_acheivements", payload: data.val() });
         console.log("acheivement getstate:");
         console.log(store.getState().acheivement.val);
+    }
+});
+db.ref("/usersTable/usersTable").on("value", data => {
+    if (data.val()) {
+        store.dispatch({ type: "SET_VAL_allUsers", payload: snapshotToArray(data) });
+        console.log("allUsers getstate:");
+        console.log(store.getState().allUsers.val);
     }
 });
 

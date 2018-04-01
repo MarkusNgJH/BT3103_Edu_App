@@ -22,7 +22,24 @@ const reducerNewCharts = (state = {}, action) => {
 const reducerAcheivement = (state = {}, action) => {
   switch (action.type) {
     case 'SET_VAL_acheivements':
-       console.log("reducer-Set-Val")
+       console.log("reducer-Set-Val (achievements)")
+       console.log(state)
+       console.log(action.payload)
+      return {
+        state,
+        val: action.payload
+      };
+
+    // Handle other actions here
+    default:
+      return state;
+  }
+};
+
+const reducerAllUsers = (state = {}, action) => {
+  switch (action.type) {
+    case 'SET_VAL_allUsers':
+       console.log("reducer-Set-Val (all users)")
        console.log(state)
        console.log(action.payload)
       return {
@@ -40,7 +57,8 @@ const combReducers = combineReducers({
     users: UserReducer, 
     activeUser: ActiveUserReducer,
     reCharts: reducerNewCharts,
-    acheivement: reducerAcheivement
+    acheivement: reducerAcheivement,
+    allUsers: reducerAllUsers
 });
 
 const store = createStore(combReducers);
