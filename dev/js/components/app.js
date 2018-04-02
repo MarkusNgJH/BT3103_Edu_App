@@ -17,15 +17,13 @@ import nullPage from './nullPage';
 require('../../scss/style.scss');
 const provider = new firebase.auth.GoogleAuthProvider();
 
-
-// new syntax for esx to create functions
 class App extends Component {
     constructor() {
         super();
         this.state = {
             speed: 11,
             user: "Instructor B",
-            uid: 0,
+            uid: "default",
             view: "administrator"
         }
         this.login = this.login.bind(this);
@@ -47,9 +45,9 @@ class App extends Component {
     componentWillMount() { //persists the login auth
         firebase.auth().onAuthStateChanged((user) => {
             if (user) {
-              this.setState({ user: user.email, uid: this.state.uid });
-            } 
-          });
+                this.setState({ user: user.email, uid: this.state.uid });
+            }
+        });
     }
 
     handleChange(e) {
@@ -86,17 +84,19 @@ class App extends Component {
                 });
             });
     }
+
     changeUid(newValue) {
         this.setState({
-          uid: newValue,
+            uid: newValue,
         });
       }
+
     changeView(newValue) {
         this.setState({
-          view: newValue,
+            view: newValue,
         });
-      }
-    changeLogOut(){
+    }
+    changeLogOut() {
         firebase.auth().signOut()
             .then(() => {
                 this.setState({
@@ -116,28 +116,12 @@ class App extends Component {
                 </Switch>
             </div>
         )
+        
         return (
             <div id="main">
                 {this.state.user ?
                     <div>
-                        {this.state.uid == 0 ?
-                            // Default view
-                            <div> 
-                                <AppFrame uid={this.state.uid} email={this.state.user} view={this.state.view}
-                                changeLogOut={this.changeLogOut.bind(this)}  body={body} logout={this.logout.bind(this)}/> <br />
-
-                                {/* <ProfileSetting 
-                                uid={this.state.uid} changeUid={this.changeUid.bind(this)} 
-                                view={this.state.view} changeView={this.changeView.bind(this)} 
-                                /> */}
-                            </div>
-                            :
-                            <div>
-                                {/* pass in uid and user role to Overview for it to render the correct view for that user */}
-                                <Overview uid={this.state.uid} view={this.state.view}/>
-                                <h1>Requires uid</h1>
-                            </div>
-                        }
+                        <AppFrame uid={this.state.uid} email={this.state.user} view={this.state.view} changeUid = {this.changeUid.bind(this)} changeView = {this.changeView.bind(this)} changeLogOut={this.changeLogOut.bind(this)} logout={this.logout.bind(this)} body={body}/> 
                     </div>
                     :
                     <div>

@@ -4,62 +4,30 @@ import ReactDOM from "react-dom";
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import { BrowserRouter } from 'react-router-dom'
-import allReducers from './reducers';
-import UserReducer from './reducers/reducer-users';
 import App from './components/app';
 import firebase from 'firebase';
 import store from "./store";
 //wrapping createStore in {} makes it usuable without declaring a var
 
 var config = {
-    apiKey: "AIzaSyAp5KgeDweFK8PQ1l6o-V2eaqLeOYN0GlY",
-    authDomain: "bt3103-edu-app.firebaseapp.com",
-    databaseURL: "https://bt3103-edu-app.firebaseio.com",
-    projectId: "bt3103-edu-app",
-    storageBucket: "bt3103-edu-app.appspot.com",
-    messagingSenderId: "478259615153"
-};
+    apiKey: "AIzaSyDQQWrnzVTRzEpe22LQBtP16ic78AA1bag",
+    authDomain: "bt3103-education-app-2.firebaseapp.com",
+    databaseURL: "https://bt3103-education-app-2.firebaseio.com",
+    projectId: "bt3103-education-app-2",
+    storageBucket: "bt3103-education-app-2.appspot.com",
+    messagingSenderId: "821115163051"
+  };
+
 try {
     firebase.initializeApp(config);
 } catch (error) { }
 
 var db = firebase.database();
-
-// converts firebase obj to array
-function snapshotToArray(snapshot) {
-    console.log(snapshotToArray);
-    console.log(snapshot);
-    var returnArr = [];
-
-    snapshot.forEach(function(childSnapshot) {
-        var item = childSnapshot.val();
-        item.key = childSnapshot.key;
-
-        returnArr.push(item);
-    });
-
-    return returnArr;
-};
-
-db.ref("/newCharts").on("value", data => {
+db.ref("/").on("value", data => {
     if (data.val()) {
-        store.dispatch({ type: "SET_VAL_newCharts", payload: data.val() });
+        store.dispatch({ type: "SET_VAL", payload: data.val() });
         console.log("dispatched & displaying getstate:");
         console.log(store.getState());
-    }
-});
-db.ref("/DevTeam").on("value", data => {
-    if (data.val()) {
-        store.dispatch({ type: "SET_VAL_acheivements", payload: data.val() });
-        console.log("acheivement getstate:");
-        console.log(store.getState().acheivement.val);
-    }
-});
-db.ref("/usersTable/usersTable").on("value", data => {
-    if (data.val()) {
-        store.dispatch({ type: "SET_VAL_allUsers", payload: snapshotToArray(data) });
-        console.log("allUsers getstate:");
-        console.log(store.getState().allUsers.val);
     }
 });
 

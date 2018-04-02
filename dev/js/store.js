@@ -1,67 +1,45 @@
 import { createStore } from 'redux';
-import allReducers from './reducers/index.js';
-import {combineReducers} from 'redux';
-import UserReducer from './reducers/reducer-users';
-import ActiveUserReducer from './reducers/reducer-active-user';
+import { combineReducers } from 'redux';
 import firebase from 'firebase';
+// import ActiveProfile from './reducers/profile';
 
-const reducerNewCharts = (state = {}, action) => {
+const reducerFirebase = (state = {}, action) => {
   switch (action.type) {
-    case 'SET_VAL_newCharts':
+    case 'SET_VAL':
       return {
         state,
         val: action.payload
-      };
-
-    // Handle other actions here
+      }
+    case 'SET_VIEW':
+      return {
+        state,
+        currentView: action.payload
+      }
     default:
       return state;
   }
 };
 
-const reducerAcheivement = (state = {}, action) => {
+const activeProfile = (state = {val: {uid: "R6nSbDVly8PUnC6jQFcseDS9sgJ3", course: "BT3103", role: "Administrator"}}, action) => {
   switch (action.type) {
-    case 'SET_VAL_acheivements':
-       console.log("reducer-Set-Val (achievements)")
-       console.log(state)
-       console.log(action.payload)
+    case 'UPDATE_ACTIVE_PROFILE':
+      console.log("UPDATE_ACTIVE_PROFILE")
+      console.log(action.payload)
+      console.log(state)
       return {
         state,
         val: action.payload
       };
-
-    // Handle other actions here
-    default:
-      return state;
-  }
-};
-
-const reducerAllUsers = (state = {}, action) => {
-  switch (action.type) {
-    case 'SET_VAL_allUsers':
-       console.log("reducer-Set-Val (all users)")
-       console.log(state)
-       console.log(action.payload)
-      return {
-        state,
-        val: action.payload
-      };
-
-    // Handle other actions here
     default:
       return state;
   }
 };
 
 const combReducers = combineReducers({
-    users: UserReducer, 
-    activeUser: ActiveUserReducer,
-    reCharts: reducerNewCharts,
-    acheivement: reducerAcheivement,
-    allUsers: reducerAllUsers
+    firebase: reducerFirebase,
+    activeProfile: activeProfile 
 });
 
 const store = createStore(combReducers);
 
-export default store;
-                
+export default store;                
