@@ -1,5 +1,6 @@
 import React, { Component }from 'react';
 import {connect} from 'react-redux';
+import store from "../store";
 import {
       Table,
       TableBody,
@@ -7,16 +8,17 @@ import {
       TableHeaderColumn,
       TableRow,
       TableRowColumn,
-    } from 'material-ui/Table';
+} from 'material-ui/Table';
     
 class UsersTable extends Component {
     generateUsersTable() {
-        return this.props.allUsers.map((user) => {
+        console.log("store.getState().allUsers:");
+        console.log(store.getState().allUsers.val);
+        return store.getState().allUsers.val.map((user) => {
             return (
                 <tr>
-                    <td>
-                        {user.first}
-                    </td>
+                    <td>{user.key}</td>
+                    <td>{user.userDisplayName}</td>
                 </tr>
             )
         })
@@ -25,9 +27,17 @@ class UsersTable extends Component {
         return (
                 <div>
                     <h1>This is the UsersTable.</h1>
-                    <h3>Data from TheNewBoston</h3>
                     <table>
-                        {this.generateUsersTable()}
+                        <thead>
+                            <tr>
+                                <th>User ID</th>
+                                <th>Display Name</th>
+                                <th>Course</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {this.generateUsersTable()}
+                        </tbody>
                     </table>
                 </div>
             );
@@ -35,8 +45,10 @@ class UsersTable extends Component {
     }
 
 function mapStateToProps(state){
-    return{
-        allUsers: state.users
+    console.log("mapStateToProps called");
+    // console.log(UsersTable.props.allUsers);
+    return {
+        allUsers: state.allUsers
     };
 }    
 

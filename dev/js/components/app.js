@@ -13,6 +13,9 @@ import ProfileSetting from './profileSetting';
 import Dashboard from './dashboard';
 import Overview from './overview';
 import nullPage from './nullPage';
+import instructorHighLowPerformance from './instructorHighLowPerformance';
+import instructorpastAssignments from './instructorPastAssignment';
+import instructorStudentBehaviour from './instructorStudentBehaviour';
 
 require('../../scss/style.scss');
 const provider = new firebase.auth.GoogleAuthProvider();
@@ -115,10 +118,13 @@ class App extends Component {
                     <Route exact path='/' component={Overview} />
                     <Route exact path='/mydashboard' component={Dashboard} />
                     <Route exact path='/profilesetting' component={ProfileSetting} />
+                    <Route exact path='/instructor-highlow-performance' component={instructorHighLowPerformance} />
+                    <Route exact path='/instructor-past-assignments' component={instructorpastAssignments} />
+                    <Route exact path='/instructor-student-behaviour' component={instructorStudentBehaviour} />
                 </Switch>
             </div>
         )
-        
+
         return (
             <div id="main">
                 {this.state.user ?

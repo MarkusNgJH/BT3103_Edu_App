@@ -9,6 +9,7 @@ import AppFrame from './AppFrame';
 import RechartsComp from './RechartsChart.js';
 import Grid from 'material-ui/Grid';
 import store from '../store';
+
 import {
     PieChart,
     Pie,
@@ -50,51 +51,8 @@ const AxisLabel = ({
 class RechartsChartComp extends React.Component {
     constructor(props) {
         super(props);
-        // var ind = 0
-        // for (var key in props.newCharts) {
-        //     // console.log('within loop')
-        //     // console.log(key, props.newCharts[key])
-        //     if (this.props.newCharts[key].style == 'recharts') {
-        //     this.chartsArr[ind] = this.props.newCharts[key]
-        //         ind = ind + 1
-        //     }
-
-        // }
     }
 
-    // componentDidMount() {
-    //     const rootRef = firebase.database().ref('sampleData01');
-    //     rootRef.on('value', (snapshot) => {
-    //         let items = snapshot.val();
-    //         let newState = [];
-    //         for (let item in items) {
-    //             newState.push({
-    //                 id: item,
-    //                 level: items[item].level,
-    //                 numPlayers: items[item].Players
-    //             });
-    //         }
-    //         this.setState({
-    //             items: newState
-    //         });
-    //     });
-    //     // everytime data changes on valueRef, assign value to speed.   
-    // }
-
-    // componentWillReceiveProps(newProps) {
-    //     console.log("componentWillReceiveProps")
-    //     console.log(newProps)
-    //     if (newProps != this.props) {
-    //         this.props = newProps
-    //         var ind = 0
-    //         for (var key in this.props.newCharts) {
-    //             if (this.props.newCharts[key].style == 'recharts') {
-    //                 this.chartsArr[ind] = this.props.newCharts[key]
-    //                 ind = ind + 1
-    //             }
-    //         }
-    //     }
-    // }
 
     render() {
         const s = store.getState()
@@ -103,6 +61,7 @@ class RechartsChartComp extends React.Component {
         console.log(s.firebase.currentView)
         return (
             <div>
+                
                 <h1>Your current view is {s.firebase.currentView}</h1>
                 <Grid container spacing={8}>
                 <Grid item xs={6}>

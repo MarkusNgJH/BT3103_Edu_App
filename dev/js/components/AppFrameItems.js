@@ -70,7 +70,7 @@ class DrawerItems extends React.Component {
                         {
                             this.charts.map(function (chart, i) {
                                 var t = { chart }.chart
-                                console.log("value:", t, "index:", i)
+                                // console.log("value:", t, "index:", i)
                                 return
                                 (
                                     <ListItem button onClick={this.props.handleDrawerClose.bind(this)}>

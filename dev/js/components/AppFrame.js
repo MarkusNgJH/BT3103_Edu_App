@@ -21,6 +21,8 @@ import Collapse from 'material-ui/transitions/Collapse';
 import ExpandLess from 'material-ui-icons/ExpandLess';
 import ExpandMore from 'material-ui-icons/ExpandMore';
 import AppFrameItems from './AppFrameItems';
+import ActiveUserInfo from './activeUserInfo';
+import store from '../store';
 
 const drawerWidth = 240;
 
@@ -176,7 +178,8 @@ class PersistentDrawer extends React.Component {
                             </IconButton>
                             <Typography variant="title" color="inherit" style={{ flex: 1 }} noWrap>
                                 Edu App
-              </Typography>
+                            </Typography>
+                            <ActiveUserInfo />
                             {auth && (
                                 <div>
                                     <IconButton
