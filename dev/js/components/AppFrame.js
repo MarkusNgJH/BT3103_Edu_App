@@ -96,7 +96,7 @@ const styles = theme => ({
     },
 });
 
-class PersistentDrawer extends React.Component {
+class AppFrame extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -134,6 +134,7 @@ class PersistentDrawer extends React.Component {
         const { auth, anchorEl } = this.state; // for user account menu
         const menuOpen = Boolean(anchorEl); // for user account menu
         const { overviewOpen } = this.state;
+        const storeState = store.getState();
 
         const drawer = (
             <Drawer
@@ -155,6 +156,7 @@ class PersistentDrawer extends React.Component {
                     handleDrawerClose={this.handleDrawerClose.bind(this)}
                     overviewOpen={this.state.overviewOpen}
                     charts={this.charts}
+                    activeProfileRole={storeState.activeProfile.val.role}
                 />
             </Drawer>
         );
@@ -226,9 +228,9 @@ class PersistentDrawer extends React.Component {
     }
 }
 
-PersistentDrawer.propTypes = {
+AppFrame.propTypes = {
     classes: PropTypes.object.isRequired,
     theme: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles, { withTheme: true })(PersistentDrawer);
+export default withStyles(styles, { withTheme: true })(AppFrame);

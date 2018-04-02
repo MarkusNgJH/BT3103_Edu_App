@@ -10,11 +10,6 @@ const reducerFirebase = (state = {}, action) => {
         ...state,
         val: action.payload
       }
-    case 'SET_VIEW':
-      return {
-        ...state,
-        currentView: action.payload
-      }
     default:
       return state;
   }
@@ -35,9 +30,23 @@ const activeProfile = (state = {val: {uid: "R6nSbDVly8PUnC6jQFcseDS9sgJ3", cours
   }
 };
 
+const activeView = (state = {}, action) => {
+  switch (action.type) {
+    case "SET_VIEW":
+      return {
+        ...state,
+        currentView: action.payload
+      }
+  
+    default:
+      return state;
+  }
+}
+
 const combReducers = combineReducers({
     firebase: reducerFirebase,
-    activeProfile: activeProfile 
+    activeProfile: activeProfile, 
+    activeView: activeView,
 });
 
 const store = createStore(combReducers);

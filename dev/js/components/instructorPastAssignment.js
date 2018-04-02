@@ -1,10 +1,17 @@
 import React from 'react';
+import store from '../store';
 
-const InstructorPastAssignment = () => (
-    <div>
-        <h1> This is instructor past assignment </h1>
-    </div>
-);
+class InstructorPastAssignment extends React.Component {
+    render() {
+        const state = store.getState();
+
+        return (
+            <div>
+                <h1> This is instructor {state.firebase.currentView}</h1>
+            </div>
+        )
+    }
+}
 
 export default InstructorPastAssignment;
 

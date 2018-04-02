@@ -12,10 +12,10 @@ import UidPage from './uid';
 import ProfileSetting from './profileSetting';
 import Dashboard from './dashboard';
 import Overview from './overview';
-import nullPage from './nullPage';
 import instructorHighLowPerformance from './instructorHighLowPerformance';
 import instructorpastAssignments from './instructorPastAssignment';
 import instructorStudentBehaviour from './instructorStudentBehaviour';
+import store from '../store';
 
 require('../../scss/style.scss');
 const provider = new firebase.auth.GoogleAuthProvider();
@@ -46,6 +46,9 @@ class App extends Component {
             });
         });
         // everytime data changes on valueRef, assign value to speed.
+
+        // Subscribe to store changes, each time changes happen, component re-render 
+        store.subscribe(() => this.forceUpdate());
     }
     componentWillMount() { //persists the login auth
         firebase.auth().onAuthStateChanged((user) => {
@@ -94,7 +97,7 @@ class App extends Component {
         this.setState({
             uid: newValue,
         });
-      }
+    }
 
     changeView(newValue) {
         this.setState({
@@ -111,7 +114,8 @@ class App extends Component {
     }
 
     render() {
-        const body = (
+        const state = store.getState()
+        const routes = (
             <div>
                 {/* Tell the page which component to display depending on the URL path */}
                 <Switch>
@@ -125,11 +129,12 @@ class App extends Component {
             </div>
         )
 
+
         return (
             <div id="main">
                 {this.state.user ?
                     <div>
-                        <AppFrame uid={this.state.uid} email={this.state.user} view={this.state.view} changeUid = {this.changeUid.bind(this)} changeView = {this.changeView.bind(this)} changeLogOut={this.changeLogOut.bind(this)} logout={this.logout.bind(this)} body={body}/> 
+                        <AppFrame uid={this.state.uid} email={this.state.user} view={this.state.view} changeUid={this.changeUid.bind(this)} changeView={this.changeView.bind(this)} changeLogOut={this.changeLogOut.bind(this)} logout={this.logout.bind(this)} body={routes} />
                     </div>
                     :
                     <div>

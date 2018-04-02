@@ -50,7 +50,66 @@ class DrawerItems extends React.Component {
                     {this.props.overviewOpen ? <ExpandLess /> : <ExpandMore />}
                 </ListItem>
                 <Collapse in={this.props.overviewOpen} timeout="auto" unmountOnExit>
-                    <List disablePadding>
+
+                    {this.props.activeProfileRole == 'Administrator' ?
+                        <List disablePadding>
+                            <ListItem button onClick={this.props.handleDrawerClose.bind(this)} style={{ paddingLeft: "60px" }}>
+                                <Link to="/mydashboard">
+                                    <ListItemText primary="Admin-Performance" />
+                                </Link>
+                            </ListItem>
+                            <ListItem button onClick={this.props.handleDrawerClose.bind(this)} style={{ paddingLeft: "60px" }}>
+                                <Link to="/mydashboard">
+                                    <ListItemText primary="Admin-Submission Status" />
+                                </Link>
+                            </ListItem>
+                            <ListItem button onClick={this.props.handleDrawerClose.bind(this)} style={{ paddingLeft: "60px" }}>
+                                <Link to="/mydashboard">
+                                    <ListItemText primary="Admin-Student Satisfaction" />
+                                </Link>
+                            </ListItem>
+                        </List>
+                        :
+                        this.props.activeProfileRole == 'Instructor' ?
+                            <List disablePadding>
+                                <ListItem button onClick={this.props.handleDrawerClose.bind(this)} style={{ paddingLeft: "60px" }}>
+                                    <Link to="/instructor-highlow-performance">
+                                        <ListItemText primary="Instructor-Performance" />
+                                    </Link>
+                                </ListItem>
+                                <ListItem button onClick={this.props.handleDrawerClose.bind(this)} style={{ paddingLeft: "60px" }}>
+                                    <Link to="/instructor-past-assignments">
+                                        <ListItemText primary="Instructor-Submission Status" />
+                                    </Link>
+                                </ListItem>
+                                <ListItem button onClick={this.props.handleDrawerClose.bind(this)} style={{ paddingLeft: "60px" }}>
+                                    <Link to="/instructor-student-behaviour">
+                                        <ListItemText primary="Instructor-Student Satisfaction" />
+                                    </Link>
+                                </ListItem>
+                            </List>
+                        :
+                            <List disablePadding>
+                                <ListItem button onClick={this.props.handleDrawerClose.bind(this)} style={{ paddingLeft: "60px" }}>
+                                    <Link to="/mydashboard">
+                                        <ListItemText primary="Student-Performance" />
+                                    </Link>
+                                </ListItem>
+                                <ListItem button onClick={this.props.handleDrawerClose.bind(this)} style={{ paddingLeft: "60px" }}>
+                                    <Link to="/mydashboard">
+                                        <ListItemText primary="Student-Submission Status" />
+                                    </Link>
+                                </ListItem>
+                                <ListItem button onClick={this.props.handleDrawerClose.bind(this)} style={{ paddingLeft: "60px" }}>
+                                    <Link to="/mydashboard">
+                                        <ListItemText primary="Student-Student Satisfaction" />
+                                    </Link>
+                                </ListItem>
+                            </List>
+                    }
+
+
+                    {/* <List disablePadding>
                         <ListItem button onClick={this.props.handleDrawerClose.bind(this)} style={{ paddingLeft: "60px" }}>
                             <Link to="/mydashboard">
                                 <ListItemText primary="Performance" />
@@ -79,7 +138,7 @@ class DrawerItems extends React.Component {
                                 )
                             })
                         }
-                    </List>
+                    </List> */}
                 </Collapse>
 
                 <ListItem button onClick={this.props.handleDrawerClose.bind(this)}>

@@ -59,7 +59,7 @@ class GridExample extends Component {
     }
 
     render() {
-
+        
         return (
             <div>
                 <h1> Overview </h1>
@@ -83,7 +83,7 @@ class GridExample extends Component {
                             </CardContent>
                             <CardActions>
                                 <Button
-                                    onClick={() => this.handleClick('Performance')}
+                                    onClick={() => this.handleClick('High-Low Performance')}
                                     component={Link} to="/instructor-highlow-performance"
                                     variant="raised" size="small"
                                     color={this.chooseColor(1, 2)}> {this.chooseText(1, 2)}
@@ -110,7 +110,7 @@ class GridExample extends Component {
                             </CardContent>
                             <CardActions>
                                 <Button
-                                    onClick={() => { this.handleClick('Submission Status') }}
+                                    onClick={() => { this.handleClick('Past-Assignments') }}
                                     component={Link} to="/instructor-past-assignments"
                                     variant="raised"
                                     size="small"
@@ -138,7 +138,7 @@ class GridExample extends Component {
                             </CardContent>
                             <CardActions>
                                 <Button
-                                    onClick={() => { this.handleClick('Student Satisfaction') }}
+                                    onClick={() => { this.handleClick('Student Behaviour') }}
                                     component={Link} to="/instructor-student-behaviour"
                                     variant="raised"
                                     size="small"
@@ -147,7 +147,7 @@ class GridExample extends Component {
                             </CardActions>
                         </Card>
                     </Grid>
-                    <Grid item xs={6}>
+                    {/* <Grid item xs={6}>
                         <Card>
                             <CardContent>
                                 <Typography color="textSecondary">
@@ -173,7 +173,7 @@ class GridExample extends Component {
                                 </Button>
                             </CardActions>
                         </Card>
-                    </Grid>
+                    </Grid> */}
                 </Grid>
             </div>
         )

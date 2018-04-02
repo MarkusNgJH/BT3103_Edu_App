@@ -48,7 +48,7 @@ const AxisLabel = ({
     );
   };
 
-class RechartsChartComp extends React.Component {
+class Dashboard extends React.Component {
     constructor(props) {
         super(props);
     }
@@ -56,13 +56,10 @@ class RechartsChartComp extends React.Component {
 
     render() {
         const s = store.getState()
-        const fireb = s.firebase.state.val
-        console.log(fireb)
-        console.log(s.firebase.currentView)
+        const fireb = s.firebase.val
+        console.log(s.activeView.currentView)
         return (
             <div>
-                
-                <h1>Your current view is {s.firebase.currentView}</h1>
                 <Grid container spacing={8}>
                 <Grid item xs={6}>
                 <BarChart
@@ -158,14 +155,14 @@ class RechartsChartComp extends React.Component {
     }
 }
 
-const mapStateToProps = state => {
-    return { 
-        firebase: state.firebase.val, 
-        currentView: state.firebase.state.currentView
-    }
-}
+// const mapStateToProps = state => {
+//     return { 
+//         firebase: state.firebase.val, 
+//         currentView: state.firebase.state.currentView
+//     }
+// }
 
 
-const Dashboard = connect(mapStateToProps)(RechartsChartComp)
+// const Dashboard = connect(mapStateToProps)(RechartsChartComp)
 
 export default Dashboard;
