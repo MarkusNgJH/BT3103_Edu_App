@@ -17,6 +17,8 @@ import nullPage from './nullPage';
 require('../../scss/style.scss');
 const provider = new firebase.auth.GoogleAuthProvider();
 
+// Real time pulling data function here. setInterval()
+
 class App extends Component {
     constructor() {
         super();
