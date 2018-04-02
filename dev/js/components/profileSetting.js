@@ -35,12 +35,12 @@ const styles = theme => ({
 class profileSetting extends React.Component {
     state = {
         uid: 'default',
-        view: 'BT3103',
+        course: 'BT3103',
     };
 
     handleUIDChange(e) {
         this.setState({ uid: e.target.value})
-        this.setState({ view: Object.keys(this.props.firebase.val[e.target.value])[0]})
+        this.setState({ course: Object.keys(this.props.firebase.val[e.target.value])[0]})
         console.log('handleUIDChange')
         console.log(Object.keys(this.props.firebase.val[e.target.value])[0])
     }
@@ -48,12 +48,12 @@ class profileSetting extends React.Component {
     handleChange = () => {
         this.props.changeUid(this.state.uid)
         console.log("uid is: " + this.state.uid)
-        this.props.changeView(this.state.view)
-        console.log("View is: " + this.state.view)
+        this.props.changecourse(this.state.course)
+        console.log("course is: " + this.state.course)
     };
 
-    handleViewChange(e) {
-        this.setState({ view: e.target.value})
+    handlecourseChange(e) {
+        this.setState({ course: e.target.value})
         // console.log(e.target.value)
     }
 
@@ -103,11 +103,11 @@ class profileSetting extends React.Component {
         return(
             <div>
                 <h1>This is profile setting page</h1>
-                <h2> {this.props.activeProfile.uid} </h2>
-                <h2> {this.props.activeProfile.course} </h2>
+                <h2> Props UID: {this.props.activeProfile.uid} </h2>
+                <h2> Props Course: {this.props.activeProfile.course} </h2>
+                <h2> Props Role{this.props.activeProfile.role} </h2>
                 <h2> Local state is {this.state.uid} </h2>
-                <h2> Local state is {this.state.view} </h2>
-                <h2> {this.props.activeProfile.role} </h2>
+                <h2> Local state is {this.state.course} </h2>
                 <h2> {this.viewCourses()} </h2>
                 <div style={{ width: '20%', height: 'auto', position: 'relative', margin: '0px auto', padding: '10px' }}>
                     <FormControl className={styles.formControl} aria-describedby="name-helper-text">
@@ -119,7 +119,7 @@ class profileSetting extends React.Component {
                     <FormControl className={classNames(styles.margin, styles.textField)}>
                         <label>
                             Select your View Type:<br/> 
-                            <select name="view" onChange={this.handleViewChange.bind(this)} onFocus={this.handleViewChange.bind(this)}>
+                            <select name="course" onChange={this.handlecourseChange.bind(this)} onFocus={this.handlecourseChange.bind(this)}>
                             {this.viewCourses()}
                             </select>
                         </label>
@@ -132,7 +132,7 @@ class profileSetting extends React.Component {
 
                     <br /> <br />
                     <button style={{ float: 'right' }} 
-                    onClick={() => this.props.updateActiveProfile({uid: this.state.uid, course: this.state.view, role:"Administrator"})}>
+                    onClick={() => this.props.updateActiveProfile({uid: this.state.uid, course: this.state.course, role:this.props.firebase.val[this.state.uid][this.state.course]['User Type']})}>
                     Submit</button>
                 </div>
             </div>

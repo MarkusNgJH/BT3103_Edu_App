@@ -82,12 +82,15 @@ class GridExample extends Component {
                                 </Typography>
                             </CardContent>
                             <CardActions>
+                            <Link to="/instructor-highlow-performance" >
                                 <Button
                                     onClick={() => this.handleClick('Performance')}
-                                    component={Link} to="/mydashboard"
+                                    
+                                    /* component={Link} to="/instructor-highlow-performance" */
                                     variant="raised" size="small"
                                     color={this.chooseColor(1, 2)}> {this.chooseText(1, 2)}
                                 </Button>
+                            </Link>
                             </CardActions>
                         </Card>
                     </Grid>
@@ -111,7 +114,7 @@ class GridExample extends Component {
                             <CardActions>
                                 <Button
                                     onClick={() => { this.handleClick('Submission Status') }}
-                                    component={Link} to="/mydashboard"
+                                    component={Link} to="/instructor-past-assignments"
                                     variant="raised"
                                     size="small"
                                     color={this.chooseColor(5, 2)}> {this.chooseText(5, 2)}
@@ -126,7 +129,7 @@ class GridExample extends Component {
                                     Metrics 3
                 </Typography>
                                 <Typography variant="headline" component="h2">
-                                    Student Satisfaction
+                                    Student Behaviour
                 </Typography>
                                 <Typography color="textSecondary">
                                     Measure students happiness with classes
@@ -139,7 +142,7 @@ class GridExample extends Component {
                             <CardActions>
                                 <Button
                                     onClick={() => { this.handleClick('Student Satisfaction') }}
-                                    component={Link} to="/mydashboard"
+                                    component={Link} to="/instructor-student-behaviour"
                                     variant="raised"
                                     size="small"
                                     color={this.chooseColor(5, 2)} > {this.chooseText(5, 2)}
@@ -152,13 +155,13 @@ class GridExample extends Component {
                             <CardContent>
                                 <Typography color="textSecondary">
                                     Word of the Day
-                </Typography>
+                                </Typography>
                                 <Typography variant="headline" component="h2">
                                     Metrics 4
-                </Typography>
+                                </Typography>
                                 <Typography color="textSecondary">
                                     adjective
-                </Typography>
+                                </Typography>
                                 <Typography component="p">
                                     insert information here<br />
                                     {'"detail"'}

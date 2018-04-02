@@ -61,6 +61,7 @@ class RechartsChartComp extends React.Component {
         console.log(s.firebase.currentView)
         return (
             <div>
+                
                 <h1>Your current view is {s.firebase.currentView}</h1>
                 <Grid container spacing={8}>
                 <Grid item xs={6}>
