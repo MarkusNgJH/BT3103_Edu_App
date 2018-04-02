@@ -12,8 +12,10 @@ import VisibilityOff from 'material-ui-icons/VisibilityOff';
 import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
 import {connect} from 'react-redux';
-
-
+import {bindActionCreators} from 'redux';
+import {updateActiveProfile} from '../actions/updateActiveProfile';
+import store from '../store';
+ 
 const styles = theme => ({
     container: {
         display: 'flex',
@@ -33,12 +35,14 @@ const styles = theme => ({
 class profileSetting extends React.Component {
     state = {
         uid: 'default',
-        view: 'student',
+        view: 'BT3103',
     };
 
     handleUIDChange(e) {
         this.setState({ uid: e.target.value})
-        console.log(e.target.value)
+        this.setState({ view: Object.keys(this.props.firebase.val[e.target.value])[0]})
+        console.log('handleUIDChange')
+        console.log(Object.keys(this.props.firebase.val[e.target.value])[0])
     }
 
     handleChange = () => {
@@ -46,29 +50,34 @@ class profileSetting extends React.Component {
         console.log("uid is: " + this.state.uid)
         this.props.changeView(this.state.view)
         console.log("View is: " + this.state.view)
-
     };
 
     handleViewChange(e) {
         this.setState({ view: e.target.value})
-        console.log(e.target.value)
+        // console.log(e.target.value)
     }
 
     componentWillReceiveProps(newProps) {
         if (newProps != this.props) {
-            console.log("componentWillReceiveProps")
             this.props = newProps
-            console.log(this.props.firebase)
+            // console.log("componentWillReceiveProps")
+            // console.log("componentWillReceivePropsFB")
+            // console.log(this.props.firebase)
+            // console.log("componentWillReceivePropsAP")
+            // console.log(this.props.activeProfile)
+            // console.log("componentWillReceivePropsAll")
+            // console.log(this.props)
+            // console.log(store)
         }
       }
     // how to change the state to the right directory
     viewCourses(){
         if(Object.keys(this.props.firebase).length != 0){
-            console.log(this.props.firebase)
+            // console.log(this.props.firebase)
             var location = (Object.keys(this.props.firebase.val).indexOf(this.state.uid) > -1) ? this.state.uid : 'R6nSbDVly8PUnC6jQFcseDS9sgJ3'; 
-            console.log(Object.keys(this.props.firebase.val))
-            console.log('location is')
-            console.log(location)
+            // console.log(Object.keys(this.props.firebase.val))
+            // console.log('location is')
+            // console.log(location)
             return (
                 // g8odN87wiURjfhqbw1HiMoFIwxn1
                 // R6nSbDVly8PUnC6jQFcseDS9sgJ3
@@ -94,8 +103,11 @@ class profileSetting extends React.Component {
         return(
             <div>
                 <h1>This is profile setting page</h1>
-                <h2> {this.props.uid} </h2>
-                <h2> {this.props.view} </h2>
+                <h2> {this.props.activeProfile.uid} </h2>
+                <h2> {this.props.activeProfile.course} </h2>
+                <h2> Local state is {this.state.uid} </h2>
+                <h2> Local state is {this.state.view} </h2>
+                <h2> {this.props.activeProfile.role} </h2>
                 <h2> {this.viewCourses()} </h2>
                 <div style={{ width: '20%', height: 'auto', position: 'relative', margin: '0px auto', padding: '10px' }}>
                     <FormControl className={styles.formControl} aria-describedby="name-helper-text">
@@ -107,11 +119,8 @@ class profileSetting extends React.Component {
                     <FormControl className={classNames(styles.margin, styles.textField)}>
                         <label>
                             Select your View Type:<br/> 
-                            <select name="view" onChange={this.handleViewChange.bind(this)}>
+                            <select name="view" onChange={this.handleViewChange.bind(this)} onFocus={this.handleViewChange.bind(this)}>
                             {this.viewCourses()}
-                            {/* <option value="student">Student</option>
-                            <option value="instructor">Instructor</option>
-                            <option value="adminstrator">Administrator</option> */}
                             </select>
                         </label>
                         
@@ -122,9 +131,10 @@ class profileSetting extends React.Component {
                     </FormControl>
 
                     <br /> <br />
-                    <button style={{ float: 'right' }} onClick={this.handleChange.bind(this)}>Submit</button>
+                    <button style={{ float: 'right' }} 
+                    onClick={() => this.props.updateActiveProfile({uid: this.state.uid, course: this.state.view, role:"Administrator"})}>
+                    Submit</button>
                 </div>
-
             </div>
         )
     }
@@ -132,8 +142,13 @@ class profileSetting extends React.Component {
 
 function mapStateToProps(state){
     return{
-        firebase: state.firebase
+        firebase: state.firebase,
+        activeProfile: state.activeProfile.state
     };
 }    
 
-export default connect(mapStateToProps)(profileSetting); 
+function matchDispatchToProps(dispatch){
+    return bindActionCreators({updateActiveProfile: updateActiveProfile}, dispatch)
+}
+
+export default connect(mapStateToProps, matchDispatchToProps)(profileSetting); 
