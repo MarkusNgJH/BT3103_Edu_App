@@ -143,7 +143,7 @@ class profileSetting extends React.Component {
 function mapStateToProps(state){
     return{
         firebase: state.firebase,
-        activeProfile: state.activeProfile.state
+        activeProfile: state.activeProfile.val
     };
 }    
 

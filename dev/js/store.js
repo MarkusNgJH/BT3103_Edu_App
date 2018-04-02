@@ -20,14 +20,14 @@ const reducerFirebase = (state = {}, action) => {
   }
 };
 
-const activeProfile = (state = {state: {uid: "R6nSbDVly8PUnC6jQFcseDS9sgJ3", course: "BT3103", role: "Administrator"}}, action) => {
+const activeProfile = (state = {val: {uid: "R6nSbDVly8PUnC6jQFcseDS9sgJ3", course: "BT3103", role: "Administrator"}}, action) => {
   switch (action.type) {
     case 'UPDATE_ACTIVE_PROFILE':
       console.log("UPDATE_ACTIVE_PROFILE")
       console.log(action.payload)
       console.log(state)
       return {
-        state: action.payload,
+        state,
         val: action.payload
       };
     default:
@@ -36,8 +36,6 @@ const activeProfile = (state = {state: {uid: "R6nSbDVly8PUnC6jQFcseDS9sgJ3", cou
 };
 
 const combReducers = combineReducers({
-    users: UserReducer, 
-    activeUser: ActiveUserReducer,
     firebase: reducerFirebase,
     activeProfile: activeProfile 
 });
