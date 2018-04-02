@@ -1,8 +1,5 @@
 import { createStore } from 'redux';
-import allReducers from './reducers/index.js';
-import {combineReducers} from 'redux';
-import UserReducer from './reducers/reducer-users';
-import ActiveUserReducer from './reducers/reducer-active-user';
+import { combineReducers } from 'redux';
 import firebase from 'firebase';
 // import ActiveProfile from './reducers/profile';
 
@@ -12,7 +9,12 @@ const reducerFirebase = (state = {}, action) => {
       return {
         state,
         val: action.payload
-      };
+      }
+    case 'SET_VIEW':
+      return {
+        state,
+        currentView: action.payload
+      }
     default:
       return state;
   }

@@ -8,6 +8,7 @@ import firebase from 'firebase';
 import AppFrame from './AppFrame';
 import RechartsComp from './RechartsChart.js';
 import Grid from 'material-ui/Grid';
+import store from '../store';
 import {
     PieChart,
     Pie,
@@ -49,10 +50,6 @@ const AxisLabel = ({
 class RechartsChartComp extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            items: []
-        }
-        this.chartsArr = [];
         // var ind = 0
         // for (var key in props.newCharts) {
         //     // console.log('within loop')
@@ -100,15 +97,19 @@ class RechartsChartComp extends React.Component {
     // }
 
     render() {
-        // const output = this.state.items
+        const s = store.getState()
+        const fireb = s.firebase.state.val
+        console.log(fireb)
+        console.log(s.firebase.currentView)
         return (
             <div>
+                <h1>Your current view is {s.firebase.currentView}</h1>
                 <Grid container spacing={8}>
                 <Grid item xs={6}>
                 <BarChart
                     width={600}
                     height={300}
-                    data={this.props.firebase.R6nSbDVly8PUnC6jQFcseDS9sgJ3.BT3103.HighLowPerformance.data.chart04}
+                    data={fireb.R6nSbDVly8PUnC6jQFcseDS9sgJ3.BT3103.HighLowPerformance.data.chart04}
                     margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
                     >
                     <XAxis
@@ -137,7 +138,7 @@ class RechartsChartComp extends React.Component {
                 <BarChart
                     width={600}
                     height={300}
-                    data={this.props.firebase.R6nSbDVly8PUnC6jQFcseDS9sgJ3.BT3103.HighLowPerformance.data.chart05}
+                    data={fireb.R6nSbDVly8PUnC6jQFcseDS9sgJ3.BT3103.HighLowPerformance.data.chart05}
                     margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
                     >
                     <XAxis
@@ -166,7 +167,7 @@ class RechartsChartComp extends React.Component {
                 <BarChart
                     width={600}
                     height={300}
-                    data={this.props.firebase.R6nSbDVly8PUnC6jQFcseDS9sgJ3.BT3103.HighLowPerformance.data.chart07}
+                    data={fireb.R6nSbDVly8PUnC6jQFcseDS9sgJ3.BT3103.HighLowPerformance.data.chart07}
                     margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
                     >
                     <XAxis
@@ -199,7 +200,10 @@ class RechartsChartComp extends React.Component {
 }
 
 const mapStateToProps = state => {
-    return { firebase: state.firebase.val }
+    return { 
+        firebase: state.firebase.val, 
+        currentView: state.firebase.state.currentView
+    }
 }
 
 

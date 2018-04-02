@@ -4,8 +4,6 @@ import ReactDOM from "react-dom";
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import { BrowserRouter } from 'react-router-dom'
-import allReducers from './reducers';
-import UserReducer from './reducers/reducer-users';
 import App from './components/app';
 import firebase from 'firebase';
 import store from "./store";
