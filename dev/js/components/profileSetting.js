@@ -40,9 +40,10 @@ class profileSetting extends React.Component {
 
     handleUIDChange(e) {
         this.setState({ uid: e.target.value})
-        this.setState({ course: Object.keys(this.props.firebase.val[e.target.value])[0]})
         console.log('handleUIDChange')
-        console.log(Object.keys(this.props.firebase.val[e.target.value])[0])
+        if(Object.keys(this.props.firebase.val).indexOf(e.target.value) > -1){
+            this.setState({ course: Object.keys(this.props.firebase.val[e.target.value])[0]})
+        }
     }
 
     handleChange = () => {
@@ -73,7 +74,8 @@ class profileSetting extends React.Component {
     // how to change the state to the right directory
     viewCourses(){
         if(Object.keys(this.props.firebase).length != 0){
-            // console.log(this.props.firebase)
+            console.log("ViewCourses")
+            console.log(this.props.firebase)
             var location = (Object.keys(this.props.firebase.val).indexOf(this.state.uid) > -1) ? this.state.uid : 'R6nSbDVly8PUnC6jQFcseDS9sgJ3'; 
             // console.log(Object.keys(this.props.firebase.val))
             // console.log('location is')
@@ -102,13 +104,13 @@ class profileSetting extends React.Component {
     render(){
         return(
             <div>
-                <h1>This is profile setting page</h1>
-                <h2> Props UID: {this.props.activeProfile.uid} </h2>
+                <h1>Profile Setting</h1>
+                {/* <h2> Props UID: {this.props.activeProfile.uid} </h2>
                 <h2> Props Course: {this.props.activeProfile.course} </h2>
                 <h2> Props Role{this.props.activeProfile.role} </h2>
                 <h2> Local state is {this.state.uid} </h2>
-                <h2> Local state is {this.state.course} </h2>
-                <h2> {this.viewCourses()} </h2>
+                <h2> Local state is {this.state.course} </h2> */}
+                {/* <h2> {this.viewCourses()} </h2> */}
                 <div style={{ width: '20%', height: 'auto', position: 'relative', margin: '0px auto', padding: '10px' }}>
                     <FormControl className={styles.formControl} aria-describedby="name-helper-text">
                         <InputLabel htmlFor="name-helper">User ID</InputLabel>

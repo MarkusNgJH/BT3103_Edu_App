@@ -7,12 +7,12 @@ const reducerFirebase = (state = {}, action) => {
   switch (action.type) {
     case 'SET_VAL':
       return {
-        state,
+        ...state,
         val: action.payload
       }
     case 'SET_VIEW':
       return {
-        state,
+        ...state,
         currentView: action.payload
       }
     default:
@@ -27,7 +27,7 @@ const activeProfile = (state = {val: {uid: "R6nSbDVly8PUnC6jQFcseDS9sgJ3", cours
       console.log(action.payload)
       console.log(state)
       return {
-        state,
+        ...state,
         val: action.payload
       };
     default:
