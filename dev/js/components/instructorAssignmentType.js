@@ -52,14 +52,17 @@ class InstructorAssignmentType extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            selectedBar: ""
+            selectedAssignmentType: "",
+            selectedVideo: ""
         }
     }
 
-    selectBar(data){
-        console.log(data)
-        console.log(this.props.activeView)
-        this.setState({selectedBar: data.Name})
+    selectedAssignmentType(data){
+        this.setState({selectedAssignmentType: data.Name})
+    }
+
+    selectedVideo(data){
+        this.setState({selectedVideo: data.Name})
     }
 
     render() {
@@ -68,8 +71,8 @@ class InstructorAssignmentType extends React.Component {
                 <Grid container spacing={8}>
                 <Grid item xs={12}>
                 <BarChart
-                    width={600}
-                    height={300}
+                    width={730}
+                    height={250}
                     // data={this.props.firebase.val.R6nSbDVly8PUnC6jQFcseDS9sgJ3.BT3103.instructorAssignmentType.chart08.data}
                     data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignmentType.chart08.data}
                     margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
@@ -94,33 +97,57 @@ class InstructorAssignmentType extends React.Component {
                     <Tooltip />
                     <Legend />
                     <Bar dataKey="Value" fill="#8884d8" 
-                    onClick={(data, index) => this.selectBar(data)} />
+                    onClick={(data, index) => this.selectedAssignmentType(data)} />
                 </BarChart>
                 </Grid>
-                <Grid item xs={12}>
+                
                 <div>
-                {this.state.selectedBar ?
+                {this.state.selectedAssignmentType ?
                     <div>
-                        {this.state.selectedBar} selected
+                        {this.state.selectedAssignmentType} selected
+                        <Grid item xs={6}>
                         <BarChart width={730} height={250} data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignmentType.chart09.data}>
                         <CartesianGrid strokeDasharray="3 3" />
                         <XAxis dataKey="Name" />
                         <YAxis />
                         <Tooltip />
                         <Legend />
-                        <Bar dataKey="plays" fill="#8884d8" />
+                        <Bar dataKey="plays" fill="#8884d8" onClick={(data, index) => this.selectedVideo(data)}/>
                         <Bar dataKey="rate" fill="#82ca9d" />
                         </BarChart>
-                
+                        </Grid>
+
+                        <Grid item xs={6}>
+                        <BarChart width={730} height={250} data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignmentType.chart10.data}>
+                        <CartesianGrid strokeDasharray="3 3" />
+                        <XAxis dataKey="Name" />
+                        <YAxis />
+                        <Tooltip />
+                        <Legend />
+                        <Bar dataKey="pauses" fill="#8884d8" />
+                        <Bar dataKey="playbacks" fill="#82ca9d" />
+                        </BarChart>
+                        </Grid>
+                        {this.state.selectedVideo ?
+                            <Grid item xs={6}>
+                            <BarChart width={730} height={250} data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignmentType.chart11.data}>
+                            <CartesianGrid strokeDasharray="3 3" />
+                            <XAxis dataKey="Name" />
+                            <YAxis />
+                            <Tooltip />
+                            <Legend />
+                            <Bar dataKey="Value" fill="#8884d8" />
+                            </BarChart>
+                            </Grid>
+                            :
+                            <div></div>
+                        }
                     </div>
                     :
-                    <div>
-
-                    </div>
+                    <div></div>
                 }
                 </div>
-                </Grid>
-
+                
                 </Grid>
                 
             </div> 
