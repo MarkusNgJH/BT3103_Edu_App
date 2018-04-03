@@ -83,8 +83,8 @@ class GridExample extends Component {
                             </CardContent>
                             <CardActions>
                                 <Button
-                                    onClick={() => this.handleClick('High-Low Performance')}
-                                    component={Link} to="/instructor-highlow-performance"
+                                    onClick={() => this.handleClick('instructorAssignmentType')}
+                                    component={Link} to="/instructorAssignmentType"
                                     variant="raised" size="small"
                                     color={this.chooseColor(1, 2)}> {this.chooseText(1, 2)}
                                 </Button>

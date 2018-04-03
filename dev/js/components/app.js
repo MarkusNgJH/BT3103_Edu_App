@@ -12,7 +12,7 @@ import UidPage from './uid';
 import ProfileSetting from './profileSetting';
 import Dashboard from './dashboard';
 import Overview from './overview';
-import instructorHighLowPerformance from './instructorHighLowPerformance';
+import instructorAssignmentType from './instructorAssignmentType';
 import instructorpastAssignments from './instructorPastAssignment';
 import instructorStudentBehaviour from './instructorStudentBehaviour';
 import store from '../store';
@@ -122,7 +122,7 @@ class App extends Component {
                     <Route exact path='/' component={Overview} />
                     <Route exact path='/mydashboard' component={Dashboard} />
                     <Route exact path='/profilesetting' component={ProfileSetting} />
-                    <Route exact path='/instructor-highlow-performance' component={instructorHighLowPerformance} />
+                    <Route exact path='/instructorAssignmentType' component={instructorAssignmentType} />
                     <Route exact path='/instructor-past-assignments' component={instructorpastAssignments} />
                     <Route exact path='/instructor-student-behaviour' component={instructorStudentBehaviour} />
                 </Switch>
