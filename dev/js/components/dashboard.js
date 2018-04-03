@@ -87,7 +87,7 @@ class Dashboard extends React.Component {
                     <CartesianGrid strokeDasharray="3 3" />
                     <Tooltip />
                     <Legend />
-                    <Bar dataKey="Value" fill="#8884d8" />
+                    <Bar dataKey="Value" fill="#8884d8" onClick={(data, index) => console.log(data, index)} />
                 </BarChart>
                 </Grid>
                 <Grid item xs={6}>
