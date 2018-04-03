@@ -13,8 +13,8 @@ import ProfileSetting from './profileSetting';
 import Dashboard from './dashboard';
 import Overview from './overview';
 import instructorAssignmentType from './instructorAssignmentType';
-import instructorpastAssignments from './instructorPastAssignment';
-import instructorStudentBehaviour from './instructorStudentBehaviour';
+import instructorAssignmentCat from './instructorAssignmentCat';
+import instructorStudentIdentifier from './instructorStudentIdentifier';
 import store from '../store';
 
 require('../../scss/style.scss');
@@ -123,8 +123,8 @@ class App extends Component {
                     <Route exact path='/mydashboard' component={Dashboard} />
                     <Route exact path='/profilesetting' component={ProfileSetting} />
                     <Route exact path='/instructorAssignmentType' component={instructorAssignmentType} />
-                    <Route exact path='/instructor-past-assignments' component={instructorpastAssignments} />
-                    <Route exact path='/instructor-student-behaviour' component={instructorStudentBehaviour} />
+                    <Route exact path='/instructorAssignmentCat' component={instructorAssignmentCat} />
+                    <Route exact path='/instructorStudentIdentifier' component={instructorStudentIdentifier} />
                 </Switch>
             </div>
         )

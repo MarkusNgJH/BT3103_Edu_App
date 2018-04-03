@@ -1,18 +1,18 @@
 import React from 'react';
 import store from '../store';
 
-class InstructorStudentBehaviour extends React.Component {
+class instructorStudentIdentifier extends React.Component {
     render() {
         const state = store.getState();
 
         return (
             <div>
-                <h1> This is instructor {state.firebase.currentView}</h1>
+                <h1> This is instructor {state.firebase.activeView.currentView}</h1>
             </div>
         )
     }
 }
 
-export default InstructorStudentBehaviour;
+export default instructorStudentIdentifier;
 
 
