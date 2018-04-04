@@ -9,6 +9,9 @@ import AppFrame from './AppFrame';
 import RechartsComp from './RechartsChart.js';
 import Grid from 'material-ui/Grid';
 import store from '../store';
+import Button from 'material-ui/Button';
+import Icon from 'material-ui/Icon';
+import Delete from 'material-ui-icons/Delete';
 
 import {
     PieChart,
@@ -104,27 +107,29 @@ class InstructorAssignmentType extends React.Component {
                 </Grid>
                 
                 <div>
-                {this.state.selectedAssignmentType ?
+                {this.state.selectedAssignmentType == "PathProblem"?
                     <div>
-                        {this.state.selectedAssignmentType} selected
+                        <Button variant="raised" color="secondary" onClick={() => this.setState({selectedAssignmentType: ""})}>
+                            Clear Selection <Delete />
+                        </Button>
                         <Grid item xs={6}>
                         <h3>Chart09</h3>
                         <h4>Which videos have my students watched and how is the pace for them? </h4>
-                        <BarChart width={730} height={250} data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignmentType.chart09.data}>
+                        <BarChart width={400} height={250} data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignmentType.chart09.data}>
                         <CartesianGrid strokeDasharray="3 3" />
                         <XAxis dataKey="Name" />
                         <YAxis />
                         <Tooltip />
                         <Legend />
-                        <Bar dataKey="plays" fill="#8884d8" onClick={(data, index) => this.selectedVideo(data)}/>
-                        <Bar dataKey="rate" fill="#82ca9d" />
+                        <Bar dataKey="plays" fill="#8884d8" onClick={(data, index) => this.selectedVideo(data)} />
+                        <Bar dataKey="rate" fill="#82ca9d" onClick={(data, index) => this.selectedVideo(data)} />
                         </BarChart>
                         </Grid>
 
                         <Grid item xs={6}>
                         <h3>Chart10</h3>
                         <h4>Which videos do my students seem to be struggling with?</h4>
-                        <BarChart width={730} height={250} data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignmentType.chart10.data}>
+                        <BarChart width={400} height={250} data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignmentType.chart10.data}>
                         <CartesianGrid strokeDasharray="3 3" />
                         <XAxis dataKey="Name" />
                         <YAxis />
@@ -134,8 +139,12 @@ class InstructorAssignmentType extends React.Component {
                         <Bar dataKey="playbacks" fill="#82ca9d" />
                         </BarChart>
                         </Grid>
-                        {this.state.selectedVideo ?
+                        {this.state.selectedVideo == "AWS Lambda Lab - Part 1 (5:55)" ?
+                            <div>
                             <Grid item xs={6}>
+                            <Button variant="raised" color="secondary" onClick={() => this.setState({selectedVideo: ""})}>
+                            Clear Selection <Delete />
+                            </Button>
                             <h3>Chart11</h3>
                             <h4>Which part of the video do my students struggle with/is valuable to them?</h4>
                             <BarChart width={730} height={250} data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignmentType.chart11.data}>
@@ -147,12 +156,13 @@ class InstructorAssignmentType extends React.Component {
                             <Bar dataKey="Value" fill="#8884d8" />
                             </BarChart>
                             </Grid>
+                            </div>
                             :
-                            <div></div>
+                            <div> No drilldown available for selected Video. Please select another Video. </div>
                         }
                     </div>
                     :
-                    <div></div>
+                    <div> No drilldown available for selected Assignment. Please select another Assignment. </div>
                 }
                 </div>
                 
