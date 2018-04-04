@@ -24,7 +24,8 @@ import {
     Tooltip,
     Legend,
     Label,
-    ReferenceLine
+    ReferenceLine,
+    Cell
   } from "recharts";
 const AxisLabel = ({
     axisType,
@@ -95,9 +96,15 @@ class InstructorAssignmentCat extends React.Component {
                     <CartesianGrid strokeDasharray="3 3" />
                     <Tooltip cursor={{fill: 'red', fillOpacity: 0.05}} />
                     <Legend verticalAlign="top" align="right" />
-                    <Bar name="Number of Submissions" dataKey="value" fill="#8884d8"
-                    onClick={(data, index) => this.selectedAssignment(data.assignment)} />
-                    <ReferenceLine y={33} strokeWidth={4} stroke="green" label={{value: "Expected Submissions", position: "top"}} />
+                    {/* <Bar name="Number of Submissions" dataKey="value" fill="#8884d8"
+                    onClick={(data, index) => this.selectedAssignment(data.assignment)} /> */}
+                    <Bar name="Number of Submissions" dataKey="value"
+                    onClick={(data, index) => this.selectedAssignment(data.assignment)}>
+                        {this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignment.chart01.data.map((entry, index) => (
+                            <Cell key={entry.assignment} fill={entry.value < 20 ? '#d68995' : '#71afe2' }/>
+                        ))}
+                    </Bar>
+                    <ReferenceLine y={33} strokeWidth={4} stroke="#e0b13c" label={{value: "Expected Submissions", position: "top"}} />
                     {/* <Line name="Expected number" type='monotone' dataKey='expected' stroke='#ff7300' dot={false} /> */}
                 </BarChart>
                 </Grid>
