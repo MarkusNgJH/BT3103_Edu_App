@@ -41,7 +41,20 @@ const activeView = (state = {}, action) => {
     default:
       return state;
   }
-}
+};
+
+const myFavourites = (state = {}, action) => {
+  switch (action.type) {
+    case "SET_FAV":
+      return {
+        ...state,
+        favourites: action.payload
+      }
+
+    default:
+      return state;
+  }
+};
 
 const combReducers = combineReducers({
     firebase: reducerFirebase,

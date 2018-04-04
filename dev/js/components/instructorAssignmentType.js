@@ -23,7 +23,7 @@ import {
     CartesianGrid,
     Tooltip,
     Legend
-  } from "recharts";
+} from "recharts";
 import { BarChart, Bar } from "recharts";
 const AxisLabel = ({
     axisType,
@@ -33,154 +33,223 @@ const AxisLabel = ({
     height,
     stroke,
     children
-  }) => {
+}) => {
     const isVert = axisType === "yAxis";
     const cx = isVert ? x + 20 : x + width / 2;
     const cy = isVert ? height / 2 + y : y + height;
     const rot = isVert ? `270 ${cx} ${cy}` : 0;
     return (
-      <text
-        x={cx}
-        y={cy}
-        transform={`rotate(${rot})`}
-        textAnchor="middle"
-        stroke={stroke}
-      >
-        {children}
-      </text>
+        <text
+            x={cx}
+            y={cy}
+            transform={`rotate(${rot})`}
+            textAnchor="middle"
+            stroke={stroke}
+        >
+            {children}
+        </text>
     );
-  };
+};
 
 class InstructorAssignmentType extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             selectedAssignmentType: "",
-            selectedVideo: ""
+            selectedVideo: "",
+            favourites: []
         }
+        // this.state.favourites = Object.keys(this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignmentType)
+        this.state.favourites = this.props.usersTable[this.props.activeProfile.uid].favourites
     }
 
-    selectedAssignmentType(data){
-        this.setState({selectedAssignmentType: data.Name})
+    selectedAssignmentType(data) {
+        this.setState({ selectedAssignmentType: data.Name })
     }
 
-    selectedVideo(data){
-        this.setState({selectedVideo: data.Name})
+    selectedVideo(data) {
+        this.setState({ selectedVideo: data.Name })
+    }
+
+    isFav(chartName) {
+        for (var i = 0; i < this.state.favourites.length; i++) {
+            if (typeof (this.state.favourites[i]) == 'object') {
+                if (this.state.favourites[i]["chart"] == chartName) {
+                    console.log(chartName, "is in favourites");
+                    return true;
+                }
+            }
+        }
+        console.log(chartName, "is NOT in favourites");
+        return false;
+    }
+
+    addToFavourites(chart, type, dataKey) {
+        console.log("Adding", chart);
+        this.state.favourites.push({
+            chart: chart,
+            type: type,
+            dataKey: dataKey
+        })
+
+        store.dispatch({
+            type: "SET_FAV",
+            payload: this.state.favourites
+        })
+        console.log("Successfully added", chart)
+    }
+
+    removeFromFavourites(chart) {
+        console.log("Removing", chart)
+
+        var newFav = this.state.favourites.filter(function (c) { return (c["chart"] != chart) })
+        this.setState({
+            favourites: newFav
+        })
+
+        store.dispatch({
+            type: "SET_FAV",
+            payload: newFav
+        })
+        console.log("Successfully removed", chart)
     }
 
     render() {
+        console.log("My favourites:", this.state.favourites)
         return (
             <div>
                 <Grid container spacing={8}>
-                <Grid item xs={12}>
-                <h3>Chart08</h3>
-                <h4>Which type of assignments do my students seem to be struggling with?</h4>
-                <BarChart
-                    width={730}
-                    height={250}
-                    // data={this.props.firebase.val.R6nSbDVly8PUnC6jQFcseDS9sgJ3.BT3103.instructorAssignmentType.chart08.data}
-                    data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignmentType.chart08.data}
-                    margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-                    >
-                    <XAxis
-                    dataKey="Name"
-                    label={
-                        <AxisLabel axisType="xAxis" width={600} height={300}>
-                        xAxis
+                    <Grid item xs={12}>
+                        <h3>Chart08</h3>
+                        <h4>Which type of assignments do my students seem to be struggling with?</h4>
+                        <BarChart
+                            width={730}
+                            height={250}
+                            // data={this.props.firebase.val.R6nSbDVly8PUnC6jQFcseDS9sgJ3.BT3103.instructorAssignmentType.chart08.data}
+                            data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignmentType.chart08.data}
+                            margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+                        >
+                            <XAxis
+                                dataKey="Name"
+                                label={
+                                    <AxisLabel axisType="xAxis" width={600} height={300}>
+                                        xAxis
                         </AxisLabel>
-                    }
-                    />
-                    <YAxis
-                    dataKey="Value"
-                    label={
-                        <AxisLabel axisType="yAxis" width={600} height={300}>
-                        yAxis
+                                }
+                            />
+                            <YAxis
+                                dataKey="Value"
+                                label={
+                                    <AxisLabel axisType="yAxis" width={600} height={300}>
+                                        yAxis
                         </AxisLabel>
-                    }
-                    />
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <Tooltip />
-                    <Legend />
-                    <Bar dataKey="Value" fill="#8884d8" 
-                    onClick={(data, index) => this.selectedAssignmentType(data)} />
-                </BarChart>
-                </Grid>
-                
-                <div>
-                {this.state.selectedAssignmentType == "PathProblem"?
-                    <div>
-                        <Button variant="raised" color="secondary" onClick={() => this.setState({selectedAssignmentType: ""})}>
-                            Clear Selection <Delete />
-                        </Button>
-                        <Grid item xs={6}>
-                        <h3>Chart09</h3>
-                        <h4>Which videos have my students watched and how is the pace for them? </h4>
-                        <BarChart width={400} height={250} data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignmentType.chart09.data}>
-                        <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis dataKey="Name" />
-                        <YAxis />
-                        <Tooltip />
-                        <Legend />
-                        <Bar dataKey="plays" fill="#8884d8" onClick={(data, index) => this.selectedVideo(data)} />
-                        <Bar dataKey="rate" fill="#82ca9d" onClick={(data, index) => this.selectedVideo(data)} />
-                        </BarChart>
-                        </Grid>
-
-                        <Grid item xs={6}>
-                        <h3>Chart10</h3>
-                        <h4>Which videos do my students seem to be struggling with?</h4>
-                        <BarChart width={400} height={250} data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignmentType.chart10.data}>
-                        <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis dataKey="Name" />
-                        <YAxis />
-                        <Tooltip />
-                        <Legend />
-                        <Bar dataKey="pauses" fill="#8884d8" />
-                        <Bar dataKey="playbacks" fill="#82ca9d" />
-                        </BarChart>
-                        </Grid>
-                        {this.state.selectedVideo == "AWS Lambda Lab - Part 1 (5:55)" ?
-                            <div>
-                            <Grid item xs={6}>
-                            <Button variant="raised" color="secondary" onClick={() => this.setState({selectedVideo: ""})}>
-                            Clear Selection <Delete />
-                            </Button>
-                            <h3>Chart11</h3>
-                            <h4>Which part of the video do my students struggle with/is valuable to them?</h4>
-                            <BarChart width={730} height={250} data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignmentType.chart11.data}>
+                                }
+                            />
                             <CartesianGrid strokeDasharray="3 3" />
-                            <XAxis dataKey="Name" />
-                            <YAxis />
                             <Tooltip />
                             <Legend />
-                            <Bar dataKey="Value" fill="#8884d8" />
-                            </BarChart>
-                            </Grid>
+                            <Bar dataKey="Value" fill="#8884d8"
+                                onClick={(data, index) => this.selectedAssignmentType(data)} />
+                        </BarChart>
+                        {this.isFav("chart08") == true ?
+                            <Button size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart08") }}>Remove</Button>
+                            :
+                            <Button size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart08", "BarChart", ["Name", "Value"]) }}>Favourite</Button>
+                        }
+
+                    </Grid>
+
+                    <div>
+                        {this.state.selectedAssignmentType == "PathProblem" ?
+                            <div>
+                                <Button variant="raised" color="secondary" onClick={() => this.setState({ selectedAssignmentType: "" })}>
+                                    Clear Selection <Delete />
+                                </Button>
+                                <Grid item xs={6}>
+                                    <h3>Chart09</h3>
+                                    <h4>Which videos have my students watched and how is the pace for them? </h4>
+                                    <BarChart width={400} height={250} data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignmentType.chart09.data}>
+                                        <CartesianGrid strokeDasharray="3 3" />
+                                        <XAxis dataKey="Name" />
+                                        <YAxis />
+                                        <Tooltip />
+                                        <Legend />
+                                        <Bar dataKey="plays" fill="#8884d8" onClick={(data, index) => this.selectedVideo(data)} />
+                                        <Bar dataKey="rate" fill="#82ca9d" onClick={(data, index) => this.selectedVideo(data)} />
+                                    </BarChart>
+                                    {this.isFav("chart09") == true ?
+                                        <Button size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart09") }}>Remove</Button>
+                                        :
+                                        <Button size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart09", "BarChart", ["Name", "plays", "rate"]) }}>Favourite</Button>
+                                    }
+                                </Grid>
+
+                                <Grid item xs={6}>
+                                    <h3>Chart10</h3>
+                                    <h4>Which videos do my students seem to be struggling with?</h4>
+                                    <BarChart width={400} height={250} data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignmentType.chart10.data}>
+                                        <CartesianGrid strokeDasharray="3 3" />
+                                        <XAxis dataKey="Name" />
+                                        <YAxis />
+                                        <Tooltip />
+                                        <Legend />
+                                        <Bar dataKey="pauses" fill="#8884d8" />
+                                        <Bar dataKey="playbacks" fill="#82ca9d" />
+                                    </BarChart>
+                                    {this.isFav("chart10") == true ?
+                                        <Button size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart10") }}>Remove</Button>
+                                        :
+                                        <Button size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart10", "BarChart", ["Name", "pauses", "playbacks"]) }}>Favourite</Button>
+                                    }
+                                </Grid> <br />
+                                {this.state.selectedVideo == "AWS Lambda Lab - Part 1 (5:55)" ?
+                                    <div>
+                                        <Grid item xs={6}>
+                                            <Button variant="raised" color="secondary" onClick={() => this.setState({ selectedVideo: "" })}>
+                                                Clear Selection <Delete />
+                                            </Button>
+                                            <h3>Chart11</h3>
+                                            <h4>Which part of the video do my students struggle with/is valuable to them?</h4>
+                                            <BarChart width={730} height={250} data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignmentType.chart11.data}>
+                                                <CartesianGrid strokeDasharray="3 3" />
+                                                <XAxis dataKey="Name" />
+                                                <YAxis />
+                                                <Tooltip />
+                                                <Legend />
+                                                <Bar dataKey="Value" fill="#8884d8" />
+                                            </BarChart>
+                                            {this.isFav("chart11") == true ?
+                                                <Button size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart11") }}>Remove</Button>
+                                                :
+                                                <Button size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart11", "BarChart", ["Name", "Value"]) }}>Favourite</Button>
+                                            }
+                                        </Grid>
+                                    </div>
+                                    :
+                                    <div> No drilldown available for selected Video. Please select another Video. </div>
+                                }
                             </div>
                             :
-                            <div> No drilldown available for selected Video. Please select another Video. </div>
+                            <div> No drilldown available for selected Assignment. Please select another Assignment. </div>
                         }
                     </div>
-                    :
-                    <div> No drilldown available for selected Assignment. Please select another Assignment. </div>
-                }
-                </div>
-                
+
                 </Grid>
-                
-            </div> 
+
+            </div>
 
         );
     }
 }
 
-function mapStateToProps(state){
-    return{
+function mapStateToProps(state) {
+    return {
         firebase: state.firebase,
         activeProfile: state.activeProfile.val,
-        activeView: state.activeView
+        activeView: state.activeView,
+        usersTable: state.firebase.val.usersTable.usersTable
     };
-}    
+}
 
-export default connect(mapStateToProps)(InstructorAssignmentType); 
+export default connect(mapStateToProps)(InstructorAssignmentType);
 
