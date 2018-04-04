@@ -70,6 +70,8 @@ class InstructorAssignmentType extends React.Component {
             <div>
                 <Grid container spacing={8}>
                 <Grid item xs={12}>
+                <h3>Chart08</h3>
+                <h4>Which type of assignments do my students seem to be struggling with?</h4>
                 <BarChart
                     width={730}
                     height={250}
@@ -106,6 +108,8 @@ class InstructorAssignmentType extends React.Component {
                     <div>
                         {this.state.selectedAssignmentType} selected
                         <Grid item xs={6}>
+                        <h3>Chart09</h3>
+                        <h4>Which videos have my students watched and how is the pace for them? </h4>
                         <BarChart width={730} height={250} data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignmentType.chart09.data}>
                         <CartesianGrid strokeDasharray="3 3" />
                         <XAxis dataKey="Name" />
@@ -118,6 +122,8 @@ class InstructorAssignmentType extends React.Component {
                         </Grid>
 
                         <Grid item xs={6}>
+                        <h3>Chart10</h3>
+                        <h4>Which videos do my students seem to be struggling with?</h4>
                         <BarChart width={730} height={250} data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignmentType.chart10.data}>
                         <CartesianGrid strokeDasharray="3 3" />
                         <XAxis dataKey="Name" />
@@ -130,6 +136,8 @@ class InstructorAssignmentType extends React.Component {
                         </Grid>
                         {this.state.selectedVideo ?
                             <Grid item xs={6}>
+                            <h3>Chart11</h3>
+                            <h4>Which part of the video do my students struggle with/is valuable to them?</h4>
                             <BarChart width={730} height={250} data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignmentType.chart11.data}>
                             <CartesianGrid strokeDasharray="3 3" />
                             <XAxis dataKey="Name" />
