@@ -12,6 +12,7 @@ import store from '../store';
 import Button from 'material-ui/Button';
 import Icon from 'material-ui/Icon';
 import Delete from 'material-ui-icons/Delete';
+import Stepper from './stepper';
 
 import {
     PieChart,
@@ -57,7 +58,8 @@ class InstructorAssignmentType extends React.Component {
         this.state = {
             selectedAssignmentType: "",
             selectedVideo: "",
-            favourites: []
+            favourites: [],
+            steps: ["InstructorAssignmentType"],
         }
         // this.state.favourites = Object.keys(this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignmentType)
         this.state.favourites = this.props.usersTable[this.props.activeProfile.uid].favourites
@@ -112,6 +114,37 @@ class InstructorAssignmentType extends React.Component {
             payload: newFav
         })
         console.log("Successfully removed", chart)
+    }
+    
+    selectedAssignmentType(data){
+        console.log(this.state.steps)
+        // var newSteps = this.state.steps.push(data.Name)
+        this.setState({selectedAssignmentType: data.Name, steps: [...this.state.steps, data.Name] })
+        console.log(this.state.steps)
+    }
+
+    selectedVideo(data){
+        this.setState({selectedVideo: data.Name, steps: [...this.state.steps, data.Name]})
+    }
+
+    backStep(){
+        if(this.state.steps.length == 2){
+            var array = this.state.steps;
+            array.splice(-1, 1); //remove last element
+            this.setState({steps: array });
+            this.setState({selectedAssignmentType: ""})
+        }
+        else if(this.state.steps.length == 3){
+            var array = this.state.steps;
+            array.splice(-1, 1);
+            this.setState({steps: array });
+            this.setState({selectedVideo: ""})
+        }
+
+    }
+    reset(){
+        var array = this.state.steps;
+        this.setState({steps: ["InstructorAssignmentType"], selectedVideo: "", selectedAssignmentType: ""});
     }
 
     render() {

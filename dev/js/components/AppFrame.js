@@ -179,7 +179,9 @@ class AppFrame extends React.Component {
                                 <MenuIcon />
                             </IconButton>
                             <Typography variant="title" color="inherit" style={{ flex: 1 }} noWrap>
-                                Edu App
+                                <Link to="/" >
+                                <span style={{color: 'white'}}>Edu App</span>
+                                </Link>
                             </Typography>
                             <ActiveUserInfo />
                             {auth && (
