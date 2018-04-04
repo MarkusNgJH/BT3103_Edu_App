@@ -14,17 +14,19 @@ import Delete from 'material-ui-icons/Delete';
 import store from '../store';
 
 import {
-    PieChart,
-    Pie,
-    LineChart,
-    Line,
-    XAxis,
-    YAxis,
+    PieChart, Pie,
+    LineChart, Line,
+    BarChart, Bar,
+    AreaChart, Area,
+    ComposedChart,
+    XAxis, YAxis,
     CartesianGrid,
     Tooltip,
-    Legend
+    Legend,
+    Label,
+    ReferenceLine,
+    Cell
   } from "recharts";
-import { BarChart, Bar, AreaChart, Area} from "recharts";
 const AxisLabel = ({
     axisType,
     x = 0,
@@ -84,25 +86,26 @@ class InstructorAssignmentCat extends React.Component {
                     >
                     <XAxis
                     dataKey="assignment"
-                    label={
-                        <AxisLabel axisType="xAxis" width={600} height={300}>
-                        xAxis
-                        </AxisLabel>
-                    }
+                    label={{value:"Assignments", position:"insideBottom"}}
+                    ticks={[0]}
                     />
                     <YAxis
                     dataKey="value"
-                    label={
-                        <AxisLabel axisType="yAxis" width={600} height={300}>
-                        yAxis
-                        </AxisLabel>
-                    }
+                    // label={{ value: 'Number of Submissions', angle: -90, position: 'insideBottomLeft' }}
                     />
                     <CartesianGrid strokeDasharray="3 3" />
-                    <Tooltip />
-                    <Legend />
-                    <Bar dataKey="value" fill="#8884d8" 
-                    onClick={(data, index) => this.selectedAssignment(data.assignment)} />
+                    <Tooltip cursor={{fill: 'red', fillOpacity: 0.05}} />
+                    <Legend verticalAlign="top" align="right" />
+                    {/* <Bar name="Number of Submissions" dataKey="value" fill="#8884d8"
+                    onClick={(data, index) => this.selectedAssignment(data.assignment)} /> */}
+                    <Bar name="Number of Submissions" dataKey="value"
+                    onClick={(data, index) => this.selectedAssignment(data.assignment)}>
+                        {this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignment.chart01.data.map((entry, index) => (
+                            <Cell key={entry.assignment} fill={entry.value < 20 ? '#d68995' : '#71afe2' }/>
+                        ))}
+                    </Bar>
+                    <ReferenceLine y={33} strokeWidth={4} stroke="#e0b13c" label={{value: "Expected Submissions", position: "top"}} />
+                    {/* <Line name="Expected number" type='monotone' dataKey='expected' stroke='#ff7300' dot={false} /> */}
                 </BarChart>
                 </Grid>
                 
@@ -118,24 +121,16 @@ class InstructorAssignmentCat extends React.Component {
                         >
                         <XAxis
                         dataKey="days_lapsed"
-                        label={
-                            <AxisLabel axisType="xAxis" width={600} height={300}>
-                            xAxis
-                            </AxisLabel>
-                        }
+                        label={{ value: "Number of days elapsed", position: 'insideBottom', offset: -4}}
                         />
                         <YAxis
                         dataKey="value"
-                        label={
-                            <AxisLabel axisType="yAxis" width={600} height={300}>
-                            yAxis
-                            </AxisLabel>
-                        }
+                        // label={{ value: "Number of submissions", angle: -90, position: 'insideBottomLeft' }}
                         />
                         <CartesianGrid strokeDasharray="3 3" />
-                        <Tooltip />
-                        <Legend />
-                        <Bar dataKey="value" fill="#8884d8" />
+                        <Tooltip cursor={{fill: 'red', fillOpacity: 0.05}} />
+                        <Legend verticalAlign="top" align="right" />
+                        <Bar name="Number of Submissions" dataKey="value" fill="#8884d8" />
                     </BarChart>
                     </Grid>
                     <Grid item xs={12}>
