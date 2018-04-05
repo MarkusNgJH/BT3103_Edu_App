@@ -13,6 +13,8 @@ import Icon from 'material-ui/Icon';
 import Delete from 'material-ui-icons/Delete';
 import store from '../store';
 import Stepper from './stepper';
+import Paper from 'material-ui/Paper';
+import '../../scss/instructorAssignmentCat.scss';
 
 import {
     PieChart, Pie,
@@ -95,10 +97,11 @@ class InstructorAssignmentCat extends React.Component {
     render() {
         return (
             <div>
-                <Grid container spacing={8}>
+                <Grid container spacing={8} style={{border: '5px solid black'}}>
                 <Stepper steps={this.state.steps} backStep={this.backStep.bind(this)} reset={this.reset.bind(this)}/>
-                <Grid item xs={12}>
-                <h3>Chart01</h3>
+                <Grid item xs={6}>
+                <Paper>
+                <h2>Chart01</h2>
                 <h4>What is the proportion of submission for each assignment?</h4>
                 <BarChart
                     width={730} height={250}
@@ -128,11 +131,13 @@ class InstructorAssignmentCat extends React.Component {
                     <ReferenceLine y={33} strokeWidth={4} stroke="#e0b13c" label={{value: "Expected Submissions", position: "top"}} />
                     {/* <Line name="Expected number" type='monotone' dataKey='expected' stroke='#ff7300' dot={false} /> */}
                 </BarChart>
+                </Paper>
                 </Grid>
                 
                 {this.state.selectedAssignment == "" ?
                     <div>
-                    <Grid item xs={12}>
+                    <Grid item xs={6}>
+                    <Paper>
                     <h3>Chart02</h3>
                     <h4>Is there sufficient days to complete assignments?</h4>
                     <BarChart
@@ -153,8 +158,10 @@ class InstructorAssignmentCat extends React.Component {
                         <Legend verticalAlign="top" align="right" />
                         <Bar name="Number of Submissions" dataKey="value" fill="#8884d8" />
                     </BarChart>
+                    </Paper>
                     </Grid>
-                    <Grid item xs={12}>
+                    <Grid item xs={6}>
+                    <Paper>
                     <h3>Chart03</h3>
                     <h4>How are my student behaviour in submitting my assignments?</h4>
                     <AreaChart width={730} height={250}
@@ -172,6 +179,7 @@ class InstructorAssignmentCat extends React.Component {
                         <Tooltip />
                         <Area type="monotone" dataKey="value" stroke="#8884d8" fillOpacity={1} fill="url(#colorUv)" />
                     </AreaChart>
+                    </Paper>
                     </Grid>
                     </div>
                 :
