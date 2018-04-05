@@ -6,6 +6,7 @@ import Typography from 'material-ui/Typography';
 import store from '../store';
 import OverviewInstructor from './overviewInstructor';
 import OverviewAdministrator from './overviewAdministrator';
+import OverviewStudent from './overviewStudent';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 
@@ -19,7 +20,7 @@ class Overview extends Component {
                 this.props.activeProfile.role == "Administrator" ?
                     <OverviewAdministrator/>
                 :
-                    "Student" //insert component here
+                    <OverviewStudent/>
                 }    
             </div>
             

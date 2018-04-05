@@ -48,39 +48,55 @@ const AxisLabel = ({
     );
   };
 
-class administratorPerformance extends React.Component {
+class studentAssignmentType extends React.Component {
     render() {
         const state = store.getState();
         return (
             <div>
-                <h3>Chart01</h3>
-                <h4>Cohort Performance</h4>
+                <h3>Chart05</h3>
+                <h4>Question Type</h4>
                 <Grid container spacing={8}>
                 <Grid item xs={12}>
-                <PieChart
-                    width={730}
-                    height={250}
-                    >
-                    <Pie dataKey="value" fill="#8884d8"
-                    data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].adminPerformance.chart01.data}
-                    margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-                    outerRadius={80}
-                    label
-                    />
-                </PieChart>
-                </Grid>
-                
-                <Grid item xs={12}>
-                <h3>Chart02</h3>
-                <h4>Performance Across Cohort (%)</h4>
                 <BarChart
                     width={730}
                     height={250}
-                    data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].adminPerformance.chart02.data}
+                    data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].studentAssignmentType.chart05.data}
                     margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
                     >
                     <XAxis
-                    dataKey="course_cohort"
+                    dataKey="Name"
+                    label={
+                        <AxisLabel axisType="xAxis" width={600} height={300}>
+                        Student
+                        </AxisLabel>
+                    }
+                    />
+                    <YAxis
+                    dataKey="Value"
+                    label={
+                        <AxisLabel axisType="yAxis" width={600} height={300}>
+                        Number of Submissions
+                        </AxisLabel>
+                    }
+                    />
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <Tooltip />
+                    <Legend />
+                    <Bar dataKey="Value" fill="#8884d8"/>
+                </BarChart>
+                </Grid>
+                
+                {/* <Grid item xs={12}>
+                <h3>Chart06</h3>
+                <h4>Which Students Appear To Be High-Achieving/Do More Than What Is Required?</h4>
+                <BarChart
+                    width={730}
+                    height={250}
+                    data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorStudentIdentifier.chart13.data}
+                    margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+                    >
+                    <XAxis
+                    dataKey="student_name"
                     label={
                         <AxisLabel axisType="xAxis" width={600} height={300}>
                         Student
@@ -100,72 +116,7 @@ class administratorPerformance extends React.Component {
                     <Legend />
                     <Bar dataKey="value" fill="#8884d8" />
                 </BarChart>
-                </Grid>
-
-                <Grid item xs={12}>
-                <h3>Chart03</h3>
-                <h4>Progress Tracking</h4>
-                <BarChart
-                    width={730}
-                    height={250}
-                    data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].adminPerformance.chart03.data}
-                    margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-                    >
-                    <XAxis
-                    dataKey="school_course"
-                    label={
-                        <AxisLabel axisType="xAxis" width={600} height={300}>
-                        Student
-                        </AxisLabel>
-                    }
-                    />
-                    <YAxis
-                    dataKey="value"
-                    label={
-                        <AxisLabel axisType="yAxis" width={600} height={300}>
-                        Number of Days Taken
-                        </AxisLabel>
-                    }
-                    />
-                    <CartesianGrid strokeDasharray="3 3"/>
-                    <Tooltip />
-                    <Legend />
-                    <Bar dataKey="value" fill="#8884d8"/>
-                </BarChart>
-                </Grid>
-
-                <Grid item xs={12}>
-                <h3>Chart04</h3>
-                <h4> Proportion of Completion by Courses </h4>
-                <BarChart
-                    width={730}
-                    height={250}
-                    data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].adminPerformance.chart04.data}
-                    margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-                    >
-                    <XAxis
-                    dataKey="school_course"
-                    label={
-                        <AxisLabel axisType="xAxis" width={600} height={300}>
-                        Student
-                        </AxisLabel>
-                    }
-                    />
-                    {/* <YAxis
-                    dataKey="value"
-                    label={
-                        <AxisLabel axisType="yAxis" width={600} height={300}>
-                        Number of Days Taken
-                        </AxisLabel>
-                    }
-                    /> */}
-                    <CartesianGrid strokeDasharray="3 3"/>
-                    <Tooltip />
-                    <Legend />
-                    <Bar dataKey="completed" stackId="a" fill="#8884d8"/>
-                    <Bar dataKey="total" stackId="a" fill="#76a8dd"/>
-                </BarChart>
-                </Grid>
+                </Grid> */}
                         
                 </Grid>
 
@@ -182,6 +133,6 @@ function mapStateToProps(state){
     };
 }    
 
-export default connect(mapStateToProps)(administratorPerformance); 
+export default connect(mapStateToProps)(studentAssignmentType); 
 
 

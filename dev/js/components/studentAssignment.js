@@ -9,6 +9,10 @@ import AppFrame from './AppFrame';
 import RechartsComp from './RechartsChart.js';
 import Grid from 'material-ui/Grid';
 import store from '../store';
+import Button from 'material-ui/Button';
+import Icon from 'material-ui/Icon';
+import Delete from 'material-ui-icons/Delete';
+import Stepper from './stepper';
 
 import {
     PieChart,
@@ -48,39 +52,79 @@ const AxisLabel = ({
     );
   };
 
-class administratorPerformance extends React.Component {
+class studentAssignment extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            selectedAssignment: "",
+            favourites: [],
+            steps: ["studentAssignment"],
+        }
+        // this.state.favourites = this.props.usersTable[this.props.activeProfile.uid].favourites
+    }
+
+    selectedAssignment(data){
+        console.log(this.state.steps)
+        // var newSteps = this.state.steps.push(data.Name)
+        if(this.state.selectedAssignment == ""){
+            this.setState({selectedAssignment: data.Name, steps: [...this.state.steps, data.Name] })
+        }
+        else{
+            var array = this.state.steps;
+            array.splice(-1, 1, data.Name);
+            this.setState({selectedAssignment: data.Name, steps: array })
+        }
+        console.log(this.state.steps)
+    }
+
+    backStep(){
+        if(this.state.steps.length == 2){
+            var array = this.state.steps;
+            array.splice(-1, 1); //remove last element
+            this.setState({steps: array });
+            this.setState({selectedAssignment: ""})
+        }
+    }
+
+    reset(){
+        var array = this.state.steps;
+        this.setState({steps: ["InstructorAssignment"], selectedAssignment: ""});
+    }
+
     render() {
         const state = store.getState();
         return (
             <div>
-                <h3>Chart01</h3>
-                <h4>Cohort Performance</h4>
                 <Grid container spacing={8}>
+                <Stepper steps={this.state.steps} backStep={this.backStep.bind(this)} reset={this.reset.bind(this)}/>
                 <Grid item xs={12}>
+                <h3>Chart01</h3>
+                <h4>Assignments completed by Student</h4>
                 <PieChart
                     width={730}
                     height={250}
-                    >
-                    <Pie dataKey="value" fill="#8884d8"
-                    data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].adminPerformance.chart01.data}
                     margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-                    outerRadius={80}
-                    label
-                    />
+                    >
+                    <Pie
+                    data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].studentAssignment.chart01.data} 
+                    cx="50%" cy="50%"
+                    dataKey="Value" nameKey="Name" outerRadius={100} fill="#8884d8" label
+                    onClick={(data, index) => this.selectedAssignment(data)}/>
                 </PieChart>
                 </Grid>
-                
-                <Grid item xs={12}>
+                {this.state.selectedAssignment ?
+                <div> 
+                    <Grid item xs={12}>
                 <h3>Chart02</h3>
-                <h4>Performance Across Cohort (%)</h4>
+                <h4>Assignment Tracking</h4>
                 <BarChart
                     width={730}
                     height={250}
-                    data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].adminPerformance.chart02.data}
+                    data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].studentAssignment.chart02.data}
                     margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
                     >
                     <XAxis
-                    dataKey="course_cohort"
+                    dataKey="Name"
                     label={
                         <AxisLabel axisType="xAxis" width={600} height={300}>
                         Student
@@ -88,7 +132,7 @@ class administratorPerformance extends React.Component {
                     }
                     />
                     <YAxis
-                    dataKey="value"
+                    dataKey="Value"
                     label={
                         <AxisLabel axisType="yAxis" width={600} height={300}>
                         Number of Subsmission
@@ -98,21 +142,23 @@ class administratorPerformance extends React.Component {
                     <CartesianGrid strokeDasharray="3 3" />
                     <Tooltip />
                     <Legend />
-                    <Bar dataKey="value" fill="#8884d8" />
+                    <Bar dataKey="Value" fill="#8884d8" />
                 </BarChart>
                 </Grid>
-
-                <Grid item xs={12}>
+                </div>
+                :
+                <div> 
+                    <Grid item xs={12}>
                 <h3>Chart03</h3>
-                <h4>Progress Tracking</h4>
-                <BarChart
+                <h4>Date of Submissison</h4>
+                <LineChart
                     width={730}
                     height={250}
-                    data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].adminPerformance.chart03.data}
+                    data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].studentAssignment.chart03.data}
                     margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
                     >
                     <XAxis
-                    dataKey="school_course"
+                    dataKey="name"
                     label={
                         <AxisLabel axisType="xAxis" width={600} height={300}>
                         Student
@@ -120,7 +166,7 @@ class administratorPerformance extends React.Component {
                     }
                     />
                     <YAxis
-                    dataKey="value"
+                    dataKey="Value"
                     label={
                         <AxisLabel axisType="yAxis" width={600} height={300}>
                         Number of Days Taken
@@ -130,45 +176,45 @@ class administratorPerformance extends React.Component {
                     <CartesianGrid strokeDasharray="3 3"/>
                     <Tooltip />
                     <Legend />
-                    <Bar dataKey="value" fill="#8884d8"/>
-                </BarChart>
+                    <Line dataKey="Value" fill="#8884d8"/>
+                </LineChart>
                 </Grid>
 
                 <Grid item xs={12}>
                 <h3>Chart04</h3>
-                <h4> Proportion of Completion by Courses </h4>
+                <h4>Time Lapse Since Work Done</h4>
                 <BarChart
                     width={730}
                     height={250}
-                    data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].adminPerformance.chart04.data}
+                    data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].studentAssignment.chart04.data}
                     margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
                     >
                     <XAxis
-                    dataKey="school_course"
+                    dataKey="Name"
                     label={
                         <AxisLabel axisType="xAxis" width={600} height={300}>
                         Student
                         </AxisLabel>
                     }
                     />
-                    {/* <YAxis
-                    dataKey="value"
+                    <YAxis
+                    dataKey="Value"
                     label={
                         <AxisLabel axisType="yAxis" width={600} height={300}>
                         Number of Days Taken
                         </AxisLabel>
                     }
-                    /> */}
+                    />
                     <CartesianGrid strokeDasharray="3 3"/>
                     <Tooltip />
                     <Legend />
-                    <Bar dataKey="completed" stackId="a" fill="#8884d8"/>
-                    <Bar dataKey="total" stackId="a" fill="#76a8dd"/>
+                    <Bar dataKey="Value" fill="#8884d8"/>
                 </BarChart>
                 </Grid>
-                        
+                </div>
+                }
+                 
                 </Grid>
-
             </div>
         )
     }
@@ -182,6 +228,6 @@ function mapStateToProps(state){
     };
 }    
 
-export default connect(mapStateToProps)(administratorPerformance); 
+export default connect(mapStateToProps)(studentAssignment); 
 
 

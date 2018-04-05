@@ -17,6 +17,8 @@ import instructorAssignmentCat from './instructorAssignmentCat';
 import instructorStudentIdentifier from './instructorStudentIdentifier';
 import administratorActivity from './administratorActivity';
 import administratorPerformance from './administratorPerformance';
+import StudentAssignment from './studentAssignment';
+import StudentAssignmentType from './studentAssignmentType';
 import store from '../store';
 
 require('../../scss/style.scss');
@@ -130,6 +132,8 @@ class App extends Component {
                     <Route exact path='/instructorAssignmentType' component={instructorAssignmentType} />
                     <Route exact path='/administratorActivity' component={administratorActivity} />
                     <Route exact path='/administratorPerformance' component={administratorPerformance} />
+                    <Route exact path='/studentAssignment' component={StudentAssignment} />
+                    <Route exact path='/studentAssignmentType' component={StudentAssignmentType} />
                 </Switch>
             </div>
         )
