@@ -151,7 +151,7 @@ class studentAssignment extends React.Component {
                     <Grid item xs={12}>
                 <h3>Chart03</h3>
                 <h4>Date of Submissison</h4>
-                <BarChart
+                <LineChart
                     width={730}
                     height={250}
                     data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].studentAssignment.chart03.data}
@@ -176,8 +176,8 @@ class studentAssignment extends React.Component {
                     <CartesianGrid strokeDasharray="3 3"/>
                     <Tooltip />
                     <Legend />
-                    <Bar dataKey="Value" fill="#8884d8"/>
-                </BarChart>
+                    <Line dataKey="Value" fill="#8884d8"/>
+                </LineChart>
                 </Grid>
 
                 <Grid item xs={12}>
