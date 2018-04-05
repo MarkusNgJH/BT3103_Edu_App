@@ -15,6 +15,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {updateActiveProfile} from '../actions/updateActiveProfile';
 import store from '../store';
+import UserTable from './userTable';
  
 const styles = theme => ({
     container: {
@@ -137,6 +138,7 @@ class profileSetting extends React.Component {
                     onClick={() => this.props.updateActiveProfile({uid: this.state.uid, course: this.state.course, role:this.props.firebase.val[this.state.uid][this.state.course]['User Type']})}>
                     Submit</button>
                 </div>
+                <UserTable />
             </div>
         )
     }
