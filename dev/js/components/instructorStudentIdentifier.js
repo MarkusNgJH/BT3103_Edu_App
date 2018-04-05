@@ -9,6 +9,7 @@ import AppFrame from './AppFrame';
 import RechartsComp from './RechartsChart.js';
 import Grid from 'material-ui/Grid';
 import store from '../store';
+import Paper from 'material-ui/Paper';
 
 import {
     PieChart,
@@ -19,7 +20,8 @@ import {
     YAxis,
     CartesianGrid,
     Tooltip,
-    Legend
+    Legend,
+    ResponsiveContainer
   } from "recharts";
 import { BarChart, Bar } from "recharts";
 const AxisLabel = ({
@@ -53,10 +55,12 @@ class instructorStudentIdentifier extends React.Component {
         const state = store.getState();
         return (
             <div>
+                <Grid container spacing={8}>
+                <Grid item xs={6}>
+                <Paper>
                 <h3>Chart12</h3>
                 <h4>Which Students Show a High/Low Rate of Assignment Submission?</h4>
-                <Grid container spacing={8}>
-                <Grid item xs={12}>
+                <ResponsiveContainer width="90%" height={400}>
                 <BarChart
                     width={730}
                     height={250}
@@ -84,11 +88,15 @@ class instructorStudentIdentifier extends React.Component {
                     <Legend />
                     <Bar dataKey="value" fill="#8884d8"/>
                 </BarChart>
+                </ ResponsiveContainer>
+                </Paper>
                 </Grid>
                 
-                <Grid item xs={12}>
+                <Grid item xs={6}>
+                <Paper>
                 <h3>Chart13</h3>
                 <h4>Which Students Appear To Be High-Achieving/Do More Than What Is Required?</h4>
+                <ResponsiveContainer width="90%" height={400}>
                 <BarChart
                     width={730}
                     height={250}
@@ -116,11 +124,15 @@ class instructorStudentIdentifier extends React.Component {
                     <Legend />
                     <Bar dataKey="value" fill="#8884d8" />
                 </BarChart>
+                </ResponsiveContainer>
+                </Paper>
                 </Grid>
 
                 <Grid item xs={12}>
+                <Paper>
                 <h3>Chart14</h3>
                 <h4>Which student is always quick/slow to submit?</h4>
+                <ResponsiveContainer width="90%" height={400}>
                 <BarChart
                     width={730}
                     height={250}
@@ -148,10 +160,10 @@ class instructorStudentIdentifier extends React.Component {
                     <Legend />
                     <Bar dataKey="value" fill="#8884d8"/>
                 </BarChart>
+                </ResponsiveContainer>
+                </Paper> 
+                </Grid>    
                 </Grid>
-                        
-                </Grid>
-
             </div>
         )
     }
