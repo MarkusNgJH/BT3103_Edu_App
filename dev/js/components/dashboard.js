@@ -130,40 +130,44 @@ class Dashboard extends React.Component {
                     {this.state.favourites.map(function (chart, index) {
                         return (
                             <Grid item xs={6} key={index}>
-                                <h3>{chart["chart"]}</h3>
-                                <BarChart
-                                    width={730}
-                                    height={250}
-                                    data={chartData[index].data}
-                                    margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-                                >
-                                    <XAxis
-                                        dataKey={chart["dataKey"][0]}
-                                        label={
-                                            <AxisLabel axisType="xAxis" width={600} height={300}>
-                                                xAxis
-                        </AxisLabel>
-                                        }
-                                    />
-                                    <YAxis
-                                        dataKey={chart["dataKey"][1]}
-                                        label={
-                                            <AxisLabel axisType="yAxis" width={600} height={300}>
-                                                yAxis
-                        </AxisLabel>
-                                        }
-                                    />
-                                    <CartesianGrid strokeDasharray="3 3" />
-                                    <Tooltip />
-                                    <Legend />
-                                    <Bar dataKey="Value" fill="#8884d8"
-                                        onClick={(data, index) => this.selectedAssignmentType(data)} />
-                                </BarChart>
-                                {/* {this.isFav("chart08") == true ?
-                                    <Button size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart08") }}>Remove</Button>
+                                <h3 style={{float:"right"}}>{chart["chart"]}</h3> <br/>
+                                <h4 style={{ paddingLeft: "200px" }}>{chart["title"]}</h4>
+                                {chart["type"] == "BarChart" ?
+                                    <BarChart
+                                        width={730}
+                                        height={250}
+                                        data={chartData[index].data}
+                                        margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+                                    >
+                                        <XAxis
+                                            dataKey={chart["xAxis"]}
+                                            label={
+                                                <AxisLabel axisType="xAxis" width={600} height={300}>
+                                                    xAxis
+                                                </AxisLabel>
+                                            }
+                                        />
+                                        <YAxis
+                                            dataKey={chart["yAxis"]}
+                                            label={
+                                                <AxisLabel axisType="yAxis" width={600} height={300}>
+                                                    yAxis
+                                                </AxisLabel>
+                                            }
+                                        />
+                                        <CartesianGrid strokeDasharray="3 3" />
+                                        <Tooltip />
+                                        <Legend />
+                                        {chart["dataKey"].map(function (dk, index) {
+                                            return (
+                                                <Bar key={index} dataKey={dk} fill="#8884d8" />
+                                            )
+                                        })}
+                                    </BarChart>
                                     :
-                                    <Button size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart08", "BarChart", ["Name", "Value"]) }}>Favourite</Button>
-                                } */}
+                                    <div><h1>Unable to render chart type</h1></div>
+                                }
+
                             </Grid>
                         )
                     })}

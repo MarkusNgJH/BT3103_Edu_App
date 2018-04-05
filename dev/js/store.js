@@ -43,7 +43,7 @@ const activeView = (state = {}, action) => {
   }
 };
 
-const myFavourites = (state = {}, action) => {
+const myFavourites = (state = {favourites: {chart: "", type: "", title: "", xAxis: "", yAxis: "", dataKey: {}}}, action) => {
   switch (action.type) {
     case "SET_FAV":
       return {
