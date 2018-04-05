@@ -20,6 +20,13 @@ import Menu, { MenuItem } from 'material-ui/Menu';
 import Collapse from 'material-ui/transitions/Collapse';
 import ExpandLess from 'material-ui-icons/ExpandLess';
 import ExpandMore from 'material-ui-icons/ExpandMore';
+import instructorAssignmentType from './instructorAssignmentType';
+import instructorAssignmentCat from './instructorAssignmentCat';
+import instructorStudentIdentifier from './instructorStudentIdentifier';
+import administratorActivity from './administratorActivity';
+import administratorPerformance from './administratorPerformance';
+import StudentAssignment from './studentAssignment';
+import StudentAssignmentType from './studentAssignmentType';
 
 
 class DrawerItems extends React.Component {
@@ -54,18 +61,13 @@ class DrawerItems extends React.Component {
                     {this.props.activeProfileRole == 'Administrator' ?
                         <List disablePadding>
                             <ListItem button onClick={this.props.handleDrawerClose.bind(this)} style={{ paddingLeft: "60px" }}>
-                                <Link to="/mydashboard">
-                                    <ListItemText primary="Admin-Performance" />
+                                <Link to="/administratorPerformance">
+                                    <ListItemText primary="Administrator Performance" />
                                 </Link>
                             </ListItem>
                             <ListItem button onClick={this.props.handleDrawerClose.bind(this)} style={{ paddingLeft: "60px" }}>
-                                <Link to="/mydashboard">
-                                    <ListItemText primary="Admin-Submission Status" />
-                                </Link>
-                            </ListItem>
-                            <ListItem button onClick={this.props.handleDrawerClose.bind(this)} style={{ paddingLeft: "60px" }}>
-                                <Link to="/mydashboard">
-                                    <ListItemText primary="Admin-Student Satisfaction" />
+                                <Link to="/administratorActivity">
+                                    <ListItemText primary="Administrator Activity" />
                                 </Link>
                             </ListItem>
                         </List>
@@ -73,36 +75,31 @@ class DrawerItems extends React.Component {
                         this.props.activeProfileRole == 'Instructor' ?
                             <List disablePadding>
                                 <ListItem button onClick={this.props.handleDrawerClose.bind(this)} style={{ paddingLeft: "60px" }}>
-                                    <Link to="/instructor-highlow-performance">
-                                        <ListItemText primary="Instructor-Performance" />
+                                    <Link to="/instructorAssignmentType">
+                                        <ListItemText primary="Instructor Assignment Type" />
                                     </Link>
                                 </ListItem>
                                 <ListItem button onClick={this.props.handleDrawerClose.bind(this)} style={{ paddingLeft: "60px" }}>
-                                    <Link to="/instructor-past-assignments">
-                                        <ListItemText primary="Instructor-Submission Status" />
+                                    <Link to="/instructorAssignmentCat">
+                                        <ListItemText primary="Instructor Assignment Cat" />
                                     </Link>
                                 </ListItem>
                                 <ListItem button onClick={this.props.handleDrawerClose.bind(this)} style={{ paddingLeft: "60px" }}>
-                                    <Link to="/instructor-student-behaviour">
-                                        <ListItemText primary="Instructor-Student Satisfaction" />
+                                    <Link to="/instructorStudentIdentifier">
+                                        <ListItemText primary="Instructor Student Identifier" />
                                     </Link>
                                 </ListItem>
                             </List>
                         :
                             <List disablePadding>
                                 <ListItem button onClick={this.props.handleDrawerClose.bind(this)} style={{ paddingLeft: "60px" }}>
-                                    <Link to="/mydashboard">
-                                        <ListItemText primary="Student-Performance" />
+                                    <Link to="/StudentAssignment">
+                                        <ListItemText primary="Student Assignment" />
                                     </Link>
                                 </ListItem>
                                 <ListItem button onClick={this.props.handleDrawerClose.bind(this)} style={{ paddingLeft: "60px" }}>
-                                    <Link to="/mydashboard">
-                                        <ListItemText primary="Student-Submission Status" />
-                                    </Link>
-                                </ListItem>
-                                <ListItem button onClick={this.props.handleDrawerClose.bind(this)} style={{ paddingLeft: "60px" }}>
-                                    <Link to="/mydashboard">
-                                        <ListItemText primary="Student-Student Satisfaction" />
+                                    <Link to="/StudentAssignmentType">
+                                        <ListItemText primary="Student Assignment Type" />
                                     </Link>
                                 </ListItem>
                             </List>
