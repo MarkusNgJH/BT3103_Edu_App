@@ -12,6 +12,7 @@ import Button from 'material-ui/Button';
 import Icon from 'material-ui/Icon';
 import Delete from 'material-ui-icons/Delete';
 import store from '../store';
+import Stepper from './stepper';
 
 import {
     PieChart, Pie,
@@ -58,13 +59,33 @@ class InstructorAssignmentCat extends React.Component {
         super(props);
         this.state = {
             selectedAssignment: "",
+            steps: ["InstructorAssignmentCat"]
             // selectedVideo: ""
         }
     }
 
     selectedAssignment(data){
-        this.setState({selectedAssignment: data})
-        console.log("this.state.selectedAssignment: " + this.state.selectedAssignment);
+        if(this.state.selectedAssignment == ""){
+            this.setState({selectedAssignment: data, steps: [...this.state.steps, data] })
+        }
+        else{
+            var array = this.state.steps;
+            array.splice(-1, 1, data);
+            this.setState({selectedAssignment: data, steps: array })
+        }
+    }
+
+    backStep(){
+        if(this.state.steps.length == 2){
+            var array = this.state.steps;
+            array.splice(-1, 1); //remove last element
+            this.setState({steps: array });
+            this.setState({selectedAssignment: ""})
+        }
+    }
+    reset(){
+        var array = this.state.steps;
+        this.setState({steps: ["InstructorAssignmentCat"], selectedAssignment: ""});
     }
 
     // selectedVideo(data){
@@ -75,7 +96,7 @@ class InstructorAssignmentCat extends React.Component {
         return (
             <div>
                 <Grid container spacing={8}>
-
+                <Stepper steps={this.state.steps} backStep={this.backStep.bind(this)} reset={this.reset.bind(this)}/>
                 <Grid item xs={12}>
                 <h3>Chart01</h3>
                 <h4>What is the proportion of submission for each assignment?</h4>
@@ -156,9 +177,9 @@ class InstructorAssignmentCat extends React.Component {
                 :
                     this.state.selectedAssignment == "Follow the directions in the details link to get a free AWS account. Then submit the string SUCCESSFUL. " ?
                         <div>
-                        <Button variant="raised" color="secondary" onClick={() => this.setState({selectedAssignment: ""})}>
+                        {/* <Button variant="raised" color="secondary" onClick={() => this.setState({selectedAssignment: ""})}>
                             Clear Selection <Delete />
-                        </Button>
+                        </Button> */}
                         <Grid item xs={12}>
                         <h3>Chart04</h3>
                         <h4>Is there sufficient days to complete assignment "{this.state.selectedAssignment}"?</h4>
@@ -213,9 +234,9 @@ class InstructorAssignmentCat extends React.Component {
                     :
                         this.state.selectedAssignment == "AWS Lambda Lab - Part 2 (7:13)" ?
                             <div>
-                            <Button variant="raised" color="secondary" onClick={() => this.setState({selectedAssignment: ""})}>
+                            {/* <Button variant="raised" color="secondary" onClick={() => this.setState({selectedAssignment: ""})}>
                                 Clear Selection <Delete />
-                            </Button>
+                            </Button> */}
                             <Grid item xs={12}>
                             <h3>Chart05</h3>
                             <h4>Is there sufficient days to complete assignment "{this.state.selectedAssignment}"?</h4>

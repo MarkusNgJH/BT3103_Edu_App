@@ -65,12 +65,26 @@ class InstructorAssignmentType extends React.Component {
     selectedAssignmentType(data){
         console.log(this.state.steps)
         // var newSteps = this.state.steps.push(data.Name)
-        this.setState({selectedAssignmentType: data.Name, steps: [...this.state.steps, data.Name] })
+        if(this.state.selectedAssignmentType == ""){
+            this.setState({selectedAssignmentType: data.Name, steps: [...this.state.steps, data.Name] })
+        }
+        else{
+            var array = this.state.steps;
+            array.splice(-1, 1, data.Name);
+            this.setState({selectedAssignmentType: data.Name, steps: array })
+        }
         console.log(this.state.steps)
     }
 
     selectedVideo(data){
-        this.setState({selectedVideo: data.Name, steps: [...this.state.steps, data.Name]})
+        if(this.state.selectedVideo == ""){
+            this.setState({selectedVideo: data.Name, steps: [...this.state.steps, data.Name]})
+        }
+        else{
+            var array = this.state.steps;
+            array.splice(-1, 1, data.Name);
+            this.setState({selectedVideo: data.Name, steps: array })
+        }
     }
 
     backStep(){
