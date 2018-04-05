@@ -5,6 +5,7 @@ import Card, { CardActions, CardContent } from 'material-ui/Card';
 import Typography from 'material-ui/Typography';
 import store from '../store';
 import OverviewInstructor from './overviewInstructor';
+import OverviewAdministrator from './overviewAdministrator';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 
@@ -12,11 +13,11 @@ class Overview extends Component {
     render(){
         return(
             <div>
-                {this.props.activeProfile.role == "Administrator" ?
+                {this.props.activeProfile.role == "Instructor" ?
                     < OverviewInstructor/>
                 :
-                this.props.activeProfile.role == "Instructor" ?
-                    "Administrator" //insert component here
+                this.props.activeProfile.role == "Administrator" ?
+                    <OverviewAdministrator/>
                 :
                     "Student" //insert component here
                 }    

@@ -166,6 +166,7 @@ class InstructorAssignmentType extends React.Component {
         return (
             <div>
                 <Grid container spacing={8}>
+                <Stepper steps={this.state.steps} backStep={this.backStep.bind(this)} reset={this.reset.bind(this)}/>
                     <Grid item xs={12}>
                         <h3>Chart08</h3>
                         <h4>Which type of assignments do my students seem to be struggling with?</h4>
@@ -209,9 +210,9 @@ class InstructorAssignmentType extends React.Component {
                     <div>
                         {this.state.selectedAssignmentType == "PathProblem" ?
                             <div>
-                                <Button variant="raised" color="secondary" onClick={() => this.setState({ selectedAssignmentType: "" })}>
+                                {/* <Button variant="raised" color="secondary" onClick={() => this.setState({ selectedAssignmentType: "" })}>
                                     Clear Selection <Delete />
-                                </Button>
+                                </Button> */}
                                 <Grid item xs={6}>
                                     <h3>Chart09</h3>
                                     <h4>Which videos have my students watched and how is the pace for them? </h4>
@@ -252,9 +253,9 @@ class InstructorAssignmentType extends React.Component {
                                 {this.state.selectedVideo == "AWS Lambda Lab - Part 1 (5:55)" ?
                                     <div>
                                         <Grid item xs={6}>
-                                            <Button variant="raised" color="secondary" onClick={() => this.setState({ selectedVideo: "" })}>
+                                            {/* <Button variant="raised" color="secondary" onClick={() => this.setState({ selectedVideo: "" })}>
                                                 Clear Selection <Delete />
-                                            </Button>
+                                            </Button> */}
                                             <h3>Chart11</h3>
                                             <h4>Which part of the video do my students struggle with/is valuable to them?</h4>
                                             <BarChart width={730} height={250} data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignmentType.chart11.data}>

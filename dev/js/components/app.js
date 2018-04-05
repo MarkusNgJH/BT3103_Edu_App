@@ -15,6 +15,8 @@ import Overview from './overview';
 import instructorAssignmentType from './instructorAssignmentType';
 import instructorAssignmentCat from './instructorAssignmentCat';
 import instructorStudentIdentifier from './instructorStudentIdentifier';
+import administratorActivity from './administratorActivity';
+import administratorPerformance from './administratorPerformance';
 import store from '../store';
 
 require('../../scss/style.scss');
@@ -29,22 +31,22 @@ class App extends Component {
             speed: 11,
             user: "Instructor B",
             uid: "default",
-            view: "administrator"
+            view: "instructor"
         }
         this.login = this.login.bind(this);
         this.logout = this.logout.bind(this);
     }
     componentDidMount() {
-        const rootRef = firebase.database().ref("/Instructor");
-        var branch = this.state.user;
-        console.log("branch is")
-        console.log(branch)
-        const valueRef = rootRef.child(String(branch));
-        valueRef.on('value', (snapshot) => {
-            this.setState({
-                speed: snapshot.val()
-            });
-        });
+        // const rootRef = firebase.database().ref("/Instructor");
+        // var branch = this.state.user;
+        // console.log("branch is")
+        // console.log(branch)
+        // const valueRef = rootRef.child(String(branch));
+        // valueRef.on('value', (snapshot) => {
+        //     this.setState({
+        //         speed: snapshot.val()
+        //     });
+        // });
         // everytime data changes on valueRef, assign value to speed.
 
         // Subscribe to store changes, each time changes happen, component re-render 
@@ -125,6 +127,9 @@ class App extends Component {
                     <Route exact path='/instructorAssignmentType' component={instructorAssignmentType} />
                     <Route exact path='/instructorAssignmentCat' component={instructorAssignmentCat} />
                     <Route exact path='/instructorStudentIdentifier' component={instructorStudentIdentifier} />
+                    <Route exact path='/instructorAssignmentType' component={instructorAssignmentType} />
+                    <Route exact path='/administratorActivity' component={administratorActivity} />
+                    <Route exact path='/administratorPerformance' component={administratorPerformance} />
                 </Switch>
             </div>
         )
