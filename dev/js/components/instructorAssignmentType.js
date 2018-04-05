@@ -65,14 +65,6 @@ class InstructorAssignmentType extends React.Component {
         this.state.favourites = this.props.usersTable[this.props.activeProfile.uid].favourites
     }
 
-    selectedAssignmentType(data) {
-        this.setState({ selectedAssignmentType: data.Name })
-    }
-
-    selectedVideo(data) {
-        this.setState({ selectedVideo: data.Name })
-    }
-
     isFav(chartName) {
         for (var i = 0; i < this.state.favourites.length; i++) {
             if (typeof (this.state.favourites[i]) == 'object') {
