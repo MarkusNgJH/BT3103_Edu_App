@@ -91,6 +91,9 @@ class InstructorAssignmentType extends React.Component {
         this.state.favourites.push({
             chart: chart,
             type: type,
+            title: title,
+            xAxis: xAxis || "",
+            yAxis: yAxis || "",
             dataKey: dataKey
         })
 
@@ -202,7 +205,7 @@ class InstructorAssignmentType extends React.Component {
                         {this.isFav("chart08") == true ?
                             <Button size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart08") }}>Remove</Button>
                             :
-                            <Button size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart08", "BarChart", ["Name", "Value"]) }}>Favourite</Button>
+                            <Button size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart08", "BarChart", "Which type of assignments do my students seem to be struggling with?", "Name", "Value", ["Value"]) }}>Favourite</Button>
                         }
 
                     </Grid>
@@ -215,7 +218,7 @@ class InstructorAssignmentType extends React.Component {
                                 </Button> */}
                                 <Grid item xs={6}>
                                     <h3>Chart09</h3>
-                                    <h4>Which videos have my students watched and how is the pace for them? </h4>
+                                    <h4>Which videos have my students watched and how is the pace for them?</h4>
                                     <BarChart width={400} height={250} data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignmentType.chart09.data}>
                                         <CartesianGrid strokeDasharray="3 3" />
                                         <XAxis dataKey="Name" />
@@ -228,7 +231,7 @@ class InstructorAssignmentType extends React.Component {
                                     {this.isFav("chart09") == true ?
                                         <Button size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart09") }}>Remove</Button>
                                         :
-                                        <Button size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart09", "BarChart", ["Name", "plays", "rate"]) }}>Favourite</Button>
+                                        <Button size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart09", "BarChart", "Which videos have my students watched and how is the pace for them?", "Name", "", ["plays", "rate"]) }}>Favourite</Button>
                                     }
                                 </Grid>
 
@@ -247,7 +250,7 @@ class InstructorAssignmentType extends React.Component {
                                     {this.isFav("chart10") == true ?
                                         <Button size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart10") }}>Remove</Button>
                                         :
-                                        <Button size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart10", "BarChart", ["Name", "pauses", "playbacks"]) }}>Favourite</Button>
+                                        <Button size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart10", "BarChart", "Which videos do my students seem to be struggling with?", "Name", "", ["pauses", "playbacks"]) }}>Favourite</Button>
                                     }
                                 </Grid> <br />
                                 {this.state.selectedVideo == "AWS Lambda Lab - Part 1 (5:55)" ?
@@ -269,7 +272,7 @@ class InstructorAssignmentType extends React.Component {
                                             {this.isFav("chart11") == true ?
                                                 <Button size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart11") }}>Remove</Button>
                                                 :
-                                                <Button size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart11", "BarChart", ["Name", "Value"]) }}>Favourite</Button>
+                                                <Button size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart11", "BarChart", "Which part of the video do my students struggle with/is valuable to them?", "Name", "", ["Value"]) }}>Favourite</Button>
                                             }
                                         </Grid>
                                     </div>
