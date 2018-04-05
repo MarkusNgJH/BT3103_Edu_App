@@ -146,7 +146,7 @@ class administratorActivity extends React.Component {
                 <Grid container spacing={8}>
                 <Stepper steps={this.state.steps} backStep={this.backStep.bind(this)} reset={this.reset.bind(this)}/>
                 <Grid item xs={12}>
-                <BarChart
+                <LineChart
                     width={730}
                     height={250}
                     data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].adminActivity.chart05.data}
@@ -164,21 +164,21 @@ class administratorActivity extends React.Component {
                     dataKey="value"
                     label={
                         <AxisLabel axisType="yAxis" width={600} height={300}>
-                        Number of Submissions
+                        Daily Activity by Cohort
                         </AxisLabel>
                     }
                     />
                     <CartesianGrid strokeDasharray="3 3" />
                     <Tooltip />
                     <Legend />
-                    <Bar dataKey="value" fill="#8884d8" onClick={(data, index) => this.selectedActivity(data)} />
-                </BarChart>
+                    <Line dataKey="value" fill="#8884d8" onClick={(data, index) => this.selectedActivity(data)} />
+                </LineChart>
                 </Grid>
                 {this.state.selectedActivity == "2018-02-21" ?
                 <div>
                 <Grid item xs={12}>
                 <h3>Chart06</h3>
-                <h4>Title06</h4>
+                <h4>Course Breakdown of Daily Activity </h4>
                 <LineChart
                     width={730}
                     height={500}

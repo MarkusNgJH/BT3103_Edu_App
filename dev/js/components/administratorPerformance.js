@@ -54,41 +54,25 @@ class administratorPerformance extends React.Component {
         return (
             <div>
                 <h3>Chart01</h3>
-                <h4>Title01</h4>
+                <h4>Cohort Performance</h4>
                 <Grid container spacing={8}>
                 <Grid item xs={12}>
-                <BarChart
+                <PieChart
                     width={730}
                     height={250}
+                    >
+                    <Pie dataKey="value" fill="#8884d8"
                     data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].adminPerformance.chart01.data}
                     margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-                    >
-                    <XAxis
-                    dataKey="name"
-                    label={
-                        <AxisLabel axisType="xAxis" width={600} height={300}>
-                        Student
-                        </AxisLabel>
-                    }
+                    outerRadius={80}
+                    label
                     />
-                    <YAxis
-                    dataKey="value"
-                    label={
-                        <AxisLabel axisType="yAxis" width={600} height={300}>
-                        Number of Submissions
-                        </AxisLabel>
-                    }
-                    />
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <Tooltip />
-                    <Legend />
-                    <Bar dataKey="value" fill="#8884d8"/>
-                </BarChart>
+                </PieChart>
                 </Grid>
                 
                 <Grid item xs={12}>
                 <h3>Chart02</h3>
-                <h4>Title02</h4>
+                <h4>Performance Across Cohort (%)</h4>
                 <BarChart
                     width={730}
                     height={250}
@@ -120,7 +104,7 @@ class administratorPerformance extends React.Component {
 
                 <Grid item xs={12}>
                 <h3>Chart03</h3>
-                <h4>Title03</h4>
+                <h4>Progress Tracking</h4>
                 <BarChart
                     width={730}
                     height={250}
@@ -152,7 +136,7 @@ class administratorPerformance extends React.Component {
 
                 <Grid item xs={12}>
                 <h3>Chart04</h3>
-                <h4>Title04</h4>
+                <h4> Proportion of Completion by Courses </h4>
                 <BarChart
                     width={730}
                     height={250}
@@ -178,8 +162,8 @@ class administratorPerformance extends React.Component {
                     <CartesianGrid strokeDasharray="3 3"/>
                     <Tooltip />
                     <Legend />
-                    <Bar dataKey="completed" fill="#8884d8"/>
-                    <Bar dataKey="total" fill="#8884d8"/>
+                    <Bar dataKey="completed" stackId="a" fill="#8884d8"/>
+                    <Bar dataKey="total" stackId="a" fill="#76a8dd"/>
                 </BarChart>
                 </Grid>
                         
