@@ -3,6 +3,13 @@ $primary: #006699;
 
 h2 {
 	color: $primary;
+	padding: 0;
+	margin: 0;
+}
+
+h3, h4, p {
+	margin: 0;
+	padding: 0;
 }
 
 #main {

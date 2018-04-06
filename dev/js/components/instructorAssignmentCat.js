@@ -106,7 +106,7 @@ class InstructorAssignmentCat extends React.Component {
                 <Grid item xs={12}>
                 <Paper>
                 <h2>Chart01</h2>
-                <h4>What is the proportion of submission for each assignment?</h4>
+                <h3>What is the proportion of submission for each assignment?</h3>
                 <ResponsiveContainer width="90%" height={380}>
                 <BarChart
                     width={730} height={250}
