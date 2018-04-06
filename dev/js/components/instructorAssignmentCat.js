@@ -206,145 +206,6 @@ class InstructorAssignmentCat extends React.Component {
 
                     {/* <Stepper steps={this.state.steps} backStep={this.backStep.bind(this)} reset={this.reset.bind(this)}/> */}
 
-<<<<<<< HEAD
-                {/** CHART 01*/}
-                <Grid item xs={12}>
-                <Paper>
-                <div style={divStyle}>
-                <h2>Assignment Submissions</h2>
-                <p>Monitor Total Submissions for Each Assignment</p>
-                <Divider />
-                </div>
-                <ResponsiveContainer width="90%" height={380}>
-                <BarChart
-                    width={730} height={250}
-                    data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignment.chart01.data}
-                    margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-                    >
-                    <XAxis
-                    dataKey="assignment"
-                    label={{value:"Assignments", position:"insideBottom"}}
-                    ticks={[0]}
-                    />
-                    <YAxis
-                    dataKey="value"
-                    // label={{ value: 'Number of Submissions', angle: -90, position: 'insideBottomLeft' }}
-                    />
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <Tooltip cursor={{fill: 'red', fillOpacity: 0.1}} />
-                    <Legend verticalAlign="top" align="right" />
-                    {/* <Bar name="Number of Submissions" dataKey="value" fill="#8884d8"
-                    onClick={(data, index) => this.selectedAssignment(data.assignment)} /> */}
-                    <Bar name="Number of Submissions" dataKey="value"
-                    onClick={(data, index) => this.selectedAssignment(data.assignment)}>
-                        {this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignment.chart01.data.map((entry, index) => (
-                            <Cell
-                            key={entry.assignment}
-                            fill={entry.assignment == this.state.selectedAssignment ? '#87f2de' : (entry.value < 20 ? '#d68995' : '#71afe2')}
-                            // strokeWidth={entry.assignment == this.state.selectedAssignment ? 2 : 0}
-                            // stroke="red"
-                            />
-                        ))}
-                    </Bar>
-                    <ReferenceLine y={33} strokeWidth={4} stroke="#e0b13c" label={{value: "Expected Submissions", position: "top"}} />
-                    {/* <Line name="Expected number" type='monotone' dataKey='expected' stroke='#ff7300' dot={false} /> */}
-                </BarChart>
-                </ResponsiveContainer>
-                </Paper>
-                </Grid>
-                
-                {/** CHART 02*/}
-                <Grid item xs={6}>
-                <Paper>
-                {this.state.selectedAssignment == "" ?
-                <div>
-                <div style={divStyle}>
-                <h2>Submission Window</h2>
-                <p>Evaluate Whether Deadline is Reasonable for Assignments</p>
-                <Divider />
-                </div>
-                <ResponsiveContainer width="90%" height={380}>
-                <BarChart
-                    width={730} height={250}
-                    data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignment.chart02.data}
-                    margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-                    >
-                    <XAxis
-                    dataKey="days_lapsed"
-                    label={{ value: "Number of days elapsed", position: 'insideBottom', offset: -4}}
-                    />
-                    <YAxis
-                    dataKey="value"
-                    // label={{ value: "Number of submissions", angle: -90, position: 'insideBottomLeft' }}
-                    />
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <Tooltip cursor={{fill: 'red', fillOpacity: 0.05}} />
-                    <Legend verticalAlign="top" align="right" />
-                    <Bar name="Number of Submissions" dataKey="value" fill="#8884d8" />
-                </BarChart>
-                </ResponsiveContainer>
-                </div>
-                :
-                <div></div>}
-                </Paper>
-                </Grid>
-
-                {/** CHART 03*/}
-                <Grid item xs={6}>
-                <Paper>
-                {this.state.selectedAssignment == "" ?
-                <div>
-                <div style={divStyle}>
-                <h2>Submission Across Time</h2>
-                <p>Monitor Student's Submission over Time</p>
-                <Divider />
-                </div>
-                <ResponsiveContainer width="90%" height={380}>
-                <AreaChart width={730} height={250}
-                    data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignment.chart03.data}
-                    margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
-                    <defs>
-                        <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8}/>
-                        <stop offset="95%" stopColor="#8884d8" stopOpacity={0}/>
-                        </linearGradient>
-                    </defs>
-                    <XAxis dataKey="date_time" />
-                    <YAxis />
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <Tooltip />
-                    <Area type="monotone" dataKey="value" stroke="#8884d8" fillOpacity={1} fill="url(#colorUv)" />
-                </AreaChart>
-                </ResponsiveContainer>
-                </div>
-                :
-                <div></div>
-                }
-                </Paper>
-                </Grid>
-                
-                {/** CHART 04*/}
-                <Grid item xs={6}>
-                <Paper>
-                {this.state.selectedAssignment == "Follow the directions in the details link to get a free AWS account. Then submit the string SUCCESSFUL. " ?
-                <div>
-                <div style={divStyle}>
-                <h2>Submission Window</h2>
-                <p>Evaluate Whether Deadline is Reasonable for "{this.state.selectedAssignment}"</p>
-                <Divider />
-                </div>
-                <ResponsiveContainer width="90%" height={380}>
-                <BarChart
-                    width={730} height={250}
-                    data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignment.chart04.data}
-                    margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-                    >
-                    <XAxis
-                    dataKey="day_lapsed_from_assignmentX"
-                    label={
-                        <AxisLabel axisType="xAxis" width={600} height={300}>
-                        xAxis
-=======
                     {/** CHART 01*/}
                     <Grid item xs={12}>
                         <Paper>
@@ -504,7 +365,6 @@ class InstructorAssignmentCat extends React.Component {
                                                 label={
                                                     <AxisLabel axisType="xAxis" width={600} height={300}>
                                                         xAxis
->>>>>>> 424d47900402c944459c03f8e2ce4ca24d63735e
                         </AxisLabel>
                                                 }
                                             />
@@ -525,63 +385,6 @@ class InstructorAssignmentCat extends React.Component {
                                     {this.isFav("chart04") == true ?
                                         <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart04", "Chart04 has been removed!") }}>Remove</Button>
 
-<<<<<<< HEAD
-                {/** CHART 06*/}
-                <Grid item xs={6}>
-                <Paper>
-                {this.state.selectedAssignment == "Follow the directions in the details link to get a free AWS account. Then submit the string SUCCESSFUL. " ?
-                <div>
-                <div style={divStyle}>
-                <h2>Submission Across Time</h2>
-                <p>Monitor Student's Submission over Time for "{this.state.selectedAssignment}"</p>
-                <Divider />
-                </div>
-                <ResponsiveContainer width="90%" height={380}>
-                <AreaChart width={730} height={250}
-                    data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignment.chart06.data}
-                    margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
-                    <defs>
-                        <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8}/>
-                        <stop offset="95%" stopColor="#8884d8" stopOpacity={0}/>
-                        </linearGradient>
-                    </defs>
-                    <XAxis dataKey="date_time" />
-                    <YAxis />
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <Tooltip />
-                    <Area type="monotone" dataKey="value" stroke="#8884d8" fillOpacity={1} fill="url(#colorUv)" />
-                </AreaChart>
-                </ResponsiveContainer>
-                </div>
-                :
-                <div></div>
-                }
-                </Paper>
-                </Grid>
-
-                {/** CHART 05*/}
-                <Grid item xs={6}>
-                <Paper>
-                {this.state.selectedAssignment == "AWS Lambda Lab - Part 2 (7:13)" ?
-                <div>
-                <div style={divStyle}>
-                <h2>Submission Window</h2>
-                <p>Evaluate Whether Deadline is Reasonable for "{this.state.selectedAssignment}"</p>
-                <Divider />
-                </div>
-                <ResponsiveContainer width="90%" height={380}>
-                <BarChart
-                    width={730} height={250}
-                    data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignment.chart05.data}
-                    margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-                    >
-                    <XAxis
-                    dataKey="day_lapsed_from_assignmentX"
-                    label={
-                        <AxisLabel axisType="xAxis" width={600} height={300}>
-                        xAxis
-=======
                                         :
                                         <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart01", "BarChart", "Is there sufficient days to complete assignment " + "{this.state.selectedAssignment}" + "?", "assignment", "value", ["value"], "Chart04 has been added!") }}>Favourite</Button>
 
@@ -655,7 +458,6 @@ class InstructorAssignmentCat extends React.Component {
                                                 label={
                                                     <AxisLabel axisType="xAxis" width={600} height={300}>
                                                         xAxis
->>>>>>> 424d47900402c944459c03f8e2ce4ca24d63735e
                         </AxisLabel>
                                                 }
                                             />
@@ -737,42 +539,7 @@ class InstructorAssignmentCat extends React.Component {
                         message={<span id="message-id">{this.state.message}</span>}
                     />
 
-<<<<<<< HEAD
-                {/** CHART 07*/}
-                <Grid item xs={6}>
-                <Paper>
-                {this.state.selectedAssignment == "AWS Lambda Lab - Part 2 (7:13)" ?
-                <div>
-                <div style={divStyle}>
-                <h2>Submission Across Time</h2>
-                <p>Monitor Student's Submission over Time for "{this.state.selectedAssignment}"</p>
-                <Divider />
-                </div>
-                <ResponsiveContainer width="90%" height={380}>
-                <AreaChart width={730} height={250}
-                    data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignment.chart07.data}
-                    margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
-                    <defs>
-                        <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8}/>
-                        <stop offset="95%" stopColor="#8884d8" stopOpacity={0}/>
-                        </linearGradient>
-                    </defs>
-                    <XAxis dataKey="date_time" />
-                    <YAxis />
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <Tooltip />
-                    <Area type="monotone" dataKey="value" stroke="#8884d8" fillOpacity={1} fill="url(#colorUv)" />
-                </AreaChart>
-                </ResponsiveContainer>
-                </div>
-                :
-                <div></div>
-                }
-                </Paper>
-=======
                     {/** End of Grid container*/}
->>>>>>> 424d47900402c944459c03f8e2ce4ca24d63735e
                 </Grid>
 
             </div>
