@@ -362,7 +362,7 @@ class InstructorAssignmentType extends React.Component {
                                     <div style={divStyle}>
                                         {/* <h2>chart11</h2> */}
                                         <h2>Area of Pauses</h2>
-                                        <p>Investigate Time Period where Pauses Occured for Assignment Z</p>
+                                        <p>Investigate Time Period where Pauses Occured for "{this.state.selectedVideo}"</p>
                                         <Divider />
                                     </div>
 
