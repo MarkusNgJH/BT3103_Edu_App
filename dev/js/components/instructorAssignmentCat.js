@@ -138,8 +138,8 @@ class InstructorAssignmentCat extends React.Component {
                 <Grid item xs={12}>
                 <Paper>
                 <div style={divStyle}>
-                <h2>Chart01</h2>
-                <p>What is the proportion of submission for each assignment?</p>
+                <h2>Assignment Submissions</h2>
+                <p>Monitor Total Submissions for Each Assignment</p>
                 <Divider />
                 </div>
                 <ResponsiveContainer width="90%" height={380}>
@@ -186,8 +186,8 @@ class InstructorAssignmentCat extends React.Component {
                 {this.state.selectedAssignment == "" ?
                 <div>
                 <div style={divStyle}>
-                <h2>Chart02</h2>
-                <p>Is there sufficient days to complete assignments?</p>
+                <h2>Submission Window</h2>
+                <p>Evaluate Whether Deadline is Reasonable for Assignments</p>
                 <Divider />
                 </div>
                 <ResponsiveContainer width="90%" height={380}>
@@ -222,8 +222,8 @@ class InstructorAssignmentCat extends React.Component {
                 {this.state.selectedAssignment == "" ?
                 <div>
                 <div style={divStyle}>
-                <h2>Chart03</h2>
-                <p>How are my student behaviour in submitting my assignments?</p>
+                <h2>Submission Across Time</h2>
+                <p>Monitor Student's Submission over Time</p>
                 <Divider />
                 </div>
                 <ResponsiveContainer width="90%" height={380}>
@@ -256,8 +256,8 @@ class InstructorAssignmentCat extends React.Component {
                 {this.state.selectedAssignment == "Follow the directions in the details link to get a free AWS account. Then submit the string SUCCESSFUL. " ?
                 <div>
                 <div style={divStyle}>
-                <h2>Chart04</h2>
-                <p>Is there sufficient days to complete assignment "{this.state.selectedAssignment}"?</p>
+                <h2>Submission Window</h2>
+                <p>Evaluate Whether Deadline is Reasonable for "{this.state.selectedAssignment}"</p>
                 <Divider />
                 </div>
                 <ResponsiveContainer width="90%" height={380}>
@@ -301,8 +301,8 @@ class InstructorAssignmentCat extends React.Component {
                 {this.state.selectedAssignment == "Follow the directions in the details link to get a free AWS account. Then submit the string SUCCESSFUL. " ?
                 <div>
                 <div style={divStyle}>
-                <h2>Chart06</h2>
-                <p>How are my student behaviour in submitting assignment "{this.state.selectedAssignment}"?</p>
+                <h2>Submission Across Time</h2>
+                <p>Monitor Student's Submission over Time for "{this.state.selectedAssignment}"</p>
                 <Divider />
                 </div>
                 <ResponsiveContainer width="90%" height={380}>
@@ -335,8 +335,8 @@ class InstructorAssignmentCat extends React.Component {
                 {this.state.selectedAssignment == "AWS Lambda Lab - Part 2 (7:13)" ?
                 <div>
                 <div style={divStyle}>
-                <h2>Chart05</h2>
-                <p>Is there sufficient days to complete assignment "{this.state.selectedAssignment}"?</p>
+                <h2>Submission Window</h2>
+                <p>Evaluate Whether Deadline is Reasonable for "{this.state.selectedAssignment}"</p>
                 <Divider />
                 </div>
                 <ResponsiveContainer width="90%" height={380}>
@@ -380,8 +380,8 @@ class InstructorAssignmentCat extends React.Component {
                 {this.state.selectedAssignment == "AWS Lambda Lab - Part 2 (7:13)" ?
                 <div>
                 <div style={divStyle}>
-                <h2>Chart07</h2>
-                <p>How are my student behaviour in submitting assignment "{this.state.selectedAssignment}"?</p>
+                <h2>Submission Across Time</h2>
+                <p>Monitor Student's Submission over Time for "{this.state.selectedAssignment}"</p>
                 <Divider />
                 </div>
                 <ResponsiveContainer width="90%" height={380}>
