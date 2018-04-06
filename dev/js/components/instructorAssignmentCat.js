@@ -28,7 +28,8 @@ import {
     Legend,
     Label,
     ReferenceLine,
-    Cell
+    Cell,
+    ResponsiveContainer
   } from "recharts";
 const AxisLabel = ({
     axisType,
@@ -97,12 +98,16 @@ class InstructorAssignmentCat extends React.Component {
     render() {
         return (
             <div>
-                <Grid container spacing={8} style={{border: '5px solid black'}}>
+                <Grid container spacing={40} alignItems="stretch" justify="center">
+
                 <Stepper steps={this.state.steps} backStep={this.backStep.bind(this)} reset={this.reset.bind(this)}/>
-                <Grid item xs={6}>
+                
+                {/** CHART 01*/}
+                <Grid item xs={12}>
                 <Paper>
                 <h2>Chart01</h2>
                 <h4>What is the proportion of submission for each assignment?</h4>
+                <ResponsiveContainer width="90%" height={380}>
                 <BarChart
                     width={730} height={250}
                     data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignment.chart01.data}
@@ -125,185 +130,235 @@ class InstructorAssignmentCat extends React.Component {
                     <Bar name="Number of Submissions" dataKey="value"
                     onClick={(data, index) => this.selectedAssignment(data.assignment)}>
                         {this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignment.chart01.data.map((entry, index) => (
-                            <Cell key={entry.assignment} fill={entry.value < 20 ? '#d68995' : '#71afe2' }/>
+                            <Cell
+                            key={entry.assignment}
+                            fill={entry.assignment == this.state.selectedAssignment ? '#a5e2f7' : (entry.value < 20 ? '#d68995' : '#71afe2')}
+                            // strokeWidth={entry.assignment == this.state.selectedAssignment ? 2 : 0}
+                            // stroke="red"
+                            />
                         ))}
                     </Bar>
                     <ReferenceLine y={33} strokeWidth={4} stroke="#e0b13c" label={{value: "Expected Submissions", position: "top"}} />
                     {/* <Line name="Expected number" type='monotone' dataKey='expected' stroke='#ff7300' dot={false} /> */}
                 </BarChart>
+                </ResponsiveContainer>
                 </Paper>
                 </Grid>
                 
+                {/** CHART 02*/}
+                <Grid item xs={6}>
+                <Paper>
                 {this.state.selectedAssignment == "" ?
-                    <div>
-                    <Grid item xs={6}>
-                    <Paper>
-                    <h3>Chart02</h3>
-                    <h4>Is there sufficient days to complete assignments?</h4>
-                    <BarChart
-                        width={730} height={250}
-                        data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignment.chart02.data}
-                        margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-                        >
-                        <XAxis
-                        dataKey="days_lapsed"
-                        label={{ value: "Number of days elapsed", position: 'insideBottom', offset: -4}}
-                        />
-                        <YAxis
-                        dataKey="value"
-                        // label={{ value: "Number of submissions", angle: -90, position: 'insideBottomLeft' }}
-                        />
-                        <CartesianGrid strokeDasharray="3 3" />
-                        <Tooltip cursor={{fill: 'red', fillOpacity: 0.05}} />
-                        <Legend verticalAlign="top" align="right" />
-                        <Bar name="Number of Submissions" dataKey="value" fill="#8884d8" />
-                    </BarChart>
-                    </Paper>
-                    </Grid>
-                    <Grid item xs={6}>
-                    <Paper>
-                    <h3>Chart03</h3>
-                    <h4>How are my student behaviour in submitting my assignments?</h4>
-                    <AreaChart width={730} height={250}
-                        data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignment.chart03.data}
-                        margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
-                        <defs>
-                            <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
-                            <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8}/>
-                            <stop offset="95%" stopColor="#8884d8" stopOpacity={0}/>
-                            </linearGradient>
-                        </defs>
-                        <XAxis dataKey="date_time" />
-                        <YAxis />
-                        <CartesianGrid strokeDasharray="3 3" />
-                        <Tooltip />
-                        <Area type="monotone" dataKey="value" stroke="#8884d8" fillOpacity={1} fill="url(#colorUv)" />
-                    </AreaChart>
-                    </Paper>
-                    </Grid>
-                    </div>
+                <div>
+                <h3>Chart02</h3>
+                <h4>Is there sufficient days to complete assignments?</h4>
+                <ResponsiveContainer width="90%" height={380}>
+                <BarChart
+                    width={730} height={250}
+                    data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignment.chart02.data}
+                    margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+                    >
+                    <XAxis
+                    dataKey="days_lapsed"
+                    label={{ value: "Number of days elapsed", position: 'insideBottom', offset: -4}}
+                    />
+                    <YAxis
+                    dataKey="value"
+                    // label={{ value: "Number of submissions", angle: -90, position: 'insideBottomLeft' }}
+                    />
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <Tooltip cursor={{fill: 'red', fillOpacity: 0.05}} />
+                    <Legend verticalAlign="top" align="right" />
+                    <Bar name="Number of Submissions" dataKey="value" fill="#8884d8" />
+                </BarChart>
+                </ResponsiveContainer>
+                </div>
                 :
-                    this.state.selectedAssignment == "Follow the directions in the details link to get a free AWS account. Then submit the string SUCCESSFUL. " ?
-                        <div>
-                        {/* <Button variant="raised" color="secondary" onClick={() => this.setState({selectedAssignment: ""})}>
-                            Clear Selection <Delete />
-                        </Button> */}
-                        <Grid item xs={12}>
-                        <h3>Chart04</h3>
-                        <h4>Is there sufficient days to complete assignment "{this.state.selectedAssignment}"?</h4>
-                        <br />
-                        <BarChart
-                            width={730} height={250}
-                            data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignment.chart04.data}
-                            margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-                            >
-                            <XAxis
-                            dataKey="day_lapsed_from_assignmentX"
-                            label={
-                                <AxisLabel axisType="xAxis" width={600} height={300}>
-                                xAxis
-                                </AxisLabel>
-                            }
-                            />
-                            <YAxis
-                            dataKey="value"
-                            label={
-                                <AxisLabel axisType="yAxis" width={600} height={300}>
-                                yAxis
-                                </AxisLabel>
-                            }
-                            />
-                            <CartesianGrid strokeDasharray="3 3" />
-                            <Tooltip />
-                            <Legend />
-                            <Bar dataKey="value" fill="#8884d8" />
-                        </BarChart>
-                        </Grid>
-                        <Grid item xs={12}>
-                        <h3>Chart06</h3>
-                        <h4>How are my student behaviour in submitting assignment "{this.state.selectedAssignment}"?</h4>
-                        <AreaChart width={730} height={250}
-                            data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignment.chart06.data}
-                            margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
-                            <defs>
-                                <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
-                                <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8}/>
-                                <stop offset="95%" stopColor="#8884d8" stopOpacity={0}/>
-                                </linearGradient>
-                            </defs>
-                            <XAxis dataKey="date_time" />
-                            <YAxis />
-                            <CartesianGrid strokeDasharray="3 3" />
-                            <Tooltip />
-                            <Area type="monotone" dataKey="value" stroke="#8884d8" fillOpacity={1} fill="url(#colorUv)" />
-                        </AreaChart>
-                        </Grid>
-                        </div>
-                    :
-                        this.state.selectedAssignment == "AWS Lambda Lab - Part 2 (7:13)" ?
-                            <div>
-                            {/* <Button variant="raised" color="secondary" onClick={() => this.setState({selectedAssignment: ""})}>
-                                Clear Selection <Delete />
-                            </Button> */}
-                            <Grid item xs={12}>
-                            <h3>Chart05</h3>
-                            <h4>Is there sufficient days to complete assignment "{this.state.selectedAssignment}"?</h4>
-                            <br />
-                            <BarChart
-                                width={730} height={250}
-                                data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignment.chart05.data}
-                                margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-                                >
-                                <XAxis
-                                dataKey="day_lapsed_from_assignmentX"
-                                label={
-                                    <AxisLabel axisType="xAxis" width={600} height={300}>
-                                    xAxis
-                                    </AxisLabel>
-                                }
-                                />
-                                <YAxis
-                                dataKey="value"
-                                label={
-                                    <AxisLabel axisType="yAxis" width={600} height={300}>
-                                    yAxis
-                                    </AxisLabel>
-                                }
-                                />
-                                <CartesianGrid strokeDasharray="3 3" />
-                                <Tooltip />
-                                <Legend />
-                                <Bar dataKey="value" fill="#8884d8" />
-                            </BarChart>
-                            </Grid>
-                            <Grid item xs={12}>
-                            <h3>Chart07</h3>
-                            <h4>How are my student behaviour in submitting assignment "{this.state.selectedAssignment}"?</h4>
-                            <AreaChart width={730} height={250}
-                                data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignment.chart07.data}
-                                margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
-                                <defs>
-                                    <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
-                                    <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8}/>
-                                    <stop offset="95%" stopColor="#8884d8" stopOpacity={0}/>
-                                    </linearGradient>
-                                </defs>
-                                <XAxis dataKey="date_time" />
-                                <YAxis />
-                                <CartesianGrid strokeDasharray="3 3" />
-                                <Tooltip />
-                                <Area type="monotone" dataKey="value" stroke="#8884d8" fillOpacity={1} fill="url(#colorUv)" />
-                            </AreaChart>
-                            </Grid>
-                            </div>
-                        :
-                            <div>No drilldown available for selected Assignment. Please select another assignment.</div>
-                }
+                <div></div>}
+                </Paper>
+                </Grid>
 
+                {/** CHART 03*/}
+                <Grid item xs={6}>
+                <Paper>
+                {this.state.selectedAssignment == "" ?
+                <div>
+                <h3>Chart03</h3>
+                <h4>How are my student behaviour in submitting my assignments?</h4>
+                <ResponsiveContainer width="90%" height={380}>
+                <AreaChart width={730} height={250}
+                    data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignment.chart03.data}
+                    margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
+                    <defs>
+                        <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8}/>
+                        <stop offset="95%" stopColor="#8884d8" stopOpacity={0}/>
+                        </linearGradient>
+                    </defs>
+                    <XAxis dataKey="date_time" />
+                    <YAxis />
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <Tooltip />
+                    <Area type="monotone" dataKey="value" stroke="#8884d8" fillOpacity={1} fill="url(#colorUv)" />
+                </AreaChart>
+                </ResponsiveContainer>
+                </div>
+                :
+                <div></div>
+                }
+                </Paper>
                 </Grid>
                 
-            </div> 
+                {/** CHART 04*/}
+                <Grid item xs={6}>
+                <Paper>
+                {this.state.selectedAssignment == "Follow the directions in the details link to get a free AWS account. Then submit the string SUCCESSFUL. " ?
+                <div>
+                <h3>Chart04</h3>
+                <h4>Is there sufficient days to complete assignment "{this.state.selectedAssignment}"?</h4>
+                <ResponsiveContainer width="90%" height={380}>
+                <BarChart
+                    width={730} height={250}
+                    data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignment.chart04.data}
+                    margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+                    >
+                    <XAxis
+                    dataKey="day_lapsed_from_assignmentX"
+                    label={
+                        <AxisLabel axisType="xAxis" width={600} height={300}>
+                        xAxis
+                        </AxisLabel>
+                    }
+                    />
+                    <YAxis
+                    dataKey="value"
+                    label={
+                        <AxisLabel axisType="yAxis" width={600} height={300}>
+                        yAxis
+                        </AxisLabel>
+                    }
+                    />
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <Tooltip />
+                    <Legend />
+                    <Bar dataKey="value" fill="#8884d8" />
+                </BarChart>
+                </ResponsiveContainer>
+                </div>
+                :
+                <div></div>
+                }
+                </Paper>
+                </Grid>
 
+                {/** CHART 06*/}
+                <Grid item xs={6}>
+                <Paper>
+                {this.state.selectedAssignment == "Follow the directions in the details link to get a free AWS account. Then submit the string SUCCESSFUL. " ?
+                <div>
+                <h3>Chart06</h3>
+                <h4>How are my student behaviour in submitting assignment "{this.state.selectedAssignment}"?</h4>
+                <ResponsiveContainer width="90%" height={380}>
+                <AreaChart width={730} height={250}
+                    data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignment.chart06.data}
+                    margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
+                    <defs>
+                        <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8}/>
+                        <stop offset="95%" stopColor="#8884d8" stopOpacity={0}/>
+                        </linearGradient>
+                    </defs>
+                    <XAxis dataKey="date_time" />
+                    <YAxis />
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <Tooltip />
+                    <Area type="monotone" dataKey="value" stroke="#8884d8" fillOpacity={1} fill="url(#colorUv)" />
+                </AreaChart>
+                </ResponsiveContainer>
+                </div>
+                :
+                <div></div>
+                }
+                </Paper>
+                </Grid>
+
+                {/** CHART 05*/}
+                <Grid item xs={6}>
+                <Paper>
+                {this.state.selectedAssignment == "AWS Lambda Lab - Part 2 (7:13)" ?
+                <div>
+                <h3>Chart05</h3>
+                <h4>Is there sufficient days to complete assignment "{this.state.selectedAssignment}"?</h4>
+                <ResponsiveContainer width="90%" height={380}>
+                <BarChart
+                    width={730} height={250}
+                    data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignment.chart05.data}
+                    margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+                    >
+                    <XAxis
+                    dataKey="day_lapsed_from_assignmentX"
+                    label={
+                        <AxisLabel axisType="xAxis" width={600} height={300}>
+                        xAxis
+                        </AxisLabel>
+                    }
+                    />
+                    <YAxis
+                    dataKey="value"
+                    label={
+                        <AxisLabel axisType="yAxis" width={600} height={300}>
+                        yAxis
+                        </AxisLabel>
+                    }
+                    />
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <Tooltip />
+                    <Legend />
+                    <Bar dataKey="value" fill="#8884d8" />
+                </BarChart>
+                </ResponsiveContainer>
+                </div>
+                :
+                <div></div>
+                }
+                </Paper>
+                </Grid>
+
+                {/** CHART 07*/}
+                <Grid item xs={6}>
+                <Paper>
+                {this.state.selectedAssignment == "AWS Lambda Lab - Part 2 (7:13)" ?
+                <div>
+                <h3>Chart07</h3>
+                <h4>How are my student behaviour in submitting assignment "{this.state.selectedAssignment}"?</h4>
+                <ResponsiveContainer width="90%" height={380}>
+                <AreaChart width={730} height={250}
+                    data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignment.chart07.data}
+                    margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
+                    <defs>
+                        <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8}/>
+                        <stop offset="95%" stopColor="#8884d8" stopOpacity={0}/>
+                        </linearGradient>
+                    </defs>
+                    <XAxis dataKey="date_time" />
+                    <YAxis />
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <Tooltip />
+                    <Area type="monotone" dataKey="value" stroke="#8884d8" fillOpacity={1} fill="url(#colorUv)" />
+                </AreaChart>
+                </ResponsiveContainer>
+                </div>
+                :
+                <div></div>
+                }
+                </Paper>
+                </Grid>
+
+                {/** End of Grid container*/}
+                </Grid>
+                
+            </div>
         );
     }
 }
