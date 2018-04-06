@@ -15,6 +15,7 @@ import Delete from 'material-ui-icons/Delete';
 import Stepper from './stepper';
 import Snackbar from 'material-ui/Snackbar';
 import Paper from 'material-ui/Paper';
+import Close from 'material-ui-icons/Close'; 
 import Divider from 'material-ui/Divider';
 
 import {
@@ -75,6 +76,16 @@ class InstructorAssignmentType extends React.Component {
         }
         // this.state.favourites = Object.keys(this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignmentType)
         this.state.favourites = this.props.usersTable[this.props.activeProfile.uid].favourites
+        this.handleDelete = this.handleDelete.bind(this);
+    }
+
+    handleDelete(chip) {
+        if (chip == "video") {
+            this.setState({selectedVideo: ""})
+        }
+        if (chip == "assignmentType") {
+            this.setState({selectedAssignmentType: "", selectedVideo: ""})
+        }
     }
 
     isFav(chartName) {
@@ -190,7 +201,41 @@ class InstructorAssignmentType extends React.Component {
         const { vertical, horizontal, snackOpen } = this.state;
         return (
             <div>
-                <Stepper steps={this.state.steps} backStep={this.backStep.bind(this)} reset={this.reset.bind(this)} />
+                <Paper className="chip_container">
+                <div className="chip">
+                InstructorAssignmentType
+                </div>
+                {this.state.selectedAssignmentType == "" ?
+                <div></div>
+                :
+                <div className="chip_spacer">>></div>
+                }
+                {this.state.selectedAssignmentType == "" ?
+                <div></div>
+                :
+                <div className="chip">
+                {this.state.selectedAssignmentType}
+                <button onClick={() => this.handleDelete("assignmentType")}>
+                    <Close />
+                </button>
+                </div>
+                }
+                {this.state.selectedVideo == "" ?
+                <div></div>
+                :
+                <div className="chip_spacer">>></div>
+                }
+                {this.state.selectedVideo == "" ?
+                <div></div>
+                :
+                <div className="chip">
+                {this.state.selectedVideo}
+                <button onClick={() => this.handleDelete("video")}>
+                    <Close />
+                </button>
+                </div>
+                }
+                </Paper>
                 <Grid container spacing={24} direction="row" align="center">
                     <Grid item xs={12}>
                         <Paper>
@@ -221,30 +266,30 @@ class InstructorAssignmentType extends React.Component {
                                             <AxisLabel axisType="yAxis" width={600} height={300}>
                                                 yAxis
                                     </AxisLabel>
-                                        }
-                                    />
-                                    <CartesianGrid strokeDasharray="3 3" />
-                                    <Tooltip />
-                                    <Legend />
-                                    <Bar dataKey="Value" fill="#8884d8"
-                                        onClick={(data, index) => this.selectedAssignmentType(data)}>
-                                        {this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignmentType.chart08.data.map((entry, index) => (
-                                            <Cell
-                                                key={entry['Name']}
-                                                fill={entry['Name'] == this.state.selectedAssignmentType ? '#87f2de' : '#71afe2'}
-                                            // strokeWidth={entry.assignment == this.state.selectedAssignment ? 2 : 0}
-                                            // stroke="red"
-                                            />
-                                        ))}
-                                    </Bar>
-                                </BarChart>
-                            </ResponsiveContainer>
-                            {this.isFav("chart08") == true ?
-                                <Button size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart08", "chart08 has been removed!") }}>Remove</Button>
-                                :
-                                <Button size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart08", "BarChart", "Which type of assignments do my students seem to be struggling with?", "Name", "Value", ["Value"], "chart08 has been added!") }}>Favourite</Button>
-                            }
-                        </Paper>
+                                }
+                            />
+                            <CartesianGrid strokeDasharray="3 3" />
+                            <Tooltip />
+                            <Legend />
+                            <Bar dataKey="Value" fill="#8884d8"
+                            onClick={(data, index) => this.selectedAssignmentType(data)}>
+                            {this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignmentType.chart08.data.map((entry, index) => (
+                                <Cell
+                                key={entry['Name']}
+                                fill={entry.Name == this.state.selectedAssignment ? '#87f2de' : (entry.Value < 1 ? '#d68995' : '#71afe2')}
+                                // strokeWidth={entry.assignment == this.state.selectedAssignment ? 2 : 0}
+                                // stroke="red"
+                                />
+                            ))}
+                            </Bar>
+                        </BarChart>
+                        </ResponsiveContainer>
+                        {this.isFav("chart08") == true ?
+                            <Button size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart08", "chart08 has been removed!") }}>Remove</Button>
+                            :
+                            <Button size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart08", "BarChart", "Which type of assignments do my students seem to be struggling with?", "Name", "Value", ["Value"], "chart08 has been added!") }}>Favourite</Button>
+                        }
+                    </Paper>
                     </Grid>
                     <Grid item xs={6}>
                         <Paper>
