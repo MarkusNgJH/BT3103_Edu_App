@@ -10,6 +10,7 @@ import Typography from 'material-ui/Typography';
 import store from '../store';
 import Loader from './loader';
 import { connect } from 'react-redux';
+import { LinearProgress } from 'material-ui/Progress';
 
 const styles = {
     card: {
@@ -103,6 +104,7 @@ class GridExample extends Component {
                                 <Typography color="textSecondary">
                                     Submission behaviour accross all assignments
                                 </Typography>
+                                <LinearProgress style={{height: 20}} variant="determinate" value={80} />
                                 {/* <Typography component="p">
                                     insert information here<br />
                                     {'"detail"'}

@@ -60,7 +60,7 @@ class DrawerItems extends React.Component {
 
                     {this.props.activeProfileRole == 'Administrator' ?
                         <List disablePadding>
-                            <ListItem button onClick={this.props.handleDrawerClose.bind(this)} style={{ paddingLeft: "60px" }}>
+                            <ListItem button onClick={this.props.handleDrawerClose.bind(this)} style={{ paddingLeft: "60px"}}>
                                 <Link to="/administratorPerformance">
                                     <ListItemText primary="Administrator Performance" />
                                 </Link>
@@ -74,6 +74,7 @@ class DrawerItems extends React.Component {
                         :
                         this.props.activeProfileRole == 'Instructor' ?
                             <List disablePadding>
+                                {/* <ListItem button onClick={this.props.handleDrawerClose.bind(this)} style={{ paddingLeft: "60px", background: 1==1 ? "#4b9aea" : ""}}> */}
                                 <ListItem button onClick={this.props.handleDrawerClose.bind(this)} style={{ paddingLeft: "60px" }}>
                                     <Link to="/instructorAssignmentType">
                                         <ListItemText primary="Instructor Assignment Type" />

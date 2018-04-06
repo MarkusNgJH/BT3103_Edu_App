@@ -14,6 +14,7 @@ import Icon from 'material-ui/Icon';
 import Delete from 'material-ui-icons/Delete';
 import Stepper from './stepper';
 import Paper from 'material-ui/Paper';
+import Close from 'material-ui-icons/Close'; 
 
 import {
     PieChart,
@@ -70,6 +71,16 @@ class InstructorAssignmentType extends React.Component {
         }
         // this.state.favourites = Object.keys(this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignmentType)
         this.state.favourites = this.props.usersTable[this.props.activeProfile.uid].favourites
+        this.handleDelete = this.handleDelete.bind(this);
+    }
+
+    handleDelete(chip) {
+        if (chip == "video") {
+            this.setState({selectedVideo: ""})
+        }
+        if (chip == "assignmentType") {
+            this.setState({selectedAssignmentType: "", selectedVideo: ""})
+        }
     }
 
     isFav(chartName) {
@@ -167,7 +178,41 @@ class InstructorAssignmentType extends React.Component {
         console.log("My favourites:", this.state.favourites)
         return (
             <div>
-                <Stepper steps={this.state.steps} backStep={this.backStep.bind(this)} reset={this.reset.bind(this)}/>
+                <Paper className="chip_container">
+                <div className="chip">
+                InstructorAssignmentType
+                </div>
+                {this.state.selectedAssignmentType == "" ?
+                <div></div>
+                :
+                <div className="chip_spacer">>></div>
+                }
+                {this.state.selectedAssignmentType == "" ?
+                <div></div>
+                :
+                <div className="chip">
+                {this.state.selectedAssignmentType}
+                <button onClick={() => this.handleDelete("assignmentType")}>
+                    <Close />
+                </button>
+                </div>
+                }
+                {this.state.selectedVideo == "" ?
+                <div></div>
+                :
+                <div className="chip_spacer">>></div>
+                }
+                {this.state.selectedVideo == "" ?
+                <div></div>
+                :
+                <div className="chip">
+                {this.state.selectedVideo}
+                <button onClick={() => this.handleDelete("video")}>
+                    <Close />
+                </button>
+                </div>
+                }
+                </Paper>
                 <Grid container spacing={24} direction="row" align="center">
                     <Grid item xs={12}>
                         <Paper>
