@@ -279,9 +279,9 @@ class InstructorAssignmentType extends React.Component {
                         </BarChart>
                         </ResponsiveContainer>
                         {this.isFav("chart08") == true ?
-                            <Button size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart08", "chart08 has been removed!") }}>Remove</Button>
+                            <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart08", "chart08 has been removed!") }}>Remove</Button>
                             :
-                            <Button size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart08", "BarChart", "Which type of assignments do my students seem to be struggling with?", "Name", "Value", ["Value"], "chart08 has been added!") }}>Favourite</Button>
+                            <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart08", "BarChart", "Which type of assignments do my students seem to be struggling with?", "Name", "Value", ["Value"], "chart08 has been added!") }}>Favourite</Button>
                         }
                     </Paper>
                     </Grid>
