@@ -141,6 +141,7 @@ class AppFrame extends React.Component {
                 variant="persistent"
                 anchor="left"
                 open={open}
+                onClose={this.handleDrawerClose}
                 classes={{
                     paper: classes.drawerPaper,
                 }}

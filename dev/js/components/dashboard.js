@@ -126,12 +126,15 @@ class Dashboard extends React.Component {
             <div>
                 <h1>{this.props.usersTable[activeUserId].userDisplayName}'s Dashboard</h1>
 
-                <Grid container spacing={8}>
+                <Grid container spacing={24} direction="row" align="center">
                     {this.state.favourites.map(function (chart, index) {
                         return (
-                            <Grid item xs={6} key={index}>
-                                <h3 style={{float:"right"}}>{chart["chart"]}</h3> <br/>
-                                <h4 style={{ paddingLeft: "200px" }}>{chart["title"]}</h4>
+                            <Grid item xs={6} key={index} align="center">
+                                <div style={{padding:"1px"}}>
+                                    <h3>{chart["chart"]}</h3> 
+                                    <h4>{chart["title"]}</h4>
+                                </div>
+
                                 {chart["type"] == "BarChart" ?
                                     <BarChart
                                         width={730}
@@ -159,13 +162,24 @@ class Dashboard extends React.Component {
                                         <Tooltip />
                                         <Legend />
                                         {chart["dataKey"].map(function (dk, index) {
-                                            return (
-                                                <Bar key={index} dataKey={dk} fill="#8884d8" />
-                                            )
+                                            if (index % 2 == 0) {
+                                                return (
+                                                    <Bar key={index} dataKey={dk} fill="#8884d8" />
+                                                )
+                                            } else {
+                                                return (
+                                                    <Bar key={index} dataKey={dk} fill="#82ca9d" />
+                                                )
+                                            }
                                         })}
                                     </BarChart>
                                     :
-                                    <div><h1>Unable to render chart type</h1></div>
+
+                                    chart["type"] == "LineChart" ?
+                                        <div></div>
+                                        :
+                                        <div><h1>Unable to render chart</h1></div>
+
                                 }
 
                             </Grid>
