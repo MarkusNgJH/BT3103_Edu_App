@@ -59,6 +59,10 @@ const AxisLabel = ({
     );
   };
 
+  var divStyle = {
+    padding: "1px"
+  };
+
 class InstructorAssignmentCat extends React.Component {
     constructor(props) {
         super(props);
@@ -125,15 +129,17 @@ class InstructorAssignmentCat extends React.Component {
                 </div>
                 }
                 </Paper>
-                <Grid container spacing={40} alignItems="stretch" justify="center">
+                <Grid container spacing={24} alignItems="stretch" justify="center" align="center">
 
                 {/* <Stepper steps={this.state.steps} backStep={this.backStep.bind(this)} reset={this.reset.bind(this)}/> */}
-                
+
                 {/** CHART 01*/}
                 <Grid item xs={12}>
                 <Paper>
+                <div style={divStyle}>
                 <h2>Chart01</h2>
-                <h3>What is the proportion of submission for each assignment?</h3>
+                <p>What is the proportion of submission for each assignment?</p>
+                </div>
                 <ResponsiveContainer width="90%" height={380}>
                 <BarChart
                     width={730} height={250}
@@ -177,8 +183,10 @@ class InstructorAssignmentCat extends React.Component {
                 <Paper>
                 {this.state.selectedAssignment == "" ?
                 <div>
-                <h3>Chart02</h3>
-                <h4>Is there sufficient days to complete assignments?</h4>
+                <div style={divStyle}>
+                <h2>Chart02</h2>
+                <p>Is there sufficient days to complete assignments?</p>
+                </div>
                 <ResponsiveContainer width="90%" height={380}>
                 <BarChart
                     width={730} height={250}
@@ -210,8 +218,10 @@ class InstructorAssignmentCat extends React.Component {
                 <Paper>
                 {this.state.selectedAssignment == "" ?
                 <div>
-                <h3>Chart03</h3>
-                <h4>How are my student behaviour in submitting my assignments?</h4>
+                <div style={divStyle}>
+                <h2>Chart03</h2>
+                <p>How are my student behaviour in submitting my assignments?</p>
+                </div>
                 <ResponsiveContainer width="90%" height={380}>
                 <AreaChart width={730} height={250}
                     data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignment.chart03.data}
@@ -241,8 +251,10 @@ class InstructorAssignmentCat extends React.Component {
                 <Paper>
                 {this.state.selectedAssignment == "Follow the directions in the details link to get a free AWS account. Then submit the string SUCCESSFUL. " ?
                 <div>
-                <h3>Chart04</h3>
-                <h4>Is there sufficient days to complete assignment "{this.state.selectedAssignment}"?</h4>
+                <div style={divStyle}>
+                <h2>Chart04</h2>
+                <p>Is there sufficient days to complete assignment "{this.state.selectedAssignment}"?</p>
+                </div>
                 <ResponsiveContainer width="90%" height={380}>
                 <BarChart
                     width={730} height={250}
@@ -283,8 +295,10 @@ class InstructorAssignmentCat extends React.Component {
                 <Paper>
                 {this.state.selectedAssignment == "Follow the directions in the details link to get a free AWS account. Then submit the string SUCCESSFUL. " ?
                 <div>
-                <h3>Chart06</h3>
-                <h4>How are my student behaviour in submitting assignment "{this.state.selectedAssignment}"?</h4>
+                <div style={divStyle}>
+                <h2>Chart06</h2>
+                <p>How are my student behaviour in submitting assignment "{this.state.selectedAssignment}"?</p>
+                </div>
                 <ResponsiveContainer width="90%" height={380}>
                 <AreaChart width={730} height={250}
                     data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignment.chart06.data}
@@ -314,8 +328,10 @@ class InstructorAssignmentCat extends React.Component {
                 <Paper>
                 {this.state.selectedAssignment == "AWS Lambda Lab - Part 2 (7:13)" ?
                 <div>
-                <h3>Chart05</h3>
-                <h4>Is there sufficient days to complete assignment "{this.state.selectedAssignment}"?</h4>
+                <div style={divStyle}>
+                <h2>Chart05</h2>
+                <p>Is there sufficient days to complete assignment "{this.state.selectedAssignment}"?</p>
+                </div>
                 <ResponsiveContainer width="90%" height={380}>
                 <BarChart
                     width={730} height={250}
@@ -356,8 +372,10 @@ class InstructorAssignmentCat extends React.Component {
                 <Paper>
                 {this.state.selectedAssignment == "AWS Lambda Lab - Part 2 (7:13)" ?
                 <div>
-                <h3>Chart07</h3>
-                <h4>How are my student behaviour in submitting assignment "{this.state.selectedAssignment}"?</h4>
+                <div style={divStyle}>
+                <h2>Chart07</h2>
+                <p>How are my student behaviour in submitting assignment "{this.state.selectedAssignment}"?</p>
+                </div>
                 <ResponsiveContainer width="90%" height={380}>
                 <AreaChart width={730} height={250}
                     data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignment.chart07.data}

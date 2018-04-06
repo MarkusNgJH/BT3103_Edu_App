@@ -10,6 +10,8 @@ import Typography from 'material-ui/Typography';
 import StudentAssignment from './studentAssignment';
 import StudentAssignmentType from './studentAssignmentType';
 import store from '../store';
+import Loader from './loader';
+import { connect } from 'react-redux';
 
 const styles = {
     card: {
@@ -65,6 +67,10 @@ class GridExample extends Component {
         return (
             <div>
                 <h1> Overview </h1>
+                {this.props.activeLoader.showLoader ?
+                <div><Loader /></div>
+                :
+                <div>
                 <Grid container spacing={8}>
                     <Grid item xs={6}>
                         <Card>
@@ -122,8 +128,17 @@ class GridExample extends Component {
                         </Card>
                     </Grid>
                 </Grid>
+                </div>
+                }
             </div>
         )
     }
 }
-export default GridExample
+
+function mapStateToProps(state){
+    return{
+        activeLoader: state.activeLoader
+    };
+}    
+
+export default connect(mapStateToProps)(GridExample); 

@@ -77,7 +77,7 @@ class instructorStudentIdentifier extends React.Component {
         const state = store.getState();
         return (
             <div>
-                <Grid container spacing={8} direction="row" align="center">
+                <Grid container spacing={24} direction="row" align="center">
                 <Grid item xs={12}>
                 <Paper>
                 <div style={divStyle}>
