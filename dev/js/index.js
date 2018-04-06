@@ -25,7 +25,10 @@ try {
 var db = firebase.database();
 db.ref("/").on("value", data => {
     if (data.val()) {
+        // console.log("BEFORE");
+        // console.log(store.getState());
         store.dispatch({ type: "SET_VAL", payload: data.val() });
+        store.dispatch({ type: "SET_LOADER", payload: false});
         console.log("dispatched & displaying getstate:");
         console.log(store.getState());
     }
