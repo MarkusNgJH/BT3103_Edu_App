@@ -9,6 +9,7 @@ import AppFrame from './AppFrame';
 import RechartsComp from './RechartsChart.js';
 import Grid from 'material-ui/Grid';
 import store from '../store';
+import Button from 'material-ui/Button';
 
 import {
     PieChart,
@@ -54,7 +55,8 @@ class Dashboard extends React.Component {
         this.state = {
             favourites: []
         }
-        this.state.favourites = this.props.usersTable[this.props.activeProfile.uid].favourites;
+        // this.state.favourites = this.props.usersTable[this.props.activeProfile.uid].favourites; // Pulls from fb, comment out this for launch 
+        this.state.favourites = this.props.myFavourites // pulls from local store, use this for demo  
         this.isFav = this.isFav.bind(this);
     }
 
@@ -121,6 +123,7 @@ class Dashboard extends React.Component {
             return (this.getChart(chart["chart"], activeUserId, activeCourse))
         })
         console.log(chartData)
+        console.log("Favourites:", this.state.favourites)
 
         return (
             <div>
@@ -130,8 +133,8 @@ class Dashboard extends React.Component {
                     {this.state.favourites.map(function (chart, index) {
                         return (
                             <Grid item xs={6} key={index} align="center">
-                                <div style={{padding:"1px"}}>
-                                    <h3>{chart["chart"]}</h3> 
+                                <div style={{ padding: "1px" }}>
+                                    <h3>{chart["chart"]}</h3>
                                     <h4>{chart["title"]}</h4>
                                 </div>
 
@@ -144,23 +147,20 @@ class Dashboard extends React.Component {
                                     >
                                         <XAxis
                                             dataKey={chart["xAxis"]}
-                                            label={
-                                                <AxisLabel axisType="xAxis" width={600} height={300}>
-                                                    xAxis
-                                                </AxisLabel>
-                                            }
+                                            label={{ value: chart["xAxis"], position: "insideBottom", offset: -4 }}
+                                            ticks={[0]}
                                         />
                                         <YAxis
                                             dataKey={chart["yAxis"]}
                                             label={
-                                                <AxisLabel axisType="yAxis" width={600} height={300}>
-                                                    yAxis
+                                                <AxisLabel width={40} height={380} axisType="yAxis">
+                                                    {chart["yAxis"]}
                                                 </AxisLabel>
                                             }
                                         />
                                         <CartesianGrid strokeDasharray="3 3" />
                                         <Tooltip />
-                                        <Legend />
+                                        <Legend verticalAlign="top" align="right"/>
                                         {chart["dataKey"].map(function (dk, index) {
                                             if (index % 2 == 0) {
                                                 return (
@@ -173,6 +173,7 @@ class Dashboard extends React.Component {
                                             }
                                         })}
                                     </BarChart>
+                                    
                                     :
 
                                     chart["type"] == "LineChart" ?
@@ -286,7 +287,8 @@ const mapStateToProps = state => {
     return {
         firebase: state.firebase.val,
         usersTable: state.firebase.val.usersTable.usersTable,
-        activeProfile: state.activeProfile.val
+        activeProfile: state.activeProfile.val,
+        myFavourites: state.myFavourites.favourites
     }
 }
 

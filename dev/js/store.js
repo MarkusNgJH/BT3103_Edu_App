@@ -43,7 +43,7 @@ const activeView = (state = {}, action) => {
   }
 };
 
-const myFavourites = (state = {favourites: {chart: "", type: "", title: "", xAxis: "", yAxis: "", dataKey: {}}}, action) => {
+const myFavourites = (state = {favourites: []}, action) => {
   switch (action.type) {
     case "SET_FAV":
       return {
@@ -75,7 +75,8 @@ const combReducers = combineReducers({
     firebase: reducerFirebase,
     activeProfile: activeProfile, 
     activeView: activeView,
-    activeLoader: activeLoader
+    activeLoader: activeLoader,
+    myFavourites: myFavourites
 });
 
 const store = createStore(combReducers);
