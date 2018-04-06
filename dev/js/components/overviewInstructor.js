@@ -7,10 +7,12 @@ import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import Card, { CardActions, CardContent } from 'material-ui/Card';
 import Typography from 'material-ui/Typography';
+import Divider from 'material-ui/Divider';
 import store from '../store';
 import Loader from './loader';
 import { connect } from 'react-redux';
 import { LinearProgress } from 'material-ui/Progress';
+import List, { ListItem, ListItemText } from 'material-ui/List';
 
 const styles = {
     card: {
@@ -72,78 +74,151 @@ class GridExample extends Component {
                 <div>
                     <Grid container spacing={40} justify="center" alignItems="center">
                     <Grid item xs={6} sm={4}>
-                        <Card>
-                            <CardContent>
+                        <Card style={{height: "525px"}}>
+                            <div style={{padding:"50px"}}>
+                            <Typography variant="display3" align="center" >
+                            50/100
+                            </Typography>
+                            </div>
+                            <LinearProgress style={{height: 20}} variant="determinate" value={50} />
+                            <CardContent align="center">
                                 <Typography variant="headline" component="h2">
                                     Assignment Type
                                 </Typography>
                                 <Typography color="textSecondary">
                                     Analysis by different asssignment types
                                 </Typography>
-                                {/* <Typography component="p">
-                                    insert information here<br />
-                                    {'"detail"'}
-                                </Typography> */}
-                            </CardContent>
-                            <CardActions>
+                                <div align="center">
+                                <List>
+                                    <ListItem style={{padding:'10px', margin:'0px', textAlign:"center"}}>
+                                    <ListItemText primary="Chart01" />
+                                    </ListItem>
+                                    <Divider  />
+                                    <ListItem style={{padding:'10px', margin:'0px', textAlign:"center"}}>
+                                    <ListItemText primary="Chart02" />
+                                    </ListItem>
+                                    <Divider  />
+                                    <ListItem style={{padding:'10px', margin:'0px', textAlign:"center"}}>
+                                    <ListItemText primary="Chart03" />
+                                    </ListItem>
+                                    <Divider  />
+                                    <ListItem style={{padding:'10px', margin:'0px', textAlign:"center"}}>
+                                    <ListItemText primary="Chart04" />
+                                    </ListItem>
+                                </List>  
+                                </div>
+  
                                 <Button
                                     onClick={() => this.handleClick('instructorAssignmentType')}
                                     component={Link} to="/instructorAssignmentType"
                                     variant="raised" size="small"
-                                    color={this.chooseColor(1, 2)}> {this.chooseText(1, 2)}
-                                </Button>
-                            </CardActions>
+                                    color={this.chooseColor(1, 2)}
+                                    style={{marginBottom: "35px"}}> 
+                                    {this.chooseText(1, 2)}
+                                    </Button>
+                            </CardContent>
+
                         </Card>
                     </Grid>
                     <Grid item xs={6} sm={4}>
-                        <Card>
-                            <CardContent>
+                        <Card style={{height: "525px"}}>
+                            <div style={{padding:"50px"}}>
+                            <Typography variant="display3" align="center" >
+                            80/100
+                            </Typography>
+                            </div>
+                            <LinearProgress style={{height: 20}} variant="determinate" value={80} />
+                            <CardContent align="center">
                                 <Typography variant="headline" component="h2">
                                     Assignments
                                 </Typography>
                                 <Typography color="textSecondary">
                                     Submission behaviour accross all assignments
                                 </Typography>
-                                <LinearProgress style={{height: 20}} variant="determinate" value={80} />
-                                {/* <Typography component="p">
-                                    insert information here<br />
-                                    {'"detail"'}
-                                </Typography> */}
-                            </CardContent>
-                            <CardActions>
+                                <div align="center">
+                                <List>
+                                    <ListItem style={{padding:'10px', margin:'0px', textAlign:"center"}}>
+                                    <ListItemText primary="Chart01" />
+                                    </ListItem>
+                                    <Divider  />
+                                    <ListItem style={{padding:'10px', margin:'0px', textAlign:"center"}}>
+                                    <ListItemText primary="Chart02" />
+                                    </ListItem>
+                                    <Divider  />
+                                    <ListItem style={{padding:'10px', margin:'0px', textAlign:"center"}}>
+                                    <ListItemText primary="Chart03" />
+                                    </ListItem>
+                                    <Divider  />
+                                    <ListItem style={{padding:'10px', margin:'0px', textAlign:"center"}}>
+                                    <ListItemText primary="Chart04" />
+                                </ListItem>
+                                </List>
+                                </div>
+
                                 <Button
                                     onClick={() => { this.handleClick('instructorAssignmentCat') }}
                                     component={Link} to="/instructorAssignmentCat"
                                     variant="raised"
                                     size="small"
-                                    color={this.chooseColor(5, 2)}> {this.chooseText(5, 2)}
+                                    color={this.chooseColor(5, 2)}
+                                    style={{marginBottom: "35px"}}> 
+                                    {this.chooseText(5, 2)}
                                 </Button>
-                            </CardActions>
+                                
+                                
+                                {/* <Typography component="p">
+                                    insert information here<br />
+                                    {'"detail"'}
+                                </Typography> */}
+                            </CardContent>
                         </Card>
                     </Grid>
+
                     <Grid item xs={6} sm={4}>
-                        <Card>
-                            <CardContent>
+                        <Card style={{height: "525px"}}>
+                            <div style={{padding:"50px"}}>
+                            <Typography variant="display3" align="center" >
+                            95/100
+                            </Typography>
+                            </div>
+                            <LinearProgress style={{height: 20}} variant="determinate" value={95} />
+                            <CardContent align="center">
                                 <Typography variant="headline" component="h2">
                                     Student Identifier
                                 </Typography>
                                 <Typography color="textSecondary">
                                     Identify high- and low- performing students
                                 </Typography>
-                                {/* <Typography component="p">
-                                    insert information here<br />
-                                    {'"detail"'}
-                                </Typography> */}
-                            </CardContent>
-                            <CardActions>
+                                <div align="center">
+                                <List>
+                                    <ListItem style={{padding:'10px', margin:'0px', textAlign:"center"}}>
+                                    <ListItemText primary="Chart01" />
+                                    </ListItem>
+                                    <Divider  />
+                                    <ListItem style={{padding:'10px', margin:'0px', textAlign:"center"}}>
+                                    <ListItemText primary="Chart02" />
+                                    </ListItem>
+                                    <Divider  />
+                                    <ListItem style={{padding:'10px', margin:'0px', textAlign:"center"}}>
+                                    <ListItemText primary="Chart03" />
+                                    </ListItem>
+                                    <Divider  />
+                                    <ListItem style={{padding:'10px', margin:'0px', textAlign:"center"}}>
+                                    <ListItemText primary="Chart04" />
+                                </ListItem>
+                                </List>
+                                </div>
+
                                 <Button
                                     onClick={() => { this.handleClick('instructorStudentIdentifier') }}
                                     component={Link} to="/instructorStudentIdentifier"
                                     variant="raised"
                                     size="small"
-                                    color={this.chooseColor(5, 2)} > {this.chooseText(5, 2)}
-                                </Button>
-                            </CardActions>
+                                    color={this.chooseColor(5, 2)} 
+                                    style={{marginBottom: "35px"}}>
+                                    {this.chooseText(5, 2)}
+                                </Button>                                
+                            </CardContent>
                         </Card>
                     </Grid>
                 </Grid> 
