@@ -84,7 +84,7 @@ class instructorStudentIdentifier extends React.Component {
                 <h2>Student Submissions</h2>
                 <p>Monitor Total Submission of Each Student</p>
                 </div>
-                <Divider inset />
+                <Divider />
                 <ResponsiveContainer width="90%" height={380}>
                 <BarChart
                     // width={730}
@@ -127,7 +127,7 @@ class instructorStudentIdentifier extends React.Component {
                 <div style={divStyle}>
                 <h2> Progress of Latest Assignment </h2>
                 <p>Identify Possible Achievers</p>
-                <Divider inset />
+                <Divider />
                 </div>
                 
                 <ResponsiveContainer width="90%" height={380}>
@@ -176,7 +176,7 @@ class instructorStudentIdentifier extends React.Component {
                 <div style={divStyle}>
                 <h2>Submission Duration</h2>
                 <p>Idntify Distribution of Time Taken for Submission</p>
-                <Divider inset />
+                <Divider />
                 </div>
                 
                 <ResponsiveContainer width="90%" height={380}>

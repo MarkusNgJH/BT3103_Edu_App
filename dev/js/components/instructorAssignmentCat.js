@@ -16,6 +16,7 @@ import store from '../store';
 import Stepper from './stepper';
 import Paper from 'material-ui/Paper';
 import Chip from 'material-ui/Chip';
+import Divider from 'material-ui/Divider';
 import '../../scss/instructorAssignmentCat.scss';
 
 import {
@@ -139,6 +140,7 @@ class InstructorAssignmentCat extends React.Component {
                 <div style={divStyle}>
                 <h2>Chart01</h2>
                 <p>What is the proportion of submission for each assignment?</p>
+                <Divider />
                 </div>
                 <ResponsiveContainer width="90%" height={380}>
                 <BarChart
@@ -186,6 +188,7 @@ class InstructorAssignmentCat extends React.Component {
                 <div style={divStyle}>
                 <h2>Chart02</h2>
                 <p>Is there sufficient days to complete assignments?</p>
+                <Divider />
                 </div>
                 <ResponsiveContainer width="90%" height={380}>
                 <BarChart
@@ -221,6 +224,7 @@ class InstructorAssignmentCat extends React.Component {
                 <div style={divStyle}>
                 <h2>Chart03</h2>
                 <p>How are my student behaviour in submitting my assignments?</p>
+                <Divider />
                 </div>
                 <ResponsiveContainer width="90%" height={380}>
                 <AreaChart width={730} height={250}
@@ -254,6 +258,7 @@ class InstructorAssignmentCat extends React.Component {
                 <div style={divStyle}>
                 <h2>Chart04</h2>
                 <p>Is there sufficient days to complete assignment "{this.state.selectedAssignment}"?</p>
+                <Divider />
                 </div>
                 <ResponsiveContainer width="90%" height={380}>
                 <BarChart
@@ -298,6 +303,7 @@ class InstructorAssignmentCat extends React.Component {
                 <div style={divStyle}>
                 <h2>Chart06</h2>
                 <p>How are my student behaviour in submitting assignment "{this.state.selectedAssignment}"?</p>
+                <Divider />
                 </div>
                 <ResponsiveContainer width="90%" height={380}>
                 <AreaChart width={730} height={250}
@@ -331,6 +337,7 @@ class InstructorAssignmentCat extends React.Component {
                 <div style={divStyle}>
                 <h2>Chart05</h2>
                 <p>Is there sufficient days to complete assignment "{this.state.selectedAssignment}"?</p>
+                <Divider />
                 </div>
                 <ResponsiveContainer width="90%" height={380}>
                 <BarChart
@@ -375,6 +382,7 @@ class InstructorAssignmentCat extends React.Component {
                 <div style={divStyle}>
                 <h2>Chart07</h2>
                 <p>How are my student behaviour in submitting assignment "{this.state.selectedAssignment}"?</p>
+                <Divider />
                 </div>
                 <ResponsiveContainer width="90%" height={380}>
                 <AreaChart width={730} height={250}

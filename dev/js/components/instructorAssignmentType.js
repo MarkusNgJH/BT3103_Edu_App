@@ -15,6 +15,7 @@ import Delete from 'material-ui-icons/Delete';
 import Stepper from './stepper';
 import Paper from 'material-ui/Paper';
 import Close from 'material-ui-icons/Close'; 
+import Divider from 'material-ui/Divider';
 
 import {
     PieChart,
@@ -219,6 +220,7 @@ class InstructorAssignmentType extends React.Component {
                         <div style={divStyle}>
                         <h2>Chart08</h2>
                         <p>Which type of assignments do my students seem to be struggling with?</p>
+                        <Divider />
                         </div>
                         <ResponsiveContainer width="90%" height={380}>
                         <BarChart
@@ -274,7 +276,9 @@ class InstructorAssignmentType extends React.Component {
                         <div style={divStyle}>
                         <h2>Chart09</h2>
                         <p>Which videos have my students watched and how is the pace for them?</p>
+                        <Divider />
                         </div>
+                        
                         <ResponsiveContainer width="90%" height={380}>
                         <BarChart width={400} height={250} data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignmentType.chart09.data}>
                             <CartesianGrid strokeDasharray="3 3" />
@@ -305,7 +309,9 @@ class InstructorAssignmentType extends React.Component {
                         <div style={divStyle}>
                         <h2>Chart10</h2>
                         <p>Which videos do my students seem to be struggling with?</p>
+                        <Divider />
                         </div>
+                        
                         <ResponsiveContainer width="90%" height={380}>
                         <BarChart width={400} height={250} data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignmentType.chart10.data}>
                             <CartesianGrid strokeDasharray="3 3" />
@@ -336,7 +342,9 @@ class InstructorAssignmentType extends React.Component {
                         <div style={divStyle}>
                         <h2>Chart11</h2>
                         <p>Which part of the video do my students struggle with/is valuable to them?</p>
+                        <Divider />
                         </div>
+                        
                         <ResponsiveContainer width="90%" height={380}>
                         <BarChart width={730} height={250} data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignmentType.chart11.data}>
                             <CartesianGrid strokeDasharray="3 3" />
