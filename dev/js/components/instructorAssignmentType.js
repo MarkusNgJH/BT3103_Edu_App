@@ -209,7 +209,7 @@ class InstructorAssignmentType extends React.Component {
                             {this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignmentType.chart08.data.map((entry, index) => (
                                 <Cell
                                 key={entry['Name']}
-                                fill={entry['Name'] == this.state.selectedAssignmentType ? '#87f2de' : '#71afe2'}
+                                fill={entry.Name == this.state.selectedAssignment ? '#87f2de' : (entry.Value < 1 ? '#d68995' : '#71afe2')}
                                 // strokeWidth={entry.assignment == this.state.selectedAssignment ? 2 : 0}
                                 // stroke="red"
                                 />
