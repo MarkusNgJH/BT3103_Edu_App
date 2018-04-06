@@ -210,7 +210,7 @@ class InstructorAssignmentCat extends React.Component {
                     <Grid item xs={12}>
                         <Paper>
                             <div style={divStyle}>
-                                <h2>Chart01</h2>
+                                <h2>Assignment Submissions</h2>
                                 <p>What is the proportion of submission for each assignment?</p>
                                 <Divider />
                             </div>
@@ -265,8 +265,8 @@ class InstructorAssignmentCat extends React.Component {
                             {this.state.selectedAssignment == "" ?
                                 <div>
                                     <div style={divStyle}>
-                                        <h2>Chart02</h2>
-                                        <p>Is there sufficient days to complete assignments?</p>
+                                        <h2>Submission Window</h2>
+                                        <p>Evaluate Whether Deadline is Reasonable for Assignments</p>
                                         <Divider />
                                     </div>
                                     <ResponsiveContainer width="90%" height={380}>
@@ -309,8 +309,8 @@ class InstructorAssignmentCat extends React.Component {
                             {this.state.selectedAssignment == "" ?
                                 <div>
                                     <div style={divStyle}>
-                                        <h2>Chart03</h2>
-                                        <p>How are my student behaviour in submitting my assignments?</p>
+                                        <h2>Submission Across Time</h2>
+                                        <p>Monitor Student's Submission over Time</p>
                                         <Divider />
                                     </div>
                                     <ResponsiveContainer width="90%" height={380}>
@@ -350,8 +350,9 @@ class InstructorAssignmentCat extends React.Component {
                             {this.state.selectedAssignment == "Follow the directions in the details link to get a free AWS account. Then submit the string SUCCESSFUL. " ?
                                 <div>
                                     <div style={divStyle}>
-                                        <h2>Chart04</h2>
-                                        <p>Is there sufficient days to complete assignment "{this.state.selectedAssignment}"?</p>
+                                        {/* <h2>Chart04</h2> */}
+                                        <h2>Submission Window</h2>
+                                        <p>Evaluate Whether Deadline is Reasonable for Assignment X "{this.state.selectedAssignment}"?</p>
                                         <Divider />
                                     </div>
                                     <ResponsiveContainer width="90%" height={380}>
@@ -362,11 +363,6 @@ class InstructorAssignmentCat extends React.Component {
                                         >
                                             <XAxis
                                                 dataKey="day_lapsed_from_assignmentX"
-                                                label={
-                                                    <AxisLabel axisType="xAxis" width={600} height={300}>
-                                                        xAxis
-                        </AxisLabel>
-                                                }
                                             />
                                             <YAxis
                                                 dataKey="value"
@@ -402,8 +398,8 @@ class InstructorAssignmentCat extends React.Component {
                             {this.state.selectedAssignment == "Follow the directions in the details link to get a free AWS account. Then submit the string SUCCESSFUL. " ?
                                 <div>
                                     <div style={divStyle}>
-                                        <h2>Chart06</h2>
-                                        <p>How are my student behaviour in submitting assignment "{this.state.selectedAssignment}"?</p>
+                                        <h2>Submission Across Time</h2>
+                                        <p>Monitor Student's Submission over Time for "{this.state.selectedAssignment}"?</p>
                                         <Divider />
                                     </div>
                                     <ResponsiveContainer width="90%" height={380}>
@@ -443,8 +439,8 @@ class InstructorAssignmentCat extends React.Component {
                             {this.state.selectedAssignment == "AWS Lambda Lab - Part 2 (7:13)" ?
                                 <div>
                                     <div style={divStyle}>
-                                        <h2>Chart05</h2>
-                                        <p>Is there sufficient days to complete assignment "{this.state.selectedAssignment}"?</p>
+                                        <h2>Submission Window</h2>
+                                        <p>Evaluate Whether Deadline is Reasonable for "{this.state.selectedAssignment}"?</p>
                                         <Divider />
                                     </div>
                                     <ResponsiveContainer width="90%" height={380}>
@@ -458,7 +454,7 @@ class InstructorAssignmentCat extends React.Component {
                                                 label={
                                                     <AxisLabel axisType="xAxis" width={600} height={300}>
                                                         xAxis
-                        </AxisLabel>
+                                            </AxisLabel>
                                                 }
                                             />
                                             <YAxis
@@ -466,7 +462,7 @@ class InstructorAssignmentCat extends React.Component {
                                                 label={
                                                     <AxisLabel axisType="yAxis" width={600} height={300}>
                                                         yAxis
-                        </AxisLabel>
+                                            </AxisLabel>
                                                 }
                                             />
                                             <CartesianGrid strokeDasharray="3 3" />
@@ -495,8 +491,8 @@ class InstructorAssignmentCat extends React.Component {
                             {this.state.selectedAssignment == "AWS Lambda Lab - Part 2 (7:13)" ?
                                 <div>
                                     <div style={divStyle}>
-                                        <h2>Chart07</h2>
-                                        <p>How are my student behaviour in submitting assignment "{this.state.selectedAssignment}"?</p>
+                                        <h2>Submission Across Time</h2>
+                                        <p>Monitor Student's Submission over Time for "{this.state.selectedAssignment}"?</p>
                                         <Divider />
                                     </div>
                                     <ResponsiveContainer width="90%" height={380}>
