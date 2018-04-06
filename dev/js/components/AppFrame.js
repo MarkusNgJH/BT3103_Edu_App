@@ -194,7 +194,7 @@ class AppFrame extends React.Component {
                                         color="inherit"
                                         style={{ right: '20px' }}
                                     >
-                                        <AccountCircle />
+                                        <AccountCircle style={{ fontSize: 48 }}/>
                                     </IconButton>
                                     <Menu
                                         id="menu-appbar"

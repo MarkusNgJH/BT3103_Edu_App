@@ -22,7 +22,7 @@ class ActiveUserInfo extends React.Component{
     render() {
         return (
             <div style = {{marginRight:"50px", marginTop:"5px"}}>
-                <div><strong>UserID: </strong>{nameToID[store.getState().activeProfile.val.uid]}</div>
+                <div><strong>Name: </strong>{nameToID[store.getState().activeProfile.val.uid]}</div>
                 <div><strong>Role: </strong>{store.getState().activeProfile.val.role}</div>
                 <div><strong>Course: </strong>{store.getState().activeProfile.val.course}</div>
             </div>
