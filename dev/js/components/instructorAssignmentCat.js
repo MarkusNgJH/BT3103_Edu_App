@@ -10,10 +10,12 @@ import RechartsComp from './RechartsChart.js';
 import Grid from 'material-ui/Grid';
 import Button from 'material-ui/Button';
 import Icon from 'material-ui/Icon';
+import Close from 'material-ui-icons/Close'; 
 import Delete from 'material-ui-icons/Delete';
 import store from '../store';
 import Stepper from './stepper';
 import Paper from 'material-ui/Paper';
+import Chip from 'material-ui/Chip';
 import '../../scss/instructorAssignmentCat.scss';
 
 import {
@@ -65,6 +67,7 @@ class InstructorAssignmentCat extends React.Component {
             steps: ["InstructorAssignmentCat"]
             // selectedVideo: ""
         }
+        this.handleDelete = this.handleDelete.bind(this);
     }
 
     selectedAssignment(data){
@@ -76,6 +79,10 @@ class InstructorAssignmentCat extends React.Component {
             array.splice(-1, 1, data);
             this.setState({selectedAssignment: data, steps: array })
         }
+    }
+
+    handleDelete() {
+        this.setState({selectedAssignment: ""})
     }
 
     backStep(){
@@ -98,9 +105,29 @@ class InstructorAssignmentCat extends React.Component {
     render() {
         return (
             <div>
+                <Paper className="chip_container">
+                <div className="chip">
+                InstructorAssignmentCat
+                </div>
+                {this.state.selectedAssignment == "" ?
+                <div></div>
+                :
+                <div className="chip_spacer">>></div>
+                }
+                {this.state.selectedAssignment == "" ?
+                <div></div>
+                :
+                <div className="chip">
+                {this.state.selectedAssignment}
+                <button onClick={this.handleDelete}>
+                    <Close />
+                </button>
+                </div>
+                }
+                </Paper>
                 <Grid container spacing={40} alignItems="stretch" justify="center">
 
-                <Stepper steps={this.state.steps} backStep={this.backStep.bind(this)} reset={this.reset.bind(this)}/>
+                {/* <Stepper steps={this.state.steps} backStep={this.backStep.bind(this)} reset={this.reset.bind(this)}/> */}
                 
                 {/** CHART 01*/}
                 <Grid item xs={12}>
