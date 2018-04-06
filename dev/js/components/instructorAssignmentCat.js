@@ -123,7 +123,7 @@ class InstructorAssignmentCat extends React.Component {
                     // label={{ value: 'Number of Submissions', angle: -90, position: 'insideBottomLeft' }}
                     />
                     <CartesianGrid strokeDasharray="3 3" />
-                    <Tooltip cursor={{fill: 'red', fillOpacity: 0.05}} />
+                    <Tooltip cursor={{fill: 'red', fillOpacity: 0.1}} />
                     <Legend verticalAlign="top" align="right" />
                     {/* <Bar name="Number of Submissions" dataKey="value" fill="#8884d8"
                     onClick={(data, index) => this.selectedAssignment(data.assignment)} /> */}
@@ -132,7 +132,7 @@ class InstructorAssignmentCat extends React.Component {
                         {this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignment.chart01.data.map((entry, index) => (
                             <Cell
                             key={entry.assignment}
-                            fill={entry.assignment == this.state.selectedAssignment ? '#a5e2f7' : (entry.value < 20 ? '#d68995' : '#71afe2')}
+                            fill={entry.assignment == this.state.selectedAssignment ? '#87f2de' : (entry.value < 20 ? '#d68995' : '#71afe2')}
                             // strokeWidth={entry.assignment == this.state.selectedAssignment ? 2 : 0}
                             // stroke="red"
                             />
