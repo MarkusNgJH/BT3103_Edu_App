@@ -63,23 +63,20 @@ class GridExample extends Component {
         return (
             <div>
                 <h1> Overview </h1>
-                <Grid container spacing={8}>
-                    <Grid item xs={6}>
+                <Grid container spacing={40} justify="center" alignItems="center">
+                    <Grid item xs={6} sm={4}>
                         <Card>
                             <CardContent>
-                                <Typography color="textSecondary">
-                                    Metrics 1
-                </Typography>
                                 <Typography variant="headline" component="h2">
-                                    Performance
-                </Typography>
+                                    Assignment Type
+                                </Typography>
                                 <Typography color="textSecondary">
-                                    Identify Top/Bottom Students
-                </Typography>
-                                <Typography component="p">
+                                    Analysis by different asssignment types
+                                </Typography>
+                                {/* <Typography component="p">
                                     insert information here<br />
                                     {'"detail"'}
-                                </Typography>
+                                </Typography> */}
                             </CardContent>
                             <CardActions>
                                 <Button
@@ -91,22 +88,19 @@ class GridExample extends Component {
                             </CardActions>
                         </Card>
                     </Grid>
-                    <Grid item xs={6}>
+                    <Grid item xs={6} sm={4}>
                         <Card>
                             <CardContent>
-                                <Typography color="textSecondary">
-                                    Metrics 2
-                </Typography>
                                 <Typography variant="headline" component="h2">
-                                    Submission Status
-                </Typography>
+                                    Assignments
+                                </Typography>
                                 <Typography color="textSecondary">
-                                    Track number of submissions
-                </Typography>
-                                <Typography component="p">
+                                    Submission behaviour accross all assignments
+                                </Typography>
+                                {/* <Typography component="p">
                                     insert information here<br />
                                     {'"detail"'}
-                                </Typography>
+                                </Typography> */}
                             </CardContent>
                             <CardActions>
                                 <Button
@@ -119,22 +113,19 @@ class GridExample extends Component {
                             </CardActions>
                         </Card>
                     </Grid>
-                    <Grid item xs={6}>
+                    <Grid item xs={6} sm={4}>
                         <Card>
                             <CardContent>
-                                <Typography color="textSecondary">
-                                    Metrics 3
-                </Typography>
                                 <Typography variant="headline" component="h2">
-                                    Student Behaviour
-                </Typography>
+                                    Student Identifier
+                                </Typography>
                                 <Typography color="textSecondary">
-                                    Measure students happiness with classes
-                </Typography>
-                                <Typography component="p">
+                                    Identify high- and low- performing students
+                                </Typography>
+                                {/* <Typography component="p">
                                     insert information here<br />
                                     {'"detail"'}
-                                </Typography>
+                                </Typography> */}
                             </CardContent>
                             <CardActions>
                                 <Button

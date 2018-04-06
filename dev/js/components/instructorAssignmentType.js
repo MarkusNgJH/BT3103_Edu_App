@@ -24,7 +24,8 @@ import {
     YAxis,
     CartesianGrid,
     Tooltip,
-    Legend
+    Legend,
+    Cell
 } from "recharts";
 import { BarChart, Bar } from "recharts";
 const AxisLabel = ({
@@ -194,7 +195,16 @@ class InstructorAssignmentType extends React.Component {
                             <Tooltip />
                             <Legend />
                             <Bar dataKey="Value" fill="#8884d8"
-                                onClick={(data, index) => this.selectedAssignmentType(data)} />
+                            onClick={(data, index) => this.selectedAssignmentType(data)}>
+                            {this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignmentType.chart08.data.map((entry, index) => (
+                                <Cell
+                                key={entry['Name']}
+                                fill={entry['Name'] == this.state.selectedAssignmentType ? '#a5e2f7' : '#71afe2'}
+                                // strokeWidth={entry.assignment == this.state.selectedAssignment ? 2 : 0}
+                                // stroke="red"
+                                />
+                            ))}
+                            </Bar>
                         </BarChart>
                         {this.isFav("chart08") == true ?
                             <Button size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart08") }}>Remove</Button>
