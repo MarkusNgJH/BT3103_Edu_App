@@ -232,11 +232,6 @@ class InstructorAssignmentType extends React.Component {
                         >
                             <XAxis
                                 dataKey="Name"
-                                label={
-                                    <AxisLabel axisType="xAxis" width={600} height={300}>
-                                        xAxis
-                                    </AxisLabel>
-                                }
                             />
                             <YAxis
                                 dataKey="Value"
@@ -248,7 +243,6 @@ class InstructorAssignmentType extends React.Component {
                             />
                             <CartesianGrid strokeDasharray="3 3" />
                             <Tooltip />
-                            <Legend />
                             <Bar dataKey="Value" fill="#8884d8"
                             onClick={(data, index) => this.selectedAssignmentType(data)}>
                             {this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignmentType.chart08.data.map((entry, index) => (
