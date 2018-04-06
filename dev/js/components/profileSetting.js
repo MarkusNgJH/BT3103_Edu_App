@@ -16,6 +16,7 @@ import {bindActionCreators} from 'redux';
 import {updateActiveProfile} from '../actions/updateActiveProfile';
 import store from '../store';
 import UserTable from './userTable';
+import Snackbar from 'material-ui/Snackbar';
  
 const styles = theme => ({
     container: {
@@ -37,6 +38,10 @@ class profileSetting extends React.Component {
     state = {
         uid: 'default',
         course: 'BT3103',
+        snackOpen: false,
+        vertical: null,
+        horizontal: null,
+        message: ""
     };
 
     handleUIDChange(e) {
@@ -102,7 +107,25 @@ class profileSetting extends React.Component {
         }
     }
 
+    handleClose = () => {
+        this.setState({ snackOpen: false });
+    };
+
+    updateActiveProfile2 = (userDetails, msg, uid, c, r) => {
+        console.log(msg + ":\n" + "userId: "+uid + "\n" + "course: "+c + "\n"+"role: " + r)
+        this.props.updateActiveProfile(userDetails)
+
+        var newMsg = msg + ":\n" + " -UserId: " + uid + "\n" + " -Course: " + c + "\n" + " -Role: " + r
+        this.setState({
+            snackOpen: true,
+            vertical: 'bottom',
+            horizontal: 'right',
+            message: newMsg
+        })
+    }
+
     render(){
+        const { vertical, horizontal, snackOpen } = this.state;
         return(
             <div>
                 <h1>Profile Setting</h1>
@@ -135,10 +158,20 @@ class profileSetting extends React.Component {
 
                     <br /> <br />
                     <button style={{ float: 'right' }} 
-                    onClick={() => this.props.updateActiveProfile({uid: this.state.uid, course: this.state.course, role:this.props.firebase.val[this.state.uid][this.state.course]['User Type']})}>
+                        onClick={() => this.updateActiveProfile2({ uid: this.state.uid, course: this.state.course, role: this.props.firebase.val[this.state.uid][this.state.course]['User Type'] }, "Updated user profile", this.state.uid, this.state.course, this.props.firebase.val[this.state.uid][this.state.course]['User Type'])}>
                     Submit</button>
+                    
                 </div>
                 <UserTable />
+                <Snackbar
+                    anchorOrigin={{ vertical, horizontal }}
+                    autoHideDuration="2500"
+                    disableWindowBlurListener="true"
+                    open={this.state.snackOpen}
+                    onClose={this.handleClose}
+                    message={this.state.message}
+                    style={{ height: 'auto', lineHeight: '28px', padding: 24, whiteSpace: 'pre-line' }}
+                />
             </div>
         )
     }
