@@ -56,10 +56,26 @@ const myFavourites = (state = {favourites: {chart: "", type: "", title: "", xAxi
   }
 };
 
+const activeLoader = (state = {showLoader: true}, action) => {
+  switch (action.type) {
+    case "SET_LOADER":
+    console.log("SET_LOADER")
+      console.log(action.payload)
+      return {
+        ...state,
+        showLoader: action.payload
+      }
+  
+    default:
+      return state;
+  }
+};
+
 const combReducers = combineReducers({
     firebase: reducerFirebase,
     activeProfile: activeProfile, 
     activeView: activeView,
+    activeLoader: activeLoader
 });
 
 const store = createStore(combReducers);

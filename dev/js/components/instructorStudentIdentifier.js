@@ -81,10 +81,10 @@ class instructorStudentIdentifier extends React.Component {
                 <Grid item xs={12}>
                 <Paper>
                 <div style={divStyle}>
-                <h3>Student Submissions</h3>
-                <h4>Monitor Total Submission of Each Student</h4>
+                <h2>Student Submissions</h2>
+                <p>Monitor Total Submission of Each Student</p>
                 </div>
-                <Divider light />
+                <Divider inset />
                 <ResponsiveContainer width="90%" height={380}>
                 <BarChart
                     // width={730}
@@ -125,10 +125,11 @@ class instructorStudentIdentifier extends React.Component {
                 <Grid item xs={6}>
                 <Paper>
                 <div style={divStyle}>
-                <h3> Progress of Latest Assignment </h3>
-                <h4>Identify Possible Achievers</h4>
+                <h2> Progress of Latest Assignment </h2>
+                <p>Identify Possible Achievers</p>
+                <Divider inset />
                 </div>
-                <Divider light />
+                
                 <ResponsiveContainer width="90%" height={380}>
                 <BarChart
                     // width={730}
@@ -173,10 +174,11 @@ class instructorStudentIdentifier extends React.Component {
                 <Grid item xs={6}>
                 <Paper>
                 <div style={divStyle}>
-                <h3>Submission Duration</h3>
-                <h4>Idntify Distribution of Time Taken for Submission</h4>
+                <h2>Submission Duration</h2>
+                <p>Idntify Distribution of Time Taken for Submission</p>
+                <Divider inset />
                 </div>
-                <Divider light />
+                
                 <ResponsiveContainer width="90%" height={380}>
                 <BarChart
                     // width={730}

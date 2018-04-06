@@ -8,6 +8,8 @@ import { withStyles } from 'material-ui/styles';
 import Card, { CardActions, CardContent } from 'material-ui/Card';
 import Typography from 'material-ui/Typography';
 import store from '../store';
+import Loader from './loader';
+import { connect } from 'react-redux';
 
 const styles = {
     card: {
@@ -63,7 +65,11 @@ class GridExample extends Component {
         return (
             <div>
                 <h1> Overview </h1>
-                <Grid container spacing={40} justify="center" alignItems="center">
+                {this.props.activeLoader.showLoader ?
+                <div><Loader /></div>
+                :
+                <div>
+                    <Grid container spacing={40} justify="center" alignItems="center">
                     <Grid item xs={6} sm={4}>
                         <Card>
                             <CardContent>
@@ -138,36 +144,20 @@ class GridExample extends Component {
                             </CardActions>
                         </Card>
                     </Grid>
-                    {/* <Grid item xs={6}>
-                        <Card>
-                            <CardContent>
-                                <Typography color="textSecondary">
-                                    Word of the Day
-                                </Typography>
-                                <Typography variant="headline" component="h2">
-                                    Metrics 4
-                                </Typography>
-                                <Typography color="textSecondary">
-                                    adjective
-                                </Typography>
-                                <Typography component="p">
-                                    insert information here<br />
-                                    {'"detail"'}
-                                </Typography>
-                            </CardContent>
-                            <CardActions>
-                                <Button
-                                    onClick={() => { this.handleClick('Metrics 4') }}
-                                    component={Link} to="/mydashboard"
-                                    variant="raised" size="small"
-                                    color={this.chooseColor(1, 2)} > {this.chooseText(1, 2)}
-                                </Button>
-                            </CardActions>
-                        </Card>
-                    </Grid> */}
-                </Grid>
+                </Grid> 
+
+
+                </div>
+                }
             </div>
         )
     }
 }
-export default GridExample
+
+function mapStateToProps(state){
+    return{
+        activeLoader: state.activeLoader
+    };
+}    
+
+export default connect(mapStateToProps)(GridExample); 
