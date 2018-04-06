@@ -25,7 +25,8 @@ import {
     CartesianGrid,
     Tooltip,
     Legend,
-    Cell
+    Cell,
+    ResponsiveContainer
 } from "recharts";
 import { BarChart, Bar } from "recharts";
 const AxisLabel = ({
@@ -53,6 +54,10 @@ const AxisLabel = ({
         </text>
     );
 };
+
+var divStyle = {
+    padding: "1px"
+  };
 
 class InstructorAssignmentType extends React.Component {
     constructor(props) {
@@ -163,11 +168,14 @@ class InstructorAssignmentType extends React.Component {
         return (
             <div>
                 <Stepper steps={this.state.steps} backStep={this.backStep.bind(this)} reset={this.reset.bind(this)}/>
-                <Grid container spacing={8} direction="row" align="center">
+                <Grid container spacing={24} direction="row" align="center">
                     <Grid item xs={12}>
                         <Paper>
-                        <h3>Chart08</h3>
-                        <h4>Which type of assignments do my students seem to be struggling with?</h4>
+                        <div style={divStyle}>
+                        <h2>Chart08</h2>
+                        <p>Which type of assignments do my students seem to be struggling with?</p>
+                        </div>
+                        <ResponsiveContainer width="90%" height={380}>
                         <BarChart
                             width={730}
                             height={250}
@@ -206,6 +214,7 @@ class InstructorAssignmentType extends React.Component {
                             ))}
                             </Bar>
                         </BarChart>
+                        </ResponsiveContainer>
                         {this.isFav("chart08") == true ?
                             <Button size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart08") }}>Remove</Button>
                             :
@@ -217,8 +226,11 @@ class InstructorAssignmentType extends React.Component {
                     <Paper>
                     {this.state.selectedAssignmentType == "PathProblem" ?
                         <div>
-                        <h3>Chart09</h3>
-                        <h4>Which videos have my students watched and how is the pace for them?</h4>
+                        <div style={divStyle}>
+                        <h2>Chart09</h2>
+                        <p>Which videos have my students watched and how is the pace for them?</p>
+                        </div>
+                        <ResponsiveContainer width="90%" height={380}>
                         <BarChart width={400} height={250} data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignmentType.chart09.data}>
                             <CartesianGrid strokeDasharray="3 3" />
                             <XAxis dataKey="Name" />
@@ -228,6 +240,7 @@ class InstructorAssignmentType extends React.Component {
                             <Bar dataKey="plays" fill="#8884d8" onClick={(data, index) => this.selectedVideo(data)} />
                             <Bar dataKey="rate" fill="#82ca9d" onClick={(data, index) => this.selectedVideo(data)} />
                         </BarChart>
+                        </ResponsiveContainer>
                         {this.isFav("chart09") == true ?
                             <Button size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart09") }}>Remove</Button>
                             :
@@ -244,8 +257,11 @@ class InstructorAssignmentType extends React.Component {
                     <Paper>
                     {this.state.selectedAssignmentType == "PathProblem" ?
                         <div>
-                        <h3>Chart10</h3>
-                        <h4>Which videos do my students seem to be struggling with?</h4>
+                        <div style={divStyle}>
+                        <h2>Chart10</h2>
+                        <p>Which videos do my students seem to be struggling with?</p>
+                        </div>
+                        <ResponsiveContainer width="90%" height={380}>
                         <BarChart width={400} height={250} data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignmentType.chart10.data}>
                             <CartesianGrid strokeDasharray="3 3" />
                             <XAxis dataKey="Name" />
@@ -255,6 +271,7 @@ class InstructorAssignmentType extends React.Component {
                             <Bar dataKey="pauses" fill="#8884d8" />
                             <Bar dataKey="playbacks" fill="#82ca9d" />
                         </BarChart>
+                        </ResponsiveContainer>
                         {this.isFav("chart10") == true ?
                             <Button size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart10") }}>Remove</Button>
                             :
@@ -271,8 +288,11 @@ class InstructorAssignmentType extends React.Component {
                     <Paper>
                     {this.state.selectedVideo == "AWS Lambda Lab - Part 1 (5:55)" ?
                     <div>
-                        <h3>Chart11</h3>
-                        <h4>Which part of the video do my students struggle with/is valuable to them?</h4>
+                        <div style={divStyle}>
+                        <h2>Chart11</h2>
+                        <p>Which part of the video do my students struggle with/is valuable to them?</p>
+                        </div>
+                        <ResponsiveContainer width="90%" height={380}>
                         <BarChart width={730} height={250} data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignmentType.chart11.data}>
                             <CartesianGrid strokeDasharray="3 3" />
                             <XAxis dataKey="Name" />
@@ -281,6 +301,7 @@ class InstructorAssignmentType extends React.Component {
                             <Legend />
                             <Bar dataKey="Value" fill="#8884d8" />
                         </BarChart>
+                        </ResponsiveContainer>
                         {this.isFav("chart11") == true ?
                             <Button size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart11") }}>Remove</Button>
                             :
