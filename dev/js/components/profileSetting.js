@@ -134,9 +134,10 @@ class profileSetting extends React.Component {
                     </FormControl>
 
                     <br /> <br />
-                    <button style={{ float: 'right' }} 
+                    <button 
                     onClick={() => this.props.updateActiveProfile({uid: this.state.uid, course: this.state.course, role:this.props.firebase.val[this.state.uid][this.state.course]['User Type']})}>
-                    Submit</button>
+                    Submit
+                    </button>
                 </div>
                 <UserTable />
             </div>
