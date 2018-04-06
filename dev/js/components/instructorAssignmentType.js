@@ -240,8 +240,9 @@ class InstructorAssignmentType extends React.Component {
                     <Grid item xs={12}>
                         <Paper>
                         <div style={divStyle}>
-                        <h2>Chart08</h2>
-                        <p>Which type of assignments do my students seem to be struggling with?</p>
+                        {/* <h2>Chart08</h2> */}
+                        <h2>Submission Per Type</h2>
+                        <p>Monitor Percentage of Submission Per Assignment Type</p>
                         <Divider />
                         </div>
                         <ResponsiveContainer width="90%" height={380}>
@@ -270,7 +271,7 @@ class InstructorAssignmentType extends React.Component {
                             {this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignmentType.chart08.data.map((entry, index) => (
                                 <Cell
                                 key={entry['Name']}
-                                fill={entry.Name == this.state.selectedAssignment ? '#87f2de' : (entry.Value < 1 ? '#d68995' : '#71afe2')}
+                                fill={entry.Name == this.state.selectedAssignmentType ? '#87f2de' : (entry.Value < 1 ? '#d68995' : '#71afe2')}
                                 // strokeWidth={entry.assignment == this.state.selectedAssignment ? 2 : 0}
                                 // stroke="red"
                                 />
@@ -290,8 +291,9 @@ class InstructorAssignmentType extends React.Component {
                             {this.state.selectedAssignmentType == "PathProblem" ?
                                 <div>
                                     <div style={divStyle}>
-                                        <h2>Chart09</h2>
-                                        <p>Which videos have my students watched and how is the pace for them?</p>
+                                        {/* <h2>Chart09</h2> */}
+                                        <h2>Total Plays/ Fast-Forwards</h2>
+                                        <p>Identify PathProblem that Students Have Complete Comfortably</p>
                                         <Divider />
                                     </div>
 
@@ -302,8 +304,8 @@ class InstructorAssignmentType extends React.Component {
                                             <YAxis />
                                             <Tooltip />
                                             <Legend />
-                                            <Bar dataKey="plays" fill="#8884d8" onClick={(data, index) => this.selectedVideo(data)} />
-                                            <Bar dataKey="rate" fill="#82ca9d" onClick={(data, index) => this.selectedVideo(data)} />
+                                            <Bar dataKey="plays" fill="#8884d8"/>
+                                            <Bar dataKey="rate" fill="#82ca9d"/>
                                         </BarChart>
                                     </ResponsiveContainer>
                                     {this.isFav("chart09") == true ?
@@ -323,8 +325,9 @@ class InstructorAssignmentType extends React.Component {
                             {this.state.selectedAssignmentType == "PathProblem" ?
                                 <div>
                                     <div style={divStyle}>
-                                        <h2>Chart10</h2>
-                                        <p>Which videos do my students seem to be struggling with?</p>
+                                        {/* <h2>Chart10</h2> */}
+                                        <h2>Total Pauses/Playbacks</h2>
+                                        <p>Identify PathProblems that Students Students May Be Struggling With</p>
                                         <Divider />
                                     </div>
 
@@ -335,8 +338,8 @@ class InstructorAssignmentType extends React.Component {
                                             <YAxis />
                                             <Tooltip />
                                             <Legend />
-                                            <Bar dataKey="pauses" fill="#8884d8" />
-                                            <Bar dataKey="playbacks" fill="#82ca9d" />
+                                            <Bar dataKey="pauses" fill="#8884d8" onClick={(data, index) => this.selectedVideo(data)}/>
+                                            <Bar dataKey="playbacks" fill="#82ca9d" onClick={(data, index) => this.selectedVideo(data)} />
                                         </BarChart>
                                     </ResponsiveContainer>
                                     {this.isFav("chart10") == true ?
@@ -353,11 +356,12 @@ class InstructorAssignmentType extends React.Component {
 
                     <Grid item xs={12}>
                         <Paper>
-                            {this.state.selectedVideo == "AWS Lambda Lab - Part 1 (5:55)" ?
+                            {this.state.selectedVideo == "AWS Lambda Lab - Part 4 (7:28)" ?
                                 <div>
                                     <div style={divStyle}>
-                                        <h2>Chart11</h2>
-                                        <p>Which part of the video do my students struggle with/is valuable to them?</p>
+                                        {/* <h2>chart11</h2> */}
+                                        <h2>Area of Pauses</h2>
+                                        <p>Investigate Time Period where Pauses Occured for Assignment Z</p>
                                         <Divider />
                                     </div>
 
