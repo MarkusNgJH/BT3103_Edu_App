@@ -527,12 +527,12 @@ class InstructorAssignmentCat extends React.Component {
                     </Grid>
                     <Snackbar
                         anchorOrigin={{ vertical, horizontal }}
+                        autoHideDuration="2500"
+                        disableWindowBlurListener="true"
                         open={this.state.snackOpen}
                         onClose={this.handleClose}
-                        SnackbarContentProps={{
-                            'aria-describedby': 'message-id',
-                        }}
-                        message={<span id="message-id">{this.state.message}</span>}
+                        message={this.state.message}
+                        style={{ height: 'auto', lineHeight: '28px', padding: 24, whiteSpace: 'pre-line' }}
                     />
 
                     {/** End of Grid container*/}

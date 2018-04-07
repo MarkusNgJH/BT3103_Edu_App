@@ -73,6 +73,7 @@ class InstructorAssignmentType extends React.Component {
             snackOpen: false,
             vertical: null,
             horizontal: null,
+            message: ""
         }
         // this.state.favourites = this.props.usersTable[this.props.activeProfile.uid].favourites; // Pulls from fb, comment out this for launch 
         this.state.favourites = this.props.myFavourites // pulls from local store, use this for demo  
@@ -280,9 +281,9 @@ class InstructorAssignmentType extends React.Component {
                         </BarChart>
                         </ResponsiveContainer>
                         {this.isFav("chart08") == true ?
-                            <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart08", "chart08 has been removed!") }}>Remove</Button>
+                            <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart08", "Chart08 has been removed!") }}>Remove</Button>
                             :
-                            <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart08", "BarChart", "Which type of assignments do my students seem to be struggling with?", "Name", "Value", ["Value"], "chart08 has been added!") }}>Favourite</Button>
+                            <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart08", "BarChart", "Which type of assignments do my students seem to be struggling with?", "Name", "Value", ["Value"], "Chart08 has been added!") }}>Favourite</Button>
                         }
                     </Paper>
                     </Grid>
@@ -361,7 +362,7 @@ class InstructorAssignmentType extends React.Component {
                                     <div style={divStyle}>
                                         {/* <h2>chart11</h2> */}
                                         <h2>Area of Pauses</h2>
-                                        <p>Investigate Time Period where Pauses Occured for Assignment Z</p>
+                                        <p>Investigate Time Period where Pauses Occured for "{this.state.selectedVideo}"</p>
                                         <Divider />
                                     </div>
 
@@ -388,12 +389,12 @@ class InstructorAssignmentType extends React.Component {
                     </Grid>
                     <Snackbar
                         anchorOrigin={{ vertical, horizontal }}
+                        autoHideDuration="2500"
+                        disableWindowBlurListener="true"
                         open={this.state.snackOpen}
                         onClose={this.handleClose}
-                        SnackbarContentProps={{
-                            'aria-describedby': 'message-id',
-                        }}
-                        message={<span id="message-id">{this.state.message}</span>}
+                        message={this.state.message}
+                        style={{ height: 'auto', lineHeight: '28px', padding: 24, whiteSpace: 'pre-line' }}
                     />
                 </Grid>
 

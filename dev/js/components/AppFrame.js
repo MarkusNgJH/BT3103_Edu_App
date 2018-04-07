@@ -23,6 +23,7 @@ import ExpandMore from 'material-ui-icons/ExpandMore';
 import AppFrameItems from './AppFrameItems';
 import ActiveUserInfo from './activeUserInfo';
 import store from '../store';
+import createPalette from 'material-ui/styles/createPalette';
 
 const drawerWidth = 240;
 
@@ -94,6 +95,15 @@ const styles = theme => ({
             padding: theme.spacing.unit * 3,
         },
     },
+    palette: createPalette({
+        background: {
+            appBar: '#000'
+        }
+    }),
+    drawerPaper: {
+        backgroundColor: "#FFBF00", 
+        color: "#FFF"
+    }
 });
 
 class AppFrame extends React.Component {
@@ -105,7 +115,6 @@ class AppFrame extends React.Component {
             anchorEl: null,
             overviewOpen: false,
         }
-        this.charts = ["chart 1", "chart 2", "chart 3"]
     }
 
     handleDrawerOpen() {
@@ -137,29 +146,27 @@ class AppFrame extends React.Component {
         const storeState = store.getState();
 
         const drawer = (
-            <Drawer
-                variant="persistent"
-                anchor="left"
-                open={open}
-                onClose={this.handleDrawerClose}
-                classes={{
-                    paper: classes.drawerPaper,
-                }}
-            >
-                <div className={classes.drawerHeader}>
-                    <IconButton onClick={this.handleDrawerClose.bind(this)}>
-                        {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
-                    </IconButton>
-                </div>
-                <Divider />
-                <AppFrameItems
-                    handleDrawerToggleNested={this.handleDrawerToggleNested.bind(this)}
-                    handleDrawerClose={this.handleDrawerClose.bind(this)}
-                    overviewOpen={this.state.overviewOpen}
-                    charts={this.charts}
-                    activeProfileRole={storeState.activeProfile.val.role}
-                />
-            </Drawer>
+            <div>
+                <Drawer
+                    variant="persistent"
+                    anchor="left"
+                    open={open}
+                    onClose={this.handleDrawerClose}
+                    classes={{paper: classes.drawerPaper}}
+                >
+                    <div className={classes.drawerHeader}>
+                        <IconButton onClick={this.handleDrawerClose.bind(this)} style={{ backgroundColor: "#FFBF00", color: "#FFF" }}>
+                            {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+                        </IconButton>
+                    </div>
+                    <AppFrameItems
+                        handleDrawerToggleNested={this.handleDrawerToggleNested.bind(this)}
+                        handleDrawerClose={this.handleDrawerClose.bind(this)}
+                        overviewOpen={this.state.overviewOpen}
+                        activeProfileRole={storeState.activeProfile.val.role}
+                    />
+                </Drawer>
+            </div>
         );
 
         return (
@@ -169,6 +176,7 @@ class AppFrame extends React.Component {
                         className={classNames(classes.appBar, {
                             [classes.appBarShift]: open,
                         })}
+                        style={{ backgroundColor: '#FFBF00', color: "#000" }}
                     >
                         <Toolbar disableGutters={!open}>
                             <IconButton
@@ -177,11 +185,11 @@ class AppFrame extends React.Component {
                                 onClick={this.handleDrawerOpen.bind(this)}
                                 className={classNames(classes.menuButton, open && classes.hide)}
                             >
-                                <MenuIcon />
+                                <MenuIcon style={{ color: "#FFF" }} />
                             </IconButton>
-                            <Typography variant="title" color="inherit" style={{ flex: 1 }} noWrap>
-                                <Link to="/" >
-                                <span style={{color: 'white'}}>Edu App</span>
+                            <Typography variant="title" style={{ flex: 1 }} noWrap>
+                                <Link to="/" style={{ textDecoration: "none" }}>
+                                    <h3 style={{ color: "#FFF" }}>Edu App</h3>
                                 </Link>
                             </Typography>
                             <ActiveUserInfo />
@@ -194,7 +202,7 @@ class AppFrame extends React.Component {
                                         color="inherit"
                                         style={{ right: '20px' }}
                                     >
-                                        <AccountCircle style={{ fontSize: 48 }}/>
+                                        <AccountCircle style={{ fontSize: 48 }} />
                                     </IconButton>
                                     <Menu
                                         id="menu-appbar"
