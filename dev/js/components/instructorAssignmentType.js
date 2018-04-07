@@ -240,52 +240,52 @@ class InstructorAssignmentType extends React.Component {
                 <Grid container spacing={24} direction="row" align="center">
                     <Grid item xs={12}>
                         <Paper>
-                        <div style={divStyle}>
-                        {/* <h2>Chart08</h2> */}
-                        <h2>Submission Per Type</h2>
-                        <p>Monitor Percentage of Submission Per Assignment Type</p>
-                        <Divider />
-                        </div>
-                        <ResponsiveContainer width="90%" height={380}>
-                        <BarChart
-                            width={730}
-                            height={250}
-                            // data={this.props.firebase.val.R6nSbDVly8PUnC6jQFcseDS9sgJ3.BT3103.instructorAssignmentType.chart08.data}
-                            data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignmentType.chart08.data}
-                            margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-                        >
-                            <XAxis
-                                dataKey="Name"
-                            />
-                            <YAxis
-                                dataKey="Value"
-                                label={
-                                    <AxisLabel axisType="yAxis" width={600} height={300}>
-                                        yAxis
+                            <div style={divStyle}>
+                                {/* <h2>Chart08</h2> */}
+                                <h2>Submission Per Type</h2>
+                                <p>Monitor Percentage of Submission Per Assignment Type</p>
+                                <Divider />
+                            </div>
+                            <ResponsiveContainer width="90%" height={380}>
+                                <BarChart
+                                    width={730}
+                                    height={250}
+                                    // data={this.props.firebase.val.R6nSbDVly8PUnC6jQFcseDS9sgJ3.BT3103.instructorAssignmentType.chart08.data}
+                                    data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignmentType.chart08.data}
+                                    margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+                                >
+                                    <XAxis
+                                        dataKey="Name"
+                                    />
+                                    <YAxis
+                                        dataKey="Value"
+                                        label={
+                                            <AxisLabel axisType="yAxis" width={600} height={300}>
+                                                yAxis
                                     </AxisLabel>
-                                }
-                            />
-                            <CartesianGrid strokeDasharray="3 3" />
-                            <Tooltip />
-                            <Bar dataKey="Value" fill="#8884d8"
-                            onClick={(data, index) => this.selectedAssignmentType(data)}>
-                            {this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignmentType.chart08.data.map((entry, index) => (
-                                <Cell
-                                key={entry['Name']}
-                                fill={entry.Name == this.state.selectedAssignmentType ? '#87f2de' : (entry.Value < 1 ? '#d68995' : '#71afe2')}
-                                // strokeWidth={entry.assignment == this.state.selectedAssignment ? 2 : 0}
-                                // stroke="red"
-                                />
-                            ))}
-                            </Bar>
-                        </BarChart>
-                        </ResponsiveContainer>
-                        {this.isFav("chart08") == true ?
-                            <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart08", "Chart08 has been removed!") }}>Remove</Button>
-                            :
-                            <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart08", "BarChart", "Which type of assignments do my students seem to be struggling with?", "Name", "Value", ["Value"], "Chart08 has been added!") }}>Favourite</Button>
-                        }
-                    </Paper>
+                                        }
+                                    />
+                                    <CartesianGrid strokeDasharray="3 3" />
+                                    <Tooltip />
+                                    <Bar dataKey="Value" fill="#8884d8"
+                                        onClick={(data, index) => this.selectedAssignmentType(data)}>
+                                        {this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignmentType.chart08.data.map((entry, index) => (
+                                            <Cell
+                                                key={entry['Name']}
+                                                fill={entry.Name == this.state.selectedAssignmentType ? '#87f2de' : (entry.Value < 1 ? '#d68995' : '#71afe2')}
+                                            // strokeWidth={entry.assignment == this.state.selectedAssignment ? 2 : 0}
+                                            // stroke="red"
+                                            />
+                                        ))}
+                                    </Bar>
+                                </BarChart>
+                            </ResponsiveContainer>
+                            {this.isFav("chart08") == true ?
+                                <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart08", "Chart08 has been removed!") }}>Remove</Button>
+                                :
+                                <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart08", "BarChart", "Which type of assignments do my students seem to be struggling with?", "Name", "Value", ["Value"], "Chart08 has been added!") }}>Favourite</Button>
+                            }
+                        </Paper>
                     </Grid>
                     <Grid item xs={6}>
                         <Paper>
@@ -305,8 +305,8 @@ class InstructorAssignmentType extends React.Component {
                                             <YAxis />
                                             <Tooltip />
                                             <Legend />
-                                            <Bar dataKey="plays" fill="#8884d8"/>
-                                            <Bar dataKey="rate" fill="#82ca9d"/>
+                                            <Bar dataKey="plays" fill="#8884d8" />
+                                            <Bar dataKey="rate" fill="#82ca9d" />
                                         </BarChart>
                                     </ResponsiveContainer>
                                     {this.isFav("chart09") == true ?
@@ -339,7 +339,7 @@ class InstructorAssignmentType extends React.Component {
                                             <YAxis />
                                             <Tooltip />
                                             <Legend />
-                                            <Bar dataKey="pauses" fill="#8884d8" onClick={(data, index) => this.selectedVideo(data)}/>
+                                            <Bar dataKey="pauses" fill="#8884d8" onClick={(data, index) => this.selectedVideo(data)} />
                                             <Bar dataKey="playbacks" fill="#82ca9d" onClick={(data, index) => this.selectedVideo(data)} />
                                         </BarChart>
                                     </ResponsiveContainer>

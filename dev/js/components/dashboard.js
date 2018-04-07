@@ -10,6 +10,7 @@ import RechartsComp from './RechartsChart.js';
 import Grid from 'material-ui/Grid';
 import store from '../store';
 import Button from 'material-ui/Button';
+import Paper from 'material-ui/Paper';
 
 import {
     PieChart,
@@ -20,7 +21,8 @@ import {
     YAxis,
     CartesianGrid,
     Tooltip,
-    Legend
+    Legend,
+    ResponsiveContainer
 } from "recharts";
 import { BarChart, Bar } from "recharts";
 const AxisLabel = ({
@@ -138,52 +140,110 @@ class Dashboard extends React.Component {
                                     <h4>{chart["title"]}</h4>
                                 </div>
 
-                                {chart["type"] == "BarChart" ?
-                                    <BarChart
-                                        width={730}
-                                        height={250}
-                                        data={chartData[index].data}
-                                        margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-                                    >
-                                        <XAxis
-                                            dataKey={chart["xAxis"]}
-                                            label={{ value: chart["xAxis"], position: "insideBottom", offset: -4 }}
-                                            ticks={[0]}
-                                        />
-                                        <YAxis
-                                            dataKey={chart["yAxis"]}
-                                            label={
-                                                <AxisLabel width={40} height={380} axisType="yAxis">
-                                                    {chart["yAxis"]}
-                                                </AxisLabel>
-                                            }
-                                        />
-                                        <CartesianGrid strokeDasharray="3 3" />
-                                        <Tooltip />
-                                        <Legend verticalAlign="top" align="right"/>
-                                        {chart["dataKey"].map(function (dk, index) {
-                                            if (index % 2 == 0) {
-                                                return (
-                                                    <Bar key={index} dataKey={dk} fill="#8884d8" />
-                                                )
-                                            } else {
-                                                return (
-                                                    <Bar key={index} dataKey={dk} fill="#82ca9d" />
-                                                )
-                                            }
-                                        })}
-                                    </BarChart>
-                                    
+                                {chart["chart"] == "chart08" ?
+                                    <ResponsiveContainer width="90%" height={380}>
+                                        <BarChart
+                                            width={730}
+                                            height={250}
+                                            // data={this.props.firebase.val.R6nSbDVly8PUnC6jQFcseDS9sgJ3.BT3103.instructorAssignmentType.chart08.data}
+                                            data={chartData[index].data}
+                                            margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+                                        >
+                                            <XAxis
+                                                dataKey={chart["xAxis"]}
+                                            />
+                                            <YAxis
+                                                dataKey={chart["yAxis"]}
+                                                label={
+                                                    <AxisLabel axisType="yAxis" width={600} height={300}>
+                                                        yAxis
+                                    </AxisLabel>
+                                                }
+                                            />
+                                            <CartesianGrid strokeDasharray="3 3" />
+                                            <Tooltip />
+                                            {/* <Bar dataKey="Value" fill="#8884d8"
+                                                onClick={(data, index) => this.selectedAssignmentType(data)}>
+                                                {this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignmentType.chart08.data.map((entry, index) => (
+                                                    <Cell
+                                                        key={entry['Name']}
+                                                        fill={entry.Name == this.state.selectedAssignmentType ? '#87f2de' : (entry.Value < 1 ? '#d68995' : '#71afe2')}
+                                                    />
+                                                ))}
+                                            </Bar> */}
+                                            {chart["dataKey"].map(function (dk, index) {
+                                                if (index % 2 == 0) {
+                                                    return (
+                                                        <Bar key={index} dataKey={dk} fill="#8884d8" />
+                                                    )
+                                                } else {
+                                                    return (
+                                                        <Bar key={index} dataKey={dk} fill="#82ca9d" />
+                                                    )
+                                                }
+                                            })}
+                                        </BarChart>
+                                    </ResponsiveContainer>
                                     :
-
-                                    chart["type"] == "LineChart" ?
-                                        <div></div>
-                                        :
-                                        <div><h1>Unable to render chart</h1></div>
-
+                                    <div>
+                                        {/* Insert if statement for other charts  */}
+                                    </div>
                                 }
-
                             </Grid>
+
+
+                            // <Grid item xs={6} key={index} align="center">
+                            //     <div style={{ padding: "1px" }}>
+                            //         <h3>{chart["chart"]}</h3>
+                            //         <h4>{chart["title"]}</h4>
+                            //     </div>
+
+                            //     {chart["type"] == "BarChart" ?
+                            //         <BarChart
+                            //             width={730}
+                            //             height={250}
+                            //             data={chartData[index].data}
+                            //             margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+                            //         >
+                            //             <XAxis
+                            //                 dataKey={chart["xAxis"]}
+                            //                 label={{ value: chart["xAxis"], position: "insideBottom", offset: -4 }}
+                            //                 ticks={[0]}
+                            //             />
+                            //             <YAxis
+                            //                 dataKey={chart["yAxis"]}
+                            //                 label={
+                            //                     <AxisLabel width={40} height={380} axisType="yAxis">
+                            //                         {chart["yAxis"]}
+                            //                     </AxisLabel>
+                            //                 }
+                            //             />
+                            //             <CartesianGrid strokeDasharray="3 3" />
+                            //             <Tooltip />
+                            //             <Legend verticalAlign="top" align="right" />
+                            //             {chart["dataKey"].map(function (dk, index) {
+                            //                 if (index % 2 == 0) {
+                            //                     return (
+                            //                         <Bar key={index} dataKey={dk} fill="#8884d8" />
+                            //                     )
+                            //                 } else {
+                            //                     return (
+                            //                         <Bar key={index} dataKey={dk} fill="#82ca9d" />
+                            //                     )
+                            //                 }
+                            //             })}
+                            //         </BarChart>
+
+                            //         :
+
+                            //         chart["type"] == "LineChart" ?
+                            //             <div></div>
+                            //             :
+                            //             <div><h1>Unable to render chart</h1></div>
+
+                            //     }
+
+                            // </Grid>
                         )
                     })}
 

@@ -13,6 +13,7 @@ import Button from 'material-ui/Button';
 import Icon from 'material-ui/Icon';
 import Delete from 'material-ui-icons/Delete';
 import Stepper from './stepper';
+import Divider from 'material-ui/Divider';
 
 import {
     PieChart,
@@ -23,9 +24,11 @@ import {
     YAxis,
     CartesianGrid,
     Tooltip,
-    Legend
+    Legend,
+    ResponsiveContainer
 } from "recharts";
 import { BarChart, Bar } from "recharts";
+import Paper from 'material-ui/Paper';
 const AxisLabel = ({
     axisType,
     x = 0,
@@ -52,16 +55,21 @@ const AxisLabel = ({
     );
 };
 
+var divStyle = {
+    padding: "1px"
+};
+
 class administratorActivity extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             selectedActivity: "",
             favourites: [],
-            steps: ["AdministratorActivity"]
+            steps: ["AdministratorActivity"],
+            selected: {}
         }
-        // this.state.favourites = Object.keys(this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignmentType)
-        this.state.favourites = this.props.usersTable[this.props.activeProfile.uid].favourites
+        // this.state.favourites = this.props.usersTable[this.props.activeProfile.uid].favourites; // Pulls from fb, comment out this for launch 
+        this.state.favourites = this.props.myFavourites // pulls from local store, use this for demo 
     }
 
     isFav(chartName) {
@@ -112,14 +120,39 @@ class administratorActivity extends React.Component {
         console.log(data)
         // var newSteps = this.state.steps.push(data.Name)
         if (this.state.selectedActivity == "") {
-            this.setState({ selectedActivity: data.date, steps: [...this.state.steps, data.date] })
+            this.setState({ selectedActivity: data.payload["Name"], steps: [...this.state.steps, data.date] })
         }
         else {
             var array = this.state.steps;
-            array.splice(-1, 1, data.date);
-            this.setState({ selectedActivity: data.date, steps: array })
+            array.splice(-1, 1, data.payload["Name"]);
+            this.setState({ selectedActivity: data.payload["Name"], steps: array })
         }
         console.log(this.state.steps)
+
+        var dataArr = this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].adminActivity.chart06.data
+        for (var i = 0; i < dataArr.length; i++) {
+            if (dataArr[i]["Name"] == data.payload["Name"]) {
+                // console.log("Found the data!")
+                // console.log(dataArr[i])
+                var arr = []
+
+                for (var key in dataArr[i]) {
+                    if (dataArr[i][key] !== data.payload["Name"]) {
+                        var temp = {
+                            name: key,
+                            value: dataArr[i][key]
+                        }
+                        arr.push(temp)
+                    }
+                }
+                // console.log(arr)
+
+                this.setState({
+                    selected: arr
+                })
+                break;
+            }
+        }
     }
 
     backStep() {
@@ -136,69 +169,76 @@ class administratorActivity extends React.Component {
         this.setState({ steps: ["AdministratorActivity"], selectedActivity: "" });
     }
 
-
     render() {
         const state = store.getState();
         return (
             <div>
                 <Stepper steps={this.state.steps} backStep={this.backStep.bind(this)} reset={this.reset.bind(this)} />
-                <br/>   
+                <br />
 
-                <Grid container spacing={8}>
+                <Grid container spacing={24} direction="row" align="center">
                     <Grid item xs={12}>
-                        <h3>Chart05</h3>
-                        <h4>Title05</h4>
-                        <LineChart
-                            width={730}
-                            height={250}
-                            data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].adminActivity.chart05.data}
-                            margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-                        >
-                            <XAxis
-                                dataKey="Name"
-                                label={
-                                    <AxisLabel axisType="xAxis" width={600} height={300}>
-                                        Student
-                        </AxisLabel>
-                                }
-                            />
-                            <YAxis
-                                dataKey="Value"
-                                label={
-                                    <AxisLabel axisType="yAxis" width={600} height={300}>
-                                        Daily Activity by Cohort
-                        </AxisLabel>
-                                }
-                            />
-                            <CartesianGrid strokeDasharray="3 3" />
-                            <Tooltip />
-                            <Legend />
-                            <Line dataKey="Value" fill="#8884d8" activeDot={{onClick: (data, index) => this.selectedActivity(data)}} />
-                        </LineChart>
-                    </Grid>
-                    {this.state.selectedActivity == "2018-02-21" ?
-                        <div>
-                            <Grid item xs={12}>
-                                <h3>Chart06</h3>
-                                <h4>Course Breakdown of Daily Activity </h4>
+                        <Paper>
+                            <div style={divStyle}>
+                                <h3>Chart05</h3>
+                                <h4>Amount of Activities per day</h4>
+                                <Divider />
+                            </div>
+
+                            <ResponsiveContainer width="90%" height={380}>
                                 <LineChart
                                     width={730}
-                                    height={500}
-                                    data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].adminActivity.chart06.data}
+                                    height={250}
+                                    data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].adminActivity.chart05.data}
                                     margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
                                 >
-                                    <XAxis
-                                        dataKey="Name"
+                                    <XAxis dataKey="Name" />
+                                    <YAxis
+                                        dataKey="Value"
                                         label={
-                                            <AxisLabel axisType="xAxis" width={600} height={300}>
-                                                Student
+                                            <AxisLabel axisType="yAxis" width={600} height={300}>
+                                                Daily Activity by Cohort
                         </AxisLabel>
                                         }
                                     />
                                     <CartesianGrid strokeDasharray="3 3" />
                                     <Tooltip />
-                                    <Legend />
-                                    <Line dataKey="All Other Junior (NCC2018)" fill="#8884d8" />
+                                    <Line dataKey="Value" fill="#8884d8" activeDot={{ onClick: (data, index) => this.selectedActivity(data) }} />
+                                </LineChart>
+                            </ResponsiveContainer>
+
+                        </Paper>
+                    </Grid>
+
+                    {this.state.selectedActivity == "2018-02-21" ?
+                        <Grid item xs={12}>
+                            <Paper>
+                                <div style={divStyle}>
+                                    <h3>Chart06</h3>
+                                    <h4>Course Breakdown of Daily Activity </h4>
+                                    <Divider />
+                                </div>
+                                <ResponsiveContainer width="90%" height={380}>
+                                    <LineChart
+                                        width={730}
+                                        height={500}
+                                        data={this.state.selected}
+                                        // this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].adminActivity.chart06.data
+                                        margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+                                    >
+                                        <XAxis dataKey="name" />
+                                        <YAxis
+                                            dataKey="value"
+                                            label={
+                                                <AxisLabel axisType="yAxis" width={600} height={300}>
+                                                    Amount of activities
+                                            </AxisLabel>
+                                            }
+                                        />
+                                        <CartesianGrid strokeDasharray="3 3" />
+                                        <Tooltip />
+                                        <Line dataKey="value" fill="#8884d8" />
+                                        {/* <Line dataKey="All Other Junior (NCC2018)" fill="#8884d8" />
                                     <Line dataKey="CHIJ St Nicholas Girls School (NCC2018)" fill="#82ca9d" />
                                     <Line dataKey="Clementi Town Secondary School (NCC2018)" fill="#8884d8" />
                                     <Line dataKey="Crest Secondary School (NCC2018)" fill="#82ca9d" />
@@ -215,15 +255,15 @@ class administratorActivity extends React.Component {
                                     <Line dataKey="Seng Kang Secondary School (NCC2018)" fill="#8884d8" />
                                     <Line dataKey="Singapore Chinese Girls Sch (NCC2018)" fill="#8884d8" />
                                     <Line dataKey="Temasek JC - Junior (NCC2018)" fill="#8884d8" />
-                                    <Line dataKey="West Spring Secondary School (NCC2018)" fill="#8884d8" />
-                                </LineChart>
-                            </Grid>
-                        </div>
+                                    <Line dataKey="West Spring Secondary School (NCC2018)" fill="#8884d8" /> */}
+                                    </LineChart>
+                                </ResponsiveContainer>
+                            </Paper>
+                        </Grid>
                         :
                         <div> </div>
                     }
                 </Grid>
-
             </div>
         )
     }
@@ -234,7 +274,8 @@ function mapStateToProps(state) {
         firebase: state.firebase,
         activeProfile: state.activeProfile.val,
         activeView: state.activeView,
-        usersTable: state.firebase.val.usersTable.usersTable
+        usersTable: state.firebase.val.usersTable.usersTable,
+        myFavourites: state.myFavourites.favourites
     };
 }
 
