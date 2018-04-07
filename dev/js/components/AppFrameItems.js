@@ -32,7 +32,6 @@ import StudentAssignmentType from './studentAssignmentType';
 class DrawerItems extends React.Component {
     constructor(props) {
         super(props);
-        this.charts = this.props.charts
     }
 
     render() {
@@ -51,97 +50,73 @@ class DrawerItems extends React.Component {
         return (
             <List>
                 <ListItem button onClick={this.props.handleDrawerToggleNested.bind(this)}>
-                    <Link to="/">
-                        <ListItemText primary="Homepage" />
+                    <Link to="/" style={{ textDecoration: "none" }}>
+                        <h4 style={{ color: "#FFFFFF" }}>Homepage</h4>
                     </Link>
                     {this.props.overviewOpen ? <ExpandLess /> : <ExpandMore />}
                 </ListItem>
-                <Collapse in={this.props.overviewOpen} timeout="auto" unmountOnExit>
+                <Collapse in={this.props.overviewOpen} timeout="auto" unmountOnExit style={{ backgroundColor: "#FFBF00", color: "#FFF" }}>
 
                     {this.props.activeProfileRole == 'Administrator' ?
-                        <List disablePadding>
-                            <ListItem button onClick={this.props.handleDrawerClose.bind(this)} style={{ paddingLeft: "60px"}}>
-                                <Link to="/administratorPerformance">
+                        <List disablePadding >
+                            <ListItem button onClick={this.props.handleDrawerClose.bind(this)} style={{ paddingLeft: "60px" }}>
+                                <Link to="/administratorPerformance" style={{ textDecoration: "none" }}>
                                     <ListItemText primary="Administrator Performance" />
                                 </Link>
                             </ListItem>
                             <ListItem button onClick={this.props.handleDrawerClose.bind(this)} style={{ paddingLeft: "60px" }}>
-                                <Link to="/administratorActivity">
+                                <Link to="/administratorActivity" style={{ textDecoration: "none" }}>
                                     <ListItemText primary="Administrator Activity" />
                                 </Link>
                             </ListItem>
                         </List>
                         :
                         this.props.activeProfileRole == 'Instructor' ?
-                            <List disablePadding>
+                            <List disablePadding >
                                 {/* <ListItem button onClick={this.props.handleDrawerClose.bind(this)} style={{ paddingLeft: "60px", background: 1==1 ? "#4b9aea" : ""}}> */}
                                 <ListItem button onClick={this.props.handleDrawerClose.bind(this)} style={{ paddingLeft: "60px" }}>
-                                    <Link to="/instructorAssignmentType">
-                                        <ListItemText primary="Instructor Assignment Type" />
+                                    <Link to="/instructorAssignmentType" style={{ textDecoration: "none" }}>
+                                        <h4 style={{ color: "#FFFFFF" }}>Instructor Assignment Type</h4>
                                     </Link>
                                 </ListItem>
+
+                                <Divider />
+
                                 <ListItem button onClick={this.props.handleDrawerClose.bind(this)} style={{ paddingLeft: "60px" }}>
-                                    <Link to="/instructorAssignmentCat">
-                                        <ListItemText primary="Instructor Assignment Cat" />
+                                    <Link to="/instructorAssignmentCat" style={{ textDecoration: "none" }}>
+                                        <h4 style={{ color: "#FFFFFF" }}>Instructor Assignment Cat</h4>
                                     </Link>
                                 </ListItem>
+
+                                <Divider />
+
                                 <ListItem button onClick={this.props.handleDrawerClose.bind(this)} style={{ paddingLeft: "60px" }}>
-                                    <Link to="/instructorStudentIdentifier">
-                                        <ListItemText primary="Instructor Student Identifier" />
+                                    <Link to="/instructorStudentIdentifier" style={{ textDecoration: "none" }}>
+                                        <h4 style={{ color: "#FFFFFF" }}>Instructor Student Identifier</h4>
                                     </Link>
                                 </ListItem>
                             </List>
-                        :
+                            :
                             <List disablePadding>
                                 <ListItem button onClick={this.props.handleDrawerClose.bind(this)} style={{ paddingLeft: "60px" }}>
-                                    <Link to="/StudentAssignment">
+                                    <Link to="/StudentAssignment" style={{ textDecoration: "none" }}>
                                         <ListItemText primary="Student Assignment" />
                                     </Link>
                                 </ListItem>
                                 <ListItem button onClick={this.props.handleDrawerClose.bind(this)} style={{ paddingLeft: "60px" }}>
-                                    <Link to="/StudentAssignmentType">
+                                    <Link to="/StudentAssignmentType" style={{ textDecoration: "none" }}>
                                         <ListItemText primary="Student Assignment Type" />
                                     </Link>
                                 </ListItem>
                             </List>
                     }
-
-
-                    {/* <List disablePadding>
-                        <ListItem button onClick={this.props.handleDrawerClose.bind(this)} style={{ paddingLeft: "60px" }}>
-                            <Link to="/mydashboard">
-                                <ListItemText primary="Performance" />
-                            </Link>
-                        </ListItem>
-                        <ListItem button onClick={this.props.handleDrawerClose.bind(this)} style={{ paddingLeft: "60px" }}>
-                            <Link to="/mydashboard">
-                                <ListItemText primary="Submission Status" />
-                            </Link>
-                        </ListItem>
-                        <ListItem button onClick={this.props.handleDrawerClose.bind(this)} style={{ paddingLeft: "60px" }}>
-                            <Link to="/mydashboard">
-                                <ListItemText primary="Student Satisfaction" />
-                            </Link>
-                        </ListItem>
-
-                        {
-                            this.charts.map(function (chart, i) {
-                                var t = { chart }.chart
-                                // console.log("value:", t, "index:", i)
-                                return
-                                (
-                                    <ListItem button onClick={this.props.handleDrawerClose.bind(this)}>
-                                        <ListItemText primary={t} key={i} />
-                                    </ListItem>
-                                )
-                            })
-                        }
-                    </List> */}
                 </Collapse>
 
-                <ListItem button onClick={this.props.handleDrawerClose.bind(this)}>
-                    <Link to="/mydashboard" >
-                        <ListItemText primary="My Dashboard" />
+                <Divider />
+
+                <ListItem button onClick={this.props.handleDrawerClose.bind(this)} >
+                    <Link to="/mydashboard" style={{ textDecoration: "none" }}>
+                        <h4 style={{ color: "#FFFFFF" }}>My Dashboard</h4>
                     </Link>
                 </ListItem>
 
