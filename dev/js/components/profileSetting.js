@@ -67,14 +67,6 @@ class profileSetting extends React.Component {
     componentWillReceiveProps(newProps) {
         if (newProps != this.props) {
             this.props = newProps
-            // console.log("componentWillReceiveProps")
-            // console.log("componentWillReceivePropsFB")
-            // console.log(this.props.firebase)
-            // console.log("componentWillReceivePropsAP")
-            // console.log(this.props.activeProfile)
-            // console.log("componentWillReceivePropsAll")
-            // console.log(this.props)
-            // console.log(store)
         }
       }
     // how to change the state to the right directory
@@ -112,7 +104,6 @@ class profileSetting extends React.Component {
     };
 
     updateActiveProfile2 = (userDetails, msg, uid, c, r) => {
-        console.log(msg + ":\n" + "userId: "+uid + "\n" + "course: "+c + "\n"+"role: " + r)
         this.props.updateActiveProfile(userDetails)
 
         var newMsg = msg + ":\n" + " -UserId: " + uid + "\n" + " -Course: " + c + "\n" + " -Role: " + r
@@ -129,12 +120,6 @@ class profileSetting extends React.Component {
         return(
             <div>
                 <h1>Profile Setting</h1>
-                {/* <h2> Props UID: {this.props.activeProfile.uid} </h2>
-                <h2> Props Course: {this.props.activeProfile.course} </h2>
-                <h2> Props Role{this.props.activeProfile.role} </h2>
-                <h2> Local state is {this.state.uid} </h2>
-                <h2> Local state is {this.state.course} </h2> */}
-                {/* <h2> {this.viewCourses()} </h2> */}
                 <div style={{ width: '20%', height: 'auto', position: 'relative', margin: '0px auto', padding: '10px' }}>
                     <FormControl className={styles.formControl} aria-describedby="name-helper-text">
                         <InputLabel htmlFor="name-helper">User ID</InputLabel>
@@ -149,11 +134,6 @@ class profileSetting extends React.Component {
                             {this.viewCourses()}
                             </select>
                         </label>
-                        
-                        {/* <Input
-                            id="adornment-viewType"
-                            placeholder="Enter your View Type here"
-                        /> */}
                     </FormControl>
 
                     <br /> <br />
@@ -165,8 +145,8 @@ class profileSetting extends React.Component {
                 <UserTable />
                 <Snackbar
                     anchorOrigin={{ vertical, horizontal }}
-                    autoHideDuration="2500"
-                    disableWindowBlurListener="true"
+                    autoHideDuration={2500}
+                    disableWindowBlurListener={true}
                     open={this.state.snackOpen}
                     onClose={this.handleClose}
                     message={this.state.message}

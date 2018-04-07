@@ -24,7 +24,7 @@ import {
     CartesianGrid,
     Tooltip,
     Legend
-  } from "recharts";
+} from "recharts";
 import { BarChart, Bar } from "recharts";
 const AxisLabel = ({
     axisType,
@@ -34,23 +34,23 @@ const AxisLabel = ({
     height,
     stroke,
     children
-  }) => {
+}) => {
     const isVert = axisType === "yAxis";
     const cx = isVert ? x + 20 : x + width / 2;
     const cy = isVert ? height / 2 + y : y + height;
     const rot = isVert ? `270 ${cx} ${cy}` : 0;
     return (
-      <text
-        x={cx}
-        y={cy}
-        transform={`rotate(${rot})`}
-        textAnchor="middle"
-        stroke={stroke}
-      >
-        {children}
-      </text>
+        <text
+            x={cx}
+            y={cy}
+            transform={`rotate(${rot})`}
+            textAnchor="middle"
+            stroke={stroke}
+        >
+            {children}
+        </text>
     );
-  };
+};
 
 class administratorActivity extends React.Component {
     constructor(props) {
@@ -106,34 +106,34 @@ class administratorActivity extends React.Component {
         })
         console.log("Successfully removed", chart)
     }
-    
-    selectedActivity(data){
+
+    selectedActivity(data) {
         console.log("Selected Activity")
         console.log(data)
         // var newSteps = this.state.steps.push(data.Name)
-        if(this.state.selectedActivity == ""){
-            this.setState({selectedActivity: data.date, steps: [...this.state.steps, data.date] })
+        if (this.state.selectedActivity == "") {
+            this.setState({ selectedActivity: data.date, steps: [...this.state.steps, data.date] })
         }
-        else{
+        else {
             var array = this.state.steps;
             array.splice(-1, 1, data.date);
-            this.setState({selectedActivity: data.date, steps: array })
+            this.setState({ selectedActivity: data.date, steps: array })
         }
         console.log(this.state.steps)
     }
 
-    backStep(){
-        if(this.state.steps.length == 2){
+    backStep() {
+        if (this.state.steps.length == 2) {
             var array = this.state.steps;
             array.splice(-1, 1); //remove last element
-            this.setState({steps: array });
-            this.setState({selectedActivity: ""})
+            this.setState({ steps: array });
+            this.setState({ selectedActivity: "" })
         }
     }
 
-    reset(){
+    reset() {
         var array = this.state.steps;
-        this.setState({steps: ["AdministratorActivity"], selectedActivity: ""});
+        this.setState({ steps: ["AdministratorActivity"], selectedActivity: "" });
     }
 
 
@@ -141,85 +141,87 @@ class administratorActivity extends React.Component {
         const state = store.getState();
         return (
             <div>
-                <h3>Chart05</h3>
-                <h4>Title05</h4>
+                <Stepper steps={this.state.steps} backStep={this.backStep.bind(this)} reset={this.reset.bind(this)} />
+                <br/>   
+
                 <Grid container spacing={8}>
-                <Stepper steps={this.state.steps} backStep={this.backStep.bind(this)} reset={this.reset.bind(this)}/>
-                <Grid item xs={12}>
-                <LineChart
-                    width={730}
-                    height={250}
-                    data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].adminActivity.chart05.data}
-                    margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-                    >
-                    <XAxis
-                    dataKey="date"
-                    label={
-                        <AxisLabel axisType="xAxis" width={600} height={300}>
-                        Student
+                    <Grid item xs={12}>
+                        <h3>Chart05</h3>
+                        <h4>Title05</h4>
+                        <LineChart
+                            width={730}
+                            height={250}
+                            data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].adminActivity.chart05.data}
+                            margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+                        >
+                            <XAxis
+                                dataKey="Name"
+                                label={
+                                    <AxisLabel axisType="xAxis" width={600} height={300}>
+                                        Student
                         </AxisLabel>
-                    }
-                    />
-                    <YAxis
-                    dataKey="value"
-                    label={
-                        <AxisLabel axisType="yAxis" width={600} height={300}>
-                        Daily Activity by Cohort
+                                }
+                            />
+                            <YAxis
+                                dataKey="Value"
+                                label={
+                                    <AxisLabel axisType="yAxis" width={600} height={300}>
+                                        Daily Activity by Cohort
                         </AxisLabel>
-                    }
-                    />
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <Tooltip />
-                    <Legend />
-                    <Line dataKey="value" fill="#8884d8" onClick={(data, index) => this.selectedActivity(data)} />
-                </LineChart>
-                </Grid>
-                {this.state.selectedActivity == "2018-02-21" ?
-                <div>
-                <Grid item xs={12}>
-                <h3>Chart06</h3>
-                <h4>Course Breakdown of Daily Activity </h4>
-                <LineChart
-                    width={730}
-                    height={500}
-                    data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].adminActivity.chart06.data}
-                    margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-                    >
-                    <XAxis
-                    dataKey="Name"
-                    label={
-                        <AxisLabel axisType="xAxis" width={600} height={300}>
-                        Student
+                                }
+                            />
+                            <CartesianGrid strokeDasharray="3 3" />
+                            <Tooltip />
+                            <Legend />
+                            <Line dataKey="Value" fill="#8884d8" activeDot={{onClick: (data, index) => this.selectedActivity(data)}} />
+                        </LineChart>
+                    </Grid>
+                    {this.state.selectedActivity == "2018-02-21" ?
+                        <div>
+                            <Grid item xs={12}>
+                                <h3>Chart06</h3>
+                                <h4>Course Breakdown of Daily Activity </h4>
+                                <LineChart
+                                    width={730}
+                                    height={500}
+                                    data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].adminActivity.chart06.data}
+                                    margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+                                >
+                                    <XAxis
+                                        dataKey="Name"
+                                        label={
+                                            <AxisLabel axisType="xAxis" width={600} height={300}>
+                                                Student
                         </AxisLabel>
+                                        }
+                                    />
+                                    <CartesianGrid strokeDasharray="3 3" />
+                                    <Tooltip />
+                                    <Legend />
+                                    <Line dataKey="All Other Junior (NCC2018)" fill="#8884d8" />
+                                    <Line dataKey="CHIJ St Nicholas Girls School (NCC2018)" fill="#82ca9d" />
+                                    <Line dataKey="Clementi Town Secondary School (NCC2018)" fill="#8884d8" />
+                                    <Line dataKey="Crest Secondary School (NCC2018)" fill="#82ca9d" />
+                                    <Line dataKey="Dunman HS - Junior (NCC2018)" fill="#8884d8" />
+                                    <Line dataKey="Holy Innocents HS (NCC2018)" fill="#8884d8" />
+                                    <Line dataKey="Junyuan Secondary School (NCC2018)" fill="#8884d8" />
+                                    <Line dataKey="Maris Stella High School (NCC2018)" fill="#8884d8" />
+                                    <Line dataKey="NUSHS - Junior (NCC2018)" fill="#8884d8" />
+                                    <Line dataKey="Nan Hua High School (NCC2018)" fill="#8884d8" />
+                                    <Line dataKey="National JC - Junior (NCC2018)" fill="#8884d8" />
+                                    <Line dataKey="Ping Yi Secondary School (NCC2018)" fill="#8884d8" />
+                                    <Line dataKey="Queensway Secondary School (NCC2018)" fill="#8884d8" />
+                                    <Line dataKey="Sch of Science and Technology  (NCC2018)" fill="#8884d8" />
+                                    <Line dataKey="Seng Kang Secondary School (NCC2018)" fill="#8884d8" />
+                                    <Line dataKey="Singapore Chinese Girls Sch (NCC2018)" fill="#8884d8" />
+                                    <Line dataKey="Temasek JC - Junior (NCC2018)" fill="#8884d8" />
+                                    <Line dataKey="West Spring Secondary School (NCC2018)" fill="#8884d8" />
+                                </LineChart>
+                            </Grid>
+                        </div>
+                        :
+                        <div> </div>
                     }
-                    />
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <Tooltip />
-                    <Legend />
-                    <Line dataKey="All Other Junior (NCC2018)" fill="#8884d8" />
-                    <Line dataKey="CHIJ St Nicholas Girls School (NCC2018)" fill="#82ca9d" />
-                    <Line dataKey="Clementi Town Secondary School (NCC2018)" fill="#8884d8" />
-                    <Line dataKey="Crest Secondary School (NCC2018)" fill="#82ca9d" />
-                    <Line dataKey="Dunman HS - Junior (NCC2018)" fill="#8884d8" />
-                    <Line dataKey="Holy Innocents HS (NCC2018)" fill="#8884d8" />
-                    <Line dataKey="Junyuan Secondary School (NCC2018)" fill="#8884d8" />
-                    <Line dataKey="Maris Stella High School (NCC2018)" fill="#8884d8" />
-                    <Line dataKey="NUSHS - Junior (NCC2018)" fill="#8884d8" />
-                    <Line dataKey="Nan Hua High School (NCC2018)" fill="#8884d8" />
-                    <Line dataKey="National JC - Junior (NCC2018)" fill="#8884d8" />
-                    <Line dataKey="Ping Yi Secondary School (NCC2018)" fill="#8884d8" />
-                    <Line dataKey="Queensway Secondary School (NCC2018)" fill="#8884d8" />
-                    <Line dataKey="Sch of Science and Technology  (NCC2018)" fill="#8884d8" />
-                    <Line dataKey="Seng Kang Secondary School (NCC2018)" fill="#8884d8" />
-                    <Line dataKey="Singapore Chinese Girls Sch (NCC2018)" fill="#8884d8" />
-                    <Line dataKey="Temasek JC - Junior (NCC2018)" fill="#8884d8" />
-                    <Line dataKey="West Spring Secondary School (NCC2018)" fill="#8884d8" />
-                </LineChart>
-                </Grid>
-                </div>
-                :
-                <div> </div>
-                }
                 </Grid>
 
             </div>
@@ -234,8 +236,8 @@ function mapStateToProps(state) {
         activeView: state.activeView,
         usersTable: state.firebase.val.usersTable.usersTable
     };
-} 
+}
 
-export default connect(mapStateToProps)(administratorActivity); 
+export default connect(mapStateToProps)(administratorActivity);
 
 
