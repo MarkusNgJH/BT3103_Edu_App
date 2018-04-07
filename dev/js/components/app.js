@@ -21,6 +21,7 @@ import StudentAssignment from './studentAssignment';
 import StudentAssignmentType from './studentAssignmentType';
 import store from '../store';
 
+
 require('../../scss/style.scss');
 const provider = new firebase.auth.GoogleAuthProvider();
 
@@ -39,19 +40,6 @@ class App extends Component {
         this.logout = this.logout.bind(this);
     }
     componentDidMount() {
-        // const rootRef = firebase.database().ref("/Instructor");
-        // var branch = this.state.user;
-        // console.log("branch is")
-        // console.log(branch)
-        // const valueRef = rootRef.child(String(branch));
-        // valueRef.on('value', (snapshot) => {
-        //     this.setState({
-        //         speed: snapshot.val()
-        //     });
-        // });
-        // everytime data changes on valueRef, assign value to speed.
-
-        // Subscribe to store changes, each time changes happen, component re-render 
         store.subscribe(() => this.forceUpdate());
     }
     componentWillMount() { //persists the login auth
@@ -120,7 +108,7 @@ class App extends Component {
     render() {
         const state = store.getState()
         const routes = (
-            <div>
+            <div className="mainContent">
                 {/* Tell the page which component to display depending on the URL path */}
                 <Switch>
                     <Route exact path='/' component={Overview} />
@@ -138,11 +126,10 @@ class App extends Component {
             </div>
         )
 
-
         return (
             <div id="main">
                 {this.state.user ?
-                    <div>
+                    <div className="mainContent">
                         <AppFrame uid={this.state.uid} email={this.state.user} view={this.state.view} changeUid={this.changeUid.bind(this)} changeView={this.changeView.bind(this)} changeLogOut={this.changeLogOut.bind(this)} logout={this.logout.bind(this)} body={routes} />
                     </div>
                     :
