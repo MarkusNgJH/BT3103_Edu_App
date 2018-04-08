@@ -157,7 +157,12 @@ class administratorPerformance extends React.Component {
                                     />
                                     <YAxis
                                         dataKey="Progress"
-                                        label={{ value: "Submission Rate (%)", angle: -90, position: "insideLeft" }}
+                                        // label={{ value: "Submission Rate (%)", angle: -90, position: "insideBottomLeft" }}
+                                        label={
+                                            <AxisLabel axisType="yAxis" width={600} height={300}>
+                                                Submission Rate (%)
+                                            </AxisLabel>
+                                        }
                                     />
                                     {/* <CartesianGrid strokeDasharray="3 3" /> */}
                                     <Tooltip />
