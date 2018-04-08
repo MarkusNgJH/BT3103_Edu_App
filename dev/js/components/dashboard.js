@@ -24,7 +24,8 @@ import {
     Tooltip,
     Legend,
     ResponsiveContainer,
-    Cell
+    Cell,
+    ReferenceLine
 } from "recharts";
 import { BarChart, Bar } from "recharts";
 const AxisLabel = ({
@@ -65,8 +66,8 @@ class Dashboard extends React.Component {
         }
         // this.state.favourites = this.props.usersTable[this.props.activeProfile.uid].favourites; // Pulls from fb, comment out this for launch 
         this.state.favourites = this.props.myFavourites // pulls from local store, use this for demo  
-        if(this.state.favourites.length == 0) {
-            this.state.favourites = [{chart:"chart0"}]
+        if (this.state.favourites.length == 0) {
+            this.state.favourites = [{ chart: "chart0" }]
         }
     }
 
@@ -92,7 +93,7 @@ class Dashboard extends React.Component {
         const activeCourse = this.props.activeProfile.course
         const chartData = this.state.favourites.map((chart) => {
             return (this.getChart(chart["chart"], activeUserId, activeCourse))
-        }) 
+        })
         console.log(chartData)
         console.log("Favourites:", this.state.favourites)
 
@@ -101,7 +102,7 @@ class Dashboard extends React.Component {
                 <h1>{this.props.usersTable[activeUserId].userDisplayName}'s Dashboard</h1>
 
                 <Grid container spacing={24} direction="row" align="center">
-                    
+
                     {this.state.favourites.map(function (chart, index) {
                         return (
                             chart["chart"] == "chart08" ?
@@ -144,7 +145,6 @@ class Dashboard extends React.Component {
                                                         </Bar>
                                                     )
                                                 })}
-
                                             </BarChart>
                                         </ResponsiveContainer>
                                     </Paper>
@@ -243,8 +243,51 @@ class Dashboard extends React.Component {
                                                     </ResponsiveContainer>
                                                 </Paper>
                                             </Grid>
-                                        :
-                                        <h2 style={{ marginLeft: "30%"}}>You have not added any charts to your Dashboard.</h2>
+                                            :
+                                            chart["chart"] == "chart01" ?
+                                                <Grid item xs={12}>
+                                                    <Paper>
+                                                        <div style={divStyle}>
+                                                            <h2>{chart["title"]}</h2>
+                                                            <p>{chart["subtitle"]}</p>
+                                                            <Divider />
+                                                        </div>
+                                                        <ResponsiveContainer width="90%" height={380}>
+                                                            <BarChart
+                                                                width={730} height={250}
+                                                                data={chartData[index].data}
+                                                            >
+                                                                <XAxis
+                                                                    dataKey={chart["xAxis"]}
+                                                                    label={{ value: "Assignments", position: "insideBottom" }}
+                                                                    ticks={[0]}
+                                                                />
+                                                                <YAxis
+                                                                    dataKey={chart["yAxis"]}
+                                                                    label={{ value: "Number of Submissions", angle: -90, position: "insideBottomLeft" }}
+                                                                />
+
+                                                                <Tooltip cursor={{ fill: 'red', fillOpacity: 0.1 }} />
+                                                                <Legend verticalAlign="top" align="right" />
+                                                                {chart["dataKey"].map(function (dk, index) {
+                                                                    return (
+                                                                        <Bar name="Number of Submissions" dataKey={dk}>
+                                                                            {chartData[index].data.map((entry, index) => (
+                                                                                <Cell
+                                                                                    key={entry.assignment}
+                                                                                    fill={entry.value < 20 ? '#d68995' : '#71afe2'}
+                                                                                />
+                                                                            ))}
+                                                                        </Bar>
+                                                                    )
+                                                                })}
+                                                                <ReferenceLine y={33} strokeWidth={4} stroke="#e0b13c" label={{ value: "Expected Submissions", position: "top" }} />
+                                                            </BarChart>
+                                                        </ResponsiveContainer>
+                                                    </Paper>
+                                                </Grid>
+                                                :
+                                                <h2 style={{ marginLeft: "30%" }}>You have not added any charts to your Dashboard.</h2>
                         )
                     })}
 
