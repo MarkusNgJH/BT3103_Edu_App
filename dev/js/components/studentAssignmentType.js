@@ -158,7 +158,7 @@ class studentAssignmentType extends React.Component {
                                     margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
                                 >
 
-                                    <XAxis dataKey="Name">
+                                    <XAxis dataKey="Name" hide={true}>
                                         <Label value="Assignment Type" offset={0} position="insideBottom" />
                                     </XAxis>
 
@@ -168,7 +168,7 @@ class studentAssignmentType extends React.Component {
 
                                     <CartesianGrid strokeDasharray="3 3" />
                                     <Tooltip />
-                                    <Bar dataKey="Value" fill="#8884d8" />
+                                    <Bar name="Percentage of Assignment submitted" dataKey="Value" fill="#8884d8" />
                                 </BarChart>
                             </ResponsiveContainer>
                             {this.isFav("chart05") == true ?

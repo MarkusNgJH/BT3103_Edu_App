@@ -81,14 +81,15 @@ class studentAssignment extends React.Component {
         console.log(this.state.steps)
         // var newSteps = this.state.steps.push(data.Name)
         if (this.state.selectedAssignment == "") {
-            this.setState({ selectedAssignment: data.Name, steps: [...this.state.steps, data.Name] })
+            this.setState({ selectedAssignment: data["payload"]["name"], steps: [...this.state.steps, data["payload"]["name"]] })
         }
         else {
             var array = this.state.steps;
-            array.splice(-1, 1, data.Name);
-            this.setState({ selectedAssignment: data.Name, steps: array })
+            array.splice(-1, 1, data["payload"]["name"]);
+            this.setState({ selectedAssignment: data["payload"]["name"], steps: array })
         }
         console.log(this.state.steps)
+        console.log(data["payload"]["name"])
     }
 
     backStep() {
@@ -227,8 +228,8 @@ class studentAssignment extends React.Component {
                                         margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
                                     >
 
-                                        <XAxis dataKey="Name">
-                                            <Label value="Student" offset={0} position="insideBottom" />
+                                        <XAxis dataKey="Name" hide={true}>
+                                            <Label value="Assignment" offset={-5} position="insideBottom" />
                                         </XAxis>
 
                                         <YAxis dataKey="Value">
@@ -237,8 +238,7 @@ class studentAssignment extends React.Component {
 
                                         <CartesianGrid strokeDasharray="3 3" />
                                         <Tooltip />
-                                        <Legend />
-                                        <Bar dataKey="Value" fill="#8884d8" />
+                                        <Bar name="Number of submissions" dataKey="Value" fill="#8884d8" />
                                     </BarChart>
                                 </ResponsiveContainer>
                                 {this.isFav("chart02") == true ?
@@ -263,8 +263,8 @@ class studentAssignment extends React.Component {
                                         data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].studentAssignment.chart03.data}
                                         margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
                                     >
-                                        <XAxis dataKey="Name">
-                                            <Label value="Date" offset={0} position="insideBottom" />
+                                        <XAxis dataKey="Name" hide={true}>
+                                            <Label value="Date" offset={-5} position="insideBottom" />
                                         </XAxis>
 
                                         <YAxis dataKey="Value">
@@ -273,7 +273,7 @@ class studentAssignment extends React.Component {
 
                                         <CartesianGrid strokeDasharray="3 3" />
                                         <Tooltip />
-                                        <Line dataKey="Value" fill="#8884d8" />
+                                        <Line name="Assignments Submitted" dataKey="Value" fill="#8884d8" />
                                     </LineChart>
                                 </ResponsiveContainer>
                                 {this.isFav("chart03") == true ?
@@ -287,7 +287,7 @@ class studentAssignment extends React.Component {
                             <Paper>
                                 <div style={divStyle}>
                                     <h3>Chart04</h3>
-                                    <h4>Time Lapse Since Work Done</h4>
+                                    <h4>Time Lapse Since Assignment released</h4>
                                     <Divider />
                                 </div>
                                 <ResponsiveContainer width="100%" height={380}>
@@ -298,15 +298,15 @@ class studentAssignment extends React.Component {
                                         margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
                                     >
                                         <XAxis dataKey="Name">
-                                            <Label value="Number of Students" offset={0} position="insideBottom" />
+                                            <Label value="Number of days lapsed" offset={-3} position="insideBottom" />
                                         </XAxis>
 
                                         <YAxis dataKey="Value">
-                                            <Label value="Number of Days since Assignment release" angle={-90} offset={0} position="insideBottomLeft" />
+                                            <Label value="Number of Assignments" angle={-90} offset={0} position="insideBottomLeft" />
                                         </YAxis>
 
                                         <CartesianGrid strokeDasharray="3 3" />
-                                        <Bar name="Number of Students" dataKey="Value" fill="#8884d8" />
+                                        <Bar name="Number of Assignments" dataKey="Value" fill="#8884d8" />
                                         <Tooltip />
                                     </BarChart>
                                 </ResponsiveContainer>
