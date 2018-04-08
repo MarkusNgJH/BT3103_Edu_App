@@ -100,6 +100,7 @@ class administratorPerformance extends React.Component {
                                 >
                                     <XAxis
                                         dataKey="Name"
+                                        hide={true}
                                         label={
                                             <AxisLabel axisType="xAxis" width={600} height={300}>
                                                 Cohorts
