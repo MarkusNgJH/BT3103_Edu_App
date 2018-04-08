@@ -102,7 +102,7 @@ class InstructorAssignmentType extends React.Component {
         return false;
     }
 
-    addToFavourites(chart, type, title, xAxis, yAxis, dataKey, message) {
+    addToFavourites(chart, type, title, subtitle, xAxis, yAxis, dataKey, message) {
         console.log("Adding", chart);
         this.setState({
             snackOpen: true,
@@ -114,6 +114,7 @@ class InstructorAssignmentType extends React.Component {
             chart: chart,
             type: type,
             title: title,
+            subtitle: subtitle,
             xAxis: xAxis || "",
             yAxis: yAxis || "",
             dataKey: dataKey
@@ -283,7 +284,7 @@ class InstructorAssignmentType extends React.Component {
                             {this.isFav("chart08") == true ?
                                 <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart08", "Chart08 has been removed!") }}>Remove</Button>
                                 :
-                                <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart08", "BarChart", "Which type of assignments do my students seem to be struggling with?", "Name", "Value", ["Value"], "Chart08 has been added!") }}>Favourite</Button>
+                                <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart08", "BarChart", "Submission Per Type", "Monitor Percentage of Submission Per Assignment Type", "Name", "Value", ["Value"], "Chart08 has been added!") }}>Favourite</Button>
                             }
                         </Paper>
                     </Grid>
@@ -312,7 +313,7 @@ class InstructorAssignmentType extends React.Component {
                                     {this.isFav("chart09") == true ?
                                         <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart09", "Chart09 has been removed!") }}>Remove</Button>
                                         :
-                                        <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart09", "BarChart", "Which videos have my students watched and how is the pace for them?", "Name", "", ["plays", "rate"], "Chart09 has been added!") }}>Favourite</Button>
+                                        <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart09", "BarChart", "Total Plays/ Fast-Forwards" ,"Which videos have my students watched and how is the pace for them?", "Name", "", ["plays", "rate"], "Chart09 has been added!") }}>Favourite</Button>
                                     }
                                 </div>
                                 :
@@ -346,7 +347,7 @@ class InstructorAssignmentType extends React.Component {
                                     {this.isFav("chart10") == true ?
                                         <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart10", "Chart10 has been removed!") }}>Remove</Button>
                                         :
-                                        <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart10", "BarChart", "Which videos do my students seem to be struggling with?", "Name", "", ["pauses", "playbacks"], "Chart10 has been added!") }}>Favourite</Button>
+                                        <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart10", "BarChart", "Total Pauses/Playbacks", "Identify PathProblems that Students Students May Be Struggling With", "Name", "", ["pauses", "playbacks"], "Chart10 has been added!") }}>Favourite</Button>
                                     }
                                 </div>
                                 :
@@ -379,7 +380,7 @@ class InstructorAssignmentType extends React.Component {
                                     {this.isFav("chart11") == true ?
                                         <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart11", "Chart11 has been removed!") }}>Remove</Button>
                                         :
-                                        <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart11", "BarChart", "Which part of the video do my students struggle with/is valuable to them?", "Name", "", ["Value"], "Chart11 has been added!") }}>Favourite</Button>
+                                        <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart11", "BarChart", "Area of Pauses", "Investigate Time Period where Pauses Occured for " + this.state.selectedVideo , "Name", "", ["Value"], "Chart11 has been added!") }}>Favourite</Button>
                                     }
                                 </div>
                                 :

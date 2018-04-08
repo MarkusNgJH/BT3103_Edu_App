@@ -11,6 +11,7 @@ import Grid from 'material-ui/Grid';
 import store from '../store';
 import Button from 'material-ui/Button';
 import Paper from 'material-ui/Paper';
+import Divider from 'material-ui/Divider';
 
 import {
     PieChart,
@@ -22,7 +23,8 @@ import {
     CartesianGrid,
     Tooltip,
     Legend,
-    ResponsiveContainer
+    ResponsiveContainer,
+    Cell
 } from "recharts";
 import { BarChart, Bar } from "recharts";
 const AxisLabel = ({
@@ -51,6 +53,10 @@ const AxisLabel = ({
     );
 };
 
+var divStyle = {
+    padding: "1px"
+};
+
 class Dashboard extends React.Component {
     constructor(props) {
         super(props);
@@ -59,46 +65,9 @@ class Dashboard extends React.Component {
         }
         // this.state.favourites = this.props.usersTable[this.props.activeProfile.uid].favourites; // Pulls from fb, comment out this for launch 
         this.state.favourites = this.props.myFavourites // pulls from local store, use this for demo  
-        this.isFav = this.isFav.bind(this);
-    }
-
-    isFav(chartName) {
-        for (var i = 0; i < this.state.favourites.length; i++) {
-            if (typeof (this.state.favourites[i]) == 'object') {
-                if (this.state.favourites[i]["chart"] == chartName) {
-                    console.log(chartName, "is in favourites");
-                    return true;
-                }
-            }
+        if(this.state.favourites.length == 0) {
+            this.state.favourites = [{chart:"chart0"}]
         }
-        console.log(chartName, "is NOT in favourites");
-        return false;
-    }
-
-    addToFavourites(chart) {
-        console.log("Adding", chart);
-        this.state.favourites.push(chart)
-
-        store.dispatch({
-            type: "SET_FAV",
-            payload: this.state.favourites
-        })
-        console.log("Successfully added", chart)
-    }
-
-    removeFromFavourites(chart) {
-        console.log("Removing", chart)
-
-        var newFav = this.state.favourites.filter(function (c) { return (c["chart"] != chart) })
-        this.setState({
-            favourites: newFav
-        })
-
-        store.dispatch({
-            type: "SET_FAV",
-            payload: newFav
-        })
-        console.log("Successfully removed", chart)
     }
 
     getChart(chartName, activeUserId, activeCourse) {
@@ -123,7 +92,7 @@ class Dashboard extends React.Component {
         const activeCourse = this.props.activeProfile.course
         const chartData = this.state.favourites.map((chart) => {
             return (this.getChart(chart["chart"], activeUserId, activeCourse))
-        })
+        }) 
         console.log(chartData)
         console.log("Favourites:", this.state.favourites)
 
@@ -132,118 +101,219 @@ class Dashboard extends React.Component {
                 <h1>{this.props.usersTable[activeUserId].userDisplayName}'s Dashboard</h1>
 
                 <Grid container spacing={24} direction="row" align="center">
+                    
                     {this.state.favourites.map(function (chart, index) {
-                        {chart["chart"] == "chart08" ? 
-                            <h1>Chart08</h1>
-                        :
-                        chart["chart"] == "chart09" ?
-                            <div>chart09</div>
-                        :
-                        chart["chart"] == "chart10" ? 
-                            <div>chart10</div>
-                        :
-                        chart["chart"] == "chart10" ?
-                            <div>chart11</div>
-                        :
-                            <h2>You have not added in any charts!</h2>
-                        }
+                        return (
+                            chart["chart"] == "chart08" ?
+                                <Grid item xs={12}>
+                                    <Paper>
+                                        <div style={divStyle}>
+                                            <h2>Submission Per Type</h2>
+                                            <p>{chart["title"]}</p>
+                                            <Divider />
+                                        </div>
+                                        <ResponsiveContainer width="90%" height={380}>
+                                            <BarChart
+                                                width={730}
+                                                height={250}
+                                                data={chartData[index].data}
+                                                margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+                                            >
+                                                <XAxis
+                                                    dataKey={chart["xAxis"]}
+                                                />
+                                                <YAxis
+                                                    dataKey={chart["yAxis"]}
+                                                    label={
+                                                        <AxisLabel axisType="yAxis" width={600} height={300}>
+                                                            {chart["yAxis"]}
+                                                        </AxisLabel>
+                                                    }
+                                                />
+                                                <CartesianGrid strokeDasharray="3 3" />
+                                                <Tooltip />
+                                                {chart["dataKey"].map(function (dk, index) {
+                                                    return (
+                                                        <Bar dataKey={dk} fill="#8884d8">
+                                                            {chartData[index].data.map((entry, index) => (
+                                                                <Cell
+                                                                    key={entry['Name']}
+                                                                    fill={entry.Value < 1 ? '#d68995' : '#71afe2'}
+                                                                />
+                                                            ))}
+                                                        </Bar>
+                                                    )
+                                                })}
+
+                                            </BarChart>
+                                        </ResponsiveContainer>
+                                    </Paper>
+                                </Grid>
+                                :
+                                chart["chart"] == "chart09" ?
+                                    <Grid item xs={6}>
+                                        <Paper>
+                                            <div style={divStyle}>
+                                                <h2>{chart["title"]}</h2>
+                                                <p>{chart["subtitle"]}</p>
+                                                <Divider />
+                                            </div>
+                                            <ResponsiveContainer width="90%" height={380}>
+                                                <BarChart
+                                                    width={730}
+                                                    height={250}
+                                                    data={chartData[index].data}
+                                                    margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+                                                >
+                                                    <XAxis
+                                                        dataKey={chart["xAxis"]}
+                                                    />
+                                                    <YAxis
+                                                        dataKey={chart["yAxis"]}
+                                                        label={
+                                                            <AxisLabel axisType="yAxis" width={600} height={300}>
+                                                                {chart["yAxis"]}
+                                                            </AxisLabel>
+                                                        }
+                                                    />
+                                                    <CartesianGrid strokeDasharray="3 3" />
+                                                    <Tooltip />
+                                                    {chart["dataKey"].map(function (dk, index) {
+                                                        if (dk == "plays") {
+                                                            return (<Bar dataKey={dk} fill="#8884d8"></Bar>)
+                                                        } else {
+                                                            return (<Bar dataKey={dk} fill="#82ca9d"></Bar>)
+                                                        }
+                                                    })}
+                                                </BarChart>
+                                            </ResponsiveContainer>
+                                        </Paper>
+                                    </Grid>
+                                    :
+                                    chart["chart"] == "chart10" ?
+                                        <Grid item xs={6}>
+                                            <Paper>
+                                                <div style={divStyle}>
+                                                    {/* <h2>Chart10</h2> */}
+                                                    <h2>{chart["title"]}</h2>
+                                                    <p>{chart["subtitle"]}</p>
+                                                    <Divider />
+                                                </div>
+
+                                                <ResponsiveContainer width="90%" height={380}>
+                                                    <BarChart width={400} height={250} data={chartData[index].data}>
+                                                        <CartesianGrid strokeDasharray="3 3" />
+                                                        <XAxis dataKey={chart["xAxis"]} />
+                                                        <YAxis />
+                                                        <Tooltip />
+                                                        <Legend />
+                                                        {chart["dataKey"].map(function (dk, index) {
+                                                            if (dk == "pauses") {
+                                                                return (<Bar dataKey={dk} fill="#8884d8"></Bar>)
+                                                            } else {
+                                                                return (<Bar dataKey={dk} fill="#82ca9d"></Bar>)
+                                                            }
+                                                        })}
+                                                    </BarChart>
+                                                </ResponsiveContainer>
+                                            </Paper>
+                                        </Grid>
+                                        :
+                                        chart["chart"] == "chart11" ?
+                                            <Grid item xs={12}>
+                                                <Paper>
+                                                    <div style={divStyle}>
+                                                        {/* <h2>chart11</h2> */}
+                                                        <h2>{chart["title"]}</h2>
+                                                        <p>{chart["subtitle"]}</p>
+                                                        <Divider />
+                                                    </div>
+
+                                                    <ResponsiveContainer width="90%" height={380}>
+                                                        <BarChart width={730} height={250} data={chartData[index].data}>
+                                                            <CartesianGrid strokeDasharray="3 3" />
+                                                            <XAxis dataKey={chart["xAxis"]} />
+                                                            <YAxis />
+                                                            <Tooltip />
+                                                            <Legend />
+                                                            {chart["dataKey"].map(function (dk, index) {
+                                                                return (<Bar dataKey={dk} fill="#8884d8"></Bar>)
+                                                            })}
+                                                        </BarChart>
+                                                    </ResponsiveContainer>
+                                                </Paper>
+                                            </Grid>
+                                        :
+                                        <h2 style={{ marginLeft: "30%"}}>You have not added any charts to your Dashboard.</h2>
+                        )
                     })}
 
                 </Grid>
-                {/* <Grid container spacing={8}>
-                <Grid item xs={6}>
-                <BarChart
-                    width={600}
-                    height={300}
-                    data={this.props.firebase[activeUserId].R6nSbDVly8PUnC6jQFcseDS9sgJ3.BT3103.HighLowPerformance.data.chart04}
-                    margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-                    >
-                    <XAxis
-                    dataKey="Name"
-                    label={
-                        <AxisLabel axisType="xAxis" width={600} height={300}>
-                        xAxis
-                        </AxisLabel>
-                    }
-                    />
-                    <YAxis
-                    dataKey="Value"
-                    label={
-                        <AxisLabel axisType="yAxis" width={600} height={300}>
-                        yAxis
-                        </AxisLabel>
-                    }
-                    />
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <Tooltip />
-                    <Legend />
-                    <Bar dataKey="Value" fill="#8884d8" onClick={(data, index) => console.log(data, index)} />
-                </BarChart>
-                </Grid>
-                <Grid item xs={6}>
-                <BarChart
-                    width={600}
-                    height={300}
-                    data={fireb.R6nSbDVly8PUnC6jQFcseDS9sgJ3.BT3103.HighLowPerformance.data.chart05}
-                    margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-                    >
-                    <XAxis
-                    dataKey="Name"
-                    label={
-                        <AxisLabel axisType="xAxis" width={600} height={300}>
-                        xAxis
-                        </AxisLabel>
-                    }
-                    />
-                    <YAxis
-                    dataKey="Value"
-                    label={
-                        <AxisLabel axisType="yAxis" width={600} height={300}>
-                        yAxis
-                        </AxisLabel>
-                    }
-                    />
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <Tooltip />
-                    <Legend />
-                    <Bar dataKey="Value" fill="#8884d8" />
-                </BarChart>
-                </Grid>
-                <Grid item xs={6}>
-                <BarChart
-                    width={600}
-                    height={300}
-                    data={fireb.R6nSbDVly8PUnC6jQFcseDS9sgJ3.BT3103.HighLowPerformance.data.chart07}
-                    margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-                    >
-                    <XAxis
-                    dataKey="Name"
-                    label={
-                        <AxisLabel axisType="xAxis" width={600} height={300}>
-                        xAxis
-                        </AxisLabel>
-                    }
-                    />
-                    <YAxis
-                    dataKey="Value"
-                    label={
-                        <AxisLabel axisType="yAxis" width={600} height={300}>
-                        yAxis
-                        </AxisLabel>
-                    }
-                    />
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <Tooltip />
-                    <Legend />
-                    <Bar dataKey="Value" fill="#8884d8" />
-                </BarChart>
-                </Grid>
-                </Grid> */}
             </div>
 
         );
     }
 }
+
+// {chart["chart"] == "chart08" ?
+//     <Grid item xs={12}>
+//         <Paper>
+//             <div style={divStyle}>
+//                 <h2>Submission Per Type</h2>
+//                 <p>Monitor Percentage of Submission Per Assignment Type</p>
+//                 <Divider />
+//             </div>
+//             <ResponsiveContainer width="90%" height={380}>
+//                 <BarChart
+//                     width={730}
+//                     height={250}
+//                     data={chartData[index].data}
+//                     margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+//                 >
+//                     <XAxis
+//                         dataKey={chart["xAxis"]}
+//                     />
+//                     <YAxis
+//                         dataKey={chart["yAxis"]}
+//                         label={
+//                             <AxisLabel axisType="yAxis" width={600} height={300}>
+//                                 {chart["yAxis"]}
+//                             </AxisLabel>
+//                         }
+//                     />
+//                     <CartesianGrid strokeDasharray="3 3" />
+//                     <Tooltip />
+//                     {chart["dataKey"].map(function (dk, index) {
+//                         if (index % 2 == 0) {
+//                             <Bar dataKey={dk} fill="#8884d8"></Bar>
+//                         } else {
+//                             <Bar dataKey={dk} fill="#71afe2"></Bar>
+//                         }
+//                     })}
+//                     {/* <Bar dataKey="Value" fill="#8884d8">
+//                                                     {this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignmentType.chart08.data.map((entry, index) => (
+//                                                         <Cell
+//                                                             key={entry['Name']}
+//                                                             fill={entry.Name == this.state.selectedAssignmentType ? '#87f2de' : (entry.Value < 1 ? '#d68995' : '#71afe2')}
+//                                                         />
+//                                                     ))}
+//                                                 </Bar> */}
+//                 </BarChart>
+//             </ResponsiveContainer>
+//         </Paper>
+//     </Grid>
+//     :
+//     chart["chart"] == "chart09" ?
+//         <div>chart09</div>
+//         :
+//         chart["chart"] == "chart10" ?
+//             <div>chart10</div>
+//             :
+//             chart["chart"] == "chart10" ?
+//                 <div>chart11</div>
+//                 :
+//                 <h2>You have not added in any charts!</h2>
+// }
 
 const mapStateToProps = state => {
     return {
