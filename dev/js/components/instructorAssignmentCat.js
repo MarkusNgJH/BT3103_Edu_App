@@ -227,9 +227,9 @@ class InstructorAssignmentCat extends React.Component {
                                     />
                                     <YAxis
                                         dataKey="value"
-                                    // label={{ value: 'Number of Submissions', angle: -90, position: 'insideBottomLeft' }}
+                                        label={{value:"Number of Submissions", angle: -90 ,position:"insideBottomLeft"}}
                                     />
-                                    <CartesianGrid strokeDasharray="3 3" />
+                                    
                                     <Tooltip cursor={{ fill: 'red', fillOpacity: 0.1 }} />
                                     <Legend verticalAlign="top" align="right" />
                                     {/* <Bar name="Number of Submissions" dataKey="value" fill="#8884d8"
@@ -277,14 +277,14 @@ class InstructorAssignmentCat extends React.Component {
                                         >
                                             <XAxis
                                                 dataKey="days_lapsed"
-                                                label={{ value: "Number of days elapsed", position: 'insideBottom', offset: -4 }}
+                                                label={{ value: "Number of Days Elapsed", position: 'insideBottom', offset: -4 }}
 
                                             />
                                             <YAxis
                                                 dataKey="value"
-                                            // label={{ value: "Number of submissions", angle: -90, position: 'insideBottomLeft' }}
+                                                label={{value:"Number of Submissions", angle: -90 ,position:"insideBottomLeft"}}
                                             />
-                                            <CartesianGrid strokeDasharray="3 3" />
+                                            
                                             <Tooltip cursor={{ fill: 'red', fillOpacity: 0.05 }} />
                                             <Legend verticalAlign="top" align="right" />
                                             <Bar name="Number of Submissions" dataKey="value" fill="#8884d8" />
@@ -323,16 +323,15 @@ class InstructorAssignmentCat extends React.Component {
                                                     <stop offset="95%" stopColor="#8884d8" stopOpacity={0} />
                                                 </linearGradient>
                                             </defs>
-                                            <XAxis dataKey="date_time" />
-                                            <YAxis />
-                                            <CartesianGrid strokeDasharray="3 3" />
+                                            <XAxis label={{value:"Date"}} dataKey="date_time" tick={false}/>
+                                            <YAxis label={{value:"Number of Submissions", angle: -90 ,position:"insideBottomLeft", offset: 12}}/>
+                                            <Legend verticalAlign="top" align="right" />
                                             <Tooltip />
-                                            <Area type="monotone" dataKey="value" stroke="#8884d8" fillOpacity={1} fill="url(#colorUv)" />
+                                            <Area name="Number of Submissions" type="monotone" dataKey="value" stroke="#8884d8" fillOpacity={1} fill="url(#colorUv)" />
                                         </AreaChart>
                                     </ResponsiveContainer>
                                     {this.isFav("chart03") == true ?
                                         <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart03", "Chart03 has been removed!") }}>Remove</Button>
-
                                         :
                                         <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart03", "BarChart", "How are my student behaviour in submitting my assignments?", "assignment", "value", ["value"], "Chart03 has been added!") }}>Favourite</Button>
 
@@ -352,7 +351,7 @@ class InstructorAssignmentCat extends React.Component {
                                     <div style={divStyle}>
                                         {/* <h2>Chart04</h2> */}
                                         <h2>Submission Window</h2>
-                                        <p>Evaluate Whether Deadline is Reasonable for Assignment X "{this.state.selectedAssignment}"?</p>
+                                        <p>Evaluate Whether Deadline is Reasonable for Assignment "{this.state.selectedAssignment}"?</p>
                                         <Divider />
                                     </div>
                                     <ResponsiveContainer width="90%" height={380}>
@@ -363,19 +362,16 @@ class InstructorAssignmentCat extends React.Component {
                                         >
                                             <XAxis
                                                 dataKey="day_lapsed_from_assignmentX"
+                                                label={{ value: "Number of Days Elapsed", position: 'insideBottom', offset: -4 }}
                                             />
                                             <YAxis
                                                 dataKey="value"
-                                                label={
-                                                    <AxisLabel axisType="yAxis" width={600} height={300}>
-                                                        yAxis
-                        </AxisLabel>
-                                                }
+                                                label={{value:"Number of Submissions", angle: -90 ,position:"insideBottomLeft"}}
                                             />
-                                            <CartesianGrid strokeDasharray="3 3" />
+                                            
                                             <Tooltip />
-                                            <Legend />
-                                            <Bar dataKey="value" fill="#8884d8" />
+                                            <Legend verticalAlign="top" align="right" />
+                                            <Bar name = "Number of Days Elapsed" dataKey="value" fill="#8884d8" />
                                         </BarChart>
                                     </ResponsiveContainer>
                                     {this.isFav("chart04") == true ?
@@ -412,11 +408,11 @@ class InstructorAssignmentCat extends React.Component {
                                                     <stop offset="95%" stopColor="#8884d8" stopOpacity={0} />
                                                 </linearGradient>
                                             </defs>
-                                            <XAxis dataKey="date_time" />
-                                            <YAxis />
-                                            <CartesianGrid strokeDasharray="3 3" />
+                                            <XAxis label={{value:"Date"}} dataKey="date_time" tick={false}/>
+                                            <YAxis name = "Date" label={{value:"Number of Submissions", angle: -90 ,position:"insideBottomLeft", offset: 12}}/>
+                                            <Legend verticalAlign="top" align="right" />
                                             <Tooltip />
-                                            <Area type="monotone" dataKey="value" stroke="#8884d8" fillOpacity={1} fill="url(#colorUv)" />
+                                            <Area name = "Number of Submissions" type="monotone" dataKey="value" stroke="#8884d8" fillOpacity={1} fill="url(#colorUv)" />
                                         </AreaChart>
                                     </ResponsiveContainer>
                                     {this.isFav("chart06") == true ?
@@ -451,24 +447,15 @@ class InstructorAssignmentCat extends React.Component {
                                         >
                                             <XAxis
                                                 dataKey="day_lapsed_from_assignmentX"
-                                                label={
-                                                    <AxisLabel axisType="xAxis" width={600} height={300}>
-                                                        xAxis
-                                            </AxisLabel>
-                                                }
+                                                label={"Number of Days Elapsed"}
                                             />
                                             <YAxis
                                                 dataKey="value"
-                                                label={
-                                                    <AxisLabel axisType="yAxis" width={600} height={300}>
-                                                        yAxis
-                                            </AxisLabel>
-                                                }
+                                                label={{value:"Number of Submissions", angle: -90 ,position:"insideBottomLeft"}}
                                             />
-                                            <CartesianGrid strokeDasharray="3 3" />
                                             <Tooltip />
-                                            <Legend />
-                                            <Bar dataKey="value" fill="#8884d8" />
+                                            <Legend verticalAlign="top" align="right" />
+                                            <Bar name ="Number of Days Elapsed" dataKey="value" fill="#8884d8" />
                                         </BarChart>
                                     </ResponsiveContainer>
                                     {this.isFav("chart05") == true ?
@@ -505,11 +492,12 @@ class InstructorAssignmentCat extends React.Component {
                                                     <stop offset="95%" stopColor="#8884d8" stopOpacity={0} />
                                                 </linearGradient>
                                             </defs>
-                                            <XAxis dataKey="date_time" />
-                                            <YAxis />
-                                            <CartesianGrid strokeDasharray="3 3" />
+                                            <XAxis label={{value:"Date"}} dataKey="date_time" tick={false}/>
+                                            <YAxis label={{value:"Number of Submissions", angle: -90 ,position:"insideBottomLeft", offset: 12}}/>
+                                            
                                             <Tooltip />
-                                            <Area type="monotone" dataKey="value" stroke="#8884d8" fillOpacity={1} fill="url(#colorUv)" />
+                                            <Legend verticalAlign="top" align="right" />
+                                            <Area name = "Number of Submissions" type="monotone" dataKey="value" stroke="#8884d8" fillOpacity={1} fill="url(#colorUv)" />
                                         </AreaChart>
                                     </ResponsiveContainer>
                                     {this.isFav("chart07") == true ?

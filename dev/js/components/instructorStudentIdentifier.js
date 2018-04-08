@@ -180,21 +180,18 @@ class instructorStudentIdentifier extends React.Component {
                                     />
                                     <YAxis
                                         dataKey="value"
-                                        label={
-                                            <AxisLabel width={40} height={380} axisType="yAxis">
-                                                Number of Submissions
-                        </AxisLabel>
-                                        }
+                                        label={{value:"Number of Submissions", angle: -90 ,position:"insideBottomLeft"}}
                                     />
-                                    <CartesianGrid strokeDasharray="3 3" />
+                                    
                                     <Tooltip />
-                                    <Bar dataKey="value" fill="#3498DB">
+                                    <Bar name = "Number of Submissions" dataKey="value" fill="#3498DB">
                                         onClick={(data, index) => this.selectedAssignment(data.assignment)}>
                         {this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorStudentIdentifier.chart12.data.map((entry, index) => (
                                             <Cell key={entry.student_name} fill={entry.value < 20 ? '#d68995' : '#71afe2'} />
                                         ))}
                                     </ Bar>
                                     <ReferenceLine strokeDasharray="3 3" y={20} strokeWidth={4} stroke="#e0b13c" label={{ value: "Expectation", position: "insideTop" }} />
+                                    <Legend verticalAlign="top" align="right" />
                                 </BarChart>
                             </ ResponsiveContainer>
                             {this.isFav("chart12") == true ?
@@ -231,15 +228,11 @@ class instructorStudentIdentifier extends React.Component {
                                     />
                                     <YAxis
                                         dataKey="value"
-                                        label={
-                                            <AxisLabel width={40} height={380} axisType="yAxis">
-                                                Number of Subsmission
-                        </AxisLabel>
-                                        }
+                                        label={{value:"Number of Submissions", angle: -90 ,position:"insideBottomLeft"}}
                                     />
-                                    <CartesianGrid strokeDasharray="3 3" />
+                                    
                                     <Tooltip />
-                                    <Bar dataKey="value" fill="#66CDAA">
+                                    <Bar name = "Number of Submissions" dataKey="value" fill="#66CDAA">
                                         onClick={(data, index) => this.selectedAssignment(data.assignment)}>
                         {this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorStudentIdentifier.chart13.data.map((entry, index) => (
                                             <Cell key={entry.student_name} fill={entry.value > this.topStudentSubmissions(this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorStudentIdentifier.chart13.data) ? '#66CDAA' : '#3498DB'} />
@@ -249,6 +242,7 @@ class instructorStudentIdentifier extends React.Component {
                                     <ReferenceLine strokeDasharray="3 3"
                                         y={this.topStudentSubmissions(this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorStudentIdentifier.chart13.data)}
                                         strokeWidth={4} stroke="#e0b13c" label={{ value: "75 Percentile", position: "insideTop" }} />
+                                <Legend verticalAlign="top" align="right" />
                                 </BarChart>
                             </ResponsiveContainer>
                             {this.isFav("chart13") == true ?
@@ -286,17 +280,12 @@ class instructorStudentIdentifier extends React.Component {
                                     />
                                     <YAxis
                                         dataKey="value"
-                                        label={
-                                            <AxisLabel width={40} height={380} axisType="yAxis">
-                                                Number of Days Taken
-                        </AxisLabel>
-                                        }
+                                        label={{value:"Number of Days", angle: -90 ,position:"insideBottomLeft"}}
                                     />
-                                    <CartesianGrid strokeDasharray="3 3" />
+                                    
                                     <Tooltip />
-                                    <Bar dataKey="value" fill="#3498DB">
-
-                                    </Bar>
+                                    <Bar name = "Number of Days Taken" dataKey="value" fill="#3498DB"/>>
+                                    <Legend verticalAlign="top" align="right" />
                                 </BarChart>
                             </ResponsiveContainer>
                             {this.isFav("chart14") == true ?
