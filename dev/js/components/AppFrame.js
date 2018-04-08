@@ -189,7 +189,7 @@ class AppFrame extends React.Component {
                             </IconButton>
                             <Typography variant="title" style={{ flex: 1 }} noWrap>
                                 <Link to="/" style={{ textDecoration: "none" }}>
-                                    <h3 style={{ color: "#FFF" }}>Edu App</h3>
+                                    <span className="app-logo">EduSparks</span>
                                 </Link>
                             </Typography>
                             <ActiveUserInfo />
