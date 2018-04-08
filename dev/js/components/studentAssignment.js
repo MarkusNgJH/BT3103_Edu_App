@@ -26,9 +26,12 @@ import {
     CartesianGrid,
     Tooltip,
     Legend,
-    ResponsiveContainer
+    ResponsiveContainer,
+    Cell,
+    Label
 } from "recharts";
 import { BarChart, Bar } from "recharts";
+import { Paper } from 'material-ui';
 const AxisLabel = ({
     axisType,
     x = 0,
@@ -166,129 +169,156 @@ class studentAssignment extends React.Component {
     render() {
         const state = store.getState();
         const { vertical, horizontal, snackOpen } = this.state;
+
         return (
             <div>
                 <Stepper steps={this.state.steps} backStep={this.backStep.bind(this)} reset={this.reset.bind(this)} />
+                <br />
 
-                <Grid container spacing={8}>
-                    <Grid item xs={12}>
-                        <h3>Chart01</h3>
-                        <h4>Assignments completed by Student</h4>
-                        <PieChart
-                            width={730}
-                            height={250}
-                            margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-                        >
-                            <Pie
-                                data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].studentAssignment.chart01.data}
-                                cx="50%" cy="50%"
-                                dataKey="Value" nameKey="Name" outerRadius={100} fill="#8884d8" label
-                                onClick={(data, index) => this.selectedAssignment(data)} />
-                        </PieChart>
+                <Grid container spacing={24} direction="row" align="center">
+                    <Grid item xs={12}>  {/*chart01*/}
+                        <Paper>
+                            <div style={divStyle}>
+                                <h3>Chart01</h3>
+                                <h4>Assignments completed by Student</h4>
+                                <Divider />
+                            </div>
+                            <ResponsiveContainer width="90%" height={380}>
+                                <PieChart
+                                    width={730}
+                                    height={250}
+                                    margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+                                >
+                                    <Pie
+                                        data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].studentAssignment.chart01.data}
+                                        dataKey="value" outerRadius={100} fill="#8884d8" label
+                                        onClick={(data, index) => this.selectedAssignment(data)}>
+                                        {this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].studentAssignment.chart01.data.map((entry, index) => (
+                                            <Cell
+                                                key={entry['name']}
+                                                fill={entry.value < (5) ? '#d68995' : '#71afe2'}
+                                            />
+                                        ))}
+                                    </Pie>
+                                    <Tooltip />
+                                </PieChart>
+                            </ResponsiveContainer>
+                            {this.isFav("chart01") == true ?
+                                <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart01", "Chart01 has been removed!") }}>Remove</Button>
+                                :
+                                <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart01", "PieChart", "Chart01", "Assignments completed by Student", "", "", ["Value"], "Chart01 has been added!") }}>Favourite</Button>
+                            }
+                        </Paper>
                     </Grid>
+
                     {this.state.selectedAssignment ?
-                        <div>
-                            <Grid item xs={12}>
-                                <h3>Chart02</h3>
-                                <h4>Assignment Tracking</h4>
-                                <BarChart
-                                    width={730}
-                                    height={250}
-                                    data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].studentAssignment.chart02.data}
-                                    margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-                                >
-                                    <XAxis
-                                        dataKey="Name"
-                                        label={
-                                            <AxisLabel axisType="xAxis" width={600} height={300}>
-                                                Student
-                        </AxisLabel>
-                                        }
-                                    />
-                                    <YAxis
-                                        dataKey="Value"
-                                        label={
-                                            <AxisLabel axisType="yAxis" width={600} height={300}>
-                                                Number of Subsmission
-                        </AxisLabel>
-                                        }
-                                    />
-                                    <CartesianGrid strokeDasharray="3 3" />
-                                    <Tooltip />
-                                    <Legend />
-                                    <Bar dataKey="Value" fill="#8884d8" />
-                                </BarChart>
-                            </Grid>
-                        </div>
+                        <Grid item xs={12}> {/* chart02 */}
+                            <Paper>
+                                <div style={divStyle}>
+                                    <h3>Chart02</h3>
+                                    <h4>Assignment Tracking</h4>
+                                    <Divider />
+                                </div>
+                                <ResponsiveContainer width="90%" height={380}>
+                                    <BarChart
+                                        width={730}
+                                        height={250}
+                                        data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].studentAssignment.chart02.data}
+                                        margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+                                    >
+
+                                        <XAxis dataKey="Name">
+                                            <Label value="Student" offset={0} position="insideBottom" />
+                                        </XAxis>
+
+                                        <YAxis dataKey="Value">
+                                            <Label value="Number of Subsmission" angle={-90} offset={0} position="insideBottomLeft" />
+                                        </YAxis>
+
+                                        <CartesianGrid strokeDasharray="3 3" />
+                                        <Tooltip />
+                                        <Legend />
+                                        <Bar dataKey="Value" fill="#8884d8" />
+                                    </BarChart>
+                                </ResponsiveContainer>
+                                {this.isFav("chart02") == true ?
+                                    <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart02", "Chart02 has been removed!") }}>Remove</Button>
+                                    :
+                                    <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart02", "BarChart", "Chart02", "Assignment Tracking", "Name", "Value", ["Value"], "Chart02 has been added!") }}>Favourite</Button>
+                                }
+                            </Paper>
+                        </Grid>
                         :
-                        <div>
-                            <Grid item xs={12}>
-                                <h3>Chart03</h3>
-                                <h4>Date of Submissison</h4>
-                                <LineChart
-                                    width={730}
-                                    height={250}
-                                    data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].studentAssignment.chart03.data}
-                                    margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-                                >
-                                    <XAxis
-                                        dataKey="name"
-                                        label={
-                                            <AxisLabel axisType="xAxis" width={600} height={300}>
-                                                Student
-                        </AxisLabel>
-                                        }
-                                    />
-                                    <YAxis
-                                        dataKey="Value"
-                                        label={
-                                            <AxisLabel axisType="yAxis" width={600} height={300}>
-                                                Number of Days Taken
-                        </AxisLabel>
-                                        }
-                                    />
-                                    <CartesianGrid strokeDasharray="3 3" />
-                                    <Tooltip />
-                                    <Legend />
-                                    <Line dataKey="Value" fill="#8884d8" />
-                                </LineChart>
-                            </Grid>
+                        <Grid item xs={12} zeroMinWidth> {/*chart03*/}
+                            <Paper>
+                                <div style={divStyle}>
+                                    <h3>Chart03</h3>
+                                    <h4>Date of Submissison</h4>
+                                    <Divider />
+                                </div>
+                                <ResponsiveContainer width="100%" height={380}>
+                                    <LineChart
+                                        width={730}
+                                        height={250}
+                                        data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].studentAssignment.chart03.data}
+                                        margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+                                    >
+                                        <XAxis dataKey="Name">
+                                            <Label value="Date" offset={0} position="insideBottom" />
+                                        </XAxis>
 
-                            <Grid item xs={12}>
-                                <h3>Chart04</h3>
-                                <h4>Time Lapse Since Work Done</h4>
-                                <BarChart
-                                    width={730}
-                                    height={250}
-                                    data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].studentAssignment.chart04.data}
-                                    margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-                                >
-                                    <XAxis
-                                        dataKey="Name"
-                                        label={
-                                            <AxisLabel axisType="xAxis" width={600} height={300}>
-                                                Student
-                        </AxisLabel>
-                                        }
-                                    />
-                                    <YAxis
-                                        dataKey="Value"
-                                        label={
-                                            <AxisLabel axisType="yAxis" width={600} height={300}>
-                                                Number of Days Taken
-                        </AxisLabel>
-                                        }
-                                    />
-                                    <CartesianGrid strokeDasharray="3 3" />
-                                    <Tooltip />
-                                    <Legend />
-                                    <Bar dataKey="Value" fill="#8884d8" />
-                                </BarChart>
-                            </Grid>
-                        </div>
+                                        <YAxis dataKey="Value">
+                                            <Label value="Number of Assignments Submitted" angle={-90} offset={0} position="insideBottomLeft" />
+                                        </YAxis>
+
+                                        <CartesianGrid strokeDasharray="3 3" />
+                                        <Tooltip />
+                                        <Line dataKey="Value" fill="#8884d8" />
+                                    </LineChart>
+                                </ResponsiveContainer>
+                                {this.isFav("chart03") == true ?
+                                    <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart03", "Chart03 has been removed!") }}>Remove</Button>
+                                    :
+                                    <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart03", "LineChart", "Chart03", "Date of Submissison", "name", "Value", ["Value"], "Chart03 has been added!") }}>Favourite</Button>
+                                }
+                            </Paper>
+                            <br />
+
+                            <Paper>
+                                <div style={divStyle}>
+                                    <h3>Chart04</h3>
+                                    <h4>Time Lapse Since Work Done</h4>
+                                    <Divider />
+                                </div>
+                                <ResponsiveContainer width="100%" height={380}>
+                                    <BarChart
+                                        width={730}
+                                        height={250}
+                                        data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].studentAssignment.chart04.data}
+                                        margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+                                    >
+                                        <XAxis dataKey="Name">
+                                            <Label value="Number of Students" offset={0} position="insideBottom" />
+                                        </XAxis>
+
+                                        <YAxis dataKey="Value">
+                                            <Label value="Number of Days since Assignment release" angle={-90} offset={0} position="insideBottomLeft" />
+                                        </YAxis>
+
+                                        <CartesianGrid strokeDasharray="3 3" />
+                                        <Bar name="Number of Students" dataKey="Value" fill="#8884d8" />
+                                        <Tooltip />
+                                    </BarChart>
+                                </ResponsiveContainer>
+                                {this.isFav("chart04") == true ?
+                                    <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart04", "Chart04 has been removed!") }}>Remove</Button>
+                                    :
+                                    <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart04", "BarChart", "Chart04", "Time Lapse Since Work Done", "Name", "Value", ["Value"], "Chart04 has been added!") }}>Favourite</Button>
+                                }
+                            </Paper>
+                        </Grid>
                     }
-
-                </Grid>
+                </Grid> {/*End of main Grid*/}
             </div>
         )
     }
@@ -298,7 +328,9 @@ function mapStateToProps(state) {
     return {
         firebase: state.firebase,
         activeProfile: state.activeProfile.val,
-        activeView: state.activeView
+        activeView: state.activeView,
+        usersTable: state.firebase.val.usersTable.usersTable,
+        myFavourites: state.myFavourites.favourites
     };
 }
 
