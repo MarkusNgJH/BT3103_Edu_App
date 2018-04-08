@@ -55,18 +55,20 @@ class DrawerItems extends React.Component {
                     </Link>
                     {this.props.overviewOpen ? <ExpandLess /> : <ExpandMore />}
                 </ListItem>
-                <Collapse in={this.props.overviewOpen} timeout="auto" unmountOnExit style={{ backgroundColor: "#FFBF00", color: "#FFF" }}>
+                <Collapse in={this.props.overviewOpen} timeout="auto" unmountOnExit style={{ backgroundColor: "#FFBF00", color: "#000" }}>
 
                     {this.props.activeProfileRole == 'Administrator' ?
                         <List disablePadding >
                             <ListItem button onClick={this.props.handleDrawerClose.bind(this)} style={{ paddingLeft: "60px" }}>
                                 <Link to="/administratorPerformance" style={{ textDecoration: "none" }}>
-                                    <ListItemText primary="Administrator Performance" />
+                                    {/* <ListItemText primary="Administrator Performance" /> */}
+                                    <h4 style={{ color: "#000" }}>Administrator Performance</h4>
                                 </Link>
                             </ListItem>
                             <ListItem button onClick={this.props.handleDrawerClose.bind(this)} style={{ paddingLeft: "60px" }}>
                                 <Link to="/administratorActivity" style={{ textDecoration: "none" }}>
-                                    <ListItemText primary="Administrator Activity" />
+                                    {/* <ListItemText primary="Administrator Activity" /> */}
+                                    <h4 style={{ color: "#000" }}>Administrator Activity</h4>
                                 </Link>
                             </ListItem>
                         </List>
@@ -76,7 +78,7 @@ class DrawerItems extends React.Component {
                                 {/* <ListItem button onClick={this.props.handleDrawerClose.bind(this)} style={{ paddingLeft: "60px", background: 1==1 ? "#4b9aea" : ""}}> */}
                                 <ListItem button onClick={this.props.handleDrawerClose.bind(this)} style={{ paddingLeft: "60px" }}>
                                     <Link to="/instructorAssignmentType" style={{ textDecoration: "none" }}>
-                                        <h4 style={{ color: "#FFFFFF" }}>Instructor Assignment Type</h4>
+                                        <h4 style={{color: "#000"}}>Instructor Assignment Type</h4>
                                     </Link>
                                 </ListItem>
 
@@ -84,7 +86,7 @@ class DrawerItems extends React.Component {
 
                                 <ListItem button onClick={this.props.handleDrawerClose.bind(this)} style={{ paddingLeft: "60px" }}>
                                     <Link to="/instructorAssignmentCat" style={{ textDecoration: "none" }}>
-                                        <h4 style={{ color: "#FFFFFF" }}>Instructor Assignment Cat</h4>
+                                        <h4 style={{ color: "#000" }}>Instructor Assignment Cat</h4>
                                     </Link>
                                 </ListItem>
 
@@ -92,7 +94,7 @@ class DrawerItems extends React.Component {
 
                                 <ListItem button onClick={this.props.handleDrawerClose.bind(this)} style={{ paddingLeft: "60px" }}>
                                     <Link to="/instructorStudentIdentifier" style={{ textDecoration: "none" }}>
-                                        <h4 style={{ color: "#FFFFFF" }}>Instructor Student Identifier</h4>
+                                        <h4 style={{ color: "#000" }}>Instructor Student Identifier</h4>
                                     </Link>
                                 </ListItem>
                             </List>
@@ -100,12 +102,14 @@ class DrawerItems extends React.Component {
                             <List disablePadding>
                                 <ListItem button onClick={this.props.handleDrawerClose.bind(this)} style={{ paddingLeft: "60px" }}>
                                     <Link to="/StudentAssignment" style={{ textDecoration: "none" }}>
-                                        <ListItemText primary="Student Assignment" />
+                                        {/* <ListItemText primary="Student Assignment" /> */}
+                                        <h4 style={{ color: "#000" }}>Student Assignment</h4>
                                     </Link>
                                 </ListItem>
                                 <ListItem button onClick={this.props.handleDrawerClose.bind(this)} style={{ paddingLeft: "60px" }}>
                                     <Link to="/StudentAssignmentType" style={{ textDecoration: "none" }}>
-                                        <ListItemText primary="Student Assignment Type" />
+                                        {/* <ListItemText primary="Student Assignment Type" /> */}
+                                        <h4 style={{ color: "#000" }}>Student Assignment Type</h4>
                                     </Link>
                                 </ListItem>
                             </List>
