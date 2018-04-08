@@ -9,6 +9,8 @@ import AppFrame from './AppFrame';
 import RechartsComp from './RechartsChart.js';
 import Grid from 'material-ui/Grid';
 import store from '../store';
+import Paper from 'material-ui/Paper';
+import Divider from 'material-ui/Divider';
 
 import {
     PieChart,
@@ -19,7 +21,8 @@ import {
     YAxis,
     CartesianGrid,
     Tooltip,
-    Legend
+    Legend,
+    ResponsiveContainer
 } from "recharts";
 import { BarChart, Bar } from "recharts";
 const AxisLabel = ({
@@ -48,122 +51,155 @@ const AxisLabel = ({
     );
 };
 
+var divStyle = {
+    padding: "1px"
+};
+
 class administratorPerformance extends React.Component {
     render() {
         const state = store.getState();
         return (
             <div>
-                <h3>Chart01</h3>
-                <h4>Cohort Performance</h4>
-                <Grid container spacing={8}>
+
+                <Grid container spacing={8} direction="row" align="center">
                     <Grid item xs={12}>
-                        <PieChart width={730} height={250} >
-                            <Pie
-                                dataKey="value"
-                                fill="#8884d8"
-                                data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].adminPerformance.chart01.data}
-                                outerRadius={80}
-                                label
-                            />
-                            <Tooltip />
-                        </PieChart>
+                        <Paper>
+                            <div style={divStyle}>
+                                <h3>Chart01</h3>
+                                <h4>Cohort Performance</h4>
+                                <Divider />
+                            </div>
+                            <ResponsiveContainer width="90%" height={380}>
+                                <PieChart width={730} height={250} >
+                                    <Pie
+                                        dataKey="value"
+                                        fill="#8884d8"
+                                        data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].adminPerformance.chart01.data}
+                                        outerRadius={80}
+                                        label
+                                    />
+                                    <Tooltip />
+                                </PieChart>
+                            </ResponsiveContainer>
+                        </Paper>
                     </Grid>
 
                     <Grid item xs={12}>
-                        <h3>Chart02</h3>
-                        <h4>Performance Across Cohort (%)</h4>
-                        <BarChart
-                            width={730}
-                            height={250}
-                            data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].adminPerformance.chart02.data}
-                            margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-                        >
-                            <XAxis
-                                dataKey="Name"
-                                label={
-                                    <AxisLabel axisType="xAxis" width={600} height={300}>
-                                        Cohorts
+                        <Paper>
+                            <div style={divStyle}>
+                                <h3>Chart02</h3>
+                                <h4>Performance Across Cohort (%)</h4>
+                                <Divider />
+                            </div>
+                            <ResponsiveContainer width="90%" height={380}>
+                                <BarChart
+                                    width={730}
+                                    height={250}
+                                    data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].adminPerformance.chart02.data}
+                                    margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+                                >
+                                    <XAxis
+                                        dataKey="Name"
+                                        label={
+                                            <AxisLabel axisType="xAxis" width={600} height={300}>
+                                                Cohorts
                         </AxisLabel>
-                                }
-                            />
-                            <YAxis
-                                dataKey="Value"
-                                label={
-                                    <AxisLabel axisType="yAxis" width={600} height={300}>
-                                        Number of Subsmission
+                                        }
+                                    />
+                                    <YAxis
+                                        dataKey="Value"
+                                        label={
+                                            <AxisLabel axisType="yAxis" width={600} height={300}>
+                                                Number of Subsmission
                         </AxisLabel>
-                                }
-                            />
-                            <CartesianGrid strokeDasharray="3 3" />
-                            <Tooltip />
-                            <Legend />
-                            <Bar dataKey="Value" fill="#8884d8" />
-                        </BarChart>
+                                        }
+                                    />
+                                    <CartesianGrid strokeDasharray="3 3" />
+                                    <Tooltip />
+                                    <Legend />
+                                    <Bar dataKey="Value" fill="#8884d8" />
+                                </BarChart>
+                            </ResponsiveContainer>
+                        </Paper>
                     </Grid>
 
                     <Grid item xs={12}>
-                        <h3>Chart03</h3>
-                        <h4>Progress Tracking</h4>
-                        <BarChart
-                            width={730}
-                            height={250}
-                            data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].adminPerformance.chart03.data}
-                            margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-                        >
-                            <XAxis
-                                dataKey="Name"
-                                label={
-                                    <AxisLabel axisType="xAxis" width={600} height={300}>
-                                        Student
+                        <Paper>
+                            <div style={divStyle}>
+                                <h3>Chart03</h3>
+                                <h4>Progress Tracking</h4>
+                                <Divider />
+                            </div>
+                            <ResponsiveContainer width="90%" height={380}>
+                                <BarChart
+                                    width={730}
+                                    height={250}
+                                    data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].adminPerformance.chart03.data}
+                                    margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+                                >
+                                    <XAxis
+                                        dataKey="Name"
+                                        label={
+                                            <AxisLabel axisType="xAxis" width={600} height={300}>
+                                                Student
                         </AxisLabel>
-                                }
-                            />
-                            <YAxis
-                                dataKey="Value"
-                                label={
-                                    <AxisLabel axisType="yAxis" width={600} height={300}>
-                                        Number of Days Taken
+                                        }
+                                    />
+                                    <YAxis
+                                        dataKey="Value"
+                                        label={
+                                            <AxisLabel axisType="yAxis" width={600} height={300}>
+                                                Number of Days Taken
                         </AxisLabel>
-                                }
-                            />
-                            <CartesianGrid strokeDasharray="3 3" />
-                            <Tooltip />
-                            <Legend />
-                            <Bar dataKey="Value" fill="#8884d8" />
-                        </BarChart>
+                                        }
+                                    />
+                                    <CartesianGrid strokeDasharray="3 3" />
+                                    <Tooltip />
+                                    <Legend />
+                                    <Bar dataKey="Value" fill="#8884d8" />
+                                </BarChart>
+                            </ResponsiveContainer>
+                        </Paper>
                     </Grid>
 
                     <Grid item xs={12}>
-                        <h3>Chart04</h3>
-                        <h4> Proportion of Completion by Courses </h4>
-                        <BarChart
-                            width={730}
-                            height={250}
-                            data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].adminPerformance.chart04.data}
-                            margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-                        >
-                            <XAxis
-                                dataKey="Name"
-                                label={
-                                    <AxisLabel axisType="xAxis" width={600} height={300}>
-                                        Student
+                        <Paper>
+                            <div style={divStyle}>
+                                <h3>Chart04</h3>
+                                <h4> Proportion of Completion by Courses </h4>
+                                <Divider />
+                            </div>
+                            <ResponsiveContainer width="90%" height={380}>
+                                <BarChart
+                                    width={730}
+                                    height={250}
+                                    data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].adminPerformance.chart04.data}
+                                    margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+                                >
+                                    <XAxis
+                                        dataKey="Name"
+                                        label={
+                                            <AxisLabel axisType="xAxis" width={600} height={300}>
+                                                Student
                             </AxisLabel>
-                                }
-                            />
-                            <YAxis
-                                dataKey="Value"
-                                label={
-                                    <AxisLabel axisType="yAxis" width={600} height={300}>
-                                        Number of Days Taken
+                                        }
+                                    />
+                                    <YAxis
+                                        dataKey="Value"
+                                        label={
+                                            <AxisLabel axisType="yAxis" width={600} height={300}>
+                                                Number of Days Taken
                             </AxisLabel>
-                                }
-                            />
-                            <CartesianGrid strokeDasharray="3 3" />
-                            <Tooltip />
-                            <Legend />
-                            <Bar dataKey="Value" stackId="a" fill="#8884d8" />
-                            <Bar dataKey="Value2" stackId="a" fill="#76a8dd" />
-                        </BarChart>
+                                        }
+                                    />
+                                    <CartesianGrid strokeDasharray="3 3" />
+                                    <Tooltip />
+                                    <Legend />
+                                    <Bar dataKey="Value" stackId="a" fill="#8884d8" />
+                                    <Bar dataKey="Value2" stackId="a" fill="#76a8dd" />
+                                </BarChart>
+                            </ResponsiveContainer>
+                        </Paper>
                     </Grid>
 
                 </Grid>

@@ -66,7 +66,7 @@ class administratorActivity extends React.Component {
             selectedActivity: "",
             favourites: [],
             steps: ["AdministratorActivity"],
-            selected: {}
+            selected: {} // to store dataset of the selected bar
         }
         // this.state.favourites = this.props.usersTable[this.props.activeProfile.uid].favourites; // Pulls from fb, comment out this for launch 
         this.state.favourites = this.props.myFavourites // pulls from local store, use this for demo 
