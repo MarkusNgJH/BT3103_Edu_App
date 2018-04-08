@@ -75,96 +75,60 @@ class GridExample extends Component {
                     <div><Loader /></div>
                     :
                     <div>
-                        <Grid container spacing={40} justify="center" alignItems="center">
-                            <Grid item xs={6} sm={4}>
-                                <Card style={{ height: "525px" }}>
-                                    <div style={{ padding: "50px" }}>
-                                        <Typography variant="display3" align="center" >
-                                            50/100
-                            </Typography>
-                                    </div>
-                                    <LinearProgress style={{ height: 20 }} variant="determinate" value={50} />
+                        <Grid container spacing={40} justify="center" alignItems="stretch">
+                            <Grid item xs={6} sm={4} xl={3}>
+                                <Card>
                                     <CardContent align="center">
-                                        <Typography variant="headline" component="h2">
+                                        <div className="card-title">
                                             Assignment Type
-                                </Typography>
-                                        <Typography color="textSecondary">
-                                            Analysis by different asssignment types
-                                </Typography>
-                                        <div align="center">
-                                            <List>
-                                                <ListItem style={{ padding: '10px', margin: '0px', textAlign: "center" }}>
-                                                    <ListItemText primary="Chart01" />
-                                                </ListItem>
-                                                <Divider />
-                                                <ListItem style={{ padding: '10px', margin: '0px', textAlign: "center" }}>
-                                                    <ListItemText primary="Chart02" />
-                                                </ListItem>
-                                                <Divider />
-                                                <ListItem style={{ padding: '10px', margin: '0px', textAlign: "center" }}>
-                                                    <ListItemText primary="Chart03" />
-                                                </ListItem>
-                                                <Divider />
-                                                <ListItem style={{ padding: '10px', margin: '0px', textAlign: "center" }}>
-                                                    <ListItemText primary="Chart04" />
-                                                </ListItem>
-                                            </List>
                                         </div>
-
+                                        <div className="card-sub-title">
+                                            Analysis by different asssignment types
+                                        </div>
+                                        <Divider />
+                                        <div className="card-stat">
+                                        {this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignmentType.overallStats["Total Submissions Received"]}
+                                            /
+                                            {this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignmentType.overallStats["Expected Submissions Received"]}
+                                        </div>
+                                        <div className="card-stat-bar-container">
+                                            <LinearProgress style={{height: 20}} className="progress-bar" variant="determinate" value={50} />
+                                        </div>
                                         <Button
                                             onClick={() => this.handleClick('instructorAssignmentType')}
                                             component={Link} to="/instructorAssignmentType"
                                             variant="raised" size="small"
-                                            color={this.chooseColor(1, 2)}
-                                            style={{ marginBottom: "35px" }}>
+                                            color={this.chooseColor(1, 2)}>
                                             {this.chooseText(1, 2)}
                                         </Button>
                                     </CardContent>
 
                                 </Card>
                             </Grid>
-                            <Grid item xs={6} sm={4}>
-                                <Card style={{ height: "525px" }}>
-                                    <div style={{ padding: "50px" }}>
-                                        <Typography variant="display3" align="center" >
-                                            80/100
-                            </Typography>
-                                    </div>
-                                    <LinearProgress style={{ height: 20 }} variant="determinate" value={80} />
+                            <Grid item xs={6} sm={4} xl={3}>
+                                <Card>    
                                     <CardContent align="center">
-                                        <Typography variant="headline" component="h2">
+                                        <div className="card-title">
                                             Assignments
-                                </Typography>
-                                        <Typography color="textSecondary">
-                                            Submission behaviour accross all assignments
-                                </Typography>
-                                        <div align="center">
-                                            <List>
-                                                <ListItem style={{ padding: '10px', margin: '0px', textAlign: "center" }}>
-                                                    <ListItemText primary="Chart01" />
-                                                </ListItem>
-                                                <Divider />
-                                                <ListItem style={{ padding: '10px', margin: '0px', textAlign: "center" }}>
-                                                    <ListItemText primary="Chart02" />
-                                                </ListItem>
-                                                <Divider />
-                                                <ListItem style={{ padding: '10px', margin: '0px', textAlign: "center" }}>
-                                                    <ListItemText primary="Chart03" />
-                                                </ListItem>
-                                                <Divider />
-                                                <ListItem style={{ padding: '10px', margin: '0px', textAlign: "center" }}>
-                                                    <ListItemText primary="Chart04" />
-                                                </ListItem>
-                                            </List>
                                         </div>
-
+                                        <div className="card-sub-title">
+                                            Submission behaviour accross assignments
+                                        </div>
+                                        <Divider />
+                                        <div className="card-stat">
+                                        {this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignment.overallStats["Current Submission"]}
+                                            /
+                                        {this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignment.overallStats["Total Expected Submission"]}
+                                        </div>
+                                        <div className="card-stat-bar-container">
+                                            <LinearProgress style={{height: 20}} className="progress-bar" variant="determinate" value={50} />
+                                        </div>
                                         <Button
                                             onClick={() => { this.handleClick('instructorAssignmentCat') }}
                                             component={Link} to="/instructorAssignmentCat"
                                             variant="raised"
                                             size="small"
-                                            color={this.chooseColor(5, 2)}
-                                            style={{ marginBottom: "35px" }}>
+                                            color={this.chooseColor(5, 2)}>
                                             {this.chooseText(5, 2)}
                                         </Button>
 
@@ -177,22 +141,54 @@ class GridExample extends Component {
                                 </Card>
                             </Grid>
 
-                            <Grid item xs={6} sm={4}>
-                                <Card style={{ height: "525px" }}>
-                                    <div style={{ padding: "50px" }}>
-                                        <Typography variant="display3" align="center" >
-                                            95/100
-                            </Typography>
-                                    </div>
-                                    <LinearProgress style={{ height: 20 }} variant="determinate" value={95} />
+                            <Grid item xs={6} sm={4} xl={3}>
+                                {/* <Card style={{ height: "525px" }}> */}
+                                <Card>
                                     <CardContent align="center">
-                                        <Typography variant="headline" component="h2">
+                                        <div className="card-title">
                                             Student Identifier
-                                </Typography>
-                                        <Typography color="textSecondary">
-                                            Identify high- and low- performing students
-                                </Typography>
-                                        <div align="center">
+                                        </div>
+                                        <div className="card-sub-title">
+                                            Identify high and low performing students
+                                        </div>
+                                    <div style={{paddingTop:"15px", paddingBottom:"25px", paddingLeft:"auto", paddingRigh:"auto"}}>
+
+                                        <Divider />
+                                        <div style={{float:"left", width:"50%"}}>
+                                        <Typography variant = "subheading" align="left" style={{padding: "5px"}}>
+                                        <strong>Top </strong>
+                                        </Typography>
+                                        <Typography variant = "subheading" align="left" >
+                                        {this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorStudentIdentifier.overallStats["Top"][1]}
+                                        <br/>
+                                        {this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorStudentIdentifier.overallStats["Top"][2]}
+                                        <br/>
+                                        {this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorStudentIdentifier.overallStats["Top"][3]}
+                                        </Typography>
+                                        </div>
+
+                                        <div align="left" style={{float:"left", width:"50%", paddingBottom:"20px"}}>
+                                        <Typography  variant = "subheading" align="left" style={{padding: "5px"}}>
+                                        <strong>Bottom </strong>
+                                        </Typography>
+                                        <Typography variant = "subheading" align="left" >
+                                        {this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorStudentIdentifier.overallStats["Bottom"][1]}
+                                        <br/>
+                                        {this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorStudentIdentifier.overallStats["Bottom"][2]}
+                                        <br/>
+                                        {this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorStudentIdentifier.overallStats["Bottom"][3]}
+                                        </Typography>
+                                        </div> 
+                                    </div>                               
+                                    
+
+                                        {/* <div className="card-stat">
+                                            50/100
+                                        </div>
+                                        <div className="card-stat-bar-container">
+                                            <LinearProgress style={{height: 20}} className="progress-bar" variant="determinate" value={50} />
+                                        </div> */}
+                                        {/* <div align="center">
                                             <List>
                                                 <ListItem style={{ padding: '10px', margin: '0px', textAlign: "center" }}>
                                                     <ListItemText primary="Chart01" />
@@ -210,15 +206,14 @@ class GridExample extends Component {
                                                     <ListItemText primary="Chart04" />
                                                 </ListItem>
                                             </List>
-                                        </div>
+                                        </div> */}
 
                                         <Button
                                             onClick={() => { this.handleClick('instructorStudentIdentifier') }}
                                             component={Link} to="/instructorStudentIdentifier"
                                             variant="raised"
                                             size="small"
-                                            color={this.chooseColor(5, 2)}
-                                            style={{ marginBottom: "35px" }}>
+                                            color={this.chooseColor(5, 2)}>
                                             {this.chooseText(5, 2)}
                                         </Button>
                                     </CardContent>
@@ -236,7 +231,10 @@ class GridExample extends Component {
 
 function mapStateToProps(state) {
     return {
-        activeLoader: state.activeLoader
+        activeLoader: state.activeLoader,
+        firebase: state.firebase,
+        activeProfile: state.activeProfile.val,
+        activeView: state.activeView
     };
 }
 

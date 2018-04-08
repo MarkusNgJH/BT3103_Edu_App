@@ -244,7 +244,7 @@ class InstructorAssignmentType extends React.Component {
                             <div style={divStyle}>
                                 {/* <h2>Chart08</h2> */}
                                 <h2>Submission Per Type</h2>
-                                <p>Monitor Percentage of Submission Per Assignment Type</p>
+                                <p>Monitor Percentage of Submissions for Each Assignment Type</p>
                                 <Divider />
                             </div>
                             <ResponsiveContainer width="90%" height={380}>
@@ -258,17 +258,12 @@ class InstructorAssignmentType extends React.Component {
                                     <XAxis
                                         dataKey="Name"
                                     />
-                                    <YAxis
-                                        dataKey="Value"
-                                        label={
-                                            <AxisLabel axisType="yAxis" width={600} height={300}>
-                                                yAxis
-                                    </AxisLabel>
-                                        }
-                                    />
-                                    <CartesianGrid strokeDasharray="3 3" />
+                                    
+                                    <YAxis 
+                                        label={{value:"Number of Submissions", angle: -90 ,position:"insideBottomLeft"}} />
+
                                     <Tooltip />
-                                    <Bar dataKey="Value" fill="#8884d8"
+                                    <Bar dataKey="Value" fill="#8884d8" name="% Submitted"
                                         onClick={(data, index) => this.selectedAssignmentType(data)}>
                                         {this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignmentType.chart08.data.map((entry, index) => (
                                             <Cell
@@ -279,6 +274,7 @@ class InstructorAssignmentType extends React.Component {
                                             />
                                         ))}
                                     </Bar>
+                                    <Legend verticalAlign="top" align="right" />
                                 </BarChart>
                             </ResponsiveContainer>
                             {this.isFav("chart08") == true ?
@@ -295,19 +291,18 @@ class InstructorAssignmentType extends React.Component {
                                     <div style={divStyle}>
                                         {/* <h2>Chart09</h2> */}
                                         <h2>Total Plays/ Fast-Forwards</h2>
-                                        <p>Identify PathProblem that Students Have Complete Comfortably</p>
+                                        <p>Identify PathProblem that Students Have Completed Comfortably</p>
                                         <Divider />
                                     </div>
 
-                                    <ResponsiveContainer width="90%" height={380}>
+                                    <ResponsiveContainer width="85%" height={380}>
                                         <BarChart width={400} height={250} data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignmentType.chart09.data}>
-                                            <CartesianGrid strokeDasharray="3 3" />
-                                            <XAxis dataKey="Name" />
-                                            <YAxis />
+                                            <XAxis dataKey="Name" tick={false} label={{value:"Assignments"}} />/>
+                                            <YAxis label={{value:"Count", angle: -90, position:"insideBottomLeft" , offset: 12}}/>
                                             <Tooltip />
-                                            <Legend />
-                                            <Bar dataKey="plays" fill="#8884d8" />
-                                            <Bar dataKey="rate" fill="#82ca9d" />
+                                            <Legend verticalAlign="top" align="right" />
+                                            <Bar name="# of Plays" dataKey="plays" fill="#8884d8" />
+                                            <Bar name="# of Fast Forwards" dataKey="rate" fill="#82ca9d" />
                                         </BarChart>
                                     </ResponsiveContainer>
                                     {this.isFav("chart09") == true ?
@@ -333,15 +328,14 @@ class InstructorAssignmentType extends React.Component {
                                         <Divider />
                                     </div>
 
-                                    <ResponsiveContainer width="90%" height={380}>
+                                    <ResponsiveContainer width="85%" height={380}>
                                         <BarChart width={400} height={250} data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignmentType.chart10.data}>
-                                            <CartesianGrid strokeDasharray="3 3" />
-                                            <XAxis dataKey="Name" />
-                                            <YAxis />
+                                            <XAxis dataKey="Name" tick={false} label={{value:"Assignments"}} />/>
+                                            <YAxis label={{value:"Count", angle: -90, position:"insideBottomLeft", offset: 12}}/>
                                             <Tooltip />
-                                            <Legend />
-                                            <Bar dataKey="pauses" fill="#8884d8" onClick={(data, index) => this.selectedVideo(data)} />
-                                            <Bar dataKey="playbacks" fill="#82ca9d" onClick={(data, index) => this.selectedVideo(data)} />
+                                            <Legend verticalAlign="top" align="right" />
+                                            <Bar name="# of Pauses" dataKey="pauses" fill="#8884d8" onClick={(data, index) => this.selectedVideo(data)} />
+                                            <Bar name="# of Playbacks" dataKey="playbacks" fill="#82ca9d" onClick={(data, index) => this.selectedVideo(data)} />
                                         </BarChart>
                                     </ResponsiveContainer>
                                     {this.isFav("chart10") == true ?
@@ -369,12 +363,11 @@ class InstructorAssignmentType extends React.Component {
 
                                     <ResponsiveContainer width="90%" height={380}>
                                         <BarChart width={730} height={250} data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignmentType.chart11.data}>
-                                            <CartesianGrid strokeDasharray="3 3" />
                                             <XAxis dataKey="Name" />
-                                            <YAxis />
+                                            <YAxis label={{value:"Number of Submissions", angle: -90 ,position:"insideBottomLeft",offset: 6}}/>
                                             <Tooltip />
-                                            <Legend />
-                                            <Bar dataKey="Value" fill="#8884d8" />
+                                            <Legend verticalAlign="top" align="right" />
+                                            <Bar name="# of Pauses" dataKey="Value" fill="#8884d8" />
                                         </BarChart>
                                     </ResponsiveContainer>
                                     {this.isFav("chart11") == true ?
@@ -416,4 +409,5 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps)(InstructorAssignmentType);
+
 
