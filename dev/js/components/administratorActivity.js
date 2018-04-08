@@ -25,7 +25,8 @@ import {
     CartesianGrid,
     Tooltip,
     Legend,
-    ResponsiveContainer
+    ResponsiveContainer,
+    Brush
 } from "recharts";
 import { BarChart, Bar } from "recharts";
 import Paper from 'material-ui/Paper';
@@ -173,15 +174,14 @@ class administratorActivity extends React.Component {
         const state = store.getState();
         return (
             <div>
-                <Stepper steps={this.state.steps} backStep={this.backStep.bind(this)} reset={this.reset.bind(this)} />
-                <br />
 
+                {/** CHART 05 */}
                 <Grid container spacing={24} direction="row" align="center">
                     <Grid item xs={12}>
                         <Paper>
                             <div style={divStyle}>
-                                <h3>Chart05</h3>
-                                <h4>Amount of Activities per day</h4>
+                                <h2>Cohort activity across time</h2>
+                                <p>{this.props.activeProfile.course}</p>
                                 <Divider />
                             </div>
 
@@ -191,6 +191,7 @@ class administratorActivity extends React.Component {
                                     height={250}
                                     data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].adminActivity.chart05.data}
                                     margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+                                    syncId="individualDates"
                                 >
                                     <XAxis dataKey="Name" />
                                     <YAxis
@@ -198,71 +199,71 @@ class administratorActivity extends React.Component {
                                         label={
                                             <AxisLabel axisType="yAxis" width={600} height={300}>
                                                 Daily Activity by Cohort
-                        </AxisLabel>
+                                            </AxisLabel>
                                         }
                                     />
                                     <CartesianGrid strokeDasharray="3 3" />
-                                    <Tooltip />
-                                    <Line dataKey="Value" fill="#8884d8" activeDot={{ onClick: (data, index) => this.selectedActivity(data) }} />
+                                    <Tooltip cursor={{ stroke: 'orange', strokeWidth: 3 }}/>
+                                    <Line dataKey="Value" fill="#8884d8" stroke="#8884d8" activeDot={{ onClick: (data, index) => this.selectedActivity(data) }} />
+                                    <Brush />
                                 </LineChart>
                             </ResponsiveContainer>
 
                         </Paper>
                     </Grid>
 
-                    {this.state.selectedActivity == "2018-02-21" ?
-                        <Grid item xs={12}>
-                            <Paper>
-                                <div style={divStyle}>
-                                    <h3>Chart06</h3>
-                                    <h4>Course Breakdown of Daily Activity </h4>
-                                    <Divider />
-                                </div>
-                                <ResponsiveContainer width="90%" height={380}>
-                                    <LineChart
-                                        width={730}
-                                        height={500}
-                                        data={this.state.selected}
-                                        // this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].adminActivity.chart06.data
-                                        margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-                                    >
-                                        <XAxis dataKey="name" />
-                                        <YAxis
-                                            dataKey="value"
-                                            label={
-                                                <AxisLabel axisType="yAxis" width={600} height={300}>
-                                                    Amount of activities
-                                            </AxisLabel>
-                                            }
-                                        />
-                                        <CartesianGrid strokeDasharray="3 3" />
-                                        <Tooltip />
-                                        <Line dataKey="value" fill="#8884d8" />
-                                        {/* <Line dataKey="All Other Junior (NCC2018)" fill="#8884d8" />
-                                    <Line dataKey="CHIJ St Nicholas Girls School (NCC2018)" fill="#82ca9d" />
-                                    <Line dataKey="Clementi Town Secondary School (NCC2018)" fill="#8884d8" />
-                                    <Line dataKey="Crest Secondary School (NCC2018)" fill="#82ca9d" />
-                                    <Line dataKey="Dunman HS - Junior (NCC2018)" fill="#8884d8" />
-                                    <Line dataKey="Holy Innocents HS (NCC2018)" fill="#8884d8" />
-                                    <Line dataKey="Junyuan Secondary School (NCC2018)" fill="#8884d8" />
-                                    <Line dataKey="Maris Stella High School (NCC2018)" fill="#8884d8" />
-                                    <Line dataKey="NUSHS - Junior (NCC2018)" fill="#8884d8" />
-                                    <Line dataKey="Nan Hua High School (NCC2018)" fill="#8884d8" />
-                                    <Line dataKey="National JC - Junior (NCC2018)" fill="#8884d8" />
-                                    <Line dataKey="Ping Yi Secondary School (NCC2018)" fill="#8884d8" />
-                                    <Line dataKey="Queensway Secondary School (NCC2018)" fill="#8884d8" />
-                                    <Line dataKey="Sch of Science and Technology  (NCC2018)" fill="#8884d8" />
-                                    <Line dataKey="Seng Kang Secondary School (NCC2018)" fill="#8884d8" />
-                                    <Line dataKey="Singapore Chinese Girls Sch (NCC2018)" fill="#8884d8" />
-                                    <Line dataKey="Temasek JC - Junior (NCC2018)" fill="#8884d8" />
-                                    <Line dataKey="West Spring Secondary School (NCC2018)" fill="#8884d8" /> */}
-                                    </LineChart>
-                                </ResponsiveContainer>
-                            </Paper>
-                        </Grid>
-                        :
+                    {/** CHART 06 */}
+                    {/* {this.state.selectedActivity == "2018-02-21" ? */}
+                    <Grid item xs={12}>
+                        <Paper>
+                            <div style={divStyle}>
+                                <h2>Courses' activity across time</h2>
+                                {/* <h4>Course Breakdown of Daily Activity </h4> */}
+                                <Divider />
+                            </div>
+                            <ResponsiveContainer width="90%" height={380}>
+                                <LineChart
+                                    width={730}
+                                    height={500}
+                                    data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].adminActivity.chart06.data}
+                                    margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+                                    syncId="individualDates"
+                                >
+                                    <XAxis dataKey="Name" />
+                                    <YAxis
+                                        label={
+                                            <AxisLabel axisType="yAxis" width={600} height={300}>
+                                                Amount of activities
+                                        </AxisLabel>
+                                        }
+                                    />
+                                    <CartesianGrid strokeDasharray="3 3" />
+                                    <Tooltip cursor={{ stroke: 'orange', strokeWidth: 3 }}/>
+                                    <Line dataKey="All Other Junior (NCC2018)" fill="#e56d49" stroke="#e56d49" />
+                                    <Line dataKey="CHIJ St Nicholas Girls School (NCC2018)" fill="#e56d49" stroke="#e56d49" />
+                                    <Line dataKey="Clementi Town Secondary School (NCC2018)" fill="#e56d49" stroke="#e56d49" />
+                                    <Line dataKey="Crest Secondary School (NCC2018)" fill="#e56d49" stroke="#e56d49" />
+                                    <Line dataKey="Dunman HS - Junior (NCC2018)" fill="#e56d49" stroke="#e56d49" />
+                                    <Line dataKey="Holy Innocents HS (NCC2018)" fill="#e56d49" stroke="#e56d49" />
+                                    <Line dataKey="Junyuan Secondary School (NCC2018)" fill="#e56d49" stroke="#e56d49" />
+                                    <Line dataKey="Maris Stella High School (NCC2018)" fill="#e56d49" stroke="#e56d49" />
+                                    <Line dataKey="NUSHS - Junior (NCC2018)" fill="#e56d49" stroke="#e56d49" />
+                                    <Line dataKey="Nan Hua High School (NCC2018)" fill="#e56d49" stroke="#e56d49" />
+                                    <Line dataKey="National JC - Junior (NCC2018)" fill="#e56d49" stroke="#e56d49" />
+                                    <Line dataKey="Ping Yi Secondary School (NCC2018)" fill="#e56d49" stroke="#e56d49" />
+                                    <Line dataKey="Queensway Secondary School (NCC2018)" fill="#e56d49" stroke="#e56d49" />
+                                    <Line dataKey="Sch of Science and Technology  (NCC2018)" fill="#e56d49" stroke="#e56d49" />
+                                    <Line dataKey="Seng Kang Secondary School (NCC2018)" fill="#e56d49" stroke="#e56d49" />
+                                    <Line dataKey="Singapore Chinese Girls Sch (NCC2018)" fill="#e56d49" stroke="#e56d49" />
+                                    <Line dataKey="Temasek JC - Junior (NCC2018)" fill="#e56d49" stroke="#e56d49" />
+                                    <Line dataKey="West Spring Secondary School (NCC2018)" fill="#e56d49" stroke="#e56d49" />
+                                </LineChart>
+                            </ResponsiveContainer>
+                        </Paper>
+                    </Grid>
+                        {/* :
                         <div> </div>
-                    }
+                    } */}
                 </Grid>
             </div>
         )

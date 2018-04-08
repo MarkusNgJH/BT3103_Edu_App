@@ -78,7 +78,7 @@ class GridExample extends Component {
                         <Card>
                             <CardContent>
                                 <div className="card-title">
-                                    Student Card 1
+                                    Assignment
                                 </div>
                                 <div className="card-sub-title">
                                     subtitle here
@@ -105,7 +105,7 @@ class GridExample extends Component {
                         <Card>
                             <CardContent>
                                 <div className="card-title">
-                                    Student Card 2
+                                    Assignment Type
                                 </div>
                                 <div className="card-sub-title">
                                     subtitle here

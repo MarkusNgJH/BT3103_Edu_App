@@ -22,7 +22,9 @@ import {
     CartesianGrid,
     Tooltip,
     Legend,
-    ResponsiveContainer
+    ResponsiveContainer,
+    Brush,
+    Cell
 } from "recharts";
 import { BarChart, Bar } from "recharts";
 const AxisLabel = ({
@@ -60,13 +62,13 @@ class administratorPerformance extends React.Component {
         const state = store.getState();
         return (
             <div>
-
-                <Grid container spacing={8} direction="row" align="center">
-                    <Grid item xs={12}>
+                <Grid container spacing={40} direction="row" align="center">
+                    {/** CHART 01 */}
+                    {/* <Grid item xs={12}>
                         <Paper>
                             <div style={divStyle}>
-                                <h3>Chart01</h3>
-                                <h4>Cohort Performance</h4>
+                                <h2>Assignments completion rate</h2>
+                                <p>({this.props.activeProfile.course})</p>
                                 <Divider />
                             </div>
                             <ResponsiveContainer width="90%" height={380}>
@@ -82,121 +84,124 @@ class administratorPerformance extends React.Component {
                                 </PieChart>
                             </ResponsiveContainer>
                         </Paper>
-                    </Grid>
+                    </Grid> */}
 
+                    {/** CHART 02 */}
                     <Grid item xs={12}>
+                        <Grid container justify="center">
+                            <Grid item xs={12} md={10}>
+                                <Paper>
+                                    <div style={divStyle}>
+                                        <h2>Performance across Cohorts</h2>
+                                        <p>Assignments submission rate</p>
+                                        <Divider />
+                                    </div>
+                                    <ResponsiveContainer width="90%" height={240}>
+                                        <BarChart
+                                            width={730}
+                                            height={250}
+                                            data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].adminPerformance.chart02.data}
+                                            margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+                                            layout="vertical"
+                                        >
+                                            <XAxis
+                                                type="number"
+                                                dataKey="Value"
+                                                label={{ value: 'Submission Rate (%)', position: 'insideBottom' }}
+                                                height={50}
+                                                />
+                                            />
+                                            <YAxis
+                                                dataKey="Name"
+                                                type="category"
+                                                width={180}
+                                            />
+                                            {/* <CartesianGrid strokeDasharray="3 3" /> */}
+                                            <Tooltip />
+                                            {/* <Legend verticalAlign="top" align="right" /> */}
+                                            <Bar dataKey="Value">
+                                            {this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].adminPerformance.chart02.data.map((entry, index) => (
+                                            <Cell
+                                                key={entry.Name}
+                                                fill={entry.Name == this.props.activeProfile.course ? '#edc62a' : '#e8e65c'}
+                                            />
+                                            ))}
+                                            </Bar>
+                                        </BarChart>
+                                    </ResponsiveContainer>
+                                </Paper>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                    
+                    {/** CHART 03 */}
+                    <Grid item xs={12} md={6}>
                         <Paper>
                             <div style={divStyle}>
-                                <h3>Chart02</h3>
-                                <h4>Performance Across Cohort (%)</h4>
+                                <h2>Performance by Individual Courses (%)</h2>
+                                <p>Assignments submission rate</p>
                                 <Divider />
                             </div>
-                            <ResponsiveContainer width="90%" height={380}>
-                                <BarChart
-                                    width={730}
-                                    height={250}
-                                    data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].adminPerformance.chart02.data}
-                                    margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-                                >
-                                    <XAxis
-                                        dataKey="Name"
-                                        label={
-                                            <AxisLabel axisType="xAxis" width={600} height={300}>
-                                                Cohorts
-                        </AxisLabel>
-                                        }
-                                    />
-                                    <YAxis
-                                        dataKey="Value"
-                                        label={
-                                            <AxisLabel axisType="yAxis" width={600} height={300}>
-                                                Number of Subsmission
-                        </AxisLabel>
-                                        }
-                                    />
-                                    <CartesianGrid strokeDasharray="3 3" />
-                                    <Tooltip />
-                                    <Legend />
-                                    <Bar dataKey="Value" fill="#8884d8" />
-                                </BarChart>
-                            </ResponsiveContainer>
-                        </Paper>
-                    </Grid>
-
-                    <Grid item xs={12}>
-                        <Paper>
-                            <div style={divStyle}>
-                                <h3>Chart03</h3>
-                                <h4>Progress Tracking</h4>
-                                <Divider />
-                            </div>
-                            <ResponsiveContainer width="90%" height={380}>
+                            <ResponsiveContainer width="90%" height={300}>
                                 <BarChart
                                     width={730}
                                     height={250}
                                     data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].adminPerformance.chart03.data}
                                     margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+                                    syncId="individualCourses"
                                 >
                                     <XAxis
                                         dataKey="Name"
-                                        label={
-                                            <AxisLabel axisType="xAxis" width={600} height={300}>
-                                                Student
-                        </AxisLabel>
-                                        }
+                                        label={{ value: "Courses", position: "insideBottom" }}
+                                        ticks={[0]}
                                     />
                                     <YAxis
-                                        dataKey="Value"
-                                        label={
-                                            <AxisLabel axisType="yAxis" width={600} height={300}>
-                                                Number of Days Taken
-                        </AxisLabel>
-                                        }
+                                        dataKey="Progress"
+                                        label={{ value: "Submission Rate (%)", angle: -90, position: "insideLeft" }}
                                     />
-                                    <CartesianGrid strokeDasharray="3 3" />
+                                    {/* <CartesianGrid strokeDasharray="3 3" /> */}
                                     <Tooltip />
-                                    <Legend />
-                                    <Bar dataKey="Value" fill="#8884d8" />
+                                    <Legend verticalAlign="top" align="right" />
+                                    <Bar dataKey="Progress" fill="#8884d8" />
                                 </BarChart>
                             </ResponsiveContainer>
                         </Paper>
                     </Grid>
 
-                    <Grid item xs={12}>
+                    {/** CHART 04 */}
+                    <Grid item xs={12} md={6}>
                         <Paper>
                             <div style={divStyle}>
-                                <h3>Chart04</h3>
-                                <h4> Proportion of Completion by Courses </h4>
+                                <h2>Performance by Individual Courses (count)</h2>
+                                <p>Count of Assignment Submissions</p>
                                 <Divider />
                             </div>
-                            <ResponsiveContainer width="90%" height={380}>
+                            <ResponsiveContainer width="90%" height={300}>
                                 <BarChart
                                     width={730}
                                     height={250}
                                     data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].adminPerformance.chart04.data}
                                     margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+                                    syncId="individualCourses"
                                 >
                                     <XAxis
                                         dataKey="Name"
-                                        label={
-                                            <AxisLabel axisType="xAxis" width={600} height={300}>
-                                                Student
-                            </AxisLabel>
-                                        }
+                                        label={{ value: "Courses", position: "insideBottom" }}
+                                        ticks={[0]}
                                     />
                                     <YAxis
-                                        dataKey="Value"
+                                        dataKey="Completed"
                                         label={
                                             <AxisLabel axisType="yAxis" width={600} height={300}>
-                                                Number of Days Taken
-                            </AxisLabel>
+                                                Submission Count
+                                            </AxisLabel>
                                         }
                                     />
-                                    <CartesianGrid strokeDasharray="3 3" />
+                                    {/* <CartesianGrid strokeDasharray="3 3" /> */}
                                     <Tooltip />
-                                    <Legend />
-                                    <Bar dataKey="Value" stackId="a" fill="#8884d8" />
-                                    <Bar dataKey="Value2" stackId="a" fill="#76a8dd" />
+                                    <Legend verticalAlign="top" align="right" />
+                                    <Bar dataKey="Completed" stackId="a" fill="#8884d8" />
+                                    <Bar dataKey="Uncompleted" stackId="a" fill="#76a8dd" />
                                 </BarChart>
                             </ResponsiveContainer>
                         </Paper>

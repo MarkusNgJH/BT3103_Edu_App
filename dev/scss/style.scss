@@ -1,6 +1,10 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat|Roboto|Vollkorn|Fira+Sans|Poppins|Raleway');
 $primary: #006699;
 
+.card {
+	height: 100%;
+}
+
 .card-title {
 	font-size: 32px;
 	padding: 8px;
@@ -20,6 +24,19 @@ $primary: #006699;
 
 .card-stat-bar-container {
 	margin: 10px 30px 10px 30px;
+}
+
+.card-admin-activity1 {
+	margin-top: 15px;
+	font-size: 18px;
+}
+
+.card-admin-activity2 {
+	margin-bottom: 15px;
+}
+
+.card-admin-performance-rankings {
+	justify-content: flex-start;
 }
 
 h2 {
