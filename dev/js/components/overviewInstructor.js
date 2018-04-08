@@ -75,9 +75,9 @@ class GridExample extends Component {
                     <div><Loader /></div>
                     :
                     <div>
-                        <Grid container spacing={40} justify="center" alignItems="center">
+                        <Grid container spacing={40} justify="center" alignItems="stretch">
                             <Grid item xs={6} sm={4} xl={3}>
-                                <Card style={{ height: "525px" }}>
+                                <Card>
                                     <CardContent align="center">
                                         <div className="card-title">
                                             Assignment Type
@@ -87,7 +87,7 @@ class GridExample extends Component {
                                         </div>
                                         <Divider />
                                         <div className="card-stat">
-                                        50/100
+                                            50/100
                                         </div>
                                         <div className="card-stat-bar-container">
                                             <LinearProgress style={{height: 20}} className="progress-bar" variant="determinate" value={50} />
@@ -104,44 +104,27 @@ class GridExample extends Component {
                                 </Card>
                             </Grid>
                             <Grid item xs={6} sm={4} xl={3}>
-                                <Card style={{ height: "525px" }}>
-                                    <div style={{ padding: "50px" }}>
-                                        <Typography variant="display3" align="center" >
-                                            80/100
-                            </Typography>
-                                    </div>
-                                    <LinearProgress style={{ height: 20 }} variant="determinate" value={80} />
+                                <Card>    
                                     <CardContent align="center">
-                                        <Typography variant="headline" component="h2">
+                                        <div className="card-title">
                                             Assignments
-                                </Typography>
-                                        <Typography color="textSecondary">
-                                            Submission behaviour accross all assignments
-                                </Typography>
-                                        <div align="center">
-                                            <List>
-                                                <ListItem style={{ padding: '10px', margin: '0px', textAlign: "center" }}>
-                                                    <ListItemText primary="Chart01" />
-                                                </ListItem>
-                                                <ListItem style={{ padding: '10px', margin: '0px', textAlign: "center" }}>
-                                                    <ListItemText primary="Chart02" />
-                                                </ListItem>
-                                                <ListItem style={{ padding: '10px', margin: '0px', textAlign: "center" }}>
-                                                    <ListItemText primary="Chart03" />
-                                                </ListItem>
-                                                <ListItem style={{ padding: '10px', margin: '0px', textAlign: "center" }}>
-                                                    <ListItemText primary="Chart04" />
-                                                </ListItem>
-                                            </List>
                                         </div>
-
+                                        <div className="card-sub-title">
+                                            Submission behaviour accross assignments
+                                        </div>
+                                        <Divider />
+                                        <div className="card-stat">
+                                            50/100
+                                        </div>
+                                        <div className="card-stat-bar-container">
+                                            <LinearProgress style={{height: 20}} className="progress-bar" variant="determinate" value={50} />
+                                        </div>
                                         <Button
                                             onClick={() => { this.handleClick('instructorAssignmentCat') }}
                                             component={Link} to="/instructorAssignmentCat"
                                             variant="raised"
                                             size="small"
-                                            color={this.chooseColor(5, 2)}
-                                            style={{ marginBottom: "35px" }}>
+                                            color={this.chooseColor(5, 2)}>
                                             {this.chooseText(5, 2)}
                                         </Button>
 
@@ -155,21 +138,23 @@ class GridExample extends Component {
                             </Grid>
 
                             <Grid item xs={6} sm={4} xl={3}>
-                                <Card style={{ height: "525px" }}>
-                                    <div style={{ padding: "50px" }}>
-                                        <Typography variant="display3" align="center" >
-                                            95/100
-                            </Typography>
-                                    </div>
-                                    <LinearProgress style={{ height: 20 }} variant="determinate" value={95} />
+                                {/* <Card style={{ height: "525px" }}> */}
+                                <Card>
                                     <CardContent align="center">
-                                        <Typography variant="headline" component="h2">
+                                        <div className="card-title">
                                             Student Identifier
-                                </Typography>
-                                        <Typography color="textSecondary">
-                                            Identify high- and low- performing students
-                                </Typography>
-                                        <div align="center">
+                                        </div>
+                                        <div className="card-sub-title">
+                                            Identify high and low performing students
+                                        </div>
+                                        <Divider />
+                                        <div className="card-stat">
+                                            50/100
+                                        </div>
+                                        <div className="card-stat-bar-container">
+                                            <LinearProgress style={{height: 20}} className="progress-bar" variant="determinate" value={50} />
+                                        </div>
+                                        {/* <div align="center">
                                             <List>
                                                 <ListItem style={{ padding: '10px', margin: '0px', textAlign: "center" }}>
                                                     <ListItemText primary="Chart01" />
@@ -187,15 +172,14 @@ class GridExample extends Component {
                                                     <ListItemText primary="Chart04" />
                                                 </ListItem>
                                             </List>
-                                        </div>
+                                        </div> */}
 
                                         <Button
                                             onClick={() => { this.handleClick('instructorStudentIdentifier') }}
                                             component={Link} to="/instructorStudentIdentifier"
                                             variant="raised"
                                             size="small"
-                                            color={this.chooseColor(5, 2)}
-                                            style={{ marginBottom: "35px" }}>
+                                            color={this.chooseColor(5, 2)}>
                                             {this.chooseText(5, 2)}
                                         </Button>
                                     </CardContent>

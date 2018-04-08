@@ -11,6 +11,8 @@ import AdministratorActivity from './administratorActivity';
 import AdministratorPerformance from './administratorPerformance';
 import store from '../store';
 import Loader from './loader';
+import Divider from 'material-ui/Divider';
+import { LinearProgress } from 'material-ui/Progress';
 import { connect } from 'react-redux';
 
 const styles = {
@@ -70,23 +72,23 @@ class GridExample extends Component {
                 <div><Loader /></div>
                 :
                 <div>
-                    <Grid container spacing={8}>
+                    <Grid container spacing={8} style={{alignItems: "stretch"}}>
                     <Grid item xs={6}>
                         <Card>
                             <CardContent>
-                                <Typography color="textSecondary">
-                                    Metrics 1
-                                </Typography>
-                                <Typography variant="headline" component="h2">
-                                    Performance
-                                </Typography>
-                                <Typography color="textSecondary">
-                                    Measure the Performance of Courses
-                                </Typography>
-                                <Typography component="p">
-                                    insert information here<br />
-                                    {'"detail"'}
-                                </Typography>
+                                <div className="card-title">
+                                    Admin Card 1
+                                </div>
+                                <div className="card-sub-title">
+                                    subtitle here
+                                </div>
+                                <Divider />
+                                <div className="card-stat">
+                                    50/100
+                                </div>
+                                <div className="card-stat-bar-container">
+                                    <LinearProgress style={{height: 20}} className="progress-bar" variant="determinate" value={50} />
+                                </div>
                             </CardContent>
                             <CardActions>
                                 <Button
@@ -101,19 +103,19 @@ class GridExample extends Component {
                     <Grid item xs={6}>
                         <Card>
                             <CardContent>
-                                <Typography color="textSecondary">
-                                    Metrics 2
-                                </Typography>
-                                <Typography variant="headline" component="h2">
-                                    Activity
-                                </Typography>
-                                <Typography color="textSecondary">
-                                    Measure the Activity of Courses
-                                </Typography>
-                                <Typography component="p">
-                                    insert information here<br />
-                                    {'"detail"'}
-                                </Typography>
+                                <div className="card-title">
+                                    Admin Card 2
+                                </div>
+                                <div className="card-sub-title">
+                                    subtitle here
+                                </div>
+                                <Divider />
+                                <div className="card-stat">
+                                    50/100
+                                </div>
+                                <div className="card-stat-bar-container">
+                                    <LinearProgress style={{height: 20}} className="progress-bar" variant="determinate" value={50} />
+                                </div>
                             </CardContent>
                             <CardActions>
                                 <Button

@@ -11,6 +11,8 @@ import StudentAssignment from './studentAssignment';
 import StudentAssignmentType from './studentAssignmentType';
 import store from '../store';
 import Loader from './loader';
+import Divider from 'material-ui/Divider';
+import { LinearProgress } from 'material-ui/Progress';
 import { connect } from 'react-redux';
 
 const styles = {
@@ -75,19 +77,19 @@ class GridExample extends Component {
                     <Grid item xs={6}>
                         <Card>
                             <CardContent>
-                                <Typography color="textSecondary">
-                                    Metrics 1
-                                </Typography>
-                                <Typography variant="headline" component="h2">
-                                    Student Behaviour
-                                </Typography>
-                                <Typography color="textSecondary">
-                                    See how you behave 
-                                </Typography>
-                                <Typography component="p">
-                                    insert information here<br />
-                                    {'"detail"'}
-                                </Typography>
+                                <div className="card-title">
+                                    Student Card 1
+                                </div>
+                                <div className="card-sub-title">
+                                    subtitle here
+                                </div>
+                                <Divider />
+                                <div className="card-stat">
+                                    50/100
+                                </div>
+                                <div className="card-stat-bar-container">
+                                    <LinearProgress style={{height: 20}} className="progress-bar" variant="determinate" value={50} />
+                                </div>
                             </CardContent>
                             <CardActions>
                                 <Button
@@ -102,19 +104,19 @@ class GridExample extends Component {
                     <Grid item xs={6}>
                         <Card>
                             <CardContent>
-                                <Typography color="textSecondary">
-                                    Metrics 2
-                                </Typography>
-                                <Typography variant="headline" component="h2">
-                                    Student Assignmnet
-                                </Typography>
-                                <Typography color="textSecondary">
-                                    See Student Assignment
-                                </Typography>
-                                <Typography component="p">
-                                    insert information here<br />
-                                    {'"detail"'}
-                                </Typography>
+                                <div className="card-title">
+                                    Student Card 2
+                                </div>
+                                <div className="card-sub-title">
+                                    subtitle here
+                                </div>
+                                <Divider />
+                                <div className="card-stat">
+                                    50/100
+                                </div>
+                                <div className="card-stat-bar-container">
+                                    <LinearProgress style={{height: 20}} className="progress-bar" variant="determinate" value={50} />
+                                </div>
                             </CardContent>
                             <CardActions>
                                 <Button
