@@ -77,36 +77,6 @@ class GridExample extends Component {
                     <div>
                         <Grid container spacing={40} justify="center">
                             <Grid item xs={6} sm={4} xl={3}>
-                                <Card className="card">
-                                    <CardContent align="center">
-                                        <div className="card-title">
-                                            Assignment Type
-                                        </div>
-                                        <div className="card-sub-title">
-                                            Analysis by asssignment types
-                                        </div>
-                                        <Divider />
-                                        <div className="card-stat">
-                                        {this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignmentType.overallStats["Total Submissions Received"]}
-                                            /
-                                        {this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignmentType.overallStats["Expected Submissions Received"]}
-                                        </div>
-                                        <div className="card-stat-bar-container">
-                                            <LinearProgress style={{height: 20}} className="progress-bar" variant="determinate" value={
-                                                this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignmentType.overallStats["Total Submissions Received"]/this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignmentType.overallStats["Expected Submissions Received"]*100
-                                            } />
-                                        </div>
-                                        <Button
-                                            onClick={() => this.handleClick('instructorAssignmentType')}
-                                            component={Link} to="/instructorAssignmentType"
-                                            variant="raised" size="small"
-                                            color={this.chooseColor(1, 2)}>
-                                            {this.chooseText(1, 2)}
-                                        </Button>
-                                    </CardContent>
-                                </Card>
-                            </Grid>
-                            <Grid item xs={6} sm={4} xl={3}>
                                 <Card className="card">    
                                     <CardContent align="center">
                                         <div className="card-title">
@@ -140,6 +110,37 @@ class GridExample extends Component {
                                     insert information here<br />
                                     {'"detail"'}
                                 </Typography> */}
+                                    </CardContent>
+                                </Card>
+                            </Grid>
+                            
+                            <Grid item xs={6} sm={4} xl={3}>
+                                <Card className="card">
+                                    <CardContent align="center">
+                                        <div className="card-title">
+                                            Assignment Type
+                                        </div>
+                                        <div className="card-sub-title">
+                                            Analysis by asssignment types
+                                        </div>
+                                        <Divider />
+                                        <div className="card-stat">
+                                        {this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignmentType.overallStats["Total Submissions Received"]}
+                                            /
+                                        {this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignmentType.overallStats["Expected Submissions Received"]}
+                                        </div>
+                                        <div className="card-stat-bar-container">
+                                            <LinearProgress style={{height: 20}} className="progress-bar" variant="determinate" value={
+                                                this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignmentType.overallStats["Total Submissions Received"]/this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignmentType.overallStats["Expected Submissions Received"]*100
+                                            } />
+                                        </div>
+                                        <Button
+                                            onClick={() => this.handleClick('instructorAssignmentType')}
+                                            component={Link} to="/instructorAssignmentType"
+                                            variant="raised" size="small"
+                                            color={this.chooseColor(1, 2)}>
+                                            {this.chooseText(1, 2)}
+                                        </Button>
                                     </CardContent>
                                 </Card>
                             </Grid>

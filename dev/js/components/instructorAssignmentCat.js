@@ -211,7 +211,7 @@ class InstructorAssignmentCat extends React.Component {
                                 <p>What is the proportion of submission for each assignment?</p>
                                 <Divider />
                             </div>
-                            <ResponsiveContainer width="90%" height={380}>
+                            <ResponsiveContainer width="90%" height={280}>
                                 <BarChart
                                     width={730} height={250}
                                     data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignment.chart01.data}
@@ -266,7 +266,7 @@ class InstructorAssignmentCat extends React.Component {
                                         <p>Evaluate Whether Deadline is Reasonable for Assignments</p>
                                         <Divider />
                                     </div>
-                                    <ResponsiveContainer width="90%" height={380}>
+                                    <ResponsiveContainer width="90%" height={280}>
                                         <BarChart
                                             width={730} height={250}
                                             data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignment.chart02.data}
@@ -310,7 +310,7 @@ class InstructorAssignmentCat extends React.Component {
                                         <p>Monitor Student's Submission over Time</p>
                                         <Divider />
                                     </div>
-                                    <ResponsiveContainer width="90%" height={380}>
+                                    <ResponsiveContainer width="90%" height={280}>
                                         <AreaChart width={730} height={250}
                                             data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignment.chart03.data}
                                             margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
@@ -351,7 +351,7 @@ class InstructorAssignmentCat extends React.Component {
                                         <p>Evaluate Whether Deadline is Reasonable for Assignment "{this.state.selectedAssignment}"?</p>
                                         <Divider />
                                     </div>
-                                    <ResponsiveContainer width="90%" height={380}>
+                                    <ResponsiveContainer width="90%" height={280}>
                                         <BarChart
                                             width={730} height={250}
                                             data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignment.chart04.data}
@@ -395,7 +395,7 @@ class InstructorAssignmentCat extends React.Component {
                                         <p>Monitor Student's Submission over Time for "{this.state.selectedAssignment}"?</p>
                                         <Divider />
                                     </div>
-                                    <ResponsiveContainer width="90%" height={380}>
+                                    <ResponsiveContainer width="90%" height={280}>
                                         <AreaChart width={730} height={250}
                                             data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignment.chart06.data}
                                             margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
@@ -436,7 +436,7 @@ class InstructorAssignmentCat extends React.Component {
                                         <p>Evaluate Whether Deadline is Reasonable for "{this.state.selectedAssignment}"?</p>
                                         <Divider />
                                     </div>
-                                    <ResponsiveContainer width="90%" height={380}>
+                                    <ResponsiveContainer width="90%" height={280}>
                                         <BarChart
                                             width={730} height={250}
                                             data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignment.chart05.data}
@@ -479,7 +479,7 @@ class InstructorAssignmentCat extends React.Component {
                                         <p>Monitor Student's Submission over Time for "{this.state.selectedAssignment}"?</p>
                                         <Divider />
                                     </div>
-                                    <ResponsiveContainer width="90%" height={380}>
+                                    <ResponsiveContainer width="90%" height={280}>
                                         <AreaChart width={730} height={250}
                                             data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignment.chart07.data}
                                             margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
