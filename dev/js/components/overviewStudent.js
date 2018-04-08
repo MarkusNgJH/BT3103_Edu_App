@@ -33,9 +33,18 @@ const styles = {
     },
 };
 
-class GridExample extends Component {
+class StudentOverview extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            loading: true
+        }
+    }
+
+    componentDidMount() {
+        setTimeout(() => {
+            this.setState({ loading: false });
+        }, 50);
     }
 
     chooseColor(val, threshold) {
@@ -65,82 +74,111 @@ class GridExample extends Component {
     }
 
     render() {
-        
         return (
             <div>
                 <h1> Overview </h1>
                 {this.props.activeLoader.showLoader ?
-                <div><Loader /></div>
-                :
-                <div>
-                <Grid container spacing={8}>
-                    <Grid item xs={6}>
-                        <Card>
-                            <CardContent>
-                                <div className="card-title">
-                                    Student Assignment
-                                </div>
-                                <div className="card-sub-title">
-                                    Student Assignment
-                                </div>
-                                <Divider />
-                                <div className="card-stat">
-                                    50/100
-                                </div>
-                                <div className="card-stat-bar-container">
-                                    <LinearProgress style={{height: 20}} className="progress-bar" variant="determinate" value={50} />
-                                </div>
-                            </CardContent>
-                            <CardActions>
-                                <Button
-                                    onClick={() => this.handleClick('StudentAssignment')}
-                                    component={Link} to="/studentAssignment"
-                                    variant="raised" size="small"
-                                    color={this.chooseColor(1, 2)}> {this.chooseText(1, 2)}
-                                </Button>
-                            </CardActions>
-                        </Card>
-                    </Grid>
-                    <Grid item xs={6}>
-                        <Card>
-                            <CardContent>
-                                <div className="card-title">
-                                    Student Assignment Type
-                                </div>
-                                <div className="card-sub-title">
-                                    Student Assignment Type
-                                </div>
-                                <Divider />
-                                <div className="card-stat">
-                                    50/100
-                                </div>
-                                <div className="card-stat-bar-container">
-                                    <LinearProgress style={{height: 20}} className="progress-bar" variant="determinate" value={50} />
-                                </div>
-                            </CardContent>
-                            <CardActions>
-                                <Button
-                                    onClick={() => { this.handleClick('StudentAssignmentType') }}
-                                    component={Link} to="/studentAssignmentType"
-                                    variant="raised"
-                                    size="small"
-                                    color={this.chooseColor(5, 2)}> {this.chooseText(5, 2)}
-                                </Button>
-                            </CardActions>
-                        </Card>
-                    </Grid>
-                </Grid>
-                </div>
+                    <div><Loader /></div>
+                    :
+                    <div>
+                        <Grid container spacing={8}>
+                            <Grid item xs={6}>
+                                <Card>
+                                    <CardContent>
+                                        <div className="card-title" align="center">
+                                            Student Assignment
+                                        </div>
+
+                                        <div className="card-sub-title" align="center">
+                                            Analysis of Student's Performance by Assignments
+                                        </div>
+
+                                        <Divider />
+
+                                        <div className="card-stat" align="center">
+                                            Completed: {parseFloat(this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].studentAssignment.overallStats.stats01["Value"])}%
+                                        </div>
+                                        <div className="card-stat-bar-container">
+                                            <LinearProgress style={{ height: 20 }} className="progress-bar" variant="determinate" value={parseFloat(this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].studentAssignment.overallStats.stats01["Value"])} />
+                                        </div>
+
+                                        <Divider />
+
+                                        <div className="card-stat" align="center">
+                                            Percentile: {parseFloat(this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].studentAssignment.overallStats.stats02["Value"])}%
+                                        </div>
+                                        <div className="card-stat-bar-container">
+                                            <LinearProgress style={{ height: 20 }} className="progress-bar" variant="determinate" value={parseFloat(this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].studentAssignment.overallStats.stats02["Value"])} />
+                                        </div>
+                                    </CardContent>
+                                    <CardActions>
+                                        <Button
+                                            onClick={() => this.handleClick('StudentAssignment')}
+                                            component={Link} to="/studentAssignment"
+                                            variant="raised" size="small"
+                                            style={{ left: "45%" }}
+                                            color={this.chooseColor(1, 2)}> {this.chooseText(1, 2)}
+                                        </Button>
+                                    </CardActions>
+                                </Card>
+                            </Grid>
+                            <Grid item xs={6}>
+                                <Card>
+                                    <CardContent>
+                                        <div className="card-title" align="center">
+                                            Student Assignment Type
+                                        </div>
+
+                                        <div className="card-sub-title" align="center">
+                                            Analysis of Student's Performance in each Assignment types
+                                        </div>
+
+                                        <Divider />
+
+                                        <Typography variant="headline" component="h2" style={{ marginLeft: "35%" }}>
+                                            Assignment Type: 
+                                        </Typography>
+                                        <div className="card-stat" align="center">
+                                            {this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].studentAssignmentType.overallStats.stats03.Most_Struggled_Assignment_Type["Type1"]}
+                                        </div>
+                                        <br/>
+
+                                        <Typography variant="headline" component="h2" style={{ marginLeft: "35%" }}>
+                                            Completion Rate:
+                                        </Typography>
+
+                                        <div className="card-stat" align="center">
+                                            {parseFloat(this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].studentAssignmentType.overallStats.stats03.Most_Struggled_Assignment_Type["Rate"]).toFixed(1)}%
+                                        </div>
+
+                                    </CardContent>
+                                    <CardActions>
+                                        <Button
+                                            onClick={() => { this.handleClick('StudentAssignmentType') }}
+                                            component={Link} to="/studentAssignmentType"
+                                            style={{marginLeft: "45%"}}
+                                            variant="raised"
+                                            size="small"
+                                            color={this.chooseColor(5, 2)}> {this.chooseText(5, 2)}
+                                        </Button>
+                                    </CardActions>
+                                </Card>
+                            </Grid>
+                        </Grid>
+                    </div>
                 }
             </div>
         )
     }
 }
 
-function mapStateToProps(state){
-    return{
-        activeLoader: state.activeLoader
+function mapStateToProps(state) {
+    return {
+        activeLoader: state.activeLoader,
+        firebase: state.firebase,
+        activeProfile: state.activeProfile.val,
+        activeView: state.activeView,
     };
-}    
+}
 
-export default connect(mapStateToProps)(GridExample); 
+export default connect(mapStateToProps)(StudentOverview); 

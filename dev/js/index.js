@@ -7,6 +7,7 @@ import { BrowserRouter } from 'react-router-dom'
 import App from './components/app';
 import firebase from 'firebase';
 import store from "./store";
+import Favicon from 'react-favicon';
 //wrapping createStore in {} makes it usuable without declaring a var
 
 var config = {
@@ -47,11 +48,14 @@ let update_data = function () {
 // setInterval(update_data, 180000); // remeber to comment out this in order to update firebase with live data 
 
 ReactDOM.render(
-    <BrowserRouter>
-        <Provider store={store}>
-            <App />
-        </Provider>
-    </BrowserRouter>,
+    <div>
+        <Favicon url="http://icons.iconarchive.com/icons/paomedia/small-n-flat/512/lightning-icon.png" />
+        <BrowserRouter>
+            <Provider store={store}>
+                <App />
+            </Provider>
+        </BrowserRouter>
+    </div>,
     document.getElementById('root')
 );
 // we assign a store to provider which supplies data to the componenets in App
