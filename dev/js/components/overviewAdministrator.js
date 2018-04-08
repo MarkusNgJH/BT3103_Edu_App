@@ -84,13 +84,13 @@ class GridExample extends Component {
                                 </div>
                                 <Divider />
                                 <div className="card-admin-performance-rankings">
-                                Top Courses
+                                <strong>Top Courses </strong>
                                 <ol>
                                     <li>{this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].adminPerformance.overallStats.stats03["Top_Course(s)"].Course1}</li>
                                     <li>{this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].adminPerformance.overallStats.stats03["Top_Course(s)"].Course2}</li>
                                     <li>{this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].adminPerformance.overallStats.stats03["Top_Course(s)"].Course3}</li>
                                 </ol>
-                                Bottom Courses
+                                <strong> Bottom Courses </strong>
                                 <ol>
                                     <li>{this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].adminPerformance.overallStats.stats03["Bottom_Course(s)"].Course1}</li>
                                 </ol>
@@ -99,7 +99,7 @@ class GridExample extends Component {
                                     onClick={() => this.handleClick('administratorPerformance')}
                                     component={Link} to="/administratorPerformance"
                                     variant="raised" size="small"
-                                    color={this.chooseColor(1, 2)}> {this.chooseText(1, 2)}
+                                    color={this.chooseColor(5, 2)}> {this.chooseText(5, 2)}
                                 </Button>
                             </CardContent>
                         </Card>
@@ -114,12 +114,17 @@ class GridExample extends Component {
                                     Activity tracking of Achievements
                                 </div>
                                 <Divider />
-                                <div className="card-admin-activity1">
-                                    {this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].adminActivity.overallStats.stats03["Name"]}:<br />
+                                <div style={{paddingTop: "50px"}}>
+                                    <div className="card-admin-activity1">
+                                        <strong>
+                                        {this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].adminActivity.overallStats.stats03["Name"]}:<br />
+                                        </strong>
+                                    </div>
+                                    <div className="card-admin-activity2">
+                                        {this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].adminActivity.overallStats.stats03["Value"]}
+                                    </div>
                                 </div>
-                                <div className="card-admin-activity2">
-                                    {this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].adminActivity.overallStats.stats03["Value"]}
-                                </div>
+
                                 <Button
                                     onClick={() => { this.handleClick('administratorActivity') }}
                                     component={Link} to="/administratorActivity"
