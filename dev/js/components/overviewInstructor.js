@@ -76,54 +76,34 @@ class GridExample extends Component {
                     :
                     <div>
                         <Grid container spacing={40} justify="center" alignItems="center">
-                            <Grid item xs={6} sm={4}>
+                            <Grid item xs={6} sm={4} xl={3}>
                                 <Card style={{ height: "525px" }}>
-                                    <div style={{ padding: "50px" }}>
-                                        <Typography variant="display3" align="center" >
-                                            50/100
-                            </Typography>
-                                    </div>
-                                    <LinearProgress style={{ height: 20 }} variant="determinate" value={50} />
                                     <CardContent align="center">
-                                        <Typography variant="headline" component="h2">
+                                        <div className="card-title">
                                             Assignment Type
-                                </Typography>
-                                        <Typography color="textSecondary">
-                                            Analysis by different asssignment types
-                                </Typography>
-                                        <div align="center">
-                                            <List>
-                                                <ListItem style={{ padding: '10px', margin: '0px', textAlign: "center" }}>
-                                                    <ListItemText primary="Chart01" />
-                                                </ListItem>
-                                                <Divider />
-                                                <ListItem style={{ padding: '10px', margin: '0px', textAlign: "center" }}>
-                                                    <ListItemText primary="Chart02" />
-                                                </ListItem>
-                                                <Divider />
-                                                <ListItem style={{ padding: '10px', margin: '0px', textAlign: "center" }}>
-                                                    <ListItemText primary="Chart03" />
-                                                </ListItem>
-                                                <Divider />
-                                                <ListItem style={{ padding: '10px', margin: '0px', textAlign: "center" }}>
-                                                    <ListItemText primary="Chart04" />
-                                                </ListItem>
-                                            </List>
                                         </div>
-
+                                        <div className="card-sub-title">
+                                            Analysis by different asssignment types
+                                        </div>
+                                        <Divider />
+                                        <div className="card-stat">
+                                        50/100
+                                        </div>
+                                        <div className="card-stat-bar-container">
+                                            <LinearProgress style={{height: 20}} className="progress-bar" variant="determinate" value={50} />
+                                        </div>
                                         <Button
                                             onClick={() => this.handleClick('instructorAssignmentType')}
                                             component={Link} to="/instructorAssignmentType"
                                             variant="raised" size="small"
-                                            color={this.chooseColor(1, 2)}
-                                            style={{ marginBottom: "35px" }}>
+                                            color={this.chooseColor(1, 2)}>
                                             {this.chooseText(1, 2)}
                                         </Button>
                                     </CardContent>
 
                                 </Card>
                             </Grid>
-                            <Grid item xs={6} sm={4}>
+                            <Grid item xs={6} sm={4} xl={3}>
                                 <Card style={{ height: "525px" }}>
                                     <div style={{ padding: "50px" }}>
                                         <Typography variant="display3" align="center" >
@@ -143,15 +123,12 @@ class GridExample extends Component {
                                                 <ListItem style={{ padding: '10px', margin: '0px', textAlign: "center" }}>
                                                     <ListItemText primary="Chart01" />
                                                 </ListItem>
-                                                <Divider />
                                                 <ListItem style={{ padding: '10px', margin: '0px', textAlign: "center" }}>
                                                     <ListItemText primary="Chart02" />
                                                 </ListItem>
-                                                <Divider />
                                                 <ListItem style={{ padding: '10px', margin: '0px', textAlign: "center" }}>
                                                     <ListItemText primary="Chart03" />
                                                 </ListItem>
-                                                <Divider />
                                                 <ListItem style={{ padding: '10px', margin: '0px', textAlign: "center" }}>
                                                     <ListItemText primary="Chart04" />
                                                 </ListItem>
@@ -177,7 +154,7 @@ class GridExample extends Component {
                                 </Card>
                             </Grid>
 
-                            <Grid item xs={6} sm={4}>
+                            <Grid item xs={6} sm={4} xl={3}>
                                 <Card style={{ height: "525px" }}>
                                     <div style={{ padding: "50px" }}>
                                         <Typography variant="display3" align="center" >
@@ -236,7 +213,9 @@ class GridExample extends Component {
 
 function mapStateToProps(state) {
     return {
-        activeLoader: state.activeLoader
+        activeLoader: state.activeLoader,
+        firebase: state.firebase,
+        activeProfile: state.activeProfile
     };
 }
 
