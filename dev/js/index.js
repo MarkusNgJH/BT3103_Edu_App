@@ -49,6 +49,7 @@ let update_data = function () {
 ReactDOM.render(
     <BrowserRouter>
         <Provider store={store}>
+            <Favicon url="../../public/favicon.ico" />
             <App />
         </Provider>
     </BrowserRouter>,
