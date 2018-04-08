@@ -15,7 +15,7 @@ const reducerFirebase = (state = {}, action) => {
   }
 };
 
-const activeProfile = (state = { val: { uid: "g8odN87wiURjfhqbw1HiMoFIwxn1", course: "BT3103", role: "Student"}}, action) => {
+const activeProfile = (state = { val: { uid: "R6nSbDVly8PUnC6jQFcseDS9sgJ3", course: "2018 National Coding Championships - Junior", role: "Administrator"}}, action) => {
   switch (action.type) {
     case 'UPDATE_ACTIVE_PROFILE':
       console.log("UPDATE_ACTIVE_PROFILE")

@@ -17,6 +17,10 @@ import {updateActiveProfile} from '../actions/updateActiveProfile';
 import store from '../store';
 import UserTable from './userTable';
 import Snackbar from 'material-ui/Snackbar';
+import Paper from 'material-ui/Paper';
+import Card, { CardActions, CardContent } from 'material-ui/Card';
+import Select from 'material-ui/Select';
+import Button from 'material-ui/Button';
  
 const styles = theme => ({
     container: {
@@ -120,28 +124,36 @@ class profileSetting extends React.Component {
         return(
             <div>
                 <h1>Profile Setting</h1>
-                <div style={{ width: '20%', height: 'auto', position: 'relative', margin: '0px auto', padding: '10px' }}>
-                    <FormControl className={styles.formControl} aria-describedby="name-helper-text">
-                        <InputLabel htmlFor="name-helper">User ID</InputLabel>
-                        <Input id="userId" onChange={this.handleUIDChange.bind(this)} placeholder="Enter your User ID here" />
-                    </FormControl>
+                <Card>
+                    <CardContent style={{padding: "20px", textAlign:"center"}}>
+                    {/* <div style={{ width: '20%', height: 'auto', position: 'relative', margin: '0px auto', padding: '10px', alignItems:"center" }}> */}
+                        <FormControl className={styles.formControl} aria-describedby="name-helper-text">
+                            <InputLabel htmlFor="name-helper" style={{textAlign:'center'}}>     User ID</InputLabel>
+                            <Input id="userId" onChange={this.handleUIDChange.bind(this)} placeholder="Enter your User ID here" />
+                        </FormControl>
 
-                    <br /> <br />
-                    <FormControl className={classNames(styles.margin, styles.textField)}>
-                        <label>
-                            Select your View Type:<br/> 
-                            <select name="course" onChange={this.handlecourseChange.bind(this)} onFocus={this.handlecourseChange.bind(this)}>
-                            {this.viewCourses()}
-                            </select>
-                        </label>
-                    </FormControl>
+                        <br /> <br />
+                        <FormControl className={classNames(styles.margin, styles.textField)}>
+                            <label>
+                                Select your View Type:<br/> 
+                                <select name="course" onChange={this.handlecourseChange.bind(this)} onFocus={this.handlecourseChange.bind(this)} className="selectStyle">
+                                {this.viewCourses()}
+                                </select>
+                            </label>
+                        </FormControl>
 
-                    <br /> <br />
-                    <button style={{ float: 'right' }} 
-                        onClick={() => this.updateActiveProfile2({ uid: this.state.uid, course: this.state.course, role: this.props.firebase.val[this.state.uid][this.state.course]['User Type'] }, "Updated user profile", this.state.uid, this.state.course, this.props.firebase.val[this.state.uid][this.state.course]['User Type'])}>
-                    Submit</button>
-                    
-                </div>
+                        <br /> <br />
+                        <div style={{textAlign:'center'}}>
+                        <Button variant="raised" style={{ align: 'center' }} 
+                            onClick={() => this.updateActiveProfile2({ uid: this.state.uid, course: this.state.course, role: this.props.firebase.val[this.state.uid][this.state.course]['User Type'] }, "Updated user profile", this.state.uid, this.state.course, this.props.firebase.val[this.state.uid][this.state.course]['User Type'])}>
+                        Submit</Button>
+                        </div>
+
+                        <br /> <br />
+                    {/* </div> */}
+                    </CardContent>
+                </Card>
+
                 <UserTable />
                 <Snackbar
                     anchorOrigin={{ vertical, horizontal }}

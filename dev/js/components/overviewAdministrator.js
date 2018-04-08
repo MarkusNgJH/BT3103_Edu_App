@@ -72,52 +72,54 @@ class GridExample extends Component {
                 <div><Loader /></div>
                 :
                 <div>
-                    <Grid container spacing={8} style={{alignItems: "stretch"}}>
-                    <Grid item xs={6}>
-                        <Card>
-                            <CardContent>
+                    <Grid container spacing={40} justify="center">
+                    <Grid item xs={6} sm={4} xl={3}>
+                        <Card className="card">
+                            <CardContent align="center">
                                 <div className="card-title">
-                                    Admin Card 1
+                                    Performance
                                 </div>
                                 <div className="card-sub-title">
-                                    subtitle here
+                                    Performance of cohort
                                 </div>
                                 <Divider />
-                                <div className="card-stat">
-                                    50/100
+                                <div className="card-admin-performance-rankings">
+                                Top Courses
+                                <ol>
+                                    <li>{this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].adminPerformance.overallStats.stats03["Top_Course(s)"].Course1}</li>
+                                    <li>{this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].adminPerformance.overallStats.stats03["Top_Course(s)"].Course2}</li>
+                                    <li>{this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].adminPerformance.overallStats.stats03["Top_Course(s)"].Course3}</li>
+                                </ol>
+                                Bottom Courses
+                                <ol>
+                                    <li>{this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].adminPerformance.overallStats.stats03["Bottom_Course(s)"].Course1}</li>
+                                </ol>
                                 </div>
-                                <div className="card-stat-bar-container">
-                                    <LinearProgress style={{height: 20}} className="progress-bar" variant="determinate" value={50} />
-                                </div>
-                            </CardContent>
-                            <CardActions>
                                 <Button
                                     onClick={() => this.handleClick('administratorPerformance')}
                                     component={Link} to="/administratorPerformance"
                                     variant="raised" size="small"
                                     color={this.chooseColor(1, 2)}> {this.chooseText(1, 2)}
                                 </Button>
-                            </CardActions>
+                            </CardContent>
                         </Card>
                     </Grid>
-                    <Grid item xs={6}>
-                        <Card>
-                            <CardContent>
+                    <Grid item xs={6} sm={4} xl={3} xs={6}>
+                        <Card className="card">
+                            <CardContent align="center">
                                 <div className="card-title">
-                                    Admin Card 2
+                                    Activity
                                 </div>
                                 <div className="card-sub-title">
-                                    subtitle here
+                                    Activity tracking of Achievements
                                 </div>
                                 <Divider />
-                                <div className="card-stat">
-                                    50/100
+                                <div className="card-admin-activity1">
+                                    {this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].adminActivity.overallStats.stats03["Name"]}:<br />
                                 </div>
-                                <div className="card-stat-bar-container">
-                                    <LinearProgress style={{height: 20}} className="progress-bar" variant="determinate" value={50} />
+                                <div className="card-admin-activity2">
+                                    {this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].adminActivity.overallStats.stats03["Value"]}
                                 </div>
-                            </CardContent>
-                            <CardActions>
                                 <Button
                                     onClick={() => { this.handleClick('administratorActivity') }}
                                     component={Link} to="/administratorActivity"
@@ -125,7 +127,7 @@ class GridExample extends Component {
                                     size="small"
                                     color={this.chooseColor(5, 2)}> {this.chooseText(5, 2)}
                                 </Button>
-                            </CardActions>
+                            </CardContent>
                         </Card>
                     </Grid>
                 </Grid>
@@ -138,7 +140,9 @@ class GridExample extends Component {
 
 function mapStateToProps(state){
     return{
-        activeLoader: state.activeLoader
+        activeLoader: state.activeLoader,
+        activeProfile: state.activeProfile.val,
+        firebase: state.firebase
     };
 }    
 
