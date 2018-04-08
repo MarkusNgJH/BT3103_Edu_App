@@ -87,7 +87,9 @@ class GridExample extends Component {
                                         </div>
                                         <Divider />
                                         <div className="card-stat">
-                                            50/100
+                                        {this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignmentType.overallStats["Total Submissions Received"]}
+                                            /
+                                            {this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignmentType.overallStats["Expected Submissions Received"]}
                                         </div>
                                         <div className="card-stat-bar-container">
                                             <LinearProgress style={{height: 20}} className="progress-bar" variant="determinate" value={50} />
@@ -114,7 +116,9 @@ class GridExample extends Component {
                                         </div>
                                         <Divider />
                                         <div className="card-stat">
-                                            50/100
+                                        {this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignment.overallStats["Current Submission"]}
+                                            /
+                                        {this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignment.overallStats["Total Expected Submission"]}
                                         </div>
                                         <div className="card-stat-bar-container">
                                             <LinearProgress style={{height: 20}} className="progress-bar" variant="determinate" value={50} />
@@ -147,13 +151,43 @@ class GridExample extends Component {
                                         <div className="card-sub-title">
                                             Identify high and low performing students
                                         </div>
+                                    <div style={{paddingTop:"15px", paddingBottom:"25px", paddingLeft:"auto", paddingRigh:"auto"}}>
+
                                         <Divider />
-                                        <div className="card-stat">
+                                        <div style={{float:"left", width:"50%"}}>
+                                        <Typography variant = "subheading" align="left" style={{padding: "5px"}}>
+                                        <strong>Top </strong>
+                                        </Typography>
+                                        <Typography variant = "subheading" align="left" >
+                                        {this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorStudentIdentifier.overallStats["Top"][1]}
+                                        <br/>
+                                        {this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorStudentIdentifier.overallStats["Top"][2]}
+                                        <br/>
+                                        {this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorStudentIdentifier.overallStats["Top"][3]}
+                                        </Typography>
+                                        </div>
+
+                                        <div align="left" style={{float:"left", width:"50%", paddingBottom:"20px"}}>
+                                        <Typography  variant = "subheading" align="left" style={{padding: "5px"}}>
+                                        <strong>Bottom </strong>
+                                        </Typography>
+                                        <Typography variant = "subheading" align="left" >
+                                        {this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorStudentIdentifier.overallStats["Bottom"][1]}
+                                        <br/>
+                                        {this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorStudentIdentifier.overallStats["Bottom"][2]}
+                                        <br/>
+                                        {this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorStudentIdentifier.overallStats["Bottom"][3]}
+                                        </Typography>
+                                        </div> 
+                                    </div>                               
+                                    
+
+                                        {/* <div className="card-stat">
                                             50/100
                                         </div>
                                         <div className="card-stat-bar-container">
                                             <LinearProgress style={{height: 20}} className="progress-bar" variant="determinate" value={50} />
-                                        </div>
+                                        </div> */}
                                         {/* <div align="center">
                                             <List>
                                                 <ListItem style={{ padding: '10px', margin: '0px', textAlign: "center" }}>
@@ -199,7 +233,8 @@ function mapStateToProps(state) {
     return {
         activeLoader: state.activeLoader,
         firebase: state.firebase,
-        activeProfile: state.activeProfile
+        activeProfile: state.activeProfile.val,
+        activeView: state.activeView
     };
 }
 
