@@ -27,6 +27,7 @@
     "material-ui-icons": "^1.0.0-beta.36",
     "node-libs-browser": "^1.0.0",
     "prop-types": "^15.6.1",
+    "postcss-loader": "^1.0.0", 
     "react": "^16.2.0",
     "react-addons-test-utils": "^15.1.0",
     "react-dazzle": "^1.2.7",
