@@ -21,13 +21,11 @@ Start the development server (changes will now update live in browser)
 > npm run start
 ```
 
-To view your project, go to: [http://localhost:3000/](http://localhost:3000/)
+To view your project, go to: [https://bt3103-edu-app.firebaseapp.com/]
 
-## Links
-
-- [Donate](https://www.patreon.com/thenewboston)
-- [thenewboston.com](https://thenewboston.com/)
-- [Facebook](https://www.facebook.com/TheNewBoston-464114846956315/)
-- [Twitter](https://twitter.com/bucky_roberts)
-- [Google+](https://plus.google.com/+BuckyRoberts)
-- [reddit](https://www.reddit.com/r/thenewboston/)
+Project Group
+Ang Kiang Hwee
+Lee Chen Yuan
+Markus Ng 
+Neo Ann Qi
+Sheryl Ker
