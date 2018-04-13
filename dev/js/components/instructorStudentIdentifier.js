@@ -157,6 +157,7 @@ class instructorStudentIdentifier extends React.Component {
         return (
             <div>
                 <Grid container spacing={24} direction="row" align="center">
+                    {/* chart 12 */}
                     <Grid item xs={12}>
                         <Paper>
                             <div style={divStyle}>
@@ -181,11 +182,11 @@ class instructorStudentIdentifier extends React.Component {
                                     />
                                     <YAxis
                                         dataKey="value"
-                                        label={{value:"Number of Submissions", angle: -90 ,position:"insideBottomLeft"}}
+                                        label={{ value: "Number of Submissions", angle: -90, position: "insideBottomLeft" }}
                                     />
-                                    
+
                                     <Tooltip />
-                                    <Bar name = "Number of Submissions" dataKey="value" fill="#3498DB">
+                                    <Bar name="Number of Submissions" dataKey="value" fill="#3498DB">
                                         onClick={(data, index) => this.selectedAssignment(data.assignment)}>
                         {this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorStudentIdentifier.chart12.data.map((entry, index) => (
                                             <Cell key={entry.student_name} fill={entry.value < 20 ? '#d68995' : '#71afe2'} />
@@ -203,6 +204,7 @@ class instructorStudentIdentifier extends React.Component {
                         </Paper>
                     </Grid>
 
+                    {/* chart 13 */}
                     <Grid item xs={6}>
                         <Paper>
                             <div style={divStyle}>
@@ -229,43 +231,41 @@ class instructorStudentIdentifier extends React.Component {
                                     />
                                     <YAxis
                                         dataKey="value"
-                                        label={{value:"Number of Submissions", angle: -90 ,position:"insideBottomLeft"}}
+                                        label={{ value: "Number of Submissions", angle: -90, position: "insideBottomLeft" }}
                                     />
-                                    
+
                                     <Tooltip />
-                                    <Bar name = "Number of Submissions" dataKey="value" fill="#66CDAA">
+                                    <Bar name="Number of Submissions" dataKey="value" fill="#66CDAA">
                                         onClick={(data, index) => this.selectedAssignment(data.assignment)}>
-                        {this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorStudentIdentifier.chart13.data.map((entry, index) => (
+                                        {this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorStudentIdentifier.chart13.data.map((entry, index) => (
                                             <Cell key={entry.student_name} fill={entry.value > this.topStudentSubmissions(this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorStudentIdentifier.chart13.data) ? '#66CDAA' : '#3498DB'} />
                                         ))}
                                     </Bar>
-                                    {/* {this.topStudentSubmissions(this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorStudentIdentifier.chart13.data)} */}
                                     <ReferenceLine strokeDasharray="3 3"
                                         y={this.topStudentSubmissions(this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorStudentIdentifier.chart13.data)}
                                         strokeWidth={4} stroke="#e0b13c" label={{ value: "75 Percentile", position: "insideTop" }} />
-                                <Legend verticalAlign="top" align="right" />
+                                    <Legend verticalAlign="top" align="right" />
                                 </BarChart>
                             </ResponsiveContainer>
                             {this.isFav("chart13") == true ?
                                 <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart13", "Chart13 has been removed!") }}>Remove</Button>
                                 :
-                                <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart13", "BarChart", "Progress of Latest Submission", "Identify Possible Achievers", "Name", "", ["Value"], "Chart13 has been added!") }}>Favourite</Button>
+                                <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart13", "BarChart", "Progress of Latest Submission", "Identify Possible Achievers", "student_name", "value", ["value"], "Chart13 has been added!") }}>Favourite</Button>
                             }
                         </Paper>
                     </Grid>
 
+                    {/* chart 14 */}
                     <Grid item xs={6}>
                         <Paper>
                             <div style={divStyle}>
                                 <h2>Submission Duration</h2>
-                                <p>Idntify Distribution of Time Taken for Submission</p>
+                                <p>Identify Distribution of Time Taken for Submission</p>
                                 <Divider />
                             </div>
 
                             <ResponsiveContainer width="90%" height={380}>
                                 <BarChart
-                                    // width={730}
-                                    // height={250}
                                     data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorStudentIdentifier.chart14.data}
                                     margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
                                 >
@@ -281,18 +281,18 @@ class instructorStudentIdentifier extends React.Component {
                                     />
                                     <YAxis
                                         dataKey="value"
-                                        label={{value:"Number of Days", angle: -90 ,position:"insideBottomLeft"}}
+                                        label={{ value: "Number of Days", angle: -90, position: "insideBottomLeft" }}
                                     />
-                                    
+
                                     <Tooltip />
-                                    <Bar name = "Number of Days Taken" dataKey="value" fill="#3498DB"/>>
+                                    <Bar name="Number of Days Taken" dataKey="value" fill="#3498DB" />>
                                     <Legend verticalAlign="top" align="right" />
                                 </BarChart>
                             </ResponsiveContainer>
                             {this.isFav("chart14") == true ?
                                 <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart14", "Chart14 has been removed!") }}>Remove</Button>
                                 :
-                                <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart14", "BarChart", "Submission Duration", "Idntify Distribution of Time Taken for Submission", "Name", "", ["Value"], "Chart14 has been added!") }}>Favourite</Button>
+                                <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart14", "BarChart", "Submission Duration", "Identify Distribution of Time Taken for Submission", "student_name", "value", ["value"], "Chart14 has been added!") }}>Favourite</Button>
                             }
                         </Paper>
                     </Grid>

@@ -1,10 +1,8 @@
 import React from 'react';
 import Select from 'react-select';
-import 'react-select/dist/react-select.css';
+// import 'react-select/dist/react-select.css';
 
 class Search extends React.Component {
-
-
   state = {
     selectedOption: '',
   }
