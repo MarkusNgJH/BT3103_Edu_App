@@ -21,7 +21,7 @@
 To view the project, go to: [https://bt3103-edu-app.firebaseapp.com/]
 
 Project Group
-* Ang Kiang Hwee
+* Ang Kian Hwee
 * Lee Chen Yuan
 * Markus Ng 
 * Neo Ann Qi
