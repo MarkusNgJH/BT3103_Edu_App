@@ -86,13 +86,24 @@ class GridExample extends Component {
                                 <div className="card-admin-performance-rankings">
                                 <strong>Top Courses </strong>
                                 <ol>
-                                    <li>{this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].adminPerformance.overallStats.stats03["Top_Course(s)"].Course1}</li>
+                                    {Object.keys(this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].adminPerformance.overallStats.stats03["Top_Course(s)"]).map((course) =>{
+                                            if(course[0]=="C")
+                                            return(
+                                                <li> {this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].adminPerformance.overallStats.stats03["Top_Course(s)"][course] }</li>
+                                            )}
+                                    )}
+                                    {/* <li>{this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].adminPerformance.overallStats.stats03["Top_Course(s)"].Course1}</li>
                                     <li>{this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].adminPerformance.overallStats.stats03["Top_Course(s)"].Course2}</li>
-                                    <li>{this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].adminPerformance.overallStats.stats03["Top_Course(s)"].Course3}</li>
+                                    <li>{this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].adminPerformance.overallStats.stats03["Top_Course(s)"].Course3}</li> */}
                                 </ol>
                                 <strong> Bottom Courses </strong>
                                 <ol>
-                                    <li>{this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].adminPerformance.overallStats.stats03["Bottom_Course(s)"].Course1}</li>
+                                    {Object.keys(this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].adminPerformance.overallStats.stats03["Bottom_Course(s)"]).map((course) =>{
+                                            if(course[0]=="C")
+                                            return(
+                                                <li> {this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].adminPerformance.overallStats.stats03["Bottom_Course(s)"][course] }</li>
+                                            )}
+                                    )}
                                 </ol>
                                 </div>
                                 <Button
@@ -117,11 +128,11 @@ class GridExample extends Component {
                                 <div style={{paddingTop: "50px"}}>
                                     <div className="card-admin-activity1">
                                         <strong>
-                                        {this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].adminActivity.overallStats.stats03["Name"]}:<br />
+                                        {this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].adminActivity.overallStats.stats04["Name"]}:<br />
                                         </strong>
                                     </div>
                                     <div className="card-admin-activity2">
-                                        {this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].adminActivity.overallStats.stats03["Value"]}
+                                        {this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].adminActivity.overallStats.stats04["Value"]}
                                     </div>
                                 </div>
 
