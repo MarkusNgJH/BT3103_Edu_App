@@ -21,6 +21,7 @@ import Paper from 'material-ui/Paper';
 import Card, { CardActions, CardContent } from 'material-ui/Card';
 import Select from 'material-ui/Select';
 import Button from 'material-ui/Button';
+import Search from './search';
  
 const styles = theme => ({
     container: {
@@ -53,6 +54,14 @@ class profileSetting extends React.Component {
         console.log('handleUIDChange')
         if(Object.keys(this.props.firebase.val).indexOf(e.target.value) > -1){
             this.setState({ course: Object.keys(this.props.firebase.val[e.target.value])[0]})
+        }
+    }
+
+    handleUIDChange2(e) {
+        this.setState({ uid: e})
+        console.log('handleUIDChange')
+        if(Object.keys(this.props.firebase.val).indexOf(e) > -1){
+            this.setState({ course: Object.keys(this.props.firebase.val[e])[0]})
         }
     }
 
@@ -127,12 +136,13 @@ class profileSetting extends React.Component {
                 <Card>
                     <CardContent style={{padding: "20px", textAlign:"center"}}>
                     {/* <div style={{ width: '20%', height: 'auto', position: 'relative', margin: '0px auto', padding: '10px', alignItems:"center" }}> */}
-                        <FormControl className={styles.formControl} aria-describedby="name-helper-text">
+                        <Search id="userId" handleUIDChange2={this.handleUIDChange2.bind(this)} />
+                        {/* <FormControl className={styles.formControl} aria-describedby="name-helper-text">
                             <InputLabel htmlFor="name-helper" style={{textAlign:'center'}}>     User ID</InputLabel>
                             <Input id="userId" onChange={this.handleUIDChange.bind(this)} placeholder="Enter your User ID here" />
-                        </FormControl>
+                        </FormControl> */}
 
-                        <br /> <br />
+                        <br />
                         <FormControl className={classNames(styles.margin, styles.textField)}>
                             <label>
                                 Select your View Type:<br/> 
@@ -155,6 +165,7 @@ class profileSetting extends React.Component {
                 </Card>
 
                 <UserTable />
+                
                 <Snackbar
                     anchorOrigin={{ vertical, horizontal }}
                     autoHideDuration={2500}
