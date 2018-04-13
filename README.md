@@ -2,14 +2,21 @@
 
 # Exploring the Features
 
-* Change Authethication
+* Change Roles (between Student/Instructors/ Adminstrator)
 
 * Card Displays
+** KPI Metrics
+** Conditional Formatting
 
 * Drill-Down
+** Breadcrumbs 
 
 * Favourites
+** Supporting Comparison
+** Customisability
 
+* Prediction
+** How it works
 
 To view the project, go to: [https://bt3103-edu-app.firebaseapp.com/]
 
