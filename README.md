@@ -1,31 +1,21 @@
-![](http://i.imgur.com/DUiL9yn.png)
+# Introduction
 
-# React/Sass/Redux Boilerplate
+# Exploring the Features
 
-Boilerplate and guide for a React/Sass/Redux build.
+* Change Authethication
 
-## Getting Started
+* Card Displays
 
-To get started, first install all the necessary dependencies.
-```
-> npm install
-```
+* Drill-Down
 
-Run an initial webpack build
-```
-> webpack
-```
+* Favourites
 
-Start the development server (changes will now update live in browser)
-```
-> npm run start
-```
 
-To view your project, go to: [https://bt3103-edu-app.firebaseapp.com/]
+To view the project, go to: [https://bt3103-edu-app.firebaseapp.com/]
 
 Project Group
-Ang Kiang Hwee
-Lee Chen Yuan
-Markus Ng 
-Neo Ann Qi
-Sheryl Ker
+* Ang Kiang Hwee
+* Lee Chen Yuan
+* Markus Ng 
+* Neo Ann Qi
+* Sheryl Ker
