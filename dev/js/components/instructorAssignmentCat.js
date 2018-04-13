@@ -290,7 +290,7 @@ class InstructorAssignmentCat extends React.Component {
                                         <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart02", "Chart02 has been removed!") }}>Remove</Button>
 
                                         :
-                                        <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart02", "BarChart", "Submission Window", "Is there sufficient days to complete assignments?", "assignment", "value", ["value"], "Chart02 has been added!") }}>Favourite</Button>
+                                        <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart02", "BarChart", "Submission Window", "Evaluate Whether Deadline is Reasonable for Assignments", "days_lapsed", "value", ["value"], "Chart02 has been added!") }}>Favourite</Button>
 
                                     }
                                 </div>
@@ -329,7 +329,7 @@ class InstructorAssignmentCat extends React.Component {
                                     {this.isFav("chart03") == true ?
                                         <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart03", "Chart03 has been removed!") }}>Remove</Button>
                                         :
-                                        <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart03", "BarChart", "Submission Across Time", "How are my student behaviour in submitting my assignments?", "assignment", "value", ["value"], "Chart03 has been added!") }}>Favourite</Button>
+                                        <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart03", "AreaChart", "Submission Across Time", "Monitor Student's Submission over Time", "date_time", "", ["value"], "Chart03 has been added!") }}>Favourite</Button>
 
                                     }
                                 </div>
@@ -374,7 +374,7 @@ class InstructorAssignmentCat extends React.Component {
                                         <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart04", "Chart04 has been removed!") }}>Remove</Button>
 
                                         :
-                                        <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart01", "BarChart", "Submission Window", "Is there sufficient days to complete assignment " + "{this.state.selectedAssignment}" + "?", "assignment", "value", ["value"], "Chart04 has been added!") }}>Favourite</Button>
+                                        <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart04", "BarChart", "Submission Window", "Is there sufficient days to complete assignment " + this.state.selectedAssignment + "?", "day_lapsed_from_assignmentX", "value", ["value"], "Chart04 has been added!") }}>Favourite</Button>
 
                                     }
                                 </div>
@@ -391,7 +391,7 @@ class InstructorAssignmentCat extends React.Component {
                                 <div>
                                     <div style={divStyle}>
                                         <h2>Submission Across Time</h2>
-                                        <p>Monitor Student's Submission over Time for "{this.state.selectedAssignment}"?</p>
+                                        <p>Monitor Student's Submission over Time for {this.state.selectedAssignment}?</p>
                                         <Divider />
                                     </div>
                                     <ResponsiveContainer width="90%" height={280}>
@@ -415,7 +415,7 @@ class InstructorAssignmentCat extends React.Component {
                                         <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart06", "Chart06 has been removed!") }}>Remove</Button>
 
                                         :
-                                        <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart06", "BarChart", "Submission Across Time", "How are my student behaviour in submitting assignment" + "{this.state.selectedAssignment}" + "?", "assignment", "value", ["value"], "Chart06 has been added!") }}>Favourite</Button>
+                                        <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart06", "AreaChart", "Submission Across Time", "Monitor Student's Submission over Time for " + this.state.selectedAssignment + "?", "date_time", "", ["value"], "Chart06 has been added!") }}>Favourite</Button>
 
                                     }
                                 </div>
@@ -458,7 +458,7 @@ class InstructorAssignmentCat extends React.Component {
                                         <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart05", "Chart05 has been removed!") }}>Remove</Button>
 
                                         :
-                                        <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart05", "BarChart", "Submission Window", "Is there sufficient days to complete assignment " + "{this.state.selectedAssignment}" + "?", "assignment", "value", ["value"], "Chart5 has been added!") }}>Favourite</Button>
+                                        <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart05", "BarChart", "Submission Window", "Evaluate Whether Deadline is Reasonable for " + this.state.selectedAssignment + "?", "day_lapsed_from_assignmentX", "value", ["value"], "Chart5 has been added!") }}>Favourite</Button>
 
                                     }
                                 </div>
@@ -500,7 +500,7 @@ class InstructorAssignmentCat extends React.Component {
                                         <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart07", "Chart07 has been removed!") }}>Remove</Button>
 
                                         :
-                                        <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart07", "BarChart", "Submission Across Time", "How are my student behaviour in submitting assignment " + this.state.selectedAssignment + "?", "assignment", "value", ["value"], "Chart07 has been added!") }}>Favourite</Button>
+                                        <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart07", "AreaChart", "Submission Across Time", "Monitor Student's Submission over Time for " + this.state.selectedAssignment + "?", "date_time", "", ["value"], "Chart07 has been added!") }}>Favourite</Button>
 
                                     }
                                 </div>
