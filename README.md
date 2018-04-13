@@ -1,33 +1,28 @@
-![](http://i.imgur.com/DUiL9yn.png)
+# Introduction
 
-# React/Sass/Redux Boilerplate
+# Exploring the Features
 
-Boilerplate and guide for a React/Sass/Redux build.
+* Change Roles (between Student/Instructors/ Adminstrator)
 
-## Getting Started
+* Card Displays
+** KPI Metrics
+** Conditional Formatting
 
-To get started, first install all the necessary dependencies.
-```
-> npm install
-```
+* Drill-Down
+** Breadcrumbs 
 
-Run an initial webpack build
-```
-> webpack
-```
+* Favourites
+** Supporting Comparison
+** Customisability
 
-Start the development server (changes will now update live in browser)
-```
-> npm run start
-```
+* Prediction
+** How it works
 
-To view your project, go to: [http://localhost:3000/](http://localhost:3000/)
+To view the project, go to: [https://bt3103-edu-app.firebaseapp.com/]
 
-## Links
-
-- [Donate](https://www.patreon.com/thenewboston)
-- [thenewboston.com](https://thenewboston.com/)
-- [Facebook](https://www.facebook.com/TheNewBoston-464114846956315/)
-- [Twitter](https://twitter.com/bucky_roberts)
-- [Google+](https://plus.google.com/+BuckyRoberts)
-- [reddit](https://www.reddit.com/r/thenewboston/)
+Project Group
+* Ang Kian Hwee
+* Lee Chen Yuan
+* Markus Ng 
+* Neo Ann Qi
+* Sheryl Ker

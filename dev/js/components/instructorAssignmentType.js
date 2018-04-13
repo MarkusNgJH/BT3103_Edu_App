@@ -247,7 +247,7 @@ class InstructorAssignmentType extends React.Component {
                                 <p>Monitor Percentage of Submissions for Each Assignment Type</p>
                                 <Divider />
                             </div>
-                            <ResponsiveContainer width="90%" height={380}>
+                            <ResponsiveContainer width="90%" height={280}>
                                 <BarChart
                                     width={730}
                                     height={250}
@@ -260,7 +260,7 @@ class InstructorAssignmentType extends React.Component {
                                     />
                                     
                                     <YAxis 
-                                        label={{value:"Number of Submissions", angle: -90 ,position:"insideBottomLeft"}} />
+                                        label={{value:"Submission Rate (%)", angle: -90 ,position:"insideBottomLeft"}} />
 
                                     <Tooltip />
                                     <Bar dataKey="Value" fill="#8884d8" name="% Submitted"
@@ -274,7 +274,7 @@ class InstructorAssignmentType extends React.Component {
                                             />
                                         ))}
                                     </Bar>
-                                    <Legend verticalAlign="top" align="right" />
+                                    {/* <Legend verticalAlign="top" align="right" /> */}
                                 </BarChart>
                             </ResponsiveContainer>
                             {this.isFav("chart08") == true ?
@@ -295,7 +295,7 @@ class InstructorAssignmentType extends React.Component {
                                         <Divider />
                                     </div>
 
-                                    <ResponsiveContainer width="85%" height={380}>
+                                    <ResponsiveContainer width="85%" height={280}>
                                         <BarChart width={400} height={250} data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignmentType.chart09.data}>
                                             <XAxis dataKey="Name" tick={false} label={{value:"Assignments"}} />/>
                                             <YAxis label={{value:"Count", angle: -90, position:"insideBottomLeft" , offset: 12}}/>
@@ -328,7 +328,7 @@ class InstructorAssignmentType extends React.Component {
                                         <Divider />
                                     </div>
 
-                                    <ResponsiveContainer width="85%" height={380}>
+                                    <ResponsiveContainer width="85%" height={280}>
                                         <BarChart width={400} height={250} data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignmentType.chart10.data}>
                                             <XAxis dataKey="Name" tick={false} label={{value:"Assignments"}} />/>
                                             <YAxis label={{value:"Count", angle: -90, position:"insideBottomLeft", offset: 12}}/>
@@ -361,7 +361,7 @@ class InstructorAssignmentType extends React.Component {
                                         <Divider />
                                     </div>
 
-                                    <ResponsiveContainer width="90%" height={380}>
+                                    <ResponsiveContainer width="90%" height={280}>
                                         <BarChart width={730} height={250} data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignmentType.chart11.data}>
                                             <XAxis dataKey="Name" />
                                             <YAxis label={{value:"Number of Submissions", angle: -90 ,position:"insideBottomLeft",offset: 6}}/>
