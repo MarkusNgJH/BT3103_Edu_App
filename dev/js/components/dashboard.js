@@ -25,7 +25,9 @@ import {
     Legend,
     ResponsiveContainer,
     Cell,
-    ReferenceLine
+    ReferenceLine,
+    AreaChart,
+    Area
 } from "recharts";
 import { BarChart, Bar } from "recharts";
 const AxisLabel = ({
@@ -88,6 +90,16 @@ class Dashboard extends React.Component {
         }
     }
 
+    topStudentSubmissions(data) {
+        var result = []
+        for (var i in data) {
+            result.push(data[i].value)
+        }
+        var totalStudent = result.length
+        result.sort(function (a, b) { return b - a })
+        return (result[Math.round(totalStudent / 4)])
+    }
+
     render() {
         const activeUserId = this.props.activeProfile.uid
         const activeCourse = this.props.activeProfile.course
@@ -96,6 +108,7 @@ class Dashboard extends React.Component {
         })
         console.log(chartData)
         console.log("Favourites:", this.state.favourites)
+        const comp = this;
 
         return (
             <div>
@@ -180,7 +193,7 @@ class Dashboard extends React.Component {
                                                         />
                                                         <CartesianGrid strokeDasharray="3 3" />
                                                         <Tooltip />
-                                                        {chart["dataKey"].map(function (dk, index) {
+                                                        {chart["dataKey"].map(function (dk, index2) {
                                                             if (dk == "plays") {
                                                                 return (<Bar dataKey={dk} fill="#8884d8"></Bar>)
                                                             } else {
@@ -208,7 +221,7 @@ class Dashboard extends React.Component {
                                                             <YAxis />
                                                             <Tooltip />
                                                             <Legend />
-                                                            {chart["dataKey"].map(function (dk, index) {
+                                                            {chart["dataKey"].map(function (dk, index2) {
                                                                 if (dk == "pauses") {
                                                                     return (<Bar dataKey={dk} fill="#8884d8"></Bar>)
                                                                 } else {
@@ -224,7 +237,6 @@ class Dashboard extends React.Component {
                                                 <Grid item xs={12}>
                                                     <Paper>
                                                         <div style={divStyle}>
-                                                            {/* <h2>chart11</h2> */}
                                                             <h2>{chart["title"]}</h2>
                                                             <p>{chart["subtitle"]}</p>
                                                             <Divider />
@@ -237,7 +249,7 @@ class Dashboard extends React.Component {
                                                                 <YAxis />
                                                                 <Tooltip />
                                                                 <Legend />
-                                                                {chart["dataKey"].map(function (dk, index) {
+                                                                {chart["dataKey"].map(function (dk, index2) {
                                                                     return (<Bar dataKey={dk} fill="#8884d8"></Bar>)
                                                                 })}
                                                             </BarChart>
@@ -272,10 +284,10 @@ class Dashboard extends React.Component {
 
                                                                     <Tooltip cursor={{ fill: 'red', fillOpacity: 0.1 }} />
                                                                     <Legend verticalAlign="top" align="right" />
-                                                                    {chart["dataKey"].map(function (dk, index) {
+                                                                    {chart["dataKey"].map(function (dk, index2) {
                                                                         return (
                                                                             <Bar name="Number of Submissions" dataKey={dk}>
-                                                                                {chartData[index].data.map((entry, index) => (
+                                                                                {chartData[index].data.map((entry, index3) => (
                                                                                     <Cell
                                                                                         key={entry.assignment}
                                                                                         fill={entry.value < 20 ? '#d68995' : '#71afe2'}
@@ -318,7 +330,7 @@ class Dashboard extends React.Component {
                                                                             <Tooltip cursor={{ fill: 'red', fillOpacity: 0.05 }} />
                                                                             <Legend verticalAlign="top" align="right" />
 
-                                                                            {chart["dataKey"].map(function (dk, index) {
+                                                                            {chart["dataKey"].map(function (dk, index2) {
                                                                                 return (
                                                                                     <Bar name="Number of Submissions" dataKey={dk} fill="#8884d8">
                                                                                     </Bar>
@@ -355,7 +367,7 @@ class Dashboard extends React.Component {
                                                                                 <Legend verticalAlign="top" align="right" />
                                                                                 <Tooltip />
 
-                                                                                {chart["dataKey"].map(function (dk, index) {
+                                                                                {chart["dataKey"].map(function (dk, index2) {
                                                                                     return (
                                                                                         <Area name="Number of Submissions" type="monotone" dataKey={dk} stroke="#8884d8" fillOpacity={1} fill="url(#colorUv)" />
                                                                                     )
@@ -394,7 +406,7 @@ class Dashboard extends React.Component {
 
                                                                                     <Tooltip />
                                                                                     <Legend verticalAlign="top" align="right" />
-                                                                                    {chart["dataKey"].map(function (dk, index) {
+                                                                                    {chart["dataKey"].map(function (dk, index2) {
                                                                                         return (
                                                                                             <Bar name="Number of Days Elapsed" dataKey={dk} fill="#8884d8">
                                                                                             </Bar>
@@ -429,11 +441,13 @@ class Dashboard extends React.Component {
                                                                                         <YAxis name="Date" label={{ value: "Number of Submissions", angle: -90, position: "insideBottomLeft", offset: 12 }} />
                                                                                         <Legend verticalAlign="top" align="right" />
                                                                                         <Tooltip />
-                                                                                        {chart["dataKey"].map(function (dk, index) {
+
+                                                                                        {chart["dataKey"].map(function (dk, index2) {
                                                                                             return (
                                                                                                 <Area name="Number of Submissions" type="monotone" dataKey={dk} stroke="#8884d8" fillOpacity={1} fill="url(#colorUv)" />
                                                                                             )
                                                                                         })}
+
                                                                                     </AreaChart>
                                                                                 </ResponsiveContainer>
                                                                             </div>
@@ -465,7 +479,7 @@ class Dashboard extends React.Component {
                                                                                             />
                                                                                             <Tooltip />
                                                                                             <Legend verticalAlign="top" align="right" />
-                                                                                            {chart["dataKey"].map(function (dk, index) {
+                                                                                            {chart["dataKey"].map(function (dk, index2) {
                                                                                                 return (
                                                                                                     <Bar name="Number of Days Elapsed" dataKey={dk} fill="#8884d8" />
                                                                                                 )
@@ -500,7 +514,7 @@ class Dashboard extends React.Component {
 
                                                                                                 <Tooltip />
                                                                                                 <Legend verticalAlign="top" align="right" />
-                                                                                                {chart["dataKey"].map(function (dk, index) {
+                                                                                                {chart["dataKey"].map(function (dk, index2) {
                                                                                                     return (
                                                                                                         <Area name="Number of Submissions" type="monotone" dataKey={dk} stroke="#8884d8" fillOpacity={1} fill="url(#colorUv)" />
                                                                                                     )
@@ -513,7 +527,7 @@ class Dashboard extends React.Component {
                                                                             // End of AssignmentCat charts 
                                                                             :
                                                                             // Start of StudentIdentifier charts 12-14
-                                                                            chart["chart"] == "chart012" ?
+                                                                            chart["chart"] == "chart12" ?
                                                                                 <Grid item xs={12}>
                                                                                     <Paper>
                                                                                         <div style={divStyle}>
@@ -539,10 +553,10 @@ class Dashboard extends React.Component {
                                                                                                 />
 
                                                                                                 <Tooltip />
-                                                                                                {chart["dataKey"].map(function (dk, index) {
+                                                                                                {chart["dataKey"].map(function (dk, index2) {
                                                                                                     return (
                                                                                                         <Bar name="Number of Submissions" dataKey="value" fill="#3498DB">
-                                                                                                            {chartData[index].data.map((entry, index) => (
+                                                                                                            {chartData[index].data.map((entry, index3) => (
                                                                                                                 <Cell key={entry.student_name} fill={entry.value < 20 ? '#d68995' : '#71afe2'} />
                                                                                                             ))}
                                                                                                         </ Bar>
@@ -555,9 +569,105 @@ class Dashboard extends React.Component {
                                                                                     </Paper>
                                                                                 </Grid>
                                                                                 :
-                                                                                <div align="center">
-                                                                                    <h2>You have not added any charts to your Dashboard.</h2>
-                                                                                </div>
+                                                                                chart["chart"] == "chart13" ?
+                                                                                    <Grid item xs={6}>
+                                                                                        <Paper>
+                                                                                            <div style={divStyle}>
+                                                                                                <h2>{chart["title"]}</h2>
+                                                                                                <p>{chart["subtitle"]}</p>
+                                                                                                <Divider />
+                                                                                            </div>
+
+                                                                                            <ResponsiveContainer width="90%" height={380}>
+                                                                                                <BarChart
+                                                                                                    // width={730}
+                                                                                                    // height={250}
+                                                                                                    data={chartData[index].data}
+                                                                                                    margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+                                                                                                >
+                                                                                                    <XAxis
+                                                                                                        dataKey={chart["xAxis"]}
+                                                                                                        label={{
+                                                                                                            value: "Student",
+                                                                                                            position: "insideBottom",
+                                                                                                        }
+                                                                                                        }
+                                                                                                        ticks={[0]}
+                                                                                                    />
+                                                                                                    <YAxis
+                                                                                                        dataKey={chart["yAxis"]}
+                                                                                                        label={{ value: "Number of Submissions", angle: -90, position: "insideBottomLeft" }}
+                                                                                                    />
+
+                                                                                                    <Tooltip />
+
+                                                                                                    {chart["dataKey"].map(function (dk, index2) {
+                                                                                                        return (
+                                                                                                            <Bar name="Number of Submissions" dataKey={dk} fill="#66CDAA">
+                                                                                                                {chartData[index].data.map((entry, index3) => (
+                                                                                                                    <Cell key={entry.student_name} fill={entry.value > comp.topStudentSubmissions(chartData[index].data) ? '#66CDAA' : '#3498DB'} />
+                                                                                                                ))}
+                                                                                                            </Bar>
+                                                                                                        )
+                                                                                                    })}
+
+                                                                                                    <ReferenceLine strokeDasharray="3 3"
+                                                                                                        y={comp.topStudentSubmissions(chartData[index].data)}
+                                                                                                        strokeWidth={4} stroke="#e0b13c" label={{ value: "75 Percentile", position: "insideTop" }} />
+
+                                                                                                    <Legend verticalAlign="top" align="right" />
+                                                                                                </BarChart>
+                                                                                            </ResponsiveContainer>
+                                                                                        </Paper>
+                                                                                    </Grid>
+                                                                                    :
+                                                                                    chart["chart"] == "chart14" ?
+                                                                                        <Grid item xs={6}>
+                                                                                            <Paper>
+                                                                                                <div style={divStyle}>
+                                                                                                    <h2>{chart["title"]}</h2>
+                                                                                                    <p>{chart["subtitle"]}</p>
+                                                                                                    <Divider />
+                                                                                                </div>
+
+                                                                                                <ResponsiveContainer width="90%" height={380}>
+                                                                                                    <BarChart
+                                                                                                        data={chartData[index].data}
+                                                                                                        margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+                                                                                                    >
+                                                                                                        <XAxis
+                                                                                                            dataKey={chart["xAxis"]}
+                                                                                                            label={{
+                                                                                                                value: "Student",
+                                                                                                                position: "insideBottom",
+                                                                                                            }
+                                                                                                            }
+                                                                                                            ticks={[0]}
+
+                                                                                                        />
+                                                                                                        <YAxis
+                                                                                                            dataKey={chart["yAxis"]}
+                                                                                                            label={{ value: "Number of Days", angle: -90, position: "insideBottomLeft" }}
+                                                                                                        />
+
+                                                                                                        <Tooltip />
+
+                                                                                                        {chart["dataKey"].map(function (dk, index2) {
+                                                                                                            return (
+                                                                                                                <Bar name="Number of Days Taken" dataKey={dk} fill="#3498DB">
+                                                                                                                </Bar>
+                                                                                                            )
+                                                                                                        })}
+
+                                                                                                        <Legend verticalAlign="top" align="right" />
+                                                                                                    </BarChart>
+                                                                                                </ResponsiveContainer>
+                                                                                            </Paper>
+                                                                                        </Grid>
+                                                                                        :
+                                                                                        <div align="center">
+                                                                                            <h2>You have not added any charts to your Dashboard.</h2>
+                                                                                        </div>
 
                             )
                         })

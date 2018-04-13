@@ -229,16 +229,12 @@ class InstructorAssignmentCat extends React.Component {
                                     
                                     <Tooltip cursor={{ fill: 'red', fillOpacity: 0.1 }} />
                                     <Legend verticalAlign="top" align="right" />
-                                    {/* <Bar name="Number of Submissions" dataKey="value" fill="#8884d8"
-                    onClick={(data, index) => this.selectedAssignment(data.assignment)} /> */}
                                     <Bar name="Number of Submissions" dataKey="value"
                                         onClick={(data, index) => this.selectedAssignment(data.assignment)}>
                                         {this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignment.chart01.data.map((entry, index) => (
                                             <Cell
                                                 key={entry.assignment}
                                                 fill={entry.assignment == this.state.selectedAssignment ? '#87f2de' : (entry.value < 20 ? '#d68995' : '#71afe2')}
-                                            // strokeWidth={entry.assignment == this.state.selectedAssignment ? 2 : 0}
-                                            // stroke="red"
                                             />
                                         ))}
                                     </Bar>
