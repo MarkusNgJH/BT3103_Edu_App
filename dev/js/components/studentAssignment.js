@@ -15,6 +15,7 @@ import Delete from 'material-ui-icons/Delete';
 import Stepper from './stepper';
 import Divider from 'material-ui/Divider';
 import Snackbar from 'material-ui/Snackbar';
+import Typography from 'material-ui/Typography';
 
 import {
     PieChart,
@@ -173,11 +174,10 @@ class studentAssignment extends React.Component {
 
         return (
             <div>
-                <Stepper steps={this.state.steps} backStep={this.backStep.bind(this)} reset={this.reset.bind(this)} />
-                <br />
-
-                <Grid container spacing={24} direction="row" align="center">
-                    <Grid item xs={12}>  {/*chart01*/}
+                <Grid container spacing={24} direction="row" align="center" justify="space-between">
+                    <Stepper steps={this.state.steps} backStep={this.backStep.bind(this)} reset={this.reset.bind(this)} />
+                    <br />
+                    <Grid item xs={6}>  {/*chart01*/}
                         <Paper>
                             <div style={divStyle}>
                                 <h3>Chart01</h3>
@@ -212,8 +212,78 @@ class studentAssignment extends React.Component {
                         </Paper>
                     </Grid>
 
+                    <Grid item xs={6} zeroMinWidth> {/*chart03*/}
+                        <Paper>
+                            <div style={divStyle}>
+                                <h3>Chart03</h3>
+                                <h4>Date of Submissison</h4>
+                                <Divider />
+                            </div>
+                            <ResponsiveContainer width="100%" height={380}>
+                                <LineChart
+                                    width={730}
+                                    height={250}
+                                    data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].studentAssignment.chart03.data}
+                                    margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+                                >
+                                    <XAxis dataKey="Name" hide={true}>
+                                        <Label value="Date" offset={-5} position="insideBottom" />
+                                    </XAxis>
+
+                                    <YAxis dataKey="Value">
+                                        <Label value="Number of Assignments Submitted" angle={-90} offset={0} position="insideBottomLeft" />
+                                    </YAxis>
+
+                                    <CartesianGrid strokeDasharray="3 3" />
+                                    <Tooltip />
+                                    <Line name="Assignments Submitted" dataKey="Value" fill="#8884d8" />
+                                </LineChart>
+                            </ResponsiveContainer>
+                            {this.isFav("chart03") == true ?
+                                <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart03", "Chart03 has been removed!") }}>Remove</Button>
+                                :
+                                <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart03", "LineChart", "Chart03", "Date of Submissison", "name", "Value", ["Value"], "Chart03 has been added!") }}>Favourite</Button>
+                            }
+                        </Paper>
+                    </Grid>
+
+                    <Grid item xs={6} zeroMinWidth>
+                        <Paper>
+                            <div style={divStyle}>
+                                <h3>Chart04</h3>
+                                <h4>Time Lapse Since Assignment released</h4>
+                                <Divider />
+                            </div>
+                            <ResponsiveContainer width="100%" height={380}>
+                                <BarChart
+                                    width={730}
+                                    height={250}
+                                    data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].studentAssignment.chart04.data}
+                                    margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+                                >
+                                    <XAxis dataKey="Name">
+                                        <Label value="Number of days lapsed" offset={-3} position="insideBottom" />
+                                    </XAxis>
+
+                                    <YAxis dataKey="Value">
+                                        <Label value="Number of Assignments" angle={-90} offset={0} position="insideBottomLeft" />
+                                    </YAxis>
+
+                                    <CartesianGrid strokeDasharray="3 3" />
+                                    <Bar name="Number of Assignments" dataKey="Value" fill="#8884d8" />
+                                    <Tooltip />
+                                </BarChart>
+                            </ResponsiveContainer>
+                            {this.isFav("chart04") == true ?
+                                <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart04", "Chart04 has been removed!") }}>Remove</Button>
+                                :
+                                <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart04", "BarChart", "Chart04", "Time Lapse Since Work Done", "Name", "Value", ["Value"], "Chart04 has been added!") }}>Favourite</Button>
+                            }
+                        </Paper>
+                    </Grid>
+
                     {this.state.selectedAssignment ?
-                        <Grid item xs={12}> {/* chart02 */}
+                        <Grid item xs={6}> {/* chart02 */}
                             <Paper>
                                 <div style={divStyle}>
                                     <h3>Chart02</h3>
@@ -221,25 +291,39 @@ class studentAssignment extends React.Component {
                                     <Divider />
                                 </div>
                                 <ResponsiveContainer width="90%" height={380}>
-                                    <BarChart
-                                        width={730}
-                                        height={250}
-                                        data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].studentAssignment.chart02.data}
-                                        margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-                                    >
+                                    <div align="center" style={{ height: "inherit", width: "auto" }}>
+                                        <div style={{ float: "left", width: "50%", height: "inherit" }}>
+                                            <Typography variant="subheading">
+                                                <strong>Completed</strong>
+                                            </Typography>
 
-                                        <XAxis dataKey="Name" hide={true}>
-                                            <Label value="Assignment" offset={-5} position="insideBottom" />
-                                        </XAxis>
+                                            <ol style={{ height: "90%", overflow: "auto", margin: "0", padding: "auto" }}>
+                                                {this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].studentAssignment.chart02.data.map(function (entry, index) {
+                                                    if (entry.Value == 1) {
+                                                        return (
+                                                            <li style={{ margin: "6px", padding: "5px", textAlign: "left" }}>{entry.Name}</li>
+                                                        )
+                                                    }
+                                                })}
+                                            </ol>
+                                        </div>
 
-                                        <YAxis dataKey="Value">
-                                            <Label value="Number of Subsmission" angle={-90} offset={0} position="insideBottomLeft" />
-                                        </YAxis>
+                                        <div style={{ float: "left", width: "50%", height: "inherit" }}>
+                                            <Typography variant="subheading" >
+                                                <strong>Uncompleted</strong>
+                                            </Typography>
 
-                                        <CartesianGrid strokeDasharray="3 3" />
-                                        <Tooltip />
-                                        <Bar name="Number of submissions" dataKey="Value" fill="#8884d8" />
-                                    </BarChart>
+                                            <ol style={{ height: "90%", overflow: "auto" }}>
+                                                {this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].studentAssignment.chart02.data.map(function (entry, index) {
+                                                    if (entry.Value == 0) {
+                                                        return (
+                                                            <li style={{ margin: "6px", textAlign: "left" }}>{entry.Name}</li>
+                                                        )
+                                                    }
+                                                })}
+                                            </ol>
+                                        </div>
+                                    </div>
                                 </ResponsiveContainer>
                                 {this.isFav("chart02") == true ?
                                     <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart02", "Chart02 has been removed!") }}>Remove</Button>
@@ -249,74 +333,7 @@ class studentAssignment extends React.Component {
                             </Paper>
                         </Grid>
                         :
-                        <Grid item xs={12} zeroMinWidth> {/*chart03*/}
-                            <Paper>
-                                <div style={divStyle}>
-                                    <h3>Chart03</h3>
-                                    <h4>Date of Submissison</h4>
-                                    <Divider />
-                                </div>
-                                <ResponsiveContainer width="100%" height={380}>
-                                    <LineChart
-                                        width={730}
-                                        height={250}
-                                        data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].studentAssignment.chart03.data}
-                                        margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-                                    >
-                                        <XAxis dataKey="Name" hide={true}>
-                                            <Label value="Date" offset={-5} position="insideBottom" />
-                                        </XAxis>
-
-                                        <YAxis dataKey="Value">
-                                            <Label value="Number of Assignments Submitted" angle={-90} offset={0} position="insideBottomLeft" />
-                                        </YAxis>
-
-                                        <CartesianGrid strokeDasharray="3 3" />
-                                        <Tooltip />
-                                        <Line name="Assignments Submitted" dataKey="Value" fill="#8884d8" />
-                                    </LineChart>
-                                </ResponsiveContainer>
-                                {this.isFav("chart03") == true ?
-                                    <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart03", "Chart03 has been removed!") }}>Remove</Button>
-                                    :
-                                    <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart03", "LineChart", "Chart03", "Date of Submissison", "name", "Value", ["Value"], "Chart03 has been added!") }}>Favourite</Button>
-                                }
-                            </Paper>
-                            <br />
-
-                            <Paper>
-                                <div style={divStyle}>
-                                    <h3>Chart04</h3>
-                                    <h4>Time Lapse Since Assignment released</h4>
-                                    <Divider />
-                                </div>
-                                <ResponsiveContainer width="100%" height={380}>
-                                    <BarChart
-                                        width={730}
-                                        height={250}
-                                        data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].studentAssignment.chart04.data}
-                                        margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-                                    >
-                                        <XAxis dataKey="Name">
-                                            <Label value="Number of days lapsed" offset={-3} position="insideBottom" />
-                                        </XAxis>
-
-                                        <YAxis dataKey="Value">
-                                            <Label value="Number of Assignments" angle={-90} offset={0} position="insideBottomLeft" />
-                                        </YAxis>
-
-                                        <CartesianGrid strokeDasharray="3 3" />
-                                        <Bar name="Number of Assignments" dataKey="Value" fill="#8884d8" />
-                                        <Tooltip />
-                                    </BarChart>
-                                </ResponsiveContainer>
-                                {this.isFav("chart04") == true ?
-                                    <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart04", "Chart04 has been removed!") }}>Remove</Button>
-                                    :
-                                    <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart04", "BarChart", "Chart04", "Time Lapse Since Work Done", "Name", "Value", ["Value"], "Chart04 has been added!") }}>Favourite</Button>
-                                }
-                            </Paper>
-                        </Grid>
+                        <span></span>
                     }
                 </Grid> {/*End of main Grid*/}
             </div>

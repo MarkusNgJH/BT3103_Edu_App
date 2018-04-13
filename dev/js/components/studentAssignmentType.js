@@ -29,6 +29,7 @@ import {
     Label
 } from "recharts";
 import { BarChart, Bar } from "recharts";
+import { Typography } from 'material-ui';
 const AxisLabel = ({
     axisType,
     x = 0,
