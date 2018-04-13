@@ -23,7 +23,7 @@ class Search extends React.Component {
         name="form-field-name"
         placeholder={'Enter Name ...'}
         value={value}
-        style={{maxWidth: "350px", margin: "auto"}}
+        style={{maxWidth: "350px", margin: "auto", marginTop: "35px"}}
         onChange={this.handleChange}
         options={[
           { value: 'R6nSbDVly8PUnC6jQFcseDS9sgJ3', label: 'Chris Boesch' },
