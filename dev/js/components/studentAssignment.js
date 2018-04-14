@@ -16,6 +16,7 @@ import Stepper from './stepper';
 import Divider from 'material-ui/Divider';
 import Snackbar from 'material-ui/Snackbar';
 import Typography from 'material-ui/Typography';
+import Close from 'material-ui-icons/Close';
 
 import {
     PieChart,
@@ -76,6 +77,16 @@ class studentAssignment extends React.Component {
         }
         // this.state.favourites = this.props.usersTable[this.props.activeProfile.uid].favourites; // Pulls from fb, comment out this for launch
         this.state.favourites = this.props.myFavourites // pulls from local store, use this for demo
+        this.handleDelete = this.handleDelete.bind(this);
+    }
+
+    handleDelete(chip) {
+        if (chip == "assignmentType") {
+            this.setState({ selectedAssignment: "" })
+        }
+        // if (chip == "video") {
+        //     this.setState({ selectedVideo: "" })
+        // }
     }
 
     selectedAssignment(data) {
@@ -174,9 +185,27 @@ class studentAssignment extends React.Component {
 
         return (
             <div>
+                <Paper className="chip_container" id="breadcrumbs">
+                    <div className="chip">
+                        StudentAssignment
+                    </div>
+                    {this.state.selectedAssignment == "" ?
+                        <div></div>
+                        :
+                        <div className="chip_spacer">>></div>
+                    }
+                    {this.state.selectedAssignment == "" ?
+                        <div></div>
+                        :
+                        <div className="chip">
+                            {this.state.selectedAssignment}
+                            <button onClick={() => this.handleDelete("assignmentType")}>
+                                <Close />
+                            </button>
+                        </div>
+                    }
+                </Paper>
                 <Grid container spacing={24} direction="row" align="center" justify="space-between">
-                    <Stepper steps={this.state.steps} backStep={this.backStep.bind(this)} reset={this.reset.bind(this)} />
-                    <br />
                     <Grid item xs={6}>  {/*chart01*/}
                         <Paper>
                             <div style={divStyle}>

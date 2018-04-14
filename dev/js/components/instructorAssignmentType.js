@@ -203,10 +203,10 @@ class InstructorAssignmentType extends React.Component {
         const { vertical, horizontal, snackOpen } = this.state;
         return (
             <div>
-                <Paper className="chip_container">
+                <Paper className="chip_container" id="breadcrumbs">
                     <div className="chip">
                         InstructorAssignmentType
-                </div>
+                    </div>
                     {this.state.selectedAssignmentType == "" ?
                         <div></div>
                         :
@@ -258,9 +258,9 @@ class InstructorAssignmentType extends React.Component {
                                     <XAxis
                                         dataKey="Name"
                                     />
-                                    
-                                    <YAxis 
-                                        label={{value:"Submission Rate (%)", angle: -90 ,position:"insideBottomLeft"}} />
+
+                                    <YAxis
+                                        label={{ value: "Submission Rate (%)", angle: -90, position: "insideBottomLeft" }} />
 
                                     <Tooltip />
                                     <Bar dataKey="Value" fill="#8884d8" name="% Submitted"
@@ -297,8 +297,8 @@ class InstructorAssignmentType extends React.Component {
 
                                     <ResponsiveContainer width="85%" height={280}>
                                         <BarChart width={400} height={250} data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignmentType.chart09.data}>
-                                            <XAxis dataKey="Name" tick={false} label={{value:"Assignments"}} />/>
-                                            <YAxis label={{value:"Count", angle: -90, position:"insideBottomLeft" , offset: 12}}/>
+                                            <XAxis dataKey="Name" tick={false} label={{ value: "Assignments" }} />/>
+                                            <YAxis label={{ value: "Count", angle: -90, position: "insideBottomLeft", offset: 12 }} />
                                             <Tooltip />
                                             <Legend verticalAlign="top" align="right" />
                                             <Bar name="# of Plays" dataKey="plays" fill="#8884d8" />
@@ -308,7 +308,7 @@ class InstructorAssignmentType extends React.Component {
                                     {this.isFav("chart09") == true ?
                                         <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart09", "Chart09 has been removed!") }}>Remove</Button>
                                         :
-                                        <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart09", "BarChart", "Total Plays/ Fast-Forwards" ,"Which videos have my students watched and how is the pace for them?", "Name", "", ["plays", "rate"], "Chart09 has been added!") }}>Favourite</Button>
+                                        <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart09", "BarChart", "Total Plays/ Fast-Forwards", "Which videos have my students watched and how is the pace for them?", "Name", "", ["plays", "rate"], "Chart09 has been added!") }}>Favourite</Button>
                                     }
                                 </div>
                                 :
@@ -330,8 +330,8 @@ class InstructorAssignmentType extends React.Component {
 
                                     <ResponsiveContainer width="85%" height={280}>
                                         <BarChart width={400} height={250} data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignmentType.chart10.data}>
-                                            <XAxis dataKey="Name" tick={false} label={{value:"Assignments"}} />/>
-                                            <YAxis label={{value:"Count", angle: -90, position:"insideBottomLeft", offset: 12}}/>
+                                            <XAxis dataKey="Name" tick={false} label={{ value: "Assignments" }} />/>
+                                            <YAxis label={{ value: "Count", angle: -90, position: "insideBottomLeft", offset: 12 }} />
                                             <Tooltip />
                                             <Legend verticalAlign="top" align="right" />
                                             <Bar name="# of Pauses" dataKey="pauses" fill="#8884d8" onClick={(data, index) => this.selectedVideo(data)} />
@@ -364,7 +364,7 @@ class InstructorAssignmentType extends React.Component {
                                     <ResponsiveContainer width="90%" height={280}>
                                         <BarChart width={730} height={250} data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignmentType.chart11.data}>
                                             <XAxis dataKey="Name" />
-                                            <YAxis label={{value:"Number of Submissions", angle: -90 ,position:"insideBottomLeft",offset: 6}}/>
+                                            <YAxis label={{ value: "Number of Submissions", angle: -90, position: "insideBottomLeft", offset: 6 }} />
                                             <Tooltip />
                                             <Legend verticalAlign="top" align="right" />
                                             <Bar name="# of Pauses" dataKey="Value" fill="#8884d8" />
@@ -373,7 +373,7 @@ class InstructorAssignmentType extends React.Component {
                                     {this.isFav("chart11") == true ?
                                         <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart11", "Chart11 has been removed!") }}>Remove</Button>
                                         :
-                                        <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart11", "BarChart", "Area of Pauses", "Investigate Time Period where Pauses Occured for " + this.state.selectedVideo , "Name", "", ["Value"], "Chart11 has been added!") }}>Favourite</Button>
+                                        <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart11", "BarChart", "Area of Pauses", "Investigate Time Period where Pauses Occured for " + this.state.selectedVideo, "Name", "", ["Value"], "Chart11 has been added!") }}>Favourite</Button>
                                     }
                                 </div>
                                 :
@@ -383,8 +383,8 @@ class InstructorAssignmentType extends React.Component {
                     </Grid>
                     <Snackbar
                         anchorOrigin={{ vertical, horizontal }}
-                        autoHideDuration="2500"
-                        disableWindowBlurListener="true"
+                        autoHideDuration={2500}
+                        disableWindowBlurListener={true}
                         open={this.state.snackOpen}
                         onClose={this.handleClose}
                         message={this.state.message}

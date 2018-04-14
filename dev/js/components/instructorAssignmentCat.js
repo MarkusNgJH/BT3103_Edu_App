@@ -177,12 +177,14 @@ class InstructorAssignmentCat extends React.Component {
 
     render() {
         const { vertical, horizontal, snackOpen } = this.state;
+        const comp = this;
         return (
             <div>
-                <Paper className="chip_container">
+                <Paper className="chip_container" id="breadcrumbs">
                     <div className="chip">
                         InstructorAssignmentCat
-                </div>
+                    </div>
+
                     {this.state.selectedAssignment == "" ?
                         <div></div>
                         :
@@ -200,8 +202,6 @@ class InstructorAssignmentCat extends React.Component {
                     }
                 </Paper>
                 <Grid container spacing={24} alignItems="stretch" justify="center" align="center">
-
-                    {/* <Stepper steps={this.state.steps} backStep={this.backStep.bind(this)} reset={this.reset.bind(this)}/> */}
 
                     {/** CHART 01*/}
                     <Grid item xs={12}>
@@ -224,9 +224,9 @@ class InstructorAssignmentCat extends React.Component {
                                     />
                                     <YAxis
                                         dataKey="value"
-                                        label={{value:"Number of Submissions", angle: -90 ,position:"insideBottomLeft"}}
+                                        label={{ value: "Number of Submissions", angle: -90, position: "insideBottomLeft" }}
                                     />
-                                    
+
                                     <Tooltip cursor={{ fill: 'red', fillOpacity: 0.1 }} />
                                     <Legend verticalAlign="top" align="right" />
                                     <Bar name="Number of Submissions" dataKey="value"
@@ -245,270 +245,259 @@ class InstructorAssignmentCat extends React.Component {
                             {this.isFav("chart01") == true ?
                                 <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart01", "Chart01 has been removed!") }}>Remove</Button>
                                 :
-                                <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart01", "BarChart","Assignment Submissions", "What is the proportion of submission for each assignment?", "assignment", "value", ["value"], "Chart01 has been added!") }}>Favourite</Button>
+                                <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart01", "BarChart", "Assignment Submissions", "What is the proportion of submission for each assignment?", "assignment", "value", ["value"], "Chart01 has been added!") }}>Favourite</Button>
 
                             }
                         </Paper>
                     </Grid>
 
                     {/** CHART 02*/}
-                    <Grid item xs={6}>
-                        <Paper>
-                            {this.state.selectedAssignment == "" ?
-                                <div>
-                                    <div style={divStyle}>
-                                        <h2>Submission Window</h2>
-                                        <p>Evaluate Whether Deadline is Reasonable for Assignments</p>
-                                        <Divider />
-                                    </div>
-                                    <ResponsiveContainer width="90%" height={280}>
-                                        <BarChart
-                                            width={730} height={250}
-                                            data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignment.chart02.data}
-                                            margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-                                        >
-                                            <XAxis
-                                                dataKey="days_lapsed"
-                                                label={{ value: "Number of Days Elapsed", position: 'insideBottom', offset: -4 }}
-
-                                            />
-                                            <YAxis
-                                                dataKey="value"
-                                                label={{value:"Number of Submissions", angle: -90 ,position:"insideBottomLeft"}}
-                                            />
-                                            
-                                            <Tooltip cursor={{ fill: 'red', fillOpacity: 0.05 }} />
-                                            <Legend verticalAlign="top" align="right" />
-                                            <Bar name="Number of Submissions" dataKey="value" fill="#8884d8" />
-                                        </BarChart>
-                                    </ResponsiveContainer>
-                                    {this.isFav("chart02") == true ?
-                                        <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart02", "Chart02 has been removed!") }}>Remove</Button>
-
-                                        :
-                                        <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart02", "BarChart", "Submission Window", "Evaluate Whether Deadline is Reasonable for Assignments", "days_lapsed", "value", ["value"], "Chart02 has been added!") }}>Favourite</Button>
-
-                                    }
+                    {this.state.selectedAssignment == "" ?
+                        <Grid item xs={6}>
+                            <Paper>
+                                <div style={divStyle}>
+                                    <h2>Submission Window</h2>
+                                    <p>Evaluate Whether Deadline is Reasonable for Assignments</p>
+                                    <Divider />
                                 </div>
-                                :
-                                <div></div>}
-                        </Paper>
-                    </Grid>
+                                <ResponsiveContainer width="90%" height={280}>
+                                    <BarChart
+                                        width={730} height={250}
+                                        data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignment.chart02.data}
+                                        margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+                                    >
+                                        <XAxis
+                                            dataKey="days_lapsed"
+                                            label={{ value: "Number of Days Elapsed", position: 'insideBottom', offset: -4 }}
+
+                                        />
+                                        <YAxis
+                                            dataKey="value"
+                                            label={{ value: "Number of Submissions", angle: -90, position: "insideBottomLeft" }}
+                                        />
+
+                                        <Tooltip cursor={{ fill: 'red', fillOpacity: 0.05 }} />
+                                        <Legend verticalAlign="top" align="right" />
+                                        <Bar name="Number of Submissions" dataKey="value" fill="#8884d8" />
+                                    </BarChart>
+                                </ResponsiveContainer>
+                                {comp.isFav("chart02") == true ?
+                                    <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart02", "Chart02 has been removed!") }}>Remove</Button>
+                                    :
+                                    <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart02", "BarChart", "Submission Window", "Evaluate Whether Deadline is Reasonable for Assignments", "days_lapsed", "value", ["value"], "Chart02 has been added!") }}>Favourite</Button>
+                                }
+                            </Paper>
+                        </Grid>
+                        :
+                        <span></span>
+
+                    }
 
                     {/** CHART 03*/}
-                    <Grid item xs={6}>
-                        <Paper>
-                            {this.state.selectedAssignment == "" ?
-                                <div>
-                                    <div style={divStyle}>
-                                        <h2>Submission Across Time</h2>
-                                        <p>Monitor Student's Submission over Time</p>
-                                        <Divider />
-                                    </div>
-                                    <ResponsiveContainer width="90%" height={280}>
-                                        <AreaChart width={730} height={250}
-                                            data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignment.chart03.data}
-                                            margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
-                                            <defs>
-                                                <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
-                                                    <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8} />
-                                                    <stop offset="95%" stopColor="#8884d8" stopOpacity={0} />
-                                                </linearGradient>
-                                            </defs>
-                                            <XAxis label={{value:"Date"}} dataKey="date_time" tick={false}/>
-                                            <YAxis label={{value:"Number of Submissions", angle: -90 ,position:"insideBottomLeft", offset: 12}}/>
-                                            <Legend verticalAlign="top" align="right" />
-                                            <Tooltip />
-                                            <Area name="Number of Submissions" type="monotone" dataKey="value" stroke="#8884d8" fillOpacity={1} fill="url(#colorUv)" />
-                                        </AreaChart>
-                                    </ResponsiveContainer>
-                                    {this.isFav("chart03") == true ?
-                                        <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart03", "Chart03 has been removed!") }}>Remove</Button>
-                                        :
-                                        <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart03", "AreaChart", "Submission Across Time", "Monitor Student's Submission over Time", "date_time", "", ["value"], "Chart03 has been added!") }}>Favourite</Button>
-
-                                    }
+                    {this.state.selectedAssignment == "" ?
+                        <Grid item xs={6}>
+                            <Paper>
+                                <div style={divStyle}>
+                                    <h2>Submission Across Time</h2>
+                                    <p>Monitor Student's Submission over Time</p>
+                                    <Divider />
                                 </div>
-                                :
-                                <div></div>
-                            }
-                        </Paper>
-                    </Grid>
+                                <ResponsiveContainer width="90%" height={280}>
+                                    <AreaChart width={730} height={250}
+                                        data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignment.chart03.data}
+                                        margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
+                                        <defs>
+                                            <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
+                                                <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8} />
+                                                <stop offset="95%" stopColor="#8884d8" stopOpacity={0} />
+                                            </linearGradient>
+                                        </defs>
+                                        <XAxis label={{ value: "Date" }} dataKey="date_time" tick={false} />
+                                        <YAxis label={{ value: "Number of Submissions", angle: -90, position: "insideBottomLeft", offset: 12 }} />
+                                        <Legend verticalAlign="top" align="right" />
+                                        <Tooltip />
+                                        <Area name="Number of Submissions" type="monotone" dataKey="value" stroke="#8884d8" fillOpacity={1} fill="url(#colorUv)" />
+                                    </AreaChart>
+                                </ResponsiveContainer>
+                                {this.isFav("chart03") == true ?
+                                    <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart03", "Chart03 has been removed!") }}>Remove</Button>
+                                    :
+                                    <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart03", "AreaChart", "Submission Across Time", "Monitor Student's Submission over Time", "date_time", "", ["value"], "Chart03 has been added!") }}>Favourite</Button>
+
+                                }
+                            </Paper>
+                        </Grid>
+                        :
+                        <span></span>
+                    }
 
                     {/** CHART 04*/}
-                    <Grid item xs={6}>
-                        <Paper>
-                            {this.state.selectedAssignment == "Follow the directions in the details link to get a free AWS account. Then submit the string SUCCESSFUL. " ?
-                                <div>
-                                    <div style={divStyle}>
-                                        {/* <h2>Chart04</h2> */}
-                                        <h2>Submission Window</h2>
-                                        <p>Evaluate Whether Deadline is Reasonable for Assignment "{this.state.selectedAssignment}"?</p>
-                                        <Divider />
-                                    </div>
-                                    <ResponsiveContainer width="90%" height={280}>
-                                        <BarChart
-                                            width={730} height={250}
-                                            data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignment.chart04.data}
-                                            margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-                                        >
-                                            <XAxis
-                                                dataKey="day_lapsed_from_assignmentX"
-                                                label={{ value: "Number of Days Elapsed", position: 'insideBottom', offset: -4 }}
-                                            />
-                                            <YAxis
-                                                dataKey="value"
-                                                label={{value:"Number of Submissions", angle: -90 ,position:"insideBottomLeft"}}
-                                            />
-                                            
-                                            <Tooltip />
-                                            <Legend verticalAlign="top" align="right" />
-                                            <Bar name = "Number of Days Elapsed" dataKey="value" fill="#8884d8" />
-                                        </BarChart>
-                                    </ResponsiveContainer>
-                                    {this.isFav("chart04") == true ?
-                                        <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart04", "Chart04 has been removed!") }}>Remove</Button>
-
-                                        :
-                                        <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart04", "BarChart", "Submission Window", "Is there sufficient days to complete assignment " + this.state.selectedAssignment + "?", "day_lapsed_from_assignmentX", "value", ["value"], "Chart04 has been added!") }}>Favourite</Button>
-
-                                    }
+                    {this.state.selectedAssignment == "Follow the directions in the details link to get a free AWS account. Then submit the string SUCCESSFUL. " ?
+                        <Grid item xs={6}>
+                            <Paper>
+                                <div style={divStyle}>
+                                    {/* <h2>Chart04</h2> */}
+                                    <h2>Submission Window</h2>
+                                    <p>Evaluate Whether Deadline is Reasonable for Assignment "{this.state.selectedAssignment}"?</p>
+                                    <Divider />
                                 </div>
-                                :
-                                <div></div>
-                            }
-                        </Paper>
-                    </Grid>
+                                <ResponsiveContainer width="90%" height={280}>
+                                    <BarChart
+                                        width={730} height={250}
+                                        data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignment.chart04.data}
+                                        margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+                                    >
+                                        <XAxis
+                                            dataKey="day_lapsed_from_assignmentX"
+                                            label={{ value: "Number of Days Elapsed", position: 'insideBottom', offset: -4 }}
+                                        />
+                                        <YAxis
+                                            dataKey="value"
+                                            label={{ value: "Number of Submissions", angle: -90, position: "insideBottomLeft" }}
+                                        />
+
+                                        <Tooltip />
+                                        <Legend verticalAlign="top" align="right" />
+                                        <Bar name="Number of Days Elapsed" dataKey="value" fill="#8884d8" />
+                                    </BarChart>
+                                </ResponsiveContainer>
+                                {this.isFav("chart04") == true ?
+                                    <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart04", "Chart04 has been removed!") }}>Remove</Button>
+
+                                    :
+                                    <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart04", "BarChart", "Submission Window", "Is there sufficient days to complete assignment " + this.state.selectedAssignment + "?", "day_lapsed_from_assignmentX", "value", ["value"], "Chart04 has been added!") }}>Favourite</Button>
+
+                                }
+                            </Paper>
+                        </Grid>
+                        :
+                        <span></span>
+                    }
 
                     {/** CHART 06*/}
-                    <Grid item xs={6}>
-                        <Paper>
-                            {this.state.selectedAssignment == "Follow the directions in the details link to get a free AWS account. Then submit the string SUCCESSFUL. " ?
-                                <div>
-                                    <div style={divStyle}>
-                                        <h2>Submission Across Time</h2>
-                                        <p>Monitor Student's Submission over Time for {this.state.selectedAssignment}?</p>
-                                        <Divider />
-                                    </div>
-                                    <ResponsiveContainer width="90%" height={280}>
-                                        <AreaChart width={730} height={250}
-                                            data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignment.chart06.data}
-                                            margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
-                                            <defs>
-                                                <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
-                                                    <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8} />
-                                                    <stop offset="95%" stopColor="#8884d8" stopOpacity={0} />
-                                                </linearGradient>
-                                            </defs>
-                                            <XAxis label={{value:"Date"}} dataKey="date_time" tick={false}/>
-                                            <YAxis name = "Date" label={{value:"Number of Submissions", angle: -90 ,position:"insideBottomLeft", offset: 12}}/>
-                                            <Legend verticalAlign="top" align="right" />
-                                            <Tooltip />
-                                            <Area name = "Number of Submissions" type="monotone" dataKey="value" stroke="#8884d8" fillOpacity={1} fill="url(#colorUv)" />
-                                        </AreaChart>
-                                    </ResponsiveContainer>
-                                    {this.isFav("chart06") == true ?
-                                        <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart06", "Chart06 has been removed!") }}>Remove</Button>
-
-                                        :
-                                        <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart06", "AreaChart", "Submission Across Time", "Monitor Student's Submission over Time for " + this.state.selectedAssignment + "?", "date_time", "", ["value"], "Chart06 has been added!") }}>Favourite</Button>
-
-                                    }
+                    {this.state.selectedAssignment == "Follow the directions in the details link to get a free AWS account. Then submit the string SUCCESSFUL. " ?
+                        <Grid item xs={6}>
+                            <Paper>
+                                <div style={divStyle}>
+                                    <h2>Submission Across Time</h2>
+                                    <p>Monitor Student's Submission over Time for {this.state.selectedAssignment}?</p>
+                                    <Divider />
                                 </div>
-                                :
-                                <div></div>
-                            }
-                        </Paper>
-                    </Grid>
+                                <ResponsiveContainer width="90%" height={280}>
+                                    <AreaChart width={730} height={250}
+                                        data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignment.chart06.data}
+                                        margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
+                                        <defs>
+                                            <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
+                                                <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8} />
+                                                <stop offset="95%" stopColor="#8884d8" stopOpacity={0} />
+                                            </linearGradient>
+                                        </defs>
+                                        <XAxis label={{ value: "Date" }} dataKey="date_time" tick={false} />
+                                        <YAxis name="Date" label={{ value: "Number of Submissions", angle: -90, position: "insideBottomLeft", offset: 12 }} />
+                                        <Legend verticalAlign="top" align="right" />
+                                        <Tooltip />
+                                        <Area name="Number of Submissions" type="monotone" dataKey="value" stroke="#8884d8" fillOpacity={1} fill="url(#colorUv)" />
+                                    </AreaChart>
+                                </ResponsiveContainer>
+                                {this.isFav("chart06") == true ?
+                                    <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart06", "Chart06 has been removed!") }}>Remove</Button>
+
+                                    :
+                                    <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart06", "AreaChart", "Submission Across Time", "Monitor Student's Submission over Time for " + this.state.selectedAssignment + "?", "date_time", "", ["value"], "Chart06 has been added!") }}>Favourite</Button>
+
+                                }
+                            </Paper>
+                        </Grid>
+                        :
+                        <span></span>
+                    }
 
                     {/** CHART 05*/}
-                    <Grid item xs={6}>
-                        <Paper>
-                            {this.state.selectedAssignment == "AWS Lambda Lab - Part 2 (7:13)" ?
-                                <div>
-                                    <div style={divStyle}>
-                                        <h2>Submission Window</h2>
-                                        <p>Evaluate Whether Deadline is Reasonable for "{this.state.selectedAssignment}"?</p>
-                                        <Divider />
-                                    </div>
-                                    <ResponsiveContainer width="90%" height={280}>
-                                        <BarChart
-                                            width={730} height={250}
-                                            data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignment.chart05.data}
-                                            margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-                                        >
-                                            <XAxis
-                                                dataKey="day_lapsed_from_assignmentX"
-                                                label={"Number of Days Elapsed"}
-                                            />
-                                            <YAxis
-                                                dataKey="value"
-                                                label={{value:"Number of Submissions", angle: -90 ,position:"insideBottomLeft"}}
-                                            />
-                                            <Tooltip />
-                                            <Legend verticalAlign="top" align="right" />
-                                            <Bar name ="Number of Days Elapsed" dataKey="value" fill="#8884d8" />
-                                        </BarChart>
-                                    </ResponsiveContainer>
-                                    {this.isFav("chart05") == true ?
-                                        <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart05", "Chart05 has been removed!") }}>Remove</Button>
-
-                                        :
-                                        <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart05", "BarChart", "Submission Window", "Evaluate Whether Deadline is Reasonable for " + this.state.selectedAssignment + "?", "day_lapsed_from_assignmentX", "value", ["value"], "Chart5 has been added!") }}>Favourite</Button>
-
-                                    }
+                    {this.state.selectedAssignment == "AWS Lambda Lab - Part 2 (7:13)" ?
+                        <Grid item xs={6}>
+                            <Paper>
+                                <div style={divStyle}>
+                                    <h2>Submission Window</h2>
+                                    <p>Evaluate Whether Deadline is Reasonable for "{this.state.selectedAssignment}"?</p>
+                                    <Divider />
                                 </div>
-                                :
-                                <div></div>
-                            }
-                        </Paper>
-                    </Grid>
+                                <ResponsiveContainer width="90%" height={280}>
+                                    <BarChart
+                                        width={730} height={250}
+                                        data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignment.chart05.data}
+                                        margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+                                    >
+                                        <XAxis
+                                            dataKey="day_lapsed_from_assignmentX"
+                                            label={"Number of Days Elapsed"}
+                                        />
+                                        <YAxis
+                                            dataKey="value"
+                                            label={{ value: "Number of Submissions", angle: -90, position: "insideBottomLeft" }}
+                                        />
+                                        <Tooltip />
+                                        <Legend verticalAlign="top" align="right" />
+                                        <Bar name="Number of Days Elapsed" dataKey="value" fill="#8884d8" />
+                                    </BarChart>
+                                </ResponsiveContainer>
+                                {this.isFav("chart05") == true ?
+                                    <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart05", "Chart05 has been removed!") }}>Remove</Button>
+
+                                    :
+                                    <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart05", "BarChart", "Submission Window", "Evaluate Whether Deadline is Reasonable for " + this.state.selectedAssignment + "?", "day_lapsed_from_assignmentX", "value", ["value"], "Chart5 has been added!") }}>Favourite</Button>
+
+                                }
+                            </Paper>
+                        </Grid>
+                        :
+                        <span></span>
+                    }
 
                     {/** CHART 07*/}
-                    <Grid item xs={6}>
-                        <Paper>
-                            {this.state.selectedAssignment == "AWS Lambda Lab - Part 2 (7:13)" ?
-                                <div>
-                                    <div style={divStyle}>
-                                        <h2>Submission Across Time</h2>
-                                        <p>Monitor Student's Submission over Time for "{this.state.selectedAssignment}"?</p>
-                                        <Divider />
-                                    </div>
-                                    <ResponsiveContainer width="90%" height={280}>
-                                        <AreaChart width={730} height={250}
-                                            data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignment.chart07.data}
-                                            margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
-                                            <defs>
-                                                <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
-                                                    <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8} />
-                                                    <stop offset="95%" stopColor="#8884d8" stopOpacity={0} />
-                                                </linearGradient>
-                                            </defs>
-                                            <XAxis label={{value:"Date"}} dataKey="date_time" tick={false}/>
-                                            <YAxis label={{value:"Number of Submissions", angle: -90 ,position:"insideBottomLeft", offset: 12}}/>
-                                            
-                                            <Tooltip />
-                                            <Legend verticalAlign="top" align="right" />
-                                            <Area name = "Number of Submissions" type="monotone" dataKey="value" stroke="#8884d8" fillOpacity={1} fill="url(#colorUv)" />
-                                        </AreaChart>
-                                    </ResponsiveContainer>
-                                    {this.isFav("chart07") == true ?
-                                        <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart07", "Chart07 has been removed!") }}>Remove</Button>
-
-                                        :
-                                        <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart07", "AreaChart", "Submission Across Time", "Monitor Student's Submission over Time for " + this.state.selectedAssignment + "?", "date_time", "", ["value"], "Chart07 has been added!") }}>Favourite</Button>
-
-                                    }
+                    {this.state.selectedAssignment == "AWS Lambda Lab - Part 2 (7:13)" ?
+                        <Grid item xs={6}>
+                            <Paper>
+                                <div style={divStyle}>
+                                    <h2>Submission Across Time</h2>
+                                    <p>Monitor Student's Submission over Time for "{this.state.selectedAssignment}"?</p>
+                                    <Divider />
                                 </div>
-                                :
-                                <div></div>
-                            }
-                        </Paper>
-                    </Grid>
+                                <ResponsiveContainer width="90%" height={280}>
+                                    <AreaChart width={730} height={250}
+                                        data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignment.chart07.data}
+                                        margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
+                                        <defs>
+                                            <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
+                                                <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8} />
+                                                <stop offset="95%" stopColor="#8884d8" stopOpacity={0} />
+                                            </linearGradient>
+                                        </defs>
+                                        <XAxis label={{ value: "Date" }} dataKey="date_time" tick={false} />
+                                        <YAxis label={{ value: "Number of Submissions", angle: -90, position: "insideBottomLeft", offset: 12 }} />
+
+                                        <Tooltip />
+                                        <Legend verticalAlign="top" align="right" />
+                                        <Area name="Number of Submissions" type="monotone" dataKey="value" stroke="#8884d8" fillOpacity={1} fill="url(#colorUv)" />
+                                    </AreaChart>
+                                </ResponsiveContainer>
+                                {this.isFav("chart07") == true ?
+                                    <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart07", "Chart07 has been removed!") }}>Remove</Button>
+
+                                    :
+                                    <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart07", "AreaChart", "Submission Across Time", "Monitor Student's Submission over Time for " + this.state.selectedAssignment + "?", "date_time", "", ["value"], "Chart07 has been added!") }}>Favourite</Button>
+
+                                }
+                            </Paper>
+                        </Grid>
+                        :
+                        <span></span>
+                    }
+                    
                     <Snackbar
                         anchorOrigin={{ vertical, horizontal }}
-                        autoHideDuration="2500"
-                        disableWindowBlurListener="true"
+                        autoHideDuration={2500}
+                        disableWindowBlurListener={true}
                         open={this.state.snackOpen}
                         onClose={this.handleClose}
                         message={this.state.message}

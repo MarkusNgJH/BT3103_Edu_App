@@ -298,8 +298,8 @@ class instructorStudentIdentifier extends React.Component {
                     </Grid>
                     <Snackbar
                         anchorOrigin={{ vertical, horizontal }}
-                        autoHideDuration="2500"
-                        disableWindowBlurListener="true"
+                        autoHideDuration={2500}
+                        disableWindowBlurListener={true}
                         open={this.state.snackOpen}
                         onClose={this.handleClose}
                         message={this.state.message}
