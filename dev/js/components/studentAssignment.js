@@ -93,15 +93,15 @@ class studentAssignment extends React.Component {
         console.log(this.state.steps)
         // var newSteps = this.state.steps.push(data.Name)
         if (this.state.selectedAssignment == "") {
-            this.setState({ selectedAssignment: data["payload"]["name"], steps: [...this.state.steps, data["payload"]["name"]] })
+            this.setState({ selectedAssignment: data["payload"]["Name"], steps: [...this.state.steps, data["payload"]["Name"]] })
         }
         else {
             var array = this.state.steps;
-            array.splice(-1, 1, data["payload"]["name"]);
-            this.setState({ selectedAssignment: data["payload"]["name"], steps: array })
+            array.splice(-1, 1, data["payload"]["Name"]);
+            this.setState({ selectedAssignment: data["payload"]["Name"], steps: array })
         }
         console.log(this.state.steps)
-        console.log(data["payload"]["name"])
+        console.log(data["payload"]["Name"])
     }
 
     backStep() {
@@ -122,12 +122,12 @@ class studentAssignment extends React.Component {
         for (var i = 0; i < this.state.favourites.length; i++) {
             if (typeof (this.state.favourites[i]) == 'object') {
                 if (this.state.favourites[i]["chart"] == chartName) {
-                    console.log(chartName, "is in favourites");
+                    // console.log(chartName, "is in favourites");
                     return true;
                 }
             }
         }
-        console.log(chartName, "is NOT in favourites");
+        // console.log(chartName, "is NOT in favourites");
         return false;
     }
 
@@ -153,8 +153,8 @@ class studentAssignment extends React.Component {
             type: "SET_FAV",
             payload: this.state.favourites
         })
-        console.log("Successfully added", chart)
-        console.log("Updated favs:", this.state.favourites)
+        // console.log("Successfully added", chart)
+        // console.log("Updated favs:", this.state.favourites)
     }
 
     removeFromFavourites(chart, message) {
@@ -206,10 +206,53 @@ class studentAssignment extends React.Component {
                     }
                 </Paper>
                 <Grid container spacing={24} direction="row" align="center" justify="space-between">
+                    <Grid item xs={12}>
+                        <Paper>
+                            <div style={divStyle}>
+                                <h3>Assignment Type</h3>
+                                <h4>Submission rate for each type of Assignment</h4>
+                                <Divider />
+                            </div>
+                            <ResponsiveContainer width="90%" height={380}>
+                                <BarChart
+                                    width={730}
+                                    height={250}
+                                    data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].studentAssignmentType.chart05.data}
+                                    margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+                                >
+
+                                    <XAxis dataKey="Name" hide={true}>
+                                        <Label value="Assignment Type" offset={0} position="insideBottom" />
+                                    </XAxis>
+
+                                    <YAxis dataKey="Value">
+                                        <Label value="Number of Submissions" angle={-90} offset={20} position="insideBottomLeft" />
+                                    </YAxis>
+
+                                    <CartesianGrid strokeDasharray="3 3" />
+                                    <Tooltip />
+                                    <Bar name="Percentage of Assignment submitted" dataKey="Value" fill="#8884d8" >
+                                        {this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].studentAssignmentType.chart05.data.map((entry, index) => (
+                                        <Cell
+                                            key={entry['Name']}
+                                            fill={entry.Name == this.state.selectedAssignment ? '#87f2de' : (entry.Value < 100 ? '#d68995' : '#71afe2')}
+                                        />
+                                    ))}
+                                    </Bar>
+                                </BarChart>
+                            </ResponsiveContainer>
+                            {this.isFav("chart05") == true ?
+                                <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart05", "Chart05 has been removed!") }}>Remove</Button>
+                                :
+                                <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart05", "BarChart", "Chart05", "Question Type", "Name", "Value", ["Value"], "Assignment Type has been added!") }}>Favourite</Button>
+                            }
+                        </Paper>
+                    </Grid>
+
                     <Grid item xs={6}>  {/*chart01*/}
                         <Paper>
                             <div style={divStyle}>
-                                <h3>Chart01</h3>
+                                <h3>Assignment</h3>
                                 <h4>Assignments completed by Student</h4>
                                 <Divider />
                             </div>
@@ -221,11 +264,13 @@ class studentAssignment extends React.Component {
                                 >
                                     <Pie
                                         data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].studentAssignment.chart01.data}
-                                        dataKey="value" outerRadius={100} fill="#8884d8" label
-                                        onClick={(data, index) => this.selectedAssignment(data)}>
+                                        dataKey="Value" outerRadius={100} fill="#8884d8" label
+                                        onClick={(data, index) => this.selectedAssignment(data)}
+                                        // onClick={(data, index) => console.log(data)}
+                                        >
                                         {this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].studentAssignment.chart01.data.map((entry, index) => (
                                             <Cell
-                                                key={entry['name']}
+                                                key={entry['Name']}
                                                 fill={entry.value < (5) ? '#d68995' : '#71afe2'}
                                             />
                                         ))}
@@ -244,8 +289,8 @@ class studentAssignment extends React.Component {
                     <Grid item xs={6} zeroMinWidth> {/*chart03*/}
                         <Paper>
                             <div style={divStyle}>
-                                <h3>Chart03</h3>
-                                <h4>Date of Submissison</h4>
+                                <h3>Assignment</h3>
+                                <h4>Number of Submissions per Date</h4>
                                 <Divider />
                             </div>
                             <ResponsiveContainer width="100%" height={380}>
@@ -279,7 +324,7 @@ class studentAssignment extends React.Component {
                     <Grid item xs={6} zeroMinWidth>
                         <Paper>
                             <div style={divStyle}>
-                                <h3>Chart04</h3>
+                                <h3>Assignment</h3>
                                 <h4>Time Lapse Since Assignment released</h4>
                                 <Divider />
                             </div>
@@ -315,14 +360,14 @@ class studentAssignment extends React.Component {
                         <Grid item xs={6}> {/* chart02 */}
                             <Paper>
                                 <div style={divStyle}>
-                                    <h3>Chart02</h3>
-                                    <h4>Assignment Tracking</h4>
+                                    <h3>Assignment</h3>
+                                    <h4>List of Assignments</h4>
                                     <Divider />
                                 </div>
                                 <ResponsiveContainer width="90%" height={380}>
                                     <div align="center" style={{ height: "inherit", width: "auto" }}>
                                         <div style={{ float: "left", width: "50%", height: "inherit" }}>
-                                            <Typography variant="subheading">
+                                            <Typography variant="subheading" style={{backgroundColor:"lightgreen"}}>
                                                 <strong>Completed</strong>
                                             </Typography>
 
@@ -338,7 +383,7 @@ class studentAssignment extends React.Component {
                                         </div>
 
                                         <div style={{ float: "left", width: "50%", height: "inherit" }}>
-                                            <Typography variant="subheading" >
+                                            <Typography variant="subheading" style={{backgroundColor: "orange"}}>
                                                 <strong>Uncompleted</strong>
                                             </Typography>
 

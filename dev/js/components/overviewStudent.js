@@ -82,7 +82,7 @@ class StudentOverview extends Component {
                     :
                     <div>
                         <Grid container spacing={8}>
-                            <Grid item xs={6}>
+                            <Grid item xs={12}>
                                 <Card>
                                     <CardContent>
                                         <div className="card-title" align="center">
@@ -94,9 +94,16 @@ class StudentOverview extends Component {
                                         </div>
 
                                         <Divider />
+                                        <br />
+
+                                        <div align="center">
+                                            <Typography variant="headline" component="h2">
+                                                Completed:
+                                            </Typography>
+                                        </div>
 
                                         <div className="card-stat" align="center">
-                                            Completed: {parseFloat(this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].studentAssignment.overallStats.stats01["Value"])}%
+                                            {parseFloat(this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].studentAssignment.overallStats.stats01["Value"])}%
                                         </div>
                                         <div className="card-stat-bar-container">
                                             <LinearProgress style={{ height: 20 }} className="progress-bar" variant="determinate" value={parseFloat(this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].studentAssignment.overallStats.stats01["Value"])} />
@@ -104,11 +111,17 @@ class StudentOverview extends Component {
 
                                         <Divider />
 
-                                        <div className="card-stat" align="center">
-                                            Percentile: {parseFloat(this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].studentAssignment.overallStats.stats02["Value"])}%
+                                        <div align="center">
+                                            <Typography variant="headline" component="h2">
+                                                You are at the
+                                            </Typography>
                                         </div>
-                                        <div className="card-stat-bar-container">
-                                            <LinearProgress style={{ height: 20 }} className="progress-bar" variant="determinate" value={parseFloat(this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].studentAssignment.overallStats.stats02["Value"])} />
+
+                                        <div align="center">
+                                            <span className="card-stat" style={{ margin: "0px", display: "inline-table" }}>
+                                                {parseInt(this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].studentAssignment.overallStats.stats02["Value"])}
+                                            </span>
+                                            <span style={{ color: "#000", margin: "auto", display: "inline-table", paddingLeft:"7px" }}>Percentile</span>
                                         </div>
                                     </CardContent>
                                     <CardActions>
@@ -122,7 +135,8 @@ class StudentOverview extends Component {
                                     </CardActions>
                                 </Card>
                             </Grid>
-                            <Grid item xs={6}>
+
+                            {/* <Grid item xs={6}>
                                 <Card>
                                     <CardContent>
                                         <div className="card-title" align="center">
@@ -134,14 +148,18 @@ class StudentOverview extends Component {
                                         </div>
 
                                         <Divider />
+                                        <br />
 
-                                        <Typography variant="headline" component="h2" style={{ marginLeft: "35%" }}>
-                                            Assignment Type: 
-                                        </Typography>
+                                        <div align="center">
+                                            <Typography variant="headline" component="h2">
+                                                Assignment Type:
+                                            </Typography>
+                                        </div>
+
                                         <div className="card-stat" align="center">
                                             {this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].studentAssignmentType.overallStats.stats03.Most_Struggled_Assignment_Type["Type1"]}
                                         </div>
-                                        <br/>
+                                        <br />
 
                                         <Typography variant="headline" component="h2" style={{ marginLeft: "35%" }}>
                                             Completion Rate:
@@ -156,14 +174,14 @@ class StudentOverview extends Component {
                                         <Button
                                             onClick={() => { this.handleClick('StudentAssignmentType') }}
                                             component={Link} to="/studentAssignmentType"
-                                            style={{marginLeft: "45%"}}
+                                            style={{ marginLeft: "45%" }}
                                             variant="raised"
                                             size="small"
                                             color={this.chooseColor(5, 2)}> {this.chooseText(5, 2)}
                                         </Button>
                                     </CardActions>
                                 </Card>
-                            </Grid>
+                            </Grid> */}
                         </Grid>
                     </div>
                 }
