@@ -17,6 +17,7 @@ import Snackbar from 'material-ui/Snackbar';
 import Paper from 'material-ui/Paper';
 import Close from 'material-ui-icons/Close';
 import Divider from 'material-ui/Divider';
+import Typography from 'material-ui/Typography';
 
 import {
     PieChart,
@@ -82,11 +83,14 @@ class InstructorAssignmentType extends React.Component {
     }
 
     handleDelete(chip) {
+        if (chip == "assignment") {
+            this.setState({ selectedAssignment: "", selectedAssignment: "" })
+        }
         if (chip == "video") {
             this.setState({ selectedVideo: "" })
         }
         if (chip == "assignmentType") {
-            this.setState({ selectedAssignmentType: "", selectedVideo: "" })
+            this.setState({ selectedAssignmentType: "", selectedVideo: "", selectedAssignment: "" })
         }
     }
 
@@ -162,8 +166,19 @@ class InstructorAssignmentType extends React.Component {
             this.setState({ selectedAssignmentType: data.Name, steps: array })
         }
         console.log(this.state.steps)
-        console.log(msg)
+        // console.log(msg)
         this.drilldown(msg)
+    }
+
+    selectedAssignment(data) {
+        if (this.state.selectedAssignment == "") {
+            this.setState({ selectedAssignment: data.assignment, steps: [...this.state.steps, data.assignment] })
+        }
+        else {
+            var array = this.state.steps;
+            array.splice(-1, 1, data.assignment);
+            this.setState({ selectedAssignment: data.assignment, steps: array })
+        }
     }
 
     selectedVideo(data) {
@@ -211,6 +226,7 @@ class InstructorAssignmentType extends React.Component {
     render() {
         console.log("My favourites:", this.state.favourites)
         const { vertical, horizontal, snackOpen } = this.state;
+        const multiple100 = (tick) => {return (tick*100)}
         return (
             <div>
                 <Paper className="chip_container" id="breadcrumbs">
@@ -247,6 +263,21 @@ class InstructorAssignmentType extends React.Component {
                             </button>
                         </div>
                     }
+                    {this.state.selectedAssignment == "" ?
+                        <div></div>
+                        :
+                        <div className="chip_spacer">>></div>
+                    }
+                    {this.state.selectedAssignment == "" ?
+                        <div></div>
+                        :
+                        <div className="chip">
+                            {this.state.selectedAssignment}
+                            <button onClick={() => this.handleDelete("assignment")}>
+                                <Close />
+                            </button>
+                        </div>
+                    }
                 </Paper>
                 <Grid container spacing={24} direction="row" align="center">
                     <Grid item xs={12}>
@@ -269,7 +300,8 @@ class InstructorAssignmentType extends React.Component {
                                     />
 
                                     <YAxis
-                                        label={{ value: "Submission Rate (%)", angle: -90, position: "insideBottomLeft" }} />
+                                        label={{ value: "Submission Rate (%)", angle: -90, position: "insideBottomLeft" }} 
+                                        tickFormatter={multiple100} />
 
                                     <Tooltip />
                                     <Bar dataKey="Value" fill="#8884d8" name="% Submitted"
@@ -277,7 +309,7 @@ class InstructorAssignmentType extends React.Component {
                                         {this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignmentType.chart08.data.map((entry, index) => (
                                             <Cell
                                                 key={entry['Name']}
-                                                fill={entry.Name == this.state.selectedAssignmentType ? '#87f2de' : (entry.Value < 1 ? '#d68995' : '#71afe2')}
+                                                fill={entry.Name == this.state.selectedAssignmentType ? '#87f2de' : (entry.Value*100 < 100 ? '#d68995' : '#71afe2')}
                                             />
                                         ))}
                                     </Bar>
@@ -368,16 +400,16 @@ class InstructorAssignmentType extends React.Component {
                                     </div>
 
                                     <ResponsiveContainer width="85%" height={280}>
-                                        <BarChart width={400} height={250} data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignmentType.chart10.data}>
-                                            <XAxis dataKey="Name" tick={false} label={{ value: "Assignments" }} />/>
+                                        <BarChart width={400} height={250} data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].tempDDNode.chart08DD.data}>
+                                            <XAxis dataKey="assignment" tick={false} label={{ value: "Assignments" }} />/>
                                             <YAxis label={{ value: "Count", angle: -90, position: "insideBottomLeft", offset: 12 }} />
                                             <Tooltip />
                                             <Legend verticalAlign="top" align="right" />
-                                            <Bar name="# of Pauses" dataKey="pauses" fill="#8884d8" onClick={(data, index) => this.selectedVideo(data)}>
-                                                {this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignmentType.chart10.data.map((entry, index) => (
+                                            <Bar name="Num of Submission" dataKey="value" fill="#8884d8" onClick={(data, index) => this.selectedAssignment(data)}>
+                                                {this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].tempDDNode.chart08DD.data.map((entry, index) => (
                                                     <Cell
-                                                        key={entry['Name']}
-                                                        fill={entry.Name == this.state.selectedAssignmentType ? '#87f2de' : (entry.pauses > 200 ? '#d68995' : '#71afe2')}
+                                                        key={entry['assignment']}
+                                                        fill={entry.assignment == this.state.selectedAssignment ? '#87f2de' : (entry.value < entry.expected ? '#d68995' : '#71afe2')}
                                                     />
                                                 ))}
                                             </Bar>
@@ -396,20 +428,20 @@ class InstructorAssignmentType extends React.Component {
                         </Paper>
                     </Grid>
 
-                    {/* List to show names that have not submitted assignment */}
+                    {/* name List of those who did not submit assignment */}
                     <Grid item xs={6}>
                         <Paper>
-                            {this.state.selectedVideo == "Submit a solution to the notebook linked to in details." ?
+                            {this.state.selectedAssignment ?
                                 <div>
                                     <div style={divStyle}>
                                         <h2>Name list of students</h2>
-                                        <p>Name list of those who have not submitted {this.state.selectedVideo}</p>
+                                        <p>Name list of those who have not submitted {this.state.selectedAssignment}</p>
                                         <Divider />
                                     </div>
 
                                     <ResponsiveContainer width="85%" height={280}>
                                         <div align="center">Placeholder</div>
-                                        <div align="center" style={{ height: "inherit", width: "auto" }}>
+                                        {/* <div align="center" style={{ height: "inherit", width: "auto" }}>
 
                                             <div style={{ float: "left", width: "50%", height: "inherit" }}>
                                                 <Typography variant="subheading" style={{ backgroundColor: "orange" }}>
@@ -417,7 +449,7 @@ class InstructorAssignmentType extends React.Component {
                                                 </Typography>
 
                                                 <ol style={{ height: "90%", overflow: "auto" }}>
-                                                    {this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].tempDDNode.chart08DD.data.map(function (entry, index) {
+                                                    {this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].tempDDNode.chart08DD.additionaldata.map(function (entry, index) {
                                                         if (typeof (entry.value) == "object") {
                                                             entry.value.map(function (name, index2) {
                                                                 return (
@@ -433,7 +465,7 @@ class InstructorAssignmentType extends React.Component {
                                                     })}
                                                 </ol>
                                             </div>
-                                        </div>
+                                        </div> */}
                                     </ResponsiveContainer>
                                     {this.isFav("chart10") == true ?
                                         <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart10", "Chart10 has been removed!") }}>Remove</Button>
