@@ -137,11 +137,11 @@ class profileSetting extends React.Component {
                     <CardContent style={{padding: "20px", textAlign:"center"}}>
                     {/* <div style={{ width: '20%', height: 'auto', position: 'relative', margin: '0px auto', padding: '10px', alignItems:"center" }}> */}
                         <h3>Profile Selection Form</h3>
-                        {/* <Search id="userId" handleUIDChange2={this.handleUIDChange2.bind(this)} /> */}
-                        <FormControl className={styles.formControl} aria-describedby="name-helper-text">
+                        <Search id="userId" handleUIDChange2={this.handleUIDChange2.bind(this)} />
+                        {/* <FormControl className={styles.formControl} aria-describedby="name-helper-text">
                             <InputLabel htmlFor="name-helper" style={{textAlign:'center'}}>     User ID</InputLabel>
                             <Input id="userId" onChange={this.handleUIDChange.bind(this)} placeholder="Enter your User ID here" />
-                        </FormControl>
+                        </FormControl> */}
 
                         <br />
                         <FormControl className={classNames(styles.margin, styles.textField)}>
