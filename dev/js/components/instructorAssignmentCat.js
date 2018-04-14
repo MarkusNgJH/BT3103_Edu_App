@@ -89,7 +89,12 @@ class InstructorAssignmentCat extends React.Component {
         else {
             var array = this.state.steps;
             array.splice(-1, 1, data);
-            this.setState({ selectedAssignment: data, steps: array })
+            this.setState({ selectedAssignment: data, steps: array });
+            console.log(data);
+            let url = 'https://d1pvj1k2kj.execute-api.us-west-2.amazonaws.com/prod/instructor_assignment?message=' + data;
+            fetch(url, { mode: "no-cors" }).then(function(response) {
+                console.log("Fetched ", url);
+            });
         }
     }
 
@@ -486,6 +491,87 @@ class InstructorAssignmentCat extends React.Component {
 
                                     :
                                     <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart07", "AreaChart", "Submission Across Time", "Monitor Student's Submission over Time for " + this.state.selectedAssignment + "?", "date_time", "", ["value"], "Chart07 has been added!") }}>Favourite</Button>
+
+                                }
+                            </Paper>
+                        </Grid>
+                        :
+                        <span></span>
+                    }
+
+                    {/** Dynamic Drilldown: Submission Window*/}
+                    {/* {this.state.selectedAssignment ?
+                        <Grid item xs={6}>
+                            <Paper>
+                                <div style={divStyle}>
+                                    <h2>Submission Window</h2>
+                                    <p>Evaluate Whether Deadline is Reasonable for Assignment "{this.state.selectedAssignment}"?</p>
+                                    <Divider />
+                                </div>
+                                <ResponsiveContainer width="90%" height={280}>
+                                    <BarChart
+                                        width={730} height={250}
+                                        data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].tempDDNode.chart02DD.data}
+                                        margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+                                    >
+                                        <XAxis
+                                            dataKey="day_lapsed_from_assignmentX"
+                                            label={{ value: "Number of Days Elapsed", position: 'insideBottom', offset: -4 }}
+                                        />
+                                        <YAxis
+                                            dataKey="value"
+                                            label={{ value: "Number of Submissions", angle: -90, position: "insideBottomLeft" }}
+                                        />
+
+                                        <Tooltip />
+                                        <Legend verticalAlign="top" align="right" />
+                                        <Bar name="Number of Days Elapsed" dataKey="value" fill="#8884d8" />
+                                    </BarChart>
+                                </ResponsiveContainer>
+                                {this.isFav("chart04") == true ?
+                                    <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart04", "Chart04 has been removed!") }}>Remove</Button>
+
+                                    :
+                                    <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart04", "BarChart", "Submission Window", "Is there sufficient days to complete assignment " + this.state.selectedAssignment + "?", "day_lapsed_from_assignmentX", "value", ["value"], "Chart04 has been added!") }}>Favourite</Button>
+
+                                }
+                            </Paper>
+                        </Grid>
+                        :
+                        <span></span>
+                    } */}
+
+                     {/** Dynamic Drilldown: Submission Across Time*/}
+                     {this.state.selectedAssignment ?
+                        <Grid item xs={6}>
+                            <Paper>
+                                <div style={divStyle}>
+                                    <h2>Submission Across Time</h2>
+                                    <p>Monitor Student's Submission over Time for {this.state.selectedAssignment}?</p>
+                                    <Divider />
+                                </div>
+                                <ResponsiveContainer width="90%" height={280}>
+                                    <AreaChart width={730} height={250}
+                                        data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].tempDDNode.chart03DD.data}
+                                        margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
+                                        <defs>
+                                            <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
+                                                <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8} />
+                                                <stop offset="95%" stopColor="#8884d8" stopOpacity={0} />
+                                            </linearGradient>
+                                        </defs>
+                                        <XAxis label={{ value: "Date" }} dataKey="date_time" tick={false} />
+                                        <YAxis name="Date" label={{ value: "Number of Submissions", angle: -90, position: "insideBottomLeft", offset: 12 }} />
+                                        <Legend verticalAlign="top" align="right" />
+                                        <Tooltip />
+                                        <Area name="Number of Submissions" type="monotone" dataKey="value" stroke="#8884d8" fillOpacity={1} fill="url(#colorUv)" />
+                                    </AreaChart>
+                                </ResponsiveContainer>
+                                {this.isFav("chart06") == true ?
+                                    <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart06", "Chart06 has been removed!") }}>Remove</Button>
+
+                                    :
+                                    <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart06", "AreaChart", "Submission Across Time", "Monitor Student's Submission over Time for " + this.state.selectedAssignment + "?", "date_time", "", ["value"], "Chart06 has been added!") }}>Favourite</Button>
 
                                 }
                             </Paper>
