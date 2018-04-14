@@ -143,7 +143,7 @@ class studentAssignmentType extends React.Component {
         return (
             <div>
                 <Grid container spacing={24} direction="row" align="center">
-
+                    {/* Not in use */}
                     <Grid item xs={12}>
                         <Paper>
                             <div style={divStyle}>
