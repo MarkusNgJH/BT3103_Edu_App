@@ -93,15 +93,15 @@ class studentAssignment extends React.Component {
         console.log(this.state.steps)
         // var newSteps = this.state.steps.push(data.Name)
         if (this.state.selectedAssignment == "") {
-            this.setState({ selectedAssignment: data["payload"]["name"], steps: [...this.state.steps, data["payload"]["name"]] })
+            this.setState({ selectedAssignment: data["payload"]["Name"], steps: [...this.state.steps, data["payload"]["Name"]] })
         }
         else {
             var array = this.state.steps;
-            array.splice(-1, 1, data["payload"]["name"]);
-            this.setState({ selectedAssignment: data["payload"]["name"], steps: array })
+            array.splice(-1, 1, data["payload"]["Name"]);
+            this.setState({ selectedAssignment: data["payload"]["Name"], steps: array })
         }
         console.log(this.state.steps)
-        console.log(data["payload"]["name"])
+        console.log(data["payload"]["Name"])
     }
 
     backStep() {
@@ -122,12 +122,12 @@ class studentAssignment extends React.Component {
         for (var i = 0; i < this.state.favourites.length; i++) {
             if (typeof (this.state.favourites[i]) == 'object') {
                 if (this.state.favourites[i]["chart"] == chartName) {
-                    console.log(chartName, "is in favourites");
+                    // console.log(chartName, "is in favourites");
                     return true;
                 }
             }
         }
-        console.log(chartName, "is NOT in favourites");
+        // console.log(chartName, "is NOT in favourites");
         return false;
     }
 
@@ -153,8 +153,8 @@ class studentAssignment extends React.Component {
             type: "SET_FAV",
             payload: this.state.favourites
         })
-        console.log("Successfully added", chart)
-        console.log("Updated favs:", this.state.favourites)
+        // console.log("Successfully added", chart)
+        // console.log("Updated favs:", this.state.favourites)
     }
 
     removeFromFavourites(chart, message) {
@@ -221,11 +221,13 @@ class studentAssignment extends React.Component {
                                 >
                                     <Pie
                                         data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].studentAssignment.chart01.data}
-                                        dataKey="value" outerRadius={100} fill="#8884d8" label
-                                        onClick={(data, index) => this.selectedAssignment(data)}>
+                                        dataKey="Value" outerRadius={100} fill="#8884d8" label
+                                        onClick={(data, index) => this.selectedAssignment(data)}
+                                        // onClick={(data, index) => console.log(data)}
+                                        >
                                         {this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].studentAssignment.chart01.data.map((entry, index) => (
                                             <Cell
-                                                key={entry['name']}
+                                                key={entry['Name']}
                                                 fill={entry.value < (5) ? '#d68995' : '#71afe2'}
                                             />
                                         ))}
