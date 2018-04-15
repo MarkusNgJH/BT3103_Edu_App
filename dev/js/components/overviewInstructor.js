@@ -86,6 +86,10 @@ class GridExample extends Component {
                                             Submission behaviour accross assignments
                                         </div>
                                         <Divider />
+                                        <div className="card-stat-description">
+                                            Latest Assignment: <span>{this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignment.overallStats["Name"]}</span>
+                                            Number of submissions:
+                                        </div>
                                         <div className="card-stat">
                                             {this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignment.overallStats["Current Submission"]}
                                             /
@@ -101,8 +105,14 @@ class GridExample extends Component {
                                             component={Link} to="/instructorAssignmentCat"
                                             variant="raised"
                                             size="small"
-                                            color={this.chooseColor(5, 2)}>
-                                            {this.chooseText(5, 2)}
+                                            color={this.chooseColor(
+                                                this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignment.overallStats["Current Submission"],
+                                                this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignment.overallStats["Total Expected Submission"] / 2
+                                                )}>
+                                            {this.chooseText(
+                                                this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignment.overallStats["Current Submission"],
+                                                this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignment.overallStats["Total Expected Submission"] / 2
+                                                )}
                                         </Button>
                                     </CardContent>
                                 </Card>

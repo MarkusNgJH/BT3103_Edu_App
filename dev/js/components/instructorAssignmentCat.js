@@ -232,7 +232,7 @@ class InstructorAssignmentCat extends React.Component {
                                 >
                                     <XAxis
                                         dataKey="assignment"
-                                        label={{ value: "Assignments", position: "insideBottom" }}
+                                        label={{ value: "Assignments (in chronological order)", position: "insideBottom" }}
                                         ticks={[0]}
                                     />
                                     <YAxis
@@ -241,7 +241,7 @@ class InstructorAssignmentCat extends React.Component {
                                     />
 
                                     <Tooltip cursor={{ fill: 'red', fillOpacity: 0.1 }} />
-                                    <Legend verticalAlign="top" align="right" />
+                                    {/* <Legend verticalAlign="top" align="right" /> */}
                                     <Bar name="Number of Submissions" dataKey="value"
                                         onClick={(data, index) => 
                                         this.selectedAssignment(data)
@@ -254,7 +254,7 @@ class InstructorAssignmentCat extends React.Component {
                                             />
                                         ))}
                                     </Bar>
-                                    <ReferenceLine y={33} strokeWidth={4} stroke="#e0b13c" label={{ value: "Expected Submissions", position: "top" }} />
+                                    <ReferenceLine y={33} strokeWidth={4} stroke="#e0b13c" strokeDasharray="3 3" label={{ value: "Expected Submissions", position: "top" }} />
                                     {/* <Line name="Expected number" type='monotone' dataKey='expected' stroke='#ff7300' dot={false} /> */}
                                 </BarChart>
                             </ResponsiveContainer>
@@ -293,7 +293,7 @@ class InstructorAssignmentCat extends React.Component {
                                         />
 
                                         <Tooltip cursor={{ fill: 'red', fillOpacity: 0.05 }} />
-                                        <Legend verticalAlign="top" align="right" />
+                                        {/* <Legend verticalAlign="top" align="right" /> */}
                                         <Bar name="Number of Submissions" dataKey="value" fill="#8884d8" />
                                     </BarChart>
                                 </ResponsiveContainer>
@@ -330,7 +330,7 @@ class InstructorAssignmentCat extends React.Component {
                                         </defs>
                                         <XAxis label={{ value: "Date" }} dataKey="date_time" tick={false} />
                                         <YAxis label={{ value: "Number of Submissions", angle: -90, position: "insideBottomLeft", offset: 12 }} />
-                                        <Legend verticalAlign="top" align="right" />
+                                        {/* <Legend verticalAlign="top" align="right" /> */}
                                         <Tooltip />
                                         <Area name="Number of Submissions" type="monotone" dataKey="value" stroke="#8884d8" fillOpacity={1} fill="url(#colorUv)" />
                                     </AreaChart>
@@ -546,7 +546,6 @@ class InstructorAssignmentCat extends React.Component {
                                         />
 
                                         <Tooltip />
-                                        <Legend verticalAlign="top" align="right" />
                                         <Bar name="Number of Days Elapsed" dataKey="value" fill="#8884d8" />
                                     </BarChart>
                                 </ResponsiveContainer>
@@ -583,15 +582,14 @@ class InstructorAssignmentCat extends React.Component {
                                             </linearGradient>
                                         </defs>
                                         <XAxis label={{ value: "Date" }} dataKey="date_time" tick={false} />
-                                        <YAxis name="Date" label={{ value: "Number of Submissions", angle: -90, position: "insideBottomLeft", offset: 12 }} />
-                                        <Legend verticalAlign="top" align="right" />
+                                        <YAxis name="Date" label={{ value: "Number of Submissions", angle: -90, position: "insideBottomLeft", offset: 12 }} domain={[0, 36]}/>
+                                        <ReferenceLine y={33} strokeWidth={4} stroke="#e0b13c" strokeDasharray="3 3" label={{ value: "Expected Submissions", position: "top" }} />
                                         <Tooltip />
                                         <Area name="Number of Submissions" type="monotone" dataKey="value" stroke="#8884d8" fillOpacity={1} fill="url(#colorUv)" />
                                     </AreaChart>
                                 </ResponsiveContainer>
                                 {this.isFav("chart06") == true ?
                                     <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart06", "Chart06 has been removed!") }}>Remove</Button>
-
                                     :
                                     <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart06", "AreaChart", "Submission Across Time", "Monitor Student's Submission over Time for " + this.state.selectedAssignment + "?", "date_time", "", ["value"], "Chart06 has been added!") }}>Favourite</Button>
 

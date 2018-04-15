@@ -165,7 +165,7 @@ class instructorStudentIdentifier extends React.Component {
                                 <p>Monitor Total Submission of Each Student</p>
                             </div>
                             <Divider />
-                            <ResponsiveContainer width="90%" height={380}>
+                            <ResponsiveContainer width="90%" height={280}>
                                 <BarChart
                                     // width={730}
                                     // height={250}
@@ -213,7 +213,7 @@ class instructorStudentIdentifier extends React.Component {
                                 <Divider />
                             </div>
 
-                            <ResponsiveContainer width="90%" height={380}>
+                            <ResponsiveContainer width="90%" height={280}>
                                 <BarChart
                                     // width={730}
                                     // height={250}
@@ -264,7 +264,7 @@ class instructorStudentIdentifier extends React.Component {
                                 <Divider />
                             </div>
 
-                            <ResponsiveContainer width="90%" height={380}>
+                            <ResponsiveContainer width="90%" height={280}>
                                 <BarChart
                                     data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorStudentIdentifier.chart14.data}
                                     margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
@@ -296,6 +296,48 @@ class instructorStudentIdentifier extends React.Component {
                             }
                         </Paper>
                     </Grid>
+
+                    {/* chart 15 */}
+                    <Grid item xs={6}>
+                        <Paper>
+                            <div style={divStyle}>
+                                <h2>Submission Duration by Team</h2>
+                                <p>Identify Average Submission Time by Teams</p>
+                                <Divider />
+                            </div>
+
+                            <ResponsiveContainer width="90%" height={280}>
+                                <BarChart
+                                    data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorStudentIdentifier.chart15.data}
+                                    margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+                                >
+                                    <XAxis
+                                        dataKey="team_name"
+                                        label={{
+                                            value: "Teams",
+                                            position: "insideBottom",
+                                        }}
+                                        height={40}
+
+                                    />
+                                    <YAxis
+                                        dataKey="value"
+                                        label={{ value: "Number of Days", angle: -90, position: "insideBottomLeft" }}
+                                    />
+
+                                    <Tooltip />
+                                    <Bar name="Number of Days Taken" dataKey="value" fill="#3498DB" />>
+                                    <Legend verticalAlign="top" align="right" />
+                                </BarChart>
+                            </ResponsiveContainer>
+                            {this.isFav("chart14") == true ?
+                                <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart14", "Chart14 has been removed!") }}>Remove</Button>
+                                :
+                                <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart14", "BarChart", "Submission Duration", "Identify Distribution of Time Taken for Submission", "student_name", "value", ["value"], "Chart14 has been added!") }}>Favourite</Button>
+                            }
+                        </Paper>
+                    </Grid>
+
                     <Snackbar
                         anchorOrigin={{ vertical, horizontal }}
                         autoHideDuration={2500}
