@@ -84,14 +84,14 @@ class InstructorAssignmentCat extends React.Component {
 
     selectedAssignment(data) {
         if (this.state.selectedAssignment == "") {
-            this.setState({ selectedAssignment: data, steps: [...this.state.steps, data] })
+            this.setState({ selectedAssignment: data.assignment, steps: [...this.state.steps, data.assignment] })
         }
         else {
             var array = this.state.steps;
-            array.splice(-1, 1, data);
-            this.setState({ selectedAssignment: data, steps: array });
-            console.log(data);
-            let url = 'https://d1pvj1k2kj.execute-api.us-west-2.amazonaws.com/prod/instructor_assignment?message=' + data;
+            array.splice(-1, 1, data.assignment);
+            this.setState({ selectedAssignment: data.assignment, steps: array });
+            console.log(data.assignment);
+            let url = 'https://d1pvj1k2kj.execute-api.us-west-2.amazonaws.com/prod/instructor_assignment?message=' + data.assignmentID;
             fetch(url, { mode: "no-cors" }).then(function(response) {
                 console.log("Fetched ", url);
             });
@@ -235,7 +235,10 @@ class InstructorAssignmentCat extends React.Component {
                                     <Tooltip cursor={{ fill: 'red', fillOpacity: 0.1 }} />
                                     <Legend verticalAlign="top" align="right" />
                                     <Bar name="Number of Submissions" dataKey="value"
-                                        onClick={(data, index) => this.selectedAssignment(data.assignment)}>
+                                        onClick={(data, index) => 
+                                        this.selectedAssignment(data)
+                                        // console.log(data)
+                                    }>
                                         {this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignment.chart01.data.map((entry, index) => (
                                             <Cell
                                                 key={entry.assignment}
@@ -336,12 +339,12 @@ class InstructorAssignmentCat extends React.Component {
                         <span></span>
                     }
 
-                    {/** CHART 04*/}
-                    {this.state.selectedAssignment == "Follow the directions in the details link to get a free AWS account. Then submit the string SUCCESSFUL. " ?
+                    {/* CHART 04 */}
+                    {/* {this.state.selectedAssignment == "Follow the directions in the details link to get a free AWS account. Then submit the string SUCCESSFUL. " ?
                         <Grid item xs={6}>
                             <Paper>
                                 <div style={divStyle}>
-                                    {/* <h2>Chart04</h2> */}
+                                    
                                     <h2>Submission Window</h2>
                                     <p>Evaluate Whether Deadline is Reasonable for Assignment "{this.state.selectedAssignment}"?</p>
                                     <Divider />
@@ -377,10 +380,10 @@ class InstructorAssignmentCat extends React.Component {
                         </Grid>
                         :
                         <span></span>
-                    }
+                    } */}
 
                     {/** CHART 06*/}
-                    {this.state.selectedAssignment == "Follow the directions in the details link to get a free AWS account. Then submit the string SUCCESSFUL. " ?
+                    {/* {this.state.selectedAssignment == "Follow the directions in the details link to get a free AWS account. Then submit the string SUCCESSFUL. " ?
                         <Grid item xs={6}>
                             <Paper>
                                 <div style={divStyle}>
@@ -416,10 +419,10 @@ class InstructorAssignmentCat extends React.Component {
                         </Grid>
                         :
                         <span></span>
-                    }
+                    } */}
 
                     {/** CHART 05*/}
-                    {this.state.selectedAssignment == "AWS Lambda Lab - Part 2 (7:13)" ?
+                    {/* {this.state.selectedAssignment == "AWS Lambda Lab - Part 2 (7:13)" ?
                         <Grid item xs={6}>
                             <Paper>
                                 <div style={divStyle}>
@@ -457,10 +460,10 @@ class InstructorAssignmentCat extends React.Component {
                         </Grid>
                         :
                         <span></span>
-                    }
+                    } */}
 
                     {/** CHART 07*/}
-                    {this.state.selectedAssignment == "AWS Lambda Lab - Part 2 (7:13)" ?
+                    {/* {this.state.selectedAssignment == "AWS Lambda Lab - Part 2 (7:13)" ?
                         <Grid item xs={6}>
                             <Paper>
                                 <div style={divStyle}>
@@ -497,10 +500,10 @@ class InstructorAssignmentCat extends React.Component {
                         </Grid>
                         :
                         <span></span>
-                    }
+                    } */}
 
                     {/** Dynamic Drilldown: Submission Window*/}
-                    {/* {this.state.selectedAssignment ?
+                    {this.state.selectedAssignment ?
                         <Grid item xs={6}>
                             <Paper>
                                 <div style={divStyle}>
@@ -539,7 +542,7 @@ class InstructorAssignmentCat extends React.Component {
                         </Grid>
                         :
                         <span></span>
-                    } */}
+                    }
 
                      {/** Dynamic Drilldown: Submission Across Time*/}
                      {this.state.selectedAssignment ?
