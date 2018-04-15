@@ -18,6 +18,8 @@ import Paper from 'material-ui/Paper';
 import Chip from 'material-ui/Chip';
 import Divider from 'material-ui/Divider';
 import Snackbar from 'material-ui/Snackbar';
+import Loader from './loader';
+import HorLoader from './horLoader';
 import '../../scss/instructorAssignmentCat.scss';
 
 import {
@@ -85,12 +87,18 @@ class InstructorAssignmentCat extends React.Component {
     selectedAssignment(data) {
         if (this.state.selectedAssignment == "") {
             this.setState({ selectedAssignment: data.assignment, steps: [...this.state.steps, data.assignment] })
+            store.dispatch({ type: "SET_LOADER", payload: true});
+            let url = 'https://d1pvj1k2kj.execute-api.us-west-2.amazonaws.com/prod/instructor_assignment?message=' + data.assignmentID;
+            fetch(url, { mode: "no-cors" }).then(function(response) {
+                console.log("Fetched ", url);
+            });
         }
         else {
             var array = this.state.steps;
             array.splice(-1, 1, data.assignment);
             this.setState({ selectedAssignment: data.assignment, steps: array });
             console.log(data.assignment);
+            store.dispatch({ type: "SET_LOADER", payload: true});
             let url = 'https://d1pvj1k2kj.execute-api.us-west-2.amazonaws.com/prod/instructor_assignment?message=' + data.assignmentID;
             fetch(url, { mode: "no-cors" }).then(function(response) {
                 console.log("Fetched ", url);
@@ -502,8 +510,19 @@ class InstructorAssignmentCat extends React.Component {
                         <span></span>
                     } */}
 
+                    
+                    {this.props.activeLoader.showLoader ?
+                    <div style={{margin: "auto", width: "100%"}}>
+                        <p> Loading... Please Wait </p>
+                        <HorLoader />
+                    </div>
+
+                    :
+                    <span></span>
+                    }
+
                     {/** Dynamic Drilldown: Submission Window*/}
-                    {this.state.selectedAssignment ?
+                        {this.state.selectedAssignment ?
                         <Grid item xs={6}>
                             <Paper>
                                 <div style={divStyle}>
@@ -542,7 +561,7 @@ class InstructorAssignmentCat extends React.Component {
                         </Grid>
                         :
                         <span></span>
-                    }
+                        }
 
                      {/** Dynamic Drilldown: Submission Across Time*/}
                      {this.state.selectedAssignment ?
@@ -582,7 +601,7 @@ class InstructorAssignmentCat extends React.Component {
                         :
                         <span></span>
                     }
-                    
+
                     <Snackbar
                         anchorOrigin={{ vertical, horizontal }}
                         autoHideDuration={2500}
@@ -607,7 +626,8 @@ function mapStateToProps(state) {
         activeProfile: state.activeProfile.val,
         activeView: state.activeView,
         usersTable: state.firebase.val.usersTable.usersTable,
-        myFavourites: state.myFavourites.favourites
+        myFavourites: state.myFavourites.favourites,
+        activeLoader: state.activeLoader,
     };
 }
 
