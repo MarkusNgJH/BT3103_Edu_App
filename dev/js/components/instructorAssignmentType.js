@@ -154,7 +154,7 @@ class InstructorAssignmentType extends React.Component {
         console.log("Successfully removed", chart)
     }
 
-    selectedAssignmentType(data, msg="") {
+    selectedAssignmentType(data, msg = "") {
         console.log(this.state.steps)
         // var newSteps = this.state.steps.push(data.Name)
         if (this.state.selectedAssignmentType == "") {
@@ -217,7 +217,7 @@ class InstructorAssignmentType extends React.Component {
     };
 
     drilldown(chartName) {
-        var api = " https://hcvb86chkl.execute-api.us-west-2.amazonaws.com/prod/instructor_assignmentType?message="+chartName 
+        var api = " https://hcvb86chkl.execute-api.us-west-2.amazonaws.com/prod/instructor_assignmentType?message=" + chartName
         fetch(api, { mode: "no-cors" }).then(function (response) {
             console.log("Fetched ", response);
         });
@@ -226,7 +226,8 @@ class InstructorAssignmentType extends React.Component {
     render() {
         console.log("My favourites:", this.state.favourites)
         const { vertical, horizontal, snackOpen } = this.state;
-        const multiple100 = (tick) => {return (tick*100)}
+        const multiple100 = (tick) => { return (tick * 100) }
+        const comp = this;
         return (
             <div>
                 <Paper className="chip_container" id="breadcrumbs">
@@ -300,16 +301,16 @@ class InstructorAssignmentType extends React.Component {
                                     />
 
                                     <YAxis
-                                        label={{ value: "Submission Rate (%)", angle: -90, position: "insideBottomLeft" }} 
+                                        label={{ value: "Submission Rate (%)", angle: -90, position: "insideBottomLeft" }}
                                         tickFormatter={multiple100} />
 
                                     <Tooltip />
                                     <Bar dataKey="Value" fill="#8884d8" name="% Submitted"
-                                        onClick={(data, index) => this.selectedAssignmentType(data, "chart08_"+data["Name"])}>
+                                        onClick={(data, index) => this.selectedAssignmentType(data, "chart08_" + data["Name"])}>
                                         {this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignmentType.chart08.data.map((entry, index) => (
                                             <Cell
                                                 key={entry['Name']}
-                                                fill={entry.Name == this.state.selectedAssignmentType ? '#87f2de' : (entry.Value*100 < 100 ? '#d68995' : '#71afe2')}
+                                                fill={entry.Name == this.state.selectedAssignmentType ? '#87f2de' : (entry.Value * 100 < 100 ? '#d68995' : '#71afe2')}
                                             />
                                         ))}
                                     </Bar>
@@ -431,6 +432,7 @@ class InstructorAssignmentType extends React.Component {
                     {/* name List of those who did not submit assignment */}
                     <Grid item xs={6}>
                         <Paper>
+                            {/* For any assignmentType except for PathProblems */}
                             {this.state.selectedAssignment ?
                                 <div>
                                     <div style={divStyle}>
@@ -440,32 +442,41 @@ class InstructorAssignmentType extends React.Component {
                                     </div>
 
                                     <ResponsiveContainer width="85%" height={280}>
-                                        <div align="center">Placeholder</div>
-                                        {/* <div align="center" style={{ height: "inherit", width: "auto" }}>
+                                        <div align="center" style={{ height: "inherit", width: "auto" }}>
 
-                                            <div style={{ float: "left", width: "50%", height: "inherit" }}>
+                                            <div style={{  width: "90%", height: "inherit" }}>
                                                 <Typography variant="subheading" style={{ backgroundColor: "orange" }}>
                                                     <strong>Uncompleted</strong>
                                                 </Typography>
 
-                                                <ol style={{ height: "90%", overflow: "auto" }}>
-                                                    {this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].tempDDNode.chart08DD.additionaldata.map(function (entry, index) {
-                                                        if (typeof (entry.value) == "object") {
-                                                            entry.value.map(function (name, index2) {
-                                                                return (
-                                                                    <li style={{ margin: "6px", textAlign: "left" }}>{name}</li>
-                                                                )
-                                                            })
+                                                {this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].tempDDNode.chart08DD.additionaldata.map(function (entry, index) {
+                                                    if (entry.assignment == comp.state.selectedAssignment) {
+                                                        if (entry.value == "All submitted") {
+                                                            return (
+                                                                <div>
+                                                                    <h2>All submitted {comp.state.selectedAssignment}</h2>
+                                                                </div>
+                                                            )
 
                                                         } else {
+                                                            var res = entry.value.split(", ")
                                                             return (
-                                                                <li style={{ margin: "6px", textAlign: "left" }}>{entry.value}</li>
-                                                            )
-                                                        }
-                                                    })}
-                                                </ol>
+                                                                <ol style={{ height: "90%", overflow: "auto" }}>
+                                                                    {res.map(function (name, index2) {
+                                                                        console.log(name)
+                                                                        return (
+                                                                            <li style={{ margin: "10px" }}>{name}</li>
+                                                                        )
+                                                                    })}
+                                                                </ol>
+                                                            )   
+                                                        } 
+                                                    }
+                                                })}
+
+                                                
                                             </div>
-                                        </div> */}
+                                        </div>
                                     </ResponsiveContainer>
                                     {this.isFav("chart10") == true ?
                                         <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart10", "Chart10 has been removed!") }}>Remove</Button>
