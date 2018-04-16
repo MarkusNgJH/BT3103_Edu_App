@@ -58,34 +58,80 @@ var divStyle = {
 };
 
 class administratorPerformance extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            favourites: [],
+        }
+        // this.state.favourites = this.props.usersTable[this.props.activeProfile.uid].favourites; // Pulls from fb, comment out this for launch 
+        this.state.favourites = this.props.myFavourites // pulls from local store, use this for demo 
+    }
+
+    isFav(chartName) {
+        for (var i = 0; i < this.state.favourites.length; i++) {
+            if (typeof (this.state.favourites[i]) == 'object') {
+                if (this.state.favourites[i]["chart"] == chartName) {
+                    console.log(chartName, "is in favourites");
+                    return true;
+                }
+            }
+        }
+        console.log(chartName, "is NOT in favourites");
+        return false;
+    }
+
+    addToFavourites(chart, type, title, subtitle, xAxis, yAxis, dataKey, message, ddparam1 = "") {
+        console.log("Adding", chart);
+        this.setState({
+            snackOpen: true,
+            vertical: 'bottom',
+            horizontal: 'right',
+            message: message
+        });
+        this.state.favourites.push({
+            chart: chart,
+            type: type,
+            title: title,
+            subtitle: subtitle,
+            xAxis: xAxis || "",
+            yAxis: yAxis || "",
+            dataKey: dataKey,
+            ddparam1: ddparam1
+        })
+
+        store.dispatch({
+            type: "SET_FAV",
+            payload: this.state.favourites
+        })
+        console.log("Successfully added", chart)
+    }
+
+    removeFromFavourites(chart, message) {
+        console.log("Removing", chart)
+
+        this.setState({
+            snackOpen: true,
+            vertical: 'bottom',
+            horizontal: 'right',
+            message: message
+        });
+
+        var newFav = this.state.favourites.filter(function (c) { return (c["chart"] != chart) })
+        this.setState({
+            favourites: newFav
+        })
+
+        store.dispatch({
+            type: "SET_FAV",
+            payload: newFav
+        })
+        console.log("Successfully removed", chart)
+    }
     render() {
         const state = store.getState();
         return (
             <div>
                 <Grid container spacing={40} direction="row" align="center">
-                    {/** CHART 01 */}
-                    {/* <Grid item xs={12}>
-                        <Paper>
-                            <div style={divStyle}>
-                                <h2>Assignments completion rate</h2>
-                                <p>({this.props.activeProfile.course})</p>
-                                <Divider />
-                            </div>
-                            <ResponsiveContainer width="90%" height={380}>
-                                <PieChart width={730} height={250} >
-                                    <Pie
-                                        dataKey="value"
-                                        fill="#8884d8"
-                                        data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].adminPerformance.chart01.data}
-                                        outerRadius={80}
-                                        label
-                                    />
-                                    <Tooltip />
-                                </PieChart>
-                            </ResponsiveContainer>
-                        </Paper>
-                    </Grid> */}
-
                     {/** CHART 02 */}
                     <Grid item xs={12}>
                         <Grid container justify="center">
@@ -109,31 +155,34 @@ class administratorPerformance extends React.Component {
                                                 dataKey="Value"
                                                 label={{ value: 'Submission Rate (%)', position: 'insideBottom' }}
                                                 height={50}
-                                                />
+                                            />
                                             />
                                             <YAxis
                                                 dataKey="Name"
                                                 type="category"
                                                 width={180}
                                             />
-                                            {/* <CartesianGrid strokeDasharray="3 3" /> */}
                                             <Tooltip />
-                                            {/* <Legend verticalAlign="top" align="right" /> */}
                                             <Bar dataKey="Value">
-                                            {this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].adminPerformance.chart02.data.map((entry, index) => (
-                                            <Cell
-                                                key={entry.Name}
-                                                fill={entry.Name == this.props.activeProfile.course ? '#edc62a' : '#e8e65c'}
-                                            />
-                                            ))}
+                                                {this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].adminPerformance.chart02.data.map((entry, index) => (
+                                                    <Cell
+                                                        key={entry.Name}
+                                                        fill={entry.Name == this.props.activeProfile.course ? '#edc62a' : '#e8e65c'}
+                                                    />
+                                                ))}
                                             </Bar>
                                         </BarChart>
                                     </ResponsiveContainer>
+                                    {this.isFav("chart02") == true ?
+                                        <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart02", "Chart has been removed!") }}>Remove</Button>
+                                        :
+                                        <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart02", "BarChart", "Performance across Cohorts", "Assignments submission rate", "Value", "Name", ["Value"], "Chart has been added!") }}>Favourite</Button>
+                                    }
                                 </Paper>
                             </Grid>
                         </Grid>
                     </Grid>
-                    
+
                     {/** CHART 03 */}
                     <Grid item xs={12} md={6}>
                         <Paper>
@@ -170,6 +219,11 @@ class administratorPerformance extends React.Component {
                                     <Bar dataKey="Progress" fill="#8884d8" />
                                 </BarChart>
                             </ResponsiveContainer>
+                            {this.isFav("chart03") == true ?
+                                <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart03", "Chart has been removed!") }}>Remove</Button>
+                                :
+                                <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart03", "BarChart", "Performance by Individual Courses (%)", "Assignments submission rate", "Name", "Progress", ["Progress"], "Chart has been added!") }}>Favourite</Button>
+                            }
                         </Paper>
                     </Grid>
 
@@ -209,6 +263,11 @@ class administratorPerformance extends React.Component {
                                     <Bar dataKey="Uncompleted" stackId="a" fill="#76a8dd" />
                                 </BarChart>
                             </ResponsiveContainer>
+                            {this.isFav("chart04") == true ?
+                                <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart04", "Chart has been removed!") }}>Remove</Button>
+                                :
+                                <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart04", "BarChart", "Performance by Individual Courses (count)", "Count of Assignment Submissions", "Name", "Completed", ["Completed", "Uncompleted"], "Chart has been added!") }}>Favourite</Button>
+                            }
                         </Paper>
                     </Grid>
 
