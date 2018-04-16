@@ -14,6 +14,7 @@ import Icon from 'material-ui/Icon';
 import Delete from 'material-ui-icons/Delete';
 import Stepper from './stepper';
 import Divider from 'material-ui/Divider';
+import CustomToolTip from './customAdminActivityTooltip'
 
 import {
     PieChart,
@@ -260,7 +261,7 @@ class administratorActivity extends React.Component {
                                         }
                                     />
                                     <CartesianGrid strokeDasharray="3 3" />
-                                    <Tooltip cursor={{ stroke: 'orange', strokeWidth: 3 }} />
+                                    <Tooltip cursor={{ stroke: 'orange', strokeWidth: 3 }} content ={CustomToolTip}/>
                                     <Line dataKey="All Other Junior (NCC2018)" fill="#e56d49" stroke="#e56d49" />
                                     <Line dataKey="CHIJ St Nicholas Girls School (NCC2018)" fill="#e56d49" stroke="#e56d49" />
                                     <Line dataKey="Clementi Town Secondary School (NCC2018)" fill="#e56d49" stroke="#e56d49" />
