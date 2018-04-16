@@ -436,6 +436,58 @@ class InstructorAssignmentCat extends React.Component {
                         <span></span>
                     }
 
+                    <Grid item xs={12}>
+                        <Paper>
+                            <div style={divStyle}>
+                                <h2>Forecast Submissions Duration</h2>
+                                <p>What is the forecasted number of days needed for latest assignment?</p>
+                                <Divider />
+                            </div>
+                            <ResponsiveContainer width="90%" height={280}>
+                                <BarChart
+                                    width={730} height={250}
+                                    data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignment.prediction.data}
+                                    margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+                                >
+                                    <XAxis
+                                        dataKey="student_name"
+                                        label={{ value: "Students)", position: "insideBottom" }}
+                                        ticks={[0]}
+                                    />
+                                    <YAxis
+                                        dataKey="value"
+                                        label={{ value: "Number of Days to Submit", angle: -90, position: "insideBottomLeft" }}
+                                    />
+
+                                    <Tooltip cursor={{ fill: 'red', fillOpacity: 0.1 }} />
+                                    {/* <Legend verticalAlign="top" align="right" /> */}
+                                    <Bar name="Number of Days to Submit" dataKey="value"
+                                        onClick={(data, index) => 
+                                        this.selectedAssignment(data)
+                                        // console.log(data)
+                                    }>
+                                        {this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignment.prediction.data.map((entry, index) => (
+                                            <Cell
+                                                key={entry.assignment}
+                                                fill={entry.assignment == this.state.selectedAssignment ? '#87f2de' : (entry.value > 5 ? '#d68995' : '#71afe2')}
+                                            />
+                                        ))}
+                                    </Bar>
+                                    <ReferenceLine y={5} strokeWidth={4} stroke="#e0b13c" strokeDasharray="3 3" label={{ value: "Expected Submissions", position: "top" }} />
+                                    {/* <Line name="Expected number" type='monotone' dataKey='expected' stroke='#ff7300' dot={false} /> */}
+                                </BarChart>
+                            </ResponsiveContainer>
+                            {this.isFav("chart01") == true ?
+                                <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart01", "Chart01 has been removed!") }}>Remove</Button>
+                                :
+                                <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart01", "BarChart", "Assignment Submissions", "What is the proportion of submission for each assignment?", "assignment", "value", ["value"], "Chart01 has been added!") }}>Favourite</Button>
+
+                            }
+                        </Paper>
+                    </Grid>
+
+                    
+
                     <Snackbar
                         anchorOrigin={{ vertical, horizontal }}
                         autoHideDuration={2500}
