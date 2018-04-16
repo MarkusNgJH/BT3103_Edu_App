@@ -8,15 +8,16 @@ function CustomToolTip (tooltipProps) {
   return(
     <div>
       {tooltipProps['payload'].length != 0 ?
-      <div>
+      <div style={{backgroundColor: "white", border: '1px solid gray', padding: '5px'}}>
         {Object.keys(tooltipProps['payload'][0]['payload']).map((i)=>
             tooltipProps['payload'][0]['payload'][i] > 0 ?
-            <li key ={i}>{i}: {tooltipProps['payload'][0]['payload'][i]}</li>:
+            <li key ={i}>{i}: {tooltipProps['payload'][0]['payload'][i]}</li>
+            :
             <span></span> 
         )}
       </div>
       :
-      <span></span>
+      <div>No Activity</div>
       }
     </div>
     )

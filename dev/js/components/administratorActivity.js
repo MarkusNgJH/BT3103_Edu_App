@@ -199,7 +199,8 @@ class administratorActivity extends React.Component {
                     <Grid item xs={12}>
                         <Paper>
                             <div style={divStyle}>
-                                <h2>Cohort activity across time</h2>
+                                <h2>Total Activity Across Time</h2>
+                                <h4>Track Total Daily Activity </h4>
                                 <p>{this.props.activeProfile.course}</p>
                                 <Divider />
                             </div>
@@ -217,7 +218,7 @@ class administratorActivity extends React.Component {
                                         dataKey="Value"
                                         label={
                                             <AxisLabel axisType="yAxis" width={600} height={300}>
-                                                Daily Activity by Cohort
+                                                Daily Total Activity
                                             </AxisLabel>
                                         }
                                     />
@@ -240,8 +241,8 @@ class administratorActivity extends React.Component {
                     <Grid item xs={12}>
                         <Paper>
                             <div style={divStyle}>
-                                <h2>Courses' activity across time</h2>
-                                {/* <h4>Course Breakdown of Daily Activity </h4> */}
+                                <h2>Cohort Activity Across Time</h2>
+                                <h4>Track Daily Activity by Course</h4>
                                 <Divider />
                             </div>
                             <ResponsiveContainer width="90%" height={380}>
@@ -256,7 +257,7 @@ class administratorActivity extends React.Component {
                                     <YAxis
                                         label={
                                             <AxisLabel axisType="yAxis" width={600} height={300}>
-                                                Amount of activities
+                                                Daily Activities by Cohort
                                         </AxisLabel>
                                         }
                                     />

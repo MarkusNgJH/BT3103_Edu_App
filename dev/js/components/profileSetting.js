@@ -164,8 +164,6 @@ class profileSetting extends React.Component {
                     {/* </div> */}
                     </CardContent>
                 </Card>
-
-                <UserTable />
                 
                 <Snackbar
                     anchorOrigin={{ vertical, horizontal }}
