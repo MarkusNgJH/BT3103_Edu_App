@@ -155,6 +155,16 @@ h3, h4, p {
 	z-index: 1;
 }
 
+#wordmap {
+	width: 100%;
+	height: 100%;
+	background-size: 90%;
+	background-repeat:no-repeat;
+	background-image: url("./word_map.jpg");
+	margin-top: 10px;
+	margin-left: 20px
+}
+
 * {
 	// font-family: 'Roboto', sans-serif;
 	// font-family: 'Montserrat', sans-serif;

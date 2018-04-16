@@ -69,6 +69,7 @@ class InstructorAssignmentType extends React.Component {
         super(props);
         this.state = {
             selectedAssignmentType: "",
+            selectedAssignment: "",
             selectedVideo: "",
             favourites: [],
             steps: ["InstructorAssignmentType"],
@@ -107,7 +108,7 @@ class InstructorAssignmentType extends React.Component {
         return false;
     }
 
-    addToFavourites(chart, type, title, subtitle, xAxis, yAxis, dataKey, message) {
+    addToFavourites(chart, type, title, subtitle, xAxis, yAxis, dataKey, message, ddparam1 = "") {
         console.log("Adding", chart);
         this.setState({
             snackOpen: true,
@@ -122,7 +123,8 @@ class InstructorAssignmentType extends React.Component {
             subtitle: subtitle,
             xAxis: xAxis || "",
             yAxis: yAxis || "",
-            dataKey: dataKey
+            dataKey: dataKey,
+            ddparam1: ddparam1
         })
 
         store.dispatch({
@@ -181,7 +183,7 @@ class InstructorAssignmentType extends React.Component {
         }
     }
 
-    selectedVideo(data) {
+    selectedVideo(data, msg="") {
         if (this.state.selectedVideo == "") {
             this.setState({ selectedVideo: data.Name, steps: [...this.state.steps, data.Name] })
         }
@@ -190,6 +192,8 @@ class InstructorAssignmentType extends React.Component {
             array.splice(-1, 1, data.Name);
             this.setState({ selectedVideo: data.Name, steps: array })
         }
+        console.log(msg)
+        this.drilldown(msg)
     }
 
     backStep() {
@@ -323,6 +327,7 @@ class InstructorAssignmentType extends React.Component {
                             }
                         </Paper>
                     </Grid>
+
                     <Grid item xs={6}>
                         <Paper>
                             {this.state.selectedAssignmentType == "PathProblem" ?
@@ -356,12 +361,12 @@ class InstructorAssignmentType extends React.Component {
                         </Paper>
                     </Grid>
 
+                    {/* Chart 10 */}
                     <Grid item xs={6}>
                         <Paper>
                             {this.state.selectedAssignmentType == "PathProblem" ?
                                 <div>
                                     <div style={divStyle}>
-                                        {/* <h2>Chart10</h2> */}
                                         <h2>Total Pauses/Playbacks</h2>
                                         <p>Identify PathProblems that Students Students May Be Struggling With</p>
                                         <Divider />
@@ -373,8 +378,8 @@ class InstructorAssignmentType extends React.Component {
                                             <YAxis label={{ value: "Count", angle: -90, position: "insideBottomLeft", offset: 12 }} />
                                             <Tooltip />
                                             <Legend verticalAlign="top" align="right" />
-                                            <Bar name="# of Pauses" dataKey="pauses" fill="#8884d8" onClick={(data, index) => this.selectedVideo(data)} />
-                                            <Bar name="# of Playbacks" dataKey="playbacks" fill="#82ca9d" onClick={(data, index) => this.selectedVideo(data)} />
+                                            <Bar name="# of Pauses" dataKey="pauses" fill="#8884d8" onClick={(data, index) => this.selectedVideo(data, "chart10_"+data["assignmentId"])} />
+                                            <Bar name="# of Playbacks" dataKey="playbacks" fill="#82ca9d" />
                                         </BarChart>
                                     </ResponsiveContainer>
                                     {this.isFav("chart10") == true ?
@@ -389,10 +394,61 @@ class InstructorAssignmentType extends React.Component {
                         </Paper>
                     </Grid>
 
+                    {/* Chart 10DD */}
+                    {this.state.selectedVideo ?
+                    <Grid item xs={6}>
+                        <Paper>
+                            <div style={divStyle}>
+                                <h2>Time period of video</h2>
+                                <p>Identify which parts students paused at for {comp.state.selectedVideo}</p>
+                                <Divider />
+                            </div>
+
+                            <ResponsiveContainer width="85%" height={280}>
+                                <BarChart width={400} height={250} data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].tempDDNode.chart10DD.data}>
+                                    <XAxis dataKey="days_lapsed" tick={false} label={{ value: "Time into video" }} />/>
+                                    <YAxis label={{ value: "Number of pauses", angle: -90, position: "insideBottomLeft", offset: 18 }} />
+                                    <Tooltip />
+                                    <Legend verticalAlign="top" align="right" />
+                                    <Bar name="# of pauses" dataKey="value" fill="#8884d8" />
+                                </BarChart>
+                            </ResponsiveContainer>
+                            {this.isFav("chart10") == true ?
+                                <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart10", "Chart10 has been removed!") }}>Remove</Button>
+                                :
+                                <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart10", "BarChart", "Total Pauses/Playbacks", "Identify PathProblems that Students Students May Be Struggling With", "Name", "", ["pauses", "playbacks"], "Chart10 has been added!") }}>Favourite</Button>
+                            }
+                        </Paper>
+                    </Grid>
+                    :
+                    <span></span>
+                    }
+
+                    {/* Word Cloud chart */}
+                    {this.state.selectedAssignmentType == "PathProblem" ?
+                        <Grid item xs={6}>
+                            <Paper>
+                                <div style={divStyle}>
+                                    <h2>Word Cloud</h2>
+                                    <p>Identify answers which most students give for PathProblems</p>
+                                    <Divider />
+                                </div>
+
+                                <ResponsiveContainer width="90%" height={350}>
+                                    <div id="wordmap" align="center"></div>
+                                </ResponsiveContainer>
+                            </Paper>
+                        </Grid>
+                        :
+                        <span></span>
+                    }
+
+
+                    {/* chart8DD */}
                     {/* Number of submission for each assignment of XXX Type */}
                     <Grid item xs={6}>
                         <Paper>
-                            {this.state.selectedAssignmentType == "Text" ?
+                            {this.state.selectedAssignmentType ?
                                 <div>
                                     <div style={divStyle}>
                                         <h2>Total Submissions</h2>
@@ -417,10 +473,10 @@ class InstructorAssignmentType extends React.Component {
 
                                         </BarChart>
                                     </ResponsiveContainer>
-                                    {this.isFav("chart10") == true ?
-                                        <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart10", "Chart10 has been removed!") }}>Remove</Button>
+                                    {this.isFav("chart08DD") == true ?
+                                        <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart08DD", "Chart has been removed!") }}>Remove</Button>
                                         :
-                                        <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart10", "BarChart", "Total Pauses/Playbacks", "Identify PathProblems that Students Students May Be Struggling With", "Name", "", ["pauses", "playbacks"], "Chart10 has been added!") }}>Favourite</Button>
+                                        <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart08DD", "BarChart", "Total Submissions", "Number of Submissions per " + this.state.selectedAssignmentType + "'s Assignment", "assignment", "", ["value"], "Chart has been added!") }}>Favourite</Button>
                                     }
                                 </div>
                                 :
@@ -429,6 +485,7 @@ class InstructorAssignmentType extends React.Component {
                         </Paper>
                     </Grid>
 
+                    {/* chart08DDAdd */}
                     {/* name List of those who did not submit assignment */}
                     <Grid item xs={6}>
                         <Paper>
@@ -444,7 +501,7 @@ class InstructorAssignmentType extends React.Component {
                                     <ResponsiveContainer width="85%" height={280}>
                                         <div align="center" style={{ height: "inherit", width: "auto" }}>
 
-                                            <div style={{  width: "90%", height: "inherit" }}>
+                                            <div style={{ width: "90%", height: "inherit" }}>
                                                 <Typography variant="subheading" style={{ backgroundColor: "orange" }}>
                                                     <strong>Uncompleted</strong>
                                                 </Typography>
@@ -469,19 +526,17 @@ class InstructorAssignmentType extends React.Component {
                                                                         )
                                                                     })}
                                                                 </ol>
-                                                            )   
-                                                        } 
+                                                            )
+                                                        }
                                                     }
                                                 })}
-
-                                                
                                             </div>
                                         </div>
                                     </ResponsiveContainer>
-                                    {this.isFav("chart10") == true ?
-                                        <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart10", "Chart10 has been removed!") }}>Remove</Button>
+                                    {this.isFav("chart08DDAdd") == true ?
+                                        <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart08DDAdd", "Chart has been removed!") }}>Remove</Button>
                                         :
-                                        <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart10", "BarChart", "Total Pauses/Playbacks", "Identify PathProblems that Students Students May Be Struggling With", "Name", "", ["pauses", "playbacks"], "Chart10 has been added!") }}>Favourite</Button>
+                                        <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart08DDAdd", "BarChart", "Name list of students", "Name list of those who have not submitted " + this.state.selectedAssignment, "", "", [], "Chart has been added!", this.state.selectedAssignment) }}>Favourite</Button>
                                     }
                                 </div>
                                 :
