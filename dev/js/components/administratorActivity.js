@@ -86,12 +86,23 @@ class administratorActivity extends React.Component {
         return false;
     }
 
-    addToFavourites(chart, type, dataKey) {
+    addToFavourites(chart, type, title, subtitle, xAxis, yAxis, dataKey, message, ddparam1 = "") {
         console.log("Adding", chart);
+        this.setState({
+            snackOpen: true,
+            vertical: 'bottom',
+            horizontal: 'right',
+            message: message
+        });
         this.state.favourites.push({
             chart: chart,
             type: type,
-            dataKey: dataKey
+            title: title,
+            subtitle: subtitle,
+            xAxis: xAxis || "",
+            yAxis: yAxis || "",
+            dataKey: dataKey,
+            ddparam1: ddparam1
         })
 
         store.dispatch({
@@ -101,8 +112,15 @@ class administratorActivity extends React.Component {
         console.log("Successfully added", chart)
     }
 
-    removeFromFavourites(chart) {
+    removeFromFavourites(chart, message) {
         console.log("Removing", chart)
+
+        this.setState({
+            snackOpen: true,
+            vertical: 'bottom',
+            horizontal: 'right',
+            message: message
+        });
 
         var newFav = this.state.favourites.filter(function (c) { return (c["chart"] != chart) })
         this.setState({
@@ -203,12 +221,16 @@ class administratorActivity extends React.Component {
                                         }
                                     />
                                     <CartesianGrid strokeDasharray="3 3" />
-                                    <Tooltip cursor={{ stroke: 'orange', strokeWidth: 3 }}/>
+                                    <Tooltip cursor={{ stroke: 'orange', strokeWidth: 3 }} />
                                     <Line dataKey="Value" fill="#8884d8" stroke="#8884d8" activeDot={{ onClick: (data, index) => this.selectedActivity(data) }} />
                                     <Brush />
                                 </LineChart>
                             </ResponsiveContainer>
-
+                            {this.isFav("chart05") == true ?
+                                <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart05", "Chart has been removed!") }}>Remove</Button>
+                                :
+                                <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart05", "LineChart", "Cohort activity across time", this.props.activeProfile.course, "Name", "Value", ["Value"], "Chart has been added!") }}>Favourite</Button>
+                            }
                         </Paper>
                     </Grid>
 
@@ -238,7 +260,7 @@ class administratorActivity extends React.Component {
                                         }
                                     />
                                     <CartesianGrid strokeDasharray="3 3" />
-                                    <Tooltip cursor={{ stroke: 'orange', strokeWidth: 3 }}/>
+                                    <Tooltip cursor={{ stroke: 'orange', strokeWidth: 3 }} />
                                     <Line dataKey="All Other Junior (NCC2018)" fill="#e56d49" stroke="#e56d49" />
                                     <Line dataKey="CHIJ St Nicholas Girls School (NCC2018)" fill="#e56d49" stroke="#e56d49" />
                                     <Line dataKey="Clementi Town Secondary School (NCC2018)" fill="#e56d49" stroke="#e56d49" />
@@ -259,9 +281,21 @@ class administratorActivity extends React.Component {
                                     <Line dataKey="West Spring Secondary School (NCC2018)" fill="#e56d49" stroke="#e56d49" />
                                 </LineChart>
                             </ResponsiveContainer>
+                            {this.isFav("chart06") == true ?
+                                <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart06", "Chart has been removed!") }}>Remove</Button>
+                                :
+                                <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => {
+                                    this.addToFavourites("chart06", "LineChart", "Courses' activity across time", "", "Name", "",
+                                        ["All Other Junior (NCC2018)", "CHIJ St Nicholas Girls School (NCC2018)", "Clementi Town Secondary School (NCC2018)", "Crest Secondary School (NCC2018)", "Dunman HS - Junior (NCC2018)",
+                                            "Junyuan Secondary School (NCC2018)", "Maris Stella High School (NCC2018)", "NUSHS - Junior (NCC2018)", "Nan Hua High School (NCC2018)", "National JC - Junior (NCC2018)", "Ping Yi Secondary School (NCC2018)",
+                                            "Queensway Secondary School (NCC2018)", "Sch of Science and Technology  (NCC2018)", "Seng Kang Secondary School (NCC2018)", "Singapore Chinese Girls Sch (NCC2018)",
+                                            "Temasek JC - Junior (NCC2018)", "West Spring Secondary School (NCC2018)"],
+                                        "Chart has been added!")
+                                }}>Favourite</Button>
+                            }
                         </Paper>
                     </Grid>
-                        {/* :
+                    {/* :
                         <div> </div>
                     } */}
                 </Grid>

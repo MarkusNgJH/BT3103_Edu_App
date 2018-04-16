@@ -242,9 +242,9 @@ class studentAssignment extends React.Component {
                                 </BarChart>
                             </ResponsiveContainer>
                             {this.isFav("chart05") == true ?
-                                <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart05", "Chart05 has been removed!") }}>Remove</Button>
+                                <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart05", "Chart has been removed!") }}>Remove</Button>
                                 :
-                                <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart05", "BarChart", "Chart05", "Question Type", "Name", "Value", ["Value"], "Assignment Type has been added!") }}>Favourite</Button>
+                                <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart05", "BarChart", "Chart05", "Question Type", "Name", "Value", ["Value"], "Chart has been added!") }}>Favourite</Button>
                             }
                         </Paper>
                     </Grid>
@@ -279,9 +279,9 @@ class studentAssignment extends React.Component {
                                 </PieChart>
                             </ResponsiveContainer>
                             {this.isFav("chart01") == true ?
-                                <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart01", "Chart01 has been removed!") }}>Remove</Button>
+                                <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart01", "Chart has been removed!") }}>Remove</Button>
                                 :
-                                <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart01", "PieChart", "Chart01", "Assignments completed by Student", "", "", ["Value"], "Chart01 has been added!") }}>Favourite</Button>
+                                <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart01", "PieChart", "Chart01", "Assignments completed by Student", "", "", ["Value"], "Chart has been added!") }}>Favourite</Button>
                             }
                         </Paper>
                     </Grid>
@@ -314,9 +314,9 @@ class studentAssignment extends React.Component {
                                 </LineChart>
                             </ResponsiveContainer>
                             {this.isFav("chart03") == true ?
-                                <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart03", "Chart03 has been removed!") }}>Remove</Button>
+                                <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart03", "Chart has been removed!") }}>Remove</Button>
                                 :
-                                <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart03", "LineChart", "Chart03", "Date of Submissison", "name", "Value", ["Value"], "Chart03 has been added!") }}>Favourite</Button>
+                                <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart03", "LineChart", "Chart03", "Date of Submissison", "name", "Value", ["Value"], "Chart has been added!") }}>Favourite</Button>
                             }
                         </Paper>
                     </Grid>
@@ -349,9 +349,9 @@ class studentAssignment extends React.Component {
                                 </BarChart>
                             </ResponsiveContainer>
                             {this.isFav("chart04") == true ?
-                                <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart04", "Chart04 has been removed!") }}>Remove</Button>
+                                <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart04", "Chart has been removed!") }}>Remove</Button>
                                 :
-                                <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart04", "BarChart", "Chart04", "Time Lapse Since Work Done", "Name", "Value", ["Value"], "Chart04 has been added!") }}>Favourite</Button>
+                                <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart04", "BarChart", "Chart04", "Time Lapse Since Work Done", "Name", "Value", ["Value"], "Chart has been added!") }}>Favourite</Button>
                             }
                         </Paper>
                     </Grid>
@@ -400,9 +400,9 @@ class studentAssignment extends React.Component {
                                     </div>
                                 </ResponsiveContainer>
                                 {this.isFav("chart02") == true ?
-                                    <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart02", "Chart02 has been removed!") }}>Remove</Button>
+                                    <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart02", "Chart has been removed!") }}>Remove</Button>
                                     :
-                                    <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart02", "BarChart", "Chart02", "Assignment Tracking", "Name", "Value", ["Value"], "Chart02 has been added!") }}>Favourite</Button>
+                                    <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart02", "BarChart", "Chart02", "Assignment Tracking", "Name", "Value", ["Value"], "Chart has been added!") }}>Favourite</Button>
                                 }
                             </Paper>
                         </Grid>

@@ -173,45 +173,12 @@ class studentAssignmentType extends React.Component {
                                 </BarChart>
                             </ResponsiveContainer>
                             {this.isFav("chart05") == true ?
-                                <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart05", "Chart05 has been removed!") }}>Remove</Button>
+                                <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart05", "Chart has been removed!") }}>Remove</Button>
                                 :
-                                <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart05", "BarChart", "Chart05", "Question Type", "Name", "Value", ["Value"], "Chart05 has been added!") }}>Favourite</Button>
+                                <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart05", "BarChart", "Chart05", "Question Type", "Name", "Value", ["Value"], "Chart has been added!") }}>Favourite</Button>
                             }
                         </Paper>
                     </Grid>
-
-                    {/* <Grid item xs={12}>
-                        <h3>Chart06</h3>
-                        <h4>Which Students Appear To Be High-Achieving/Do More Than What Is Required?</h4>
-                        <BarChart
-                            width={730}
-                            height={250}
-                            data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorStudentIdentifier.chart13.data}
-                            margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-                        >
-                            <XAxis
-                                dataKey="student_name"
-                                label={
-                                    <AxisLabel axisType="xAxis" width={600} height={300}>
-                                        Student
-                        </AxisLabel>
-                                }
-                            />
-                            <YAxis
-                                dataKey="value"
-                                label={
-                                    <AxisLabel axisType="yAxis" width={600} height={300}>
-                                        Number of Subsmission
-                        </AxisLabel>
-                                }
-                            />
-                            <CartesianGrid strokeDasharray="3 3" />
-                            <Tooltip />
-                            <Legend />
-                            <Bar dataKey="value" fill="#8884d8" />
-                        </BarChart>
-                    </Grid> */}
-
                 </Grid>
 
             </div>
