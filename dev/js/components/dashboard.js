@@ -12,6 +12,7 @@ import store from '../store';
 import Button from 'material-ui/Button';
 import Paper from 'material-ui/Paper';
 import Divider from 'material-ui/Divider';
+import Typography from 'material-ui/Typography';
 
 import {
     PieChart,
@@ -64,7 +65,8 @@ class Dashboard extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            favourites: []
+            favourites: [],
+            selectedAssignment: ""
         }
         // this.state.favourites = this.props.usersTable[this.props.activeProfile.uid].favourites; // Pulls from fb, comment out this for launch 
         this.state.favourites = this.props.myFavourites // pulls from local store, use this for demo  
@@ -75,14 +77,22 @@ class Dashboard extends React.Component {
 
     getChart(chartName, activeUserId, activeCourse) {
         var courses = this.props.firebase[activeUserId]
+        var chartDD = ["chart02DD", "chart03DD", "chart08DD", "chart10DD"]
         // Scan thru each course and find the correct chart 
         for (var course in courses) {
             if (activeCourse == course) {
-                for (var group in courses[activeCourse]) {
-                    for (var chart in courses[activeCourse][group]) {
-                        if (chartName == chart) {
-                            console.log(courses[activeCourse][group][chart])
-                            return courses[activeCourse][group][chart]
+                for (var card in courses[activeCourse]) {
+                    for (var chart in courses[activeCourse][card]) {
+                        if (chartDD.includes(chartName.slice(0, -3))) {
+                            if (chartName.slice(0, -3) == chart) {
+                                console.log(courses[activeCourse][card][chart])
+                                return courses[activeCourse][card][chart]
+                            }
+                        } else {
+                            if (chartName == chart) {
+                                console.log(courses[activeCourse][card][chart])
+                                return courses[activeCourse][card][chart]
+                            }
                         }
                     }
                 }
@@ -98,6 +108,10 @@ class Dashboard extends React.Component {
         var totalStudent = result.length
         result.sort(function (a, b) { return b - a })
         return (result[Math.round(totalStudent / 4)])
+    }
+
+    selectedAssignment(data) {
+        this.setState({ selectedAssignment: data.assignment })
     }
 
     render() {
@@ -665,9 +679,84 @@ class Dashboard extends React.Component {
                                                                                             </Paper>
                                                                                         </Grid>
                                                                                         :
-                                                                                        <div align="center">
-                                                                                            <h2>You have not added any charts to your Dashboard.</h2>
-                                                                                        </div>
+                                                                                        chart["chart"] == "chart08DD" ?
+                                                                                            <Grid item xs={6}>
+                                                                                                <Paper>
+                                                                                                    <div style={divStyle}>
+                                                                                                        <h2>{chart["title"]}</h2>
+                                                                                                        <p>{chart["subtitle"]}</p>
+                                                                                                        <Divider />
+                                                                                                    </div>
+
+                                                                                                    <ResponsiveContainer width="85%" height={280}>
+                                                                                                        <BarChart width={400} height={250} data={chartData[index].data}>
+                                                                                                            <XAxis dataKey={chart["xAxis"]} tick={false} label={{ value: "Assignments" }} />/>
+                                                                                                            <YAxis label={{ value: "Count", angle: -90, position: "insideBottomLeft", offset: 12 }} />
+                                                                                                            <Tooltip />
+                                                                                                            <Legend verticalAlign="top" align="right" />
+                                                                                                            <Bar name="Num of Submission" dataKey="value" fill="#8884d8" onClick={(data, index) => comp.selectedAssignment(data)}>
+                                                                                                                {chartData[index].data.map((entry, index2) => (
+                                                                                                                    <Cell
+                                                                                                                        key={entry['assignment']}
+                                                                                                                        fill={entry.assignment == comp.state.selectedAssignment ? '#87f2de' : (entry.value < entry.expected ? '#d68995' : '#71afe2')}
+                                                                                                                    />
+                                                                                                                ))}
+                                                                                                            </Bar>
+                                                                                                        </BarChart>
+                                                                                                    </ResponsiveContainer>
+                                                                                                </Paper>
+                                                                                            </Grid>
+                                                                                            :
+                                                                                            chart["chart"] == "chart08DDAdd" ?
+                                                                                                <Grid item xs={6}>
+                                                                                                    <Paper>
+                                                                                                        <div style={divStyle}>
+                                                                                                            <h2>{chart["title"]}</h2>
+                                                                                                            <p>{chart["subtitle"]}</p>
+                                                                                                            <Divider />
+                                                                                                        </div>
+
+                                                                                                        <ResponsiveContainer width="85%" height={280}>
+                                                                                                            <div align="center" style={{ height: "inherit", width: "auto" }}>
+
+                                                                                                                <div style={{ width: "90%", height: "inherit" }}>
+                                                                                                                    <Typography variant="subheading" style={{ backgroundColor: "orange" }}>
+                                                                                                                        <strong>Uncompleted</strong>
+                                                                                                                    </Typography>
+
+                                                                                                                    {chartData[index].additionaldata.map(function (entry, index2) {
+                                                                                                                        if (entry.assignment == chart["ddparam1"]) {
+                                                                                                                            if (entry.value == "All submitted") {
+                                                                                                                                return (
+                                                                                                                                    <div>
+                                                                                                                                        <h2>All submitted {chart["ddparam1"]}</h2>
+                                                                                                                                    </div>
+                                                                                                                                )
+
+                                                                                                                            } else {
+                                                                                                                                var res = entry.value.split(", ")
+                                                                                                                                return (
+                                                                                                                                    <ol style={{ height: "90%", overflow: "auto" }}>
+                                                                                                                                        {res.map(function (name, index3) {
+                                                                                                                                            console.log(name)
+                                                                                                                                            return (
+                                                                                                                                                <li style={{ margin: "10px" }}>{name}</li>
+                                                                                                                                            )
+                                                                                                                                        })}
+                                                                                                                                    </ol>
+                                                                                                                                )
+                                                                                                                            }
+                                                                                                                        }
+                                                                                                                    })}
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                        </ResponsiveContainer>
+                                                                                                    </Paper>
+                                                                                                </Grid>
+                                                                                                :
+                                                                                                <div align="center">
+                                                                                                    <h2>You have not added any charts to your Dashboard.</h2>
+                                                                                                </div>
 
                             )
                         })
