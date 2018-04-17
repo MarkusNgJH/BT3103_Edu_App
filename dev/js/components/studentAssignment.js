@@ -210,7 +210,7 @@ class studentAssignment extends React.Component {
                         <Paper>
                             <div style={divStyle}>
                                 <h3>Assignment Type</h3>
-                                <h4>Submission rate for each type of Assignment</h4>
+                                <p>Measure Submission Rate by Assignment Type</p>
                                 <Divider />
                             </div>
                             <ResponsiveContainer width="90%" height={380}>
@@ -221,8 +221,8 @@ class studentAssignment extends React.Component {
                                     margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
                                 >
 
-                                    <XAxis dataKey="Name" hide={true}>
-                                        <Label value="Assignment Type" offset={0} position="insideBottom" />
+                                    <XAxis dataKey="Name">
+                                        {/* <Label value="Assignment Type" offset={0} position="insideBottom" /> */}
                                     </XAxis>
 
                                     <YAxis dataKey="Value">
@@ -253,7 +253,7 @@ class studentAssignment extends React.Component {
                         <Paper>
                             <div style={divStyle}>
                                 <h3>Assignment</h3>
-                                <h4>Assignments completed by Student</h4>
+                                <p>Track Assignment by Completion Status</p>
                                 <Divider />
                             </div>
                             <ResponsiveContainer width="90%" height={380}>
@@ -290,7 +290,7 @@ class studentAssignment extends React.Component {
                         <Paper>
                             <div style={divStyle}>
                                 <h3>Assignment</h3>
-                                <h4>Number of Submissions per Date</h4>
+                                <p>Track Number of Submissions per Date</p>
                                 <Divider />
                             </div>
                             <ResponsiveContainer width="100%" height={380}>
@@ -325,7 +325,7 @@ class studentAssignment extends React.Component {
                         <Paper>
                             <div style={divStyle}>
                                 <h3>Assignment</h3>
-                                <h4>Time Lapse Since Assignment released</h4>
+                                <p>Track Number of Days to Complete Assignments</p>
                                 <Divider />
                             </div>
                             <ResponsiveContainer width="100%" height={380}>
@@ -336,7 +336,7 @@ class studentAssignment extends React.Component {
                                     margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
                                 >
                                     <XAxis dataKey="Name">
-                                        <Label value="Number of days lapsed" offset={-3} position="insideBottom" />
+                                        <Label value="Number of Days Lapsed" offset={-3} position="insideBottom" />
                                     </XAxis>
 
                                     <YAxis dataKey="Value">
@@ -361,7 +361,7 @@ class studentAssignment extends React.Component {
                             <Paper>
                                 <div style={divStyle}>
                                     <h3>Assignment</h3>
-                                    <h4>List of Assignments</h4>
+                                    <p>Identify Assignments by Status</p>
                                     <Divider />
                                 </div>
                                 <ResponsiveContainer width="90%" height={380}>
