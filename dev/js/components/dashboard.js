@@ -754,6 +754,52 @@ class Dashboard extends React.Component {
                                                                                                     </Paper>
                                                                                                 </Grid>
                                                                                                 :
+                                                                                                chart["chart"] == "prediction" ?
+                                                                                                <Grid item xs={12}>
+                                                                                                    <Paper>
+                                                                                                        <div style={divStyle}>
+                                                                                                            <h2>{chart["title"]}</h2>
+                                                                                                            <p>{chart["subtitle"]}</p>
+                                                                                                            <Divider />
+                                                                                                        </div>
+
+                                                                                                        <ResponsiveContainer width="85%" height={280}>
+                                                                                                                <BarChart
+                                                                                                                    width={730} height={250}
+                                                                                                                    data={chartData[index].data}
+                                                                                                                    margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+                                                                                                                >
+                                                                                                                    <XAxis
+                                                                                                                        dataKey={chart["xAxis"]}
+                                                                                                                        label={{ value: "Students", position: "insideBottom" }}
+                                                                                                                        ticks={[0]}
+                                                                                                                    />
+                                                                                                                    <YAxis
+                                                                                                                        dataKey={chart["yAxis"]}
+                                                                                                                        label={{ value: "Number of Days to Submit", angle: -90, position: "insideBottomLeft" }}
+                                                                                                                    />
+
+                                                                                                                    <Tooltip cursor={{ fill: 'red', fillOpacity: 0.1 }} />
+
+                                                                                                                    {chart["dataKey"].map(function (dk, index2) {
+                                                                                                                        return (
+                                                                                                                            <Bar name="Number of Days to Submit" dataKey={dk}
+                                                                                                                                onClick={(data, index3) => comp.selectedAssignment(data)}>
+                                                                                                                                {chartData[index].data.map((entry, index4) => (
+                                                                                                                                    <Cell
+                                                                                                                                        key={entry.assignment}
+                                                                                                                                        fill={entry.assignment == comp.state.selectedAssignment ? '#87f2de' : (entry.value > 5 ? '#d68995' : '#71afe2')}
+                                                                                                                                    />
+                                                                                                                                ))}
+                                                                                                                            </Bar>
+                                                                                                                        )
+                                                                                                                    })}
+                                                                                                                    <ReferenceLine y={5} strokeWidth={4} stroke="#e0b13c" strokeDasharray="3 3" label={{ value: "Expected Submissions", position: "top" }} />
+                                                                                                                </BarChart>
+                                                                                                        </ResponsiveContainer>
+                                                                                                    </Paper>
+                                                                                                </Grid>
+                                                                                                :
                                                                                                 <div align="center">
                                                                                                     <h2>You have not added any charts to your Dashboard.</h2>
                                                                                                 </div>

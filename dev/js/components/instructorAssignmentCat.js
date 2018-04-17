@@ -87,9 +87,9 @@ class InstructorAssignmentCat extends React.Component {
     selectedAssignment(data) {
         if (this.state.selectedAssignment == "") {
             this.setState({ selectedAssignment: data.assignment, steps: [...this.state.steps, data.assignment] })
-            store.dispatch({ type: "SET_LOADER", payload: true});
+            store.dispatch({ type: "SET_LOADER", payload: true });
             let url = 'https://d1pvj1k2kj.execute-api.us-west-2.amazonaws.com/prod/instructor_assignment?message=' + data.assignmentID;
-            fetch(url, { mode: "no-cors" }).then(function(response) {
+            fetch(url, { mode: "no-cors" }).then(function (response) {
                 console.log("Fetched ", url);
             });
         }
@@ -98,9 +98,9 @@ class InstructorAssignmentCat extends React.Component {
             array.splice(-1, 1, data.assignment);
             this.setState({ selectedAssignment: data.assignment, steps: array });
             console.log(data.assignment);
-            store.dispatch({ type: "SET_LOADER", payload: true});
+            store.dispatch({ type: "SET_LOADER", payload: true });
             let url = 'https://d1pvj1k2kj.execute-api.us-west-2.amazonaws.com/prod/instructor_assignment?message=' + data.assignmentID;
-            fetch(url, { mode: "no-cors" }).then(function(response) {
+            fetch(url, { mode: "no-cors" }).then(function (response) {
                 console.log("Fetched ", url);
             });
         }
@@ -243,10 +243,10 @@ class InstructorAssignmentCat extends React.Component {
                                     <Tooltip cursor={{ fill: 'red', fillOpacity: 0.1 }} />
                                     {/* <Legend verticalAlign="top" align="right" /> */}
                                     <Bar name="Number of Submissions" dataKey="value"
-                                        onClick={(data, index) => 
-                                        this.selectedAssignment(data)
-                                        // console.log(data)
-                                    }>
+                                        onClick={(data, index) =>
+                                            this.selectedAssignment(data)
+                                            // console.log(data)
+                                        }>
                                         {this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignment.chart01.data.map((entry, index) => (
                                             <Cell
                                                 key={entry.assignment}
@@ -346,19 +346,19 @@ class InstructorAssignmentCat extends React.Component {
                         :
                         <span></span>
                     }
-                    
-                    {this.props.activeLoader.showLoader ?
-                    <div style={{margin: "auto", width: "100%"}}>
-                        <p> Loading... Please Wait </p>
-                        <HorLoader />
-                    </div>
 
-                    :
-                    <span></span>
+                    {this.props.activeLoader.showLoader ?
+                        <div style={{ margin: "auto", width: "100%" }}>
+                            <p> Loading... Please Wait </p>
+                            <HorLoader />
+                        </div>
+
+                        :
+                        <span></span>
                     }
 
                     {/** Dynamic Drilldown: Submission Window*/}
-                        {this.state.selectedAssignment ?
+                    {this.state.selectedAssignment ?
                         <Grid item xs={6}>
                             <Paper>
                                 <div style={divStyle}>
@@ -396,10 +396,10 @@ class InstructorAssignmentCat extends React.Component {
                         </Grid>
                         :
                         <span></span>
-                        }
+                    }
 
-                     {/** Dynamic Drilldown: Submission Across Time*/}
-                     {this.state.selectedAssignment ?
+                    {/** Dynamic Drilldown: Submission Across Time*/}
+                    {this.state.selectedAssignment ?
                         <Grid item xs={6}>
                             <Paper>
                                 <div style={divStyle}>
@@ -418,7 +418,7 @@ class InstructorAssignmentCat extends React.Component {
                                             </linearGradient>
                                         </defs>
                                         <XAxis label={{ value: "Date" }} dataKey="date_time" tick={false} />
-                                        <YAxis name="Date" label={{ value: "Number of Submissions", angle: -90, position: "insideBottomLeft", offset: 12 }} domain={[0, 36]}/>
+                                        <YAxis name="Date" label={{ value: "Number of Submissions", angle: -90, position: "insideBottomLeft", offset: 12 }} domain={[0, 36]} />
                                         <ReferenceLine y={33} strokeWidth={4} stroke="#e0b13c" strokeDasharray="3 3" label={{ value: "Expected Submissions", position: "top" }} />
                                         <Tooltip />
                                         <Area name="Number of Submissions" type="monotone" dataKey="value" stroke="#8884d8" fillOpacity={1} fill="url(#colorUv)" />
@@ -435,11 +435,8 @@ class InstructorAssignmentCat extends React.Component {
                         :
                         <span></span>
                     }
-                    
-                    {/* Kian Hwee Help Here Plox */}
-                    {/* Kian Hwee Help Here Plox */}
-                    {/* Kian Hwee Help Here Plox */}
-                    {/* Kian Hwee Help Here Plox */}
+
+                    {/* prediction */}
                     <Grid item xs={12}>
                         <Paper>
                             <div style={divStyle}>
@@ -466,10 +463,10 @@ class InstructorAssignmentCat extends React.Component {
                                     <Tooltip cursor={{ fill: 'red', fillOpacity: 0.1 }} />
                                     {/* <Legend verticalAlign="top" align="right" /> */}
                                     <Bar name="Number of Days to Submit" dataKey="value"
-                                        onClick={(data, index) => 
-                                        this.selectedAssignment(data)
-                                        // console.log(data)
-                                    }>
+                                        onClick={(data, index) =>
+                                            this.selectedAssignment(data)
+                                            // console.log(data)
+                                        }>
                                         {this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignment.prediction.data.map((entry, index) => (
                                             <Cell
                                                 key={entry.assignment}
@@ -481,16 +478,16 @@ class InstructorAssignmentCat extends React.Component {
                                     {/* <Line name="Expected number" type='monotone' dataKey='expected' stroke='#ff7300' dot={false} /> */}
                                 </BarChart>
                             </ResponsiveContainer>
-                            {this.isFav("chart01") == true ?
-                                <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart01", "Chart01 has been removed!") }}>Remove</Button>
+                            {this.isFav("prediction") == true ?
+                                <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("prediction", "Chart has been removed!") }}>Remove</Button>
                                 :
-                                <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart01", "BarChart", "Assignment Submissions", "What is the proportion of submission for each assignment?", "assignment", "value", ["value"], "Chart01 has been added!") }}>Favourite</Button>
+                                <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("prediction", "BarChart", "Forecast Submissions Duration", "Forecast Number of Days Needed for Latest Assignment", "student_name", "value", ["value"], "Chart has been added!") }}>Favourite</Button>
 
                             }
                         </Paper>
                     </Grid>
 
-                    
+
                     <Snackbar
                         anchorOrigin={{ vertical, horizontal }}
                         autoHideDuration={2500}
