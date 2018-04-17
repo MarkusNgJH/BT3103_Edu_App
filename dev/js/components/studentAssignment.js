@@ -206,32 +206,36 @@ class studentAssignment extends React.Component {
                     }
                 </Paper>
                 <Grid container spacing={24} direction="row" align="center" justify="space-between">
-                    <Grid item xs={12}>
+                    <Grid item xs={12} sm={9} md={6} xl={4}>
                         <Paper>
                             <div style={divStyle}>
                                 <h3>Assignment Type</h3>
                                 <p>Measure Submission Rate by Assignment Type</p>
                                 <Divider />
                             </div>
-                            <ResponsiveContainer width="90%" height={380}>
+                            <ResponsiveContainer width="90%" height={280}>
                                 <BarChart
+                                    // layout="vertical"
                                     width={730}
                                     height={250}
                                     data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].studentAssignmentType.chart05.data}
                                     margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
                                 >
 
-                                    <XAxis dataKey="Name">
-                                        {/* <Label value="Assignment Type" offset={0} position="insideBottom" /> */}
-                                    </XAxis>
+                                    <XAxis dataKey="Name"
+                                        type="category"
+                                        />
+                                    {/* <Label value="Assignment Type" offset={0} position="insideBottom" /> */}
 
-                                    <YAxis dataKey="Value">
-                                        <Label value="Number of Submissions" angle={-90} offset={20} position="insideBottomLeft" />
-                                    </YAxis>
+                                    <YAxis dataKey="Value"
+                                        type="number"
+                                        width={20}
+                                        // <Label value="Number of Submissions" angle={-90} offset={20} position="insideBottomLeft" />
+                                    />
 
                                     <CartesianGrid strokeDasharray="3 3" />
                                     <Tooltip />
-                                    <Bar name="Percentage of Assignment submitted" dataKey="Value" fill="#8884d8" >
+                                    <Bar name="Submission Rate (%)" dataKey="Value" fill="#8884d8" >
                                         {this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].studentAssignmentType.chart05.data.map((entry, index) => (
                                         <Cell
                                             key={entry['Name']}
@@ -256,7 +260,7 @@ class studentAssignment extends React.Component {
                                 <p>Track Assignment by Completion Status</p>
                                 <Divider />
                             </div>
-                            <ResponsiveContainer width="90%" height={380}>
+                            <ResponsiveContainer width="90%" height={280}>
                                 <PieChart
                                     width={730}
                                     height={250}
@@ -271,7 +275,7 @@ class studentAssignment extends React.Component {
                                         {this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].studentAssignment.chart01.data.map((entry, index) => (
                                             <Cell
                                                 key={entry['Name']}
-                                                fill={entry.value < (5) ? '#d68995' : '#71afe2'}
+                                                fill={entry.Value < 1 ? '#d68995' : '#71afe2'}
                                             />
                                         ))}
                                     </Pie>
@@ -293,7 +297,7 @@ class studentAssignment extends React.Component {
                                 <p>Track Number of Submissions per Date</p>
                                 <Divider />
                             </div>
-                            <ResponsiveContainer width="100%" height={380}>
+                            <ResponsiveContainer width="100%" height={280}>
                                 <LineChart
                                     width={730}
                                     height={250}
@@ -328,7 +332,7 @@ class studentAssignment extends React.Component {
                                 <p>Track Number of Days to Complete Assignments</p>
                                 <Divider />
                             </div>
-                            <ResponsiveContainer width="100%" height={380}>
+                            <ResponsiveContainer width="100%" height={280}>
                                 <BarChart
                                     width={730}
                                     height={250}
@@ -345,7 +349,7 @@ class studentAssignment extends React.Component {
 
                                     <CartesianGrid strokeDasharray="3 3" />
                                     <Bar name="Number of Assignments" dataKey="Value" fill="#8884d8" />
-                                    <Tooltip />
+                                    <Tooltip cursor={{ fill: 'red', fillOpacity: 0.05 }}/>
                                 </BarChart>
                             </ResponsiveContainer>
                             {this.isFav("chart04") == true ?
@@ -364,7 +368,7 @@ class studentAssignment extends React.Component {
                                     <p>Identify Assignments by Status</p>
                                     <Divider />
                                 </div>
-                                <ResponsiveContainer width="90%" height={380}>
+                                <ResponsiveContainer width="90%" height={280}>
                                     <div align="center" style={{ height: "inherit", width: "auto" }}>
                                         <div style={{ float: "left", width: "50%", height: "inherit" }}>
                                             <Typography variant="subheading" style={{backgroundColor:"lightgreen"}}>

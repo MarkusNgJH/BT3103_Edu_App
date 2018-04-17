@@ -189,7 +189,8 @@ class AppFrame extends React.Component {
                             </IconButton>
                             <Typography variant="title" style={{ flex: 1 }} noWrap>
                                 <Link to="/" style={{ textDecoration: "none" }}>
-                                    <span className="app-logo">EduSparks</span>
+                                    <img src={ require('../../../public/EduSparksLogo2.png') } height={80} width="auto" style={{marginBottom: 0}} />
+                                    {/* <span className="app-logo">EduSparks</span> */}
                                 </Link>
                             </Typography>
                             <ActiveUserInfo />
