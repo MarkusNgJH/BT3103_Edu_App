@@ -31,9 +31,17 @@ const styles = {
     pos: {
         marginBottom: 12,
     },
+    buttonColorDefault: {
+        color: "white",
+        background: 'linear-gradient(45deg, #F7D358 30%, #F5DA81 90%)',
+    },
+    buttonColorSecondary: {
+        color: "white",
+        background: 'linear-gradient(45deg, #FF0000 30%, #FF4000 90%)',
+    }
 };
 
-class GridExample extends Component {
+class AdminOverview extends Component {
     constructor(props) {
         super(props);
     }
@@ -62,6 +70,15 @@ class GridExample extends Component {
             type: "SET_VIEW",
             payload: viewtype
         })
+    }
+
+    buttonColor(val, threshold) {
+        if (val > threshold) {
+            return this.props.classes.buttonColorDefault
+        }
+        else {
+            return this.props.classes.buttonColorSecondary
+        }
     }
 
     render() {
@@ -109,8 +126,18 @@ class GridExample extends Component {
                                 <Button
                                     onClick={() => this.handleClick('administratorPerformance')}
                                     component={Link} to="/administratorPerformance"
-                                    variant="raised" size="small"
-                                    color={this.chooseColor(5, 2)}> {this.chooseText(5, 2)}
+                                    variant="raised" 
+                                    size="small"
+                                    style={{marginTop: "20%"}}
+                                    className={this.buttonColor(
+                                        this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].adminPerformance.overallStats.stats02["Value"].slice(0,-1),
+                                        50
+                                    )}
+                                > 
+                                    {this.chooseText(
+                                        this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].adminPerformance.overallStats.stats02["Value"].slice(0,-1),
+                                        50
+                                    )}
                                 </Button>
                             </CardContent>
                         </Card>
@@ -141,7 +168,10 @@ class GridExample extends Component {
                                     component={Link} to="/administratorActivity"
                                     variant="raised"
                                     size="small"
-                                    color={this.chooseColor(5, 2)}> {this.chooseText(5, 2)}
+                                    style={{marginTop: "43%"}}
+                                    className={this.buttonColor(5,2)}
+                                > 
+                                    {this.chooseText(5, 2)}
                                 </Button>
                             </CardContent>
                         </Card>
@@ -154,6 +184,11 @@ class GridExample extends Component {
     }
 }
 
+AdminOverview.propTypes = {
+    children: PropTypes.node,
+    classes: PropTypes.object.isRequired,
+};
+
 function mapStateToProps(state){
     return{
         activeLoader: state.activeLoader,
@@ -162,4 +197,4 @@ function mapStateToProps(state){
     };
 }    
 
-export default connect(mapStateToProps)(GridExample); 
+export default connect(mapStateToProps)(withStyles(styles)(AdminOverview)); 

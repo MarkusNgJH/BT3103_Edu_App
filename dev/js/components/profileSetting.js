@@ -37,6 +37,14 @@ const styles = theme => ({
     textField: {
         flexBasis: 200,
     },
+    buttonColorDefault: {
+        color: "white",
+        background: 'linear-gradient(45deg, #F7D358 30%, #F5DA81 90%)',
+    },
+    buttonColorSecondary: {
+        color: "white",
+        background: 'linear-gradient(45deg, #FF0000 30%, #FF4000 90%)',
+    }
 });
 
 class profileSetting extends React.Component {
@@ -88,9 +96,6 @@ class profileSetting extends React.Component {
             console.log("ViewCourses")
             console.log(this.props.firebase)
             var location = (Object.keys(this.props.firebase.val).indexOf(this.state.uid) > -1) ? this.state.uid : 'R6nSbDVly8PUnC6jQFcseDS9sgJ3'; 
-            // console.log(Object.keys(this.props.firebase.val))
-            // console.log('location is')
-            // console.log(location)
             return (
                 // g8odN87wiURjfhqbw1HiMoFIwxn1
                 // R6nSbDVly8PUnC6jQFcseDS9sgJ3
@@ -128,6 +133,15 @@ class profileSetting extends React.Component {
         })
     }
 
+    buttonColor(val, threshold) {
+        if (val > threshold) {
+            return this.props.classes.buttonColorDefault
+        }
+        else {
+            return this.props.classes.buttonColorSecondary
+        }
+    }
+
     render(){
         const { vertical, horizontal, snackOpen } = this.state;
         return(
@@ -155,9 +169,14 @@ class profileSetting extends React.Component {
 
                         <br /> <br />
                         <div style={{textAlign:'center'}}>
-                        <Button variant="raised" style={{ align: 'center' }} 
-                            onClick={() => this.updateActiveProfile2({ uid: this.state.uid, course: this.state.course, role: this.props.firebase.val[this.state.uid][this.state.course]['User Type'] }, "Updated user profile", this.state.uid, this.state.course, this.props.firebase.val[this.state.uid][this.state.course]['User Type'])}>
-                        Submit</Button>
+                        <Button 
+                        variant="raised" 
+                        style={{ align: 'center' }} 
+                        onClick={() => this.updateActiveProfile2({ uid: this.state.uid, course: this.state.course, role: this.props.firebase.val[this.state.uid][this.state.course]['User Type'] }, "Updated user profile", this.state.uid, this.state.course, this.props.firebase.val[this.state.uid][this.state.course]['User Type'])}
+                        className={this.buttonColor(5,2)}
+                        >
+                        Submit
+                        </Button>
                         </div>
 
                         <br /> <br />
@@ -179,6 +198,11 @@ class profileSetting extends React.Component {
     }
 }
 
+profileSetting.propTypes = {
+    children: PropTypes.node,
+    classes: PropTypes.object.isRequired,
+};
+
 function mapStateToProps(state){
     return{
         firebase: state.firebase,
@@ -190,4 +214,4 @@ function matchDispatchToProps(dispatch){
     return bindActionCreators({updateActiveProfile: updateActiveProfile}, dispatch)
 }
 
-export default connect(mapStateToProps, matchDispatchToProps)(profileSetting); 
+export default connect(mapStateToProps, matchDispatchToProps)(withStyles(styles)(profileSetting)); 

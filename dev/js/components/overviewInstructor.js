@@ -32,10 +32,18 @@ const styles = {
     },
     barColor: {
         color: "#000"
+    },
+    buttonColorDefault: {
+        color: "white",
+        background: 'linear-gradient(45deg, #F7D358 30%, #F5DA81 90%)',
+    },
+    buttonColorSecondary: {
+        color: "white",
+        background: 'linear-gradient(45deg, #FF0000 30%, #FF4000 90%)',
     }
 };
 
-class GridExample extends Component {
+class InstructorOverview extends Component {
     constructor(props) {
         super(props);
     }
@@ -66,8 +74,18 @@ class GridExample extends Component {
         })
     }
 
+    buttonColor(val, threshold) {
+        if (val > threshold) {
+            return this.props.classes.buttonColorDefault
+        }
+        else {
+            return this.props.classes.buttonColorSecondary
+        }
+    }
+
     render() {
-        const { classes } = this.props;
+        // const classes = this.props;
+        console.log("my props: " + this.props.classes.buttonColor)
         return (
             <div>
                 <h1> Overview </h1>
@@ -116,10 +134,10 @@ class GridExample extends Component {
                                         variant="raised"
                                         size="small"
                                         style={{ position: "absolute", bottom:"5%", left: "14%"}}
-                                        color={this.chooseColor(
+                                        className={this.buttonColor(
                                             this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignment.overallStats["Current Submission"],
-                                            this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignment.overallStats["Total Expected Submission"] / 2
-                                        )}>
+                                            this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignment.overallStats["Total Expected Submission"] / 2)}
+                                    >
                                         {this.chooseText(
                                             this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignment.overallStats["Current Submission"],
                                             this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignment.overallStats["Total Expected Submission"] / 2
@@ -160,12 +178,14 @@ class GridExample extends Component {
                                     <Button
                                         onClick={() => this.handleClick('instructorAssignmentType')}
                                         component={Link} to="/instructorAssignmentType"
-                                        variant="raised" size="small"
-                                        style={{ position: "absolute", bottom: "5%", right: "48%" }}
-                                        color={this.chooseColor(
+                                        variant="raised" 
+                                        size="small"
+                                        style={{ position: "absolute", bottom: "5%", left: "48%" }}
+                                        className={this.buttonColor(
                                             this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignmentType.overallStats["Total Submissions"],
                                             this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignmentType.overallStats["Expected Submissions Received"] / 2
-                                        )}>
+                                        )}
+                                    >
                                         {this.chooseText(
                                             this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignmentType.overallStats["Total Submissions"],
                                             this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignmentType.overallStats["Expected Submissions Received"] / 2
@@ -219,7 +239,8 @@ class GridExample extends Component {
                                         variant="raised"
                                         size="small"
                                         style={{ position: "absolute", bottom: "5%", right: "14%" }}
-                                        color={this.chooseColor(5, 2)}>
+                                        className={this.buttonColor(5,2)}
+                                    >
                                         {this.chooseText(5, 2)}
                                     </Button>
                                 </Card>
@@ -234,6 +255,11 @@ class GridExample extends Component {
     }
 }
 
+InstructorOverview.propTypes = {
+    children: PropTypes.node,
+    classes: PropTypes.object.isRequired,
+};
+
 function mapStateToProps(state) {
     return {
         activeLoader: state.activeLoader,
@@ -243,4 +269,4 @@ function mapStateToProps(state) {
     };
 }
 
-export default connect(mapStateToProps)(GridExample); 
+export default connect(mapStateToProps)(withStyles(styles)(InstructorOverview)); 
