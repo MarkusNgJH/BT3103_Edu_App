@@ -368,7 +368,7 @@ class InstructorAssignmentType extends React.Component {
                                 <div>
                                     <div style={divStyle}>
                                         <h2>Total Pauses/Playbacks</h2>
-                                        <p>Identify PathProblems that Students Students May Be Struggling With</p>
+                                        <p>Identify PathProblems that Students May Be Struggling With</p>
                                         <Divider />
                                     </div>
 
@@ -400,7 +400,7 @@ class InstructorAssignmentType extends React.Component {
                         <Paper>
                             <div style={divStyle}>
                                 <h2>Time period of video</h2>
-                                <p>Identify which parts students paused at for {comp.state.selectedVideo}</p>
+                                <p>Identify Which Parts Students Paused At For {comp.state.selectedVideo}</p>
                                 <Divider />
                             </div>
 
@@ -430,7 +430,7 @@ class InstructorAssignmentType extends React.Component {
                             <Paper>
                                 <div style={divStyle}>
                                     <h2>Word Cloud</h2>
-                                    <p>Identify answers which most students give for PathProblems</p>
+                                    <p>Identify Answers Which Most Students Give For PathProblems</p>
                                     <Divider />
                                 </div>
 
@@ -494,7 +494,7 @@ class InstructorAssignmentType extends React.Component {
                                 <div>
                                     <div style={divStyle}>
                                         <h2>Name list of students</h2>
-                                        <p>Name list of those who have not submitted {this.state.selectedAssignment}</p>
+                                        <p>Identify Students Who Have Not Submitted {this.state.selectedAssignment}</p>
                                         <Divider />
                                     </div>
 

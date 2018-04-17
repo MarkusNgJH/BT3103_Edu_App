@@ -260,7 +260,7 @@ class instructorStudentIdentifier extends React.Component {
                         <Paper>
                             <div style={divStyle}>
                                 <h2>Submission Duration</h2>
-                                <p>Identify Distribution of Time Taken for Submission</p>
+                                <p>Identify Time Taken by Each Student for Submission</p>
                                 <Divider />
                             </div>
 

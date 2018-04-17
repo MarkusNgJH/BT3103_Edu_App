@@ -221,7 +221,7 @@ class InstructorAssignmentCat extends React.Component {
                         <Paper>
                             <div style={divStyle}>
                                 <h2>Assignment Submissions</h2>
-                                <p>What is the proportion of submission for each assignment?</p>
+                                <p>Track the Number of Submissions for each Assignment</p>
                                 <Divider />
                             </div>
                             <ResponsiveContainer width="90%" height={280}>
@@ -382,7 +382,7 @@ class InstructorAssignmentCat extends React.Component {
                                         />
 
                                         <Tooltip />
-                                        <Bar name="Number of Days Elapsed" dataKey="value" fill="#8884d8" />
+                                        <Bar name="Number of Submissions" dataKey="value" fill="#8884d8" />
                                     </BarChart>
                                 </ResponsiveContainer>
                                 {this.isFav("chart04") == true ?
@@ -444,7 +444,7 @@ class InstructorAssignmentCat extends React.Component {
                         <Paper>
                             <div style={divStyle}>
                                 <h2>Forecast Submissions Duration</h2>
-                                <p>What is the forecasted number of days needed for latest assignment?</p>
+                                <p>Forecast Number of Days Needed for Latest Assignment</p>
                                 <Divider />
                             </div>
                             <ResponsiveContainer width="90%" height={280}>
@@ -455,7 +455,7 @@ class InstructorAssignmentCat extends React.Component {
                                 >
                                     <XAxis
                                         dataKey="student_name"
-                                        label={{ value: "Students)", position: "insideBottom" }}
+                                        label={{ value: "Students", position: "insideBottom" }}
                                         ticks={[0]}
                                     />
                                     <YAxis
