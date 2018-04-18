@@ -117,12 +117,16 @@ class DrawerItems extends React.Component {
                 </Collapse>
 
                 <Divider />
-
-                <ListItem button onClick={this.props.handleDrawerClose.bind(this)} >
-                    <Link to="/mydashboard" style={{ textDecoration: "none" }}>
+                {this.props.activeProfileRole  == "Instructor" ?
+                    <ListItem button onClick={this.props.handleDrawerClose.bind(this)} >
+                        <Link to="/mydashboard" style={{ textDecoration: "none" }}>
                         <h4 style={{ color: "#FFFFFF" }}>My Dashboard</h4>
-                    </Link>
-                </ListItem>
+                            </Link>
+                    </ListItem>
+                :
+                <span></span>
+                }
+
 
             </List>
         );
