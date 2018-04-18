@@ -227,7 +227,7 @@ class InstructorAssignmentCat extends React.Component {
                 <Grid container spacing={24} alignItems="stretch" justify="center" align="center">
 
                     {/** CHART 01*/}
-                    <Grid item xs={12}>
+                    <Grid item xs={12} md={9}>
                         <Paper>
                             <div style={divStyle}>
                                 <div className="chartTopRow">
@@ -278,6 +278,60 @@ class InstructorAssignmentCat extends React.Component {
                             </ResponsiveContainer>
                         </Paper>
                     </Grid>
+
+                    {/** CHART 01 Additional Data (show who have not submitted an assignment)*/}
+                    {this.state.selectedAssignment != "" ?
+                        <Grid item xs={12} md={3}>
+                            <Paper>
+                                <div style={divStyle}>
+                                    <div className="chartTopRow">
+                                        <span />
+                                        <h2>Names List</h2>
+                                        <span />
+                                    </div>
+                                    <p>Students Who Have Not Submitted "
+                                        {this.state.selectedAssignment.length > 20 ?
+                                            this.state.selectedAssignment.substring(0, 16) + "..."
+                                        :
+                                            this.state.selectedAssignment
+                                        }
+                                    "</p>
+                                    <Divider />
+                                </div>
+                                <div style={{ height: 190 }}>
+                                    {this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignment.chart01.additionaldata.map(
+                                        function (entry, index) {
+                                            if (entry.assignment == comp.state.selectedAssignment) {
+                                                if (entry.value == "All submitted") {
+                                                    return (
+                                                        <div className="hori-vert-center">
+                                                            <h3>
+                                                                All submitted.
+                                                            </h3>
+                                                        </div>
+                                                    )
+                                                } else {
+                                                    var res = entry.value.split(", ")
+                                                    return (
+                                                        <ol style={{ height: "90%", overflow: "auto" }}>
+                                                            {res.map(function (name, index2) {
+                                                                return (
+                                                                    <li style={{ margin: "10px" }}>{name}</li>
+                                                                )
+                                                            })}
+                                                        </ol>
+                                                    )
+                                                }
+                                            }
+                                        }
+                                    )}
+                                </div>
+                            </Paper>
+                        </Grid>
+                    :
+                        <Grid item xs={12} md={3}>
+                        </Grid>
+                    }
 
                     {/** CHART 02*/}
                     {this.state.selectedAssignment == "" ?
@@ -431,9 +485,9 @@ class InstructorAssignmentCat extends React.Component {
                                         <div className="blank"/>
                                         <h2>Submission Across Time</h2>
                                         {this.isFav("chart06") == true ?
-                                            <Button style={{ float: "right", margin: "5px" }} mini="true" color="primary" variant="fab" onClick={() => { this.removeFromFavourites("chart06", "Chart has been removed!") }}>Remove</Button>
+                                            <Button style={{ float: "right", margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart06", "Chart has been removed!") }}>Remove</Button>
                                             :
-                                            <Button style={{ float: "right", margin: "5px" }} mini="true" color="secondary" variant="fab" onClick={() => { this.addToFavourites("chart06", "AreaChart", "Submission Across Time", "Monitor Student's Submission over Time for " + this.state.selectedAssignment + "?", "date_time", "", ["value"], "Chart has been added!") }}>Favourite</Button>
+                                            <Button style={{ float: "right", margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart06", "AreaChart", "Submission Across Time", "Monitor Student's Submission over Time for " + this.state.selectedAssignment + "?", "date_time", "", ["value"], "Chart has been added!") }}>Favourite</Button>
                                         }
                                     </div>
                                     <p>Monitor Student's Submission over Time for "
@@ -473,7 +527,15 @@ class InstructorAssignmentCat extends React.Component {
                     <Grid item xs={12}>
                         <Paper>
                             <div style={divStyle}>
-                                <h2>Forecast Submissions Duration</h2>
+                                <div className="chartTopRow">
+                                    <div className="blank"/>
+                                    <h2>Forecast Submissions Duration</h2>
+                                    {this.isFav("prediction") == true ?
+                                        <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("prediction", "Chart has been removed!") }}>Remove</Button>
+                                        :
+                                        <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("prediction", "BarChart", "Forecast Submissions Duration", "Forecast Number of Days Needed for Latest Assignment", "student_name", "value", ["value"], "Chart has been added!") }}>Favourite</Button>
+                                    }
+                                </div>
                                 <p>Forecast Number of Days Needed for Latest Assignment</p>
                                 <Divider />
                             </div>
@@ -511,12 +573,6 @@ class InstructorAssignmentCat extends React.Component {
                                     {/* <Line name="Expected number" type='monotone' dataKey='expected' stroke='#ff7300' dot={false} /> */}
                                 </BarChart>
                             </ResponsiveContainer>
-                            {this.isFav("prediction") == true ?
-                                <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("prediction", "Chart has been removed!") }}>Remove</Button>
-                                :
-                                <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("prediction", "BarChart", "Forecast Submissions Duration", "Forecast Number of Days Needed for Latest Assignment", "student_name", "value", ["value"], "Chart has been added!") }}>Favourite</Button>
-
-                            }
                         </Paper>
                     </Grid>
 
