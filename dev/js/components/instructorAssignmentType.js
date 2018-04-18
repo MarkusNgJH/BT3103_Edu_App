@@ -60,6 +60,12 @@ const AxisLabel = ({
     );
 };
 
+const wordCloudArr = [
+    "AWS Lambda Lab - Part 1.png", "AWS Lambda Lab - Part 2.png", "AWS Lambda Lab - Part 3.png",
+    "AWS Lambda Lab - Part 4.png", "AWS Lambda Lab - Part 5.png", "Introduction to AWS Lambda.png",
+    "Real-time Charts Tutorial.png"
+]
+
 var divStyle = {
     padding: "1px"
 };
@@ -183,7 +189,7 @@ class InstructorAssignmentType extends React.Component {
         }
     }
 
-    selectedVideo(data, msg="") {
+    selectedVideo(data, msg = "") {
         if (this.state.selectedVideo == "") {
             this.setState({ selectedVideo: data.Name, steps: [...this.state.steps, data.Name] })
         }
@@ -285,10 +291,10 @@ class InstructorAssignmentType extends React.Component {
                     }
                 </Paper>
                 <Grid container spacing={24} direction="row" align="center">
+                    {/* Chart 08 */}
                     <Grid item xs={12}>
                         <Paper>
                             <div style={divStyle}>
-                                {/* <h2>Chart08</h2> */}
                                 <h2>Submission Per Type</h2>
                                 <p>Monitor Percentage of Submissions for Each Assignment Type</p>
                                 <Divider />
@@ -328,12 +334,12 @@ class InstructorAssignmentType extends React.Component {
                         </Paper>
                     </Grid>
 
+                    {/* Chart 09 */}
                     <Grid item xs={6}>
                         <Paper>
                             {this.state.selectedAssignmentType == "PathProblem" ?
                                 <div>
                                     <div style={divStyle}>
-                                        {/* <h2>Chart09</h2> */}
                                         <h2>Total Plays/ Fast-Forwards</h2>
                                         <p>Identify PathProblem that Students Have Completed Comfortably</p>
                                         <Divider />
@@ -378,7 +384,7 @@ class InstructorAssignmentType extends React.Component {
                                             <YAxis label={{ value: "Count", angle: -90, position: "insideBottomLeft", offset: 12 }} />
                                             <Tooltip />
                                             <Legend verticalAlign="top" align="right" />
-                                            <Bar name="# of Pauses" dataKey="pauses" fill="#8884d8" onClick={(data, index) => this.selectedVideo(data, "chart10_"+data["assignmentId"])} />
+                                            <Bar name="# of Pauses" dataKey="pauses" fill="#8884d8" onClick={(data, index) => this.selectedVideo(data, "chart10_" + data["assignmentId"])} />
                                             <Bar name="# of Playbacks" dataKey="playbacks" fill="#82ca9d" />
                                         </BarChart>
                                     </ResponsiveContainer>
@@ -396,53 +402,33 @@ class InstructorAssignmentType extends React.Component {
 
                     {/* Chart 10DD */}
                     {this.state.selectedVideo ?
-                    <Grid item xs={6}>
-                        <Paper>
-                            <div style={divStyle}>
-                                <h2>Time period of video</h2>
-                                <p>Identify Which Parts Students Paused At For {comp.state.selectedVideo}</p>
-                                <Divider />
-                            </div>
-
-                            <ResponsiveContainer width="85%" height={280}>
-                                <BarChart width={400} height={250} data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].tempDDNode.chart10DD.data}>
-                                    <XAxis dataKey="days_lapsed" tick={false} label={{ value: "Time into video" }} />/>
-                                    <YAxis label={{ value: "Number of pauses", angle: -90, position: "insideBottomLeft", offset: 18 }} />
-                                    <Tooltip />
-                                    <Legend verticalAlign="top" align="right" />
-                                    <Bar name="# of pauses" dataKey="value" fill="#8884d8" />
-                                </BarChart>
-                            </ResponsiveContainer>
-                            {this.isFav("chart10DD") == true ?
-                                <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart10DD", "Chart has been removed!") }}>Remove</Button>
-                                :
-                                <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart10DD", "BarChart", "Total Pauses/Playbacks", "Identify PathProblems that Students Students May Be Struggling With", "days_lapsed", "", ["value"], "Chart has been added!") }}>Favourite</Button>
-                            }
-                        </Paper>
-                    </Grid>
-                    :
-                    <span></span>
-                    }
-
-                    {/* Word Cloud chart */}
-                    {this.state.selectedAssignmentType == "PathProblem" ?
                         <Grid item xs={6}>
                             <Paper>
                                 <div style={divStyle}>
-                                    <h2>Word Cloud</h2>
-                                    <p>Identify Answers Which Most Students Give For PathProblems</p>
+                                    <h2>Time period of video</h2>
+                                    <p>Identify Which Parts Students Paused At For {comp.state.selectedVideo}</p>
                                     <Divider />
                                 </div>
 
-                                <ResponsiveContainer width="90%" height={350}>
-                                    <div id="wordmap" align="center"></div>
+                                <ResponsiveContainer width="85%" height={280}>
+                                    <BarChart width={400} height={250} data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].tempDDNode.chart10DD.data}>
+                                        <XAxis dataKey="days_lapsed" tick={false} label={{ value: "Time into video" }} />/>
+                                    <YAxis label={{ value: "Number of pauses", angle: -90, position: "insideBottomLeft", offset: 18 }} />
+                                        <Tooltip />
+                                        <Legend verticalAlign="top" align="right" />
+                                        <Bar name="# of pauses" dataKey="value" fill="#8884d8" ></Bar>
+                                    </BarChart>
                                 </ResponsiveContainer>
+                                {this.isFav("chart10DD") == true ?
+                                    <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart10DD", "Chart has been removed!") }}>Remove</Button>
+                                    :
+                                    <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart10DD", "BarChart", "Total Pauses/Playbacks", "Identify PathProblems that Students Students May Be Struggling With", "days_lapsed", "", ["value"], "Chart has been added!") }}>Favourite</Button>
+                                }
                             </Paper>
                         </Grid>
                         :
                         <span></span>
                     }
-
 
                     {/* chart8DD */}
                     {/* Number of submission for each assignment of XXX Type */}
@@ -452,7 +438,7 @@ class InstructorAssignmentType extends React.Component {
                                 <div>
                                     <div style={divStyle}>
                                         <h2>Total Submissions</h2>
-                                        <p>Number of Submissions per {this.state.selectedAssignmentType}'s Assignment</p>
+                                        <p>Number of Submissions for {this.state.selectedAssignmentType}'s Assignments</p>
                                         <Divider />
                                     </div>
 
@@ -470,7 +456,6 @@ class InstructorAssignmentType extends React.Component {
                                                     />
                                                 ))}
                                             </Bar>
-
                                         </BarChart>
                                     </ResponsiveContainer>
                                     {this.isFav("chart08DD") == true ?
@@ -487,10 +472,9 @@ class InstructorAssignmentType extends React.Component {
 
                     {/* chart08DDAdd */}
                     {/* name List of those who did not submit assignment */}
-                    <Grid item xs={6}>
-                        <Paper>
-                            {/* For any assignmentType except for PathProblems */}
-                            {this.state.selectedAssignment ?
+                    {this.state.selectedAssignment ?
+                        <Grid item xs={6}>
+                            <Paper>
                                 <div>
                                     <div style={divStyle}>
                                         <h2>Name list of students</h2>
@@ -539,43 +523,42 @@ class InstructorAssignmentType extends React.Component {
                                         <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart08DDAdd", "BarChart", "Name list of students", "Name list of those who have not submitted " + this.state.selectedAssignment, "", "", [], "Chart has been added!", this.state.selectedAssignment) }}>Favourite</Button>
                                     }
                                 </div>
-                                :
-                                <div></div>
-                            }
-                        </Paper>
-                    </Grid>
+                            </Paper>
+                        </Grid>
+                        :
+                        <span></span>
+                    }
 
-                    <Grid item xs={12}>
-                        <Paper>
-                            {this.state.selectedVideo == "AWS Lambda Lab - Part 4 (7:28)" ?
-                                <div>
+                    {/* Word Cloud chart */}
+                    {this.state.selectedAssignmentType == "PathProblem" ?
+                        this.state.selectedAssignment ?
+                            <Grid item xs={12}>
+                                <Paper>
                                     <div style={divStyle}>
-                                        {/* <h2>chart11</h2> */}
-                                        <h2>Area of Pauses</h2>
-                                        <p>Investigate Time Period where Pauses Occured for "{this.state.selectedVideo}"</p>
+                                        <h2>Word Cloud</h2>
+                                        <p>Identify Answers Which Most Students Give For {this.state.selectedAssignment}</p>
                                         <Divider />
                                     </div>
 
-                                    <ResponsiveContainer width="90%" height={280}>
-                                        <BarChart width={730} height={250} data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignmentType.chart11.data}>
-                                            <XAxis dataKey="Name" />
-                                            <YAxis label={{ value: "Number of Submissions", angle: -90, position: "insideBottomLeft", offset: 6 }} />
-                                            <Tooltip />
-                                            <Legend verticalAlign="top" align="right" />
-                                            <Bar name="# of Pauses" dataKey="Value" fill="#8884d8" />
-                                        </BarChart>
+                                    <ResponsiveContainer width="90%" height={350}>
+                                        <div id="wordclouddiv" style={{height: "100%", width: "100%"}}>
+                                            {wordCloudArr.map(function (wordCloud, index) {
+                                                if (wordCloud.slice(0, -4) == comp.state.selectedAssignment.split(" (")[0]) {
+                                                    return (
+                                                        <img src={require('../../scss/' + wordCloud)} style={{height: "100%", width: "100%"}} />
+
+                                                    )
+                                                }
+                                            })}
+                                        </div>
                                     </ResponsiveContainer>
-                                    {this.isFav("chart11") == true ?
-                                        <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart11", "Chart has been removed!") }}>Remove</Button>
-                                        :
-                                        <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart11", "BarChart", "Area of Pauses", "Investigate Time Period where Pauses Occured for " + this.state.selectedVideo, "Name", "", ["Value"], "Chart has been added!") }}>Favourite</Button>
-                                    }
-                                </div>
-                                :
-                                <div></div>
-                            }
-                        </Paper>
-                    </Grid>
+                                </Paper>
+                            </Grid>
+                            :
+                            <span></span>
+                        :
+                        <span></span>
+                    }
                     <Snackbar
                         anchorOrigin={{ vertical, horizontal }}
                         autoHideDuration={2500}
