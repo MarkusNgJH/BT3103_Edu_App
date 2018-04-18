@@ -105,11 +105,11 @@ class InstructorOverview extends Component {
                                         </div>
                                         <Divider />
 
-                                        <div align="center" style={{ paddingTop: "10px" }}>
+                                        <div align="center" className="card-stat-description">
                                             <Typography variant="subheading">
                                                 <strong>Latest Assignment:</strong>
                                             </Typography>
-                                            <h3><i>{this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignment.overallStats["Name"]}</i></h3>
+                                            <span>{this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignment.overallStats["Name"]}</span>
                                         </div>
 
                                         <div className="card-stat-description">
