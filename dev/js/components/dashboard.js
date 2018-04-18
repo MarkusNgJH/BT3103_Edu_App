@@ -694,6 +694,7 @@ class Dashboard extends React.Component {
                                                                                                             <YAxis label={{ value: "Count", angle: -90, position: "insideBottomLeft", offset: 12 }} />
                                                                                                             <Tooltip />
                                                                                                             <Legend verticalAlign="top" align="right" />
+                                                                                                            <ReferenceLine y={33} strokeWidth={4} stroke="#e0b13c" label={{ value: "Expected Submissions", position: "top" }} />
                                                                                                             <Bar name="Num of Submission" dataKey="value" fill="#8884d8" onClick={(data, index) => comp.selectedAssignment(data)}>
                                                                                                                 {chartData[index].data.map((entry, index2) => (
                                                                                                                     <Cell

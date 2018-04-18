@@ -370,7 +370,7 @@ class InstructorAssignmentType extends React.Component {
                                             <Legend verticalAlign="top" align="right" />
                                             <ReferenceLine y={33} strokeWidth={4} stroke="#e0b13c" label={{ value: "Expected Submissions", position: "top" }} />
                                             <Bar name="Num of Submission" dataKey="value" fill="#8884d8" onClick={(data, index) => this.selectedAssignment(data)}>
-                                                {this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].tempDDNode.chart08DD.data.map((entry, index) => (
+                                                {this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignmentType.chart08.drillDowns[this.state.selectedAssignmentType].data.map((entry, index) => (
                                                     <Cell
                                                         key={entry['assignment']}
                                                         fill={entry.value < entry.expected ? '#d68995' : '#71afe2'}
@@ -421,10 +421,10 @@ class InstructorAssignmentType extends React.Component {
                                                         if (entry.assignment == comp.state.selectedAssignment) {
                                                             if (entry.value == "All submitted") {
                                                                 return (
-                                                                    <div>
+                                                                    <h2>
                                                                         <br/>
                                                                         All submitted {entry.assignment}
-                                                                    </div>
+                                                                    </h2>
                                                                 )
 
                                                             } else {
