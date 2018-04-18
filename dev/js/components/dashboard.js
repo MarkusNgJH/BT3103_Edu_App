@@ -75,22 +75,30 @@ class Dashboard extends React.Component {
         }
     }
 
-    getChart(chartName, activeUserId, activeCourse) {
+    getChart(chartName, activeUserId, activeCourse, drilldownName = "") {
         var courses = this.props.firebase[activeUserId]
         var chartDD = ["chart02DD", "chart03DD", "chart08DD", "chart10DD"]
         // Scan thru each course and find the correct chart 
-        for (var course in courses) {
+        for (var course in courses) { // course = BT3103 
             if (activeCourse == course) {
-                for (var card in courses[activeCourse]) {
-                    for (var chart in courses[activeCourse][card]) {
-                        if (chartDD.includes(chartName.slice(0, -3))) {
-                            if (chartName.slice(0, -3) == chart) {
-                                console.log(courses[activeCourse][card][chart])
-                                return courses[activeCourse][card][chart]
-                            }
-                        } else {
-                            if (chartName == chart) {
-                                console.log(courses[activeCourse][card][chart])
+                for (var card in courses[activeCourse]) { // card = instructorAssignmentType 
+                    for (var chart in courses[activeCourse][card]) { // chart = chart08
+                        if (chartName.slice(0, 7) == chart) {
+                            if ((chartDD.includes(chartName.slice(0, -3))) || (chartDD.includes(chartName))) { // chart08DD or chart08DDAdd
+                                for (var drilldown in courses[activeCourse][card][chart].drillDowns) { // CodeCombat_Problems, PathProblem, Profile, Text
+                                    console.log(drilldown)
+                                    if (drilldownName == drilldown) {
+                                        console.log(chartName.slice(-3))
+                                        if (chartName.slice(-3) == "Add") { // chartXXDDAdd charts
+                                            return courses[activeCourse][card][chart].drillDowns[drilldown]
+                                        } else { // chartXXDD charts
+                                            return courses[activeCourse][card][chart].drillDowns[drilldown]
+                                        }
+                                    }
+                                }
+
+                            } else {
+                                console.log(chartName + " No data found!~~")
                                 return courses[activeCourse][card][chart]
                             }
                         }
@@ -118,7 +126,7 @@ class Dashboard extends React.Component {
         const activeUserId = this.props.activeProfile.uid
         const activeCourse = this.props.activeProfile.course
         const chartData = this.state.favourites.map((chart) => {
-            return (this.getChart(chart["chart"], activeUserId, activeCourse))
+            return (this.getChart(chart["chart"], activeUserId, activeCourse, chart["drilldown"]))
         })
         console.log(chartData)
         console.log("Favourites:", this.state.favourites)
@@ -135,11 +143,11 @@ class Dashboard extends React.Component {
                             return (
                                 // Start of AssignmentType charts 08-11
                                 chart["chart"] == "chart08" ?
-                                    <Grid item xs={12}>
+                                    <Grid item xs={12} sm={9} md={6}>
                                         <Paper>
                                             <div style={divStyle}>
-                                                <h2>Submission Per Type</h2>
-                                                <p>{chart["title"]}</p>
+                                                <h2>{chart["title"]}</h2>
+                                                <p>{chart["subtitle"]}</p>
                                                 <Divider />
                                             </div>
                                             <ResponsiveContainer width="90%" height={380}>
@@ -153,22 +161,17 @@ class Dashboard extends React.Component {
                                                         dataKey={chart["xAxis"]}
                                                     />
                                                     <YAxis
-                                                        dataKey={chart["yAxis"]}
-                                                        label={
-                                                            <AxisLabel axisType="yAxis" width={600} height={300}>
-                                                                {chart["yAxis"]}
-                                                            </AxisLabel>
-                                                        }
-                                                    />
+                                                        label={{ value: "Submission Rate (%)", angle: -90, position: "insideBottomLeft" }}
+                                                        tickFormatter={(tick) => { return (tick * 100) }} />
                                                     <CartesianGrid strokeDasharray="3 3" />
                                                     <Tooltip />
-                                                    {chart["dataKey"].map(function (dk, index) {
+                                                    {chart["dataKey"].map(function (dk, index2) {
                                                         return (
-                                                            <Bar dataKey={dk} fill="#8884d8">
-                                                                {chartData[index].data.map((entry, index) => (
+                                                            <Bar key={index2} dataKey={dk} fill="#8884d8">
+                                                                {chartData[index].data.map((entry, index3) => (
                                                                     <Cell
                                                                         key={entry['Name']}
-                                                                        fill={entry.Value < 1 ? '#d68995' : '#71afe2'}
+                                                                        fill={entry.Value * 100 < 100 ? '#d68995' : '#71afe2'}
                                                                     />
                                                                 ))}
                                                             </Bar>
@@ -197,14 +200,7 @@ class Dashboard extends React.Component {
                                                         <XAxis
                                                             dataKey={chart["xAxis"]}
                                                         />
-                                                        <YAxis
-                                                            dataKey={chart["yAxis"]}
-                                                            label={
-                                                                <AxisLabel axisType="yAxis" width={600} height={300}>
-                                                                    {chart["yAxis"]}
-                                                                </AxisLabel>
-                                                            }
-                                                        />
+                                                        <YAxis label={{ value: "Count", angle: -90, position: "insideBottomLeft", offset: 12 }} />
                                                         <CartesianGrid strokeDasharray="3 3" />
                                                         <Tooltip />
                                                         {chart["dataKey"].map(function (dk, index2) {
@@ -431,379 +427,385 @@ class Dashboard extends React.Component {
                                                                         </div>
                                                                     </Paper>
                                                                 </Grid>
-                                                                :
-                                                                chart["chart"] == "chart06" ?
-                                                                    <Grid item xs={6}>
-                                                                        <Paper>
-                                                                            <div>
-                                                                                <div style={divStyle}>
-                                                                                    <h2>{chart["title"]}</h2>
-                                                                                    <p>{chart["subtitle"]}</p>
-                                                                                    <Divider />
-                                                                                </div>
-                                                                                <ResponsiveContainer width="90%" height={280}>
-                                                                                    <AreaChart width={730} height={250}
-                                                                                        data={chartData[index].data}
-                                                                                        margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
-                                                                                        <defs>
-                                                                                            <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
-                                                                                                <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8} />
-                                                                                                <stop offset="95%" stopColor="#8884d8" stopOpacity={0} />
-                                                                                            </linearGradient>
-                                                                                        </defs>
-                                                                                        <XAxis label={{ value: "Date" }} dataKey={chart["xAxis"]} tick={false} />
-                                                                                        <YAxis name="Date" label={{ value: "Number of Submissions", angle: -90, position: "insideBottomLeft", offset: 12 }} />
-                                                                                        <Legend verticalAlign="top" align="right" />
-                                                                                        <Tooltip />
+                        :
+                        chart["chart"] == "chart06" ?
+                            <Grid item xs={6}>
+                                <Paper>
+                                    <div>
+                                        <div style={divStyle}>
+                                            <h2>{chart["title"]}</h2>
+                                            <p>{chart["subtitle"]}</p>
+                                            <Divider />
+                                        </div>
+                                        <ResponsiveContainer width="90%" height={280}>
+                                            <AreaChart width={730} height={250}
+                                                data={chartData[index].data}
+                                                margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
+                                                <defs>
+                                                    <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
+                                                        <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8} />
+                                                        <stop offset="95%" stopColor="#8884d8" stopOpacity={0} />
+                                                    </linearGradient>
+                                                </defs>
+                                                <XAxis label={{ value: "Date" }} dataKey={chart["xAxis"]} tick={false} />
+                                                <YAxis name="Date" label={{ value: "Number of Submissions", angle: -90, position: "insideBottomLeft", offset: 12 }} />
+                                                <Legend verticalAlign="top" align="right" />
+                                                <Tooltip />
 
-                                                                                        {chart["dataKey"].map(function (dk, index2) {
-                                                                                            return (
-                                                                                                <Area name="Number of Submissions" type="monotone" dataKey={dk} stroke="#8884d8" fillOpacity={1} fill="url(#colorUv)" />
-                                                                                            )
-                                                                                        })}
+                                                {chart["dataKey"].map(function (dk, index2) {
+                                                    return (
+                                                        <Area name="Number of Submissions" type="monotone" dataKey={dk} stroke="#8884d8" fillOpacity={1} fill="url(#colorUv)" />
+                                                    )
+                                                })}
 
-                                                                                    </AreaChart>
-                                                                                </ResponsiveContainer>
-                                                                            </div>
-                                                                        </Paper>
-                                                                    </Grid>
-                                                                    :
-                                                                    chart["chart"] == "chart05" ?
-                                                                        <Grid item xs={6}>
-                                                                            <Paper>
-                                                                                <div>
-                                                                                    <div style={divStyle}>
-                                                                                        <h2>{chart["title"]}</h2>
-                                                                                        <p>{chart["subtitle"]}</p>
-                                                                                        <Divider />
-                                                                                    </div>
-                                                                                    <ResponsiveContainer width="90%" height={280}>
-                                                                                        <BarChart
-                                                                                            width={730} height={250}
-                                                                                            data={chartData[index].data}
-                                                                                            margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-                                                                                        >
-                                                                                            <XAxis
-                                                                                                dataKey={chart["xAxis"]}
-                                                                                                label={"Number of Days Elapsed"}
-                                                                                            />
-                                                                                            <YAxis
-                                                                                                dataKey={chart["yAxis"]}
-                                                                                                label={{ value: "Number of Submissions", angle: -90, position: "insideBottomLeft" }}
-                                                                                            />
-                                                                                            <Tooltip />
-                                                                                            <Legend verticalAlign="top" align="right" />
-                                                                                            {chart["dataKey"].map(function (dk, index2) {
-                                                                                                return (
-                                                                                                    <Bar name="Number of Days Elapsed" dataKey={dk} fill="#8884d8" />
-                                                                                                )
-                                                                                            })}
-                                                                                        </BarChart>
-                                                                                    </ResponsiveContainer>
-                                                                                </div>
-                                                                            </Paper>
-                                                                        </Grid>
-                                                                        :
-                                                                        chart["chart"] == "chart07" ?
-                                                                            <Grid item xs={6}>
-                                                                                <Paper>
-                                                                                    <div>
-                                                                                        <div style={divStyle}>
-                                                                                            <h2>{chart["title"]}</h2>
-                                                                                            <p>{chart["subtitle"]}</p>
-                                                                                            <Divider />
-                                                                                        </div>
-                                                                                        <ResponsiveContainer width="90%" height={280}>
-                                                                                            <AreaChart width={730} height={250}
-                                                                                                data={chartData[index].data}
-                                                                                                margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
-                                                                                                <defs>
-                                                                                                    <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
-                                                                                                        <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8} />
-                                                                                                        <stop offset="95%" stopColor="#8884d8" stopOpacity={0} />
-                                                                                                    </linearGradient>
-                                                                                                </defs>
-                                                                                                <XAxis label={{ value: "Date" }} dataKey={chart["xAxis"]} tick={false} />
-                                                                                                <YAxis label={{ value: "Number of Submissions", angle: -90, position: "insideBottomLeft", offset: 12 }} />
+                                            </AreaChart>
+                                        </ResponsiveContainer>
+                                    </div>
+                                </Paper>
+                            </Grid>
+                            :
+                            chart["chart"] == "chart05" ?
+                                <Grid item xs={6}>
+                                    <Paper>
+                                        <div>
+                                            <div style={divStyle}>
+                                                <h2>{chart["title"]}</h2>
+                                                <p>{chart["subtitle"]}</p>
+                                                <Divider />
+                                            </div>
+                                            <ResponsiveContainer width="90%" height={280}>
+                                                <BarChart
+                                                    width={730} height={250}
+                                                    data={chartData[index].data}
+                                                    margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+                                                >
+                                                    <XAxis
+                                                        dataKey={chart["xAxis"]}
+                                                        label={"Number of Days Elapsed"}
+                                                    />
+                                                    <YAxis
+                                                        dataKey={chart["yAxis"]}
+                                                        label={{ value: "Number of Submissions", angle: -90, position: "insideBottomLeft" }}
+                                                    />
+                                                    <Tooltip />
+                                                    <Legend verticalAlign="top" align="right" />
+                                                    {chart["dataKey"].map(function (dk, index2) {
+                                                        return (
+                                                            <Bar name="Number of Days Elapsed" dataKey={dk} fill="#8884d8" />
+                                                        )
+                                                    })}
+                                                </BarChart>
+                                            </ResponsiveContainer>
+                                        </div>
+                                    </Paper>
+                                </Grid>
+                                :
+                                chart["chart"] == "chart07" ?
+                                    <Grid item xs={6}>
+                                        <Paper>
+                                            <div>
+                                                <div style={divStyle}>
+                                                    <h2>{chart["title"]}</h2>
+                                                    <p>{chart["subtitle"]}</p>
+                                                    <Divider />
+                                                </div>
+                                                <ResponsiveContainer width="90%" height={280}>
+                                                    <AreaChart width={730} height={250}
+                                                        data={chartData[index].data}
+                                                        margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
+                                                        <defs>
+                                                            <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
+                                                                <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8} />
+                                                                <stop offset="95%" stopColor="#8884d8" stopOpacity={0} />
+                                                            </linearGradient>
+                                                        </defs>
+                                                        <XAxis label={{ value: "Date" }} dataKey={chart["xAxis"]} tick={false} />
+                                                        <YAxis label={{ value: "Number of Submissions", angle: -90, position: "insideBottomLeft", offset: 12 }} />
 
-                                                                                                <Tooltip />
-                                                                                                <Legend verticalAlign="top" align="right" />
-                                                                                                {chart["dataKey"].map(function (dk, index2) {
-                                                                                                    return (
-                                                                                                        <Area name="Number of Submissions" type="monotone" dataKey={dk} stroke="#8884d8" fillOpacity={1} fill="url(#colorUv)" />
-                                                                                                    )
-                                                                                                })}
-                                                                                            </AreaChart>
-                                                                                        </ResponsiveContainer>
-                                                                                    </div>
-                                                                                </Paper>
-                                                                            </Grid>
-                                                                            // End of AssignmentCat charts 
-                                                                            :
-                                                                            // Start of StudentIdentifier charts 12-14
-                                                                            chart["chart"] == "chart12" ?
-                                                                                <Grid item xs={12}>
-                                                                                    <Paper>
-                                                                                        <div style={divStyle}>
-                                                                                            <h2>{chart["title"]}</h2>
-                                                                                            <p>{chart["subtitle"]}</p>
-                                                                                        </div>
-                                                                                        <Divider />
-                                                                                        <ResponsiveContainer width="90%" height={380}>
-                                                                                            <BarChart
-                                                                                                // width={730}
-                                                                                                // height={250}
-                                                                                                data={chartData[index].data}
-                                                                                                margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-                                                                                            >
-                                                                                                <XAxis
-                                                                                                    dataKey={chart["xAxis"]}
-                                                                                                    label={{ value: "Student", position: "insideBottom" }}
-                                                                                                    ticks={[0]}
-                                                                                                />
-                                                                                                <YAxis
-                                                                                                    dataKey="value"
-                                                                                                    label={{ value: "Number of Submissions", angle: -90, position: "insideBottomLeft" }}
-                                                                                                />
+                                                        <Tooltip />
+                                                        <Legend verticalAlign="top" align="right" />
+                                                        {chart["dataKey"].map(function (dk, index2) {
+                                                            return (
+                                                                <Area name="Number of Submissions" type="monotone" dataKey={dk} stroke="#8884d8" fillOpacity={1} fill="url(#colorUv)" />
+                                                            )
+                                                        })}
+                                                    </AreaChart>
+                                                </ResponsiveContainer>
+                                            </div>
+                                        </Paper>
+                                    </Grid>
+                                    // End of AssignmentCat charts 
+                                    :
+                                    // Start of StudentIdentifier charts 12-14
+                                    chart["chart"] == "chart12" ?
+                                        <Grid item xs={12}>
+                                            <Paper>
+                                                <div style={divStyle}>
+                                                    <h2>{chart["title"]}</h2>
+                                                    <p>{chart["subtitle"]}</p>
+                                                </div>
+                                                <Divider />
+                                                <ResponsiveContainer width="90%" height={380}>
+                                                    <BarChart
+                                                        // width={730}
+                                                        // height={250}
+                                                        data={chartData[index].data}
+                                                        margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+                                                    >
+                                                        <XAxis
+                                                            dataKey={chart["xAxis"]}
+                                                            label={{ value: "Student", position: "insideBottom" }}
+                                                            ticks={[0]}
+                                                        />
+                                                        <YAxis
+                                                            dataKey="value"
+                                                            label={{ value: "Number of Submissions", angle: -90, position: "insideBottomLeft" }}
+                                                        />
 
-                                                                                                <Tooltip />
-                                                                                                {chart["dataKey"].map(function (dk, index2) {
-                                                                                                    return (
-                                                                                                        <Bar name="Number of Submissions" dataKey="value" fill="#3498DB">
-                                                                                                            {chartData[index].data.map((entry, index3) => (
-                                                                                                                <Cell key={entry.student_name} fill={entry.value < 20 ? '#d68995' : '#71afe2'} />
-                                                                                                            ))}
-                                                                                                        </ Bar>
-                                                                                                    )
-                                                                                                })}
-                                                                                                <ReferenceLine strokeDasharray="3 3" y={20} strokeWidth={4} stroke="#e0b13c" label={{ value: "Expectation", position: "insideTop" }} />
-                                                                                                <Legend verticalAlign="top" align="right" />
-                                                                                            </BarChart>
-                                                                                        </ ResponsiveContainer>
-                                                                                    </Paper>
-                                                                                </Grid>
-                                                                                :
-                                                                                chart["chart"] == "chart13" ?
-                                                                                    <Grid item xs={6}>
-                                                                                        <Paper>
-                                                                                            <div style={divStyle}>
-                                                                                                <h2>{chart["title"]}</h2>
-                                                                                                <p>{chart["subtitle"]}</p>
-                                                                                                <Divider />
+                                                        <Tooltip />
+                                                        {chart["dataKey"].map(function (dk, index2) {
+                                                            return (
+                                                                <Bar name="Number of Submissions" dataKey="value" fill="#3498DB">
+                                                                    {chartData[index].data.map((entry, index3) => (
+                                                                        <Cell key={entry.student_name} fill={entry.value < 20 ? '#d68995' : '#71afe2'} />
+                                                                    ))}
+                                                                </ Bar>
+                                                            )
+                                                        })}
+                                                        <ReferenceLine strokeDasharray="3 3" y={20} strokeWidth={4} stroke="#e0b13c" label={{ value: "Expectation", position: "insideTop" }} />
+                                                        <Legend verticalAlign="top" align="right" />
+                                                    </BarChart>
+                                                </ ResponsiveContainer>
+                                            </Paper>
+                                        </Grid>
+                                        :
+                                        chart["chart"] == "chart13" ?
+                                            <Grid item xs={6}>
+                                                <Paper>
+                                                    <div style={divStyle}>
+                                                        <h2>{chart["title"]}</h2>
+                                                        <p>{chart["subtitle"]}</p>
+                                                        <Divider />
+                                                    </div>
+
+                                                    <ResponsiveContainer width="90%" height={380}>
+                                                        <BarChart
+                                                            // width={730}
+                                                            // height={250}
+                                                            data={chartData[index].data}
+                                                            margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+                                                        >
+                                                            <XAxis
+                                                                dataKey={chart["xAxis"]}
+                                                                label={{
+                                                                    value: "Student",
+                                                                    position: "insideBottom",
+                                                                }
+                                                                }
+                                                                ticks={[0]}
+                                                            />
+                                                            <YAxis
+                                                                dataKey={chart["yAxis"]}
+                                                                label={{ value: "Number of Submissions", angle: -90, position: "insideBottomLeft" }}
+                                                            />
+
+                                                            <Tooltip />
+
+                                                            {chart["dataKey"].map(function (dk, index2) {
+                                                                return (
+                                                                    <Bar name="Number of Submissions" dataKey={dk} fill="#66CDAA">
+                                                                        {chartData[index].data.map((entry, index3) => (
+                                                                            <Cell key={entry.student_name} fill={entry.value > comp.topStudentSubmissions(chartData[index].data) ? '#66CDAA' : '#3498DB'} />
+                                                                        ))}
+                                                                    </Bar>
+                                                                )
+                                                            })}
+
+                                                            <ReferenceLine strokeDasharray="3 3"
+                                                                y={comp.topStudentSubmissions(chartData[index].data)}
+                                                                strokeWidth={4} stroke="#e0b13c" label={{ value: "75 Percentile", position: "insideTop" }} />
+
+                                                            <Legend verticalAlign="top" align="right" />
+                                                        </BarChart>
+                                                    </ResponsiveContainer>
+                                                </Paper>
+                                            </Grid>
+                                            :
+                                            chart["chart"] == "chart14" ?
+                                                <Grid item xs={6}>
+                                                    <Paper>
+                                                        <div style={divStyle}>
+                                                            <h2>{chart["title"]}</h2>
+                                                            <p>{chart["subtitle"]}</p>
+                                                            <Divider />
+                                                        </div>
+
+                                                        <ResponsiveContainer width="90%" height={380}>
+                                                            <BarChart
+                                                                data={chartData[index].data}
+                                                                margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+                                                            >
+                                                                <XAxis
+                                                                    dataKey={chart["xAxis"]}
+                                                                    label={{
+                                                                        value: "Student",
+                                                                        position: "insideBottom",
+                                                                    }
+                                                                    }
+                                                                    ticks={[0]}
+
+                                                                />
+                                                                <YAxis
+                                                                    dataKey={chart["yAxis"]}
+                                                                    label={{ value: "Number of Days", angle: -90, position: "insideBottomLeft" }}
+                                                                />
+
+                                                                <Tooltip />
+
+                                                                {chart["dataKey"].map(function (dk, index2) {
+                                                                    return (
+                                                                        <Bar name="Number of Days Taken" dataKey={dk} fill="#3498DB">
+                                                                        </Bar>
+                                                                    )
+                                                                })}
+
+                                                                <Legend verticalAlign="top" align="right" />
+                                                            </BarChart>
+                                                        </ResponsiveContainer>
+                                                    </Paper>
+                                                </Grid>
+                                                :
+                                                chart["chart"] == "chart08DD" ?
+                                                    <Grid item xs={6}>
+                                                        <Paper>
+                                                            <div style={divStyle}>
+                                                                <h2>{chart["title"]}</h2>
+                                                                <p>{chart["subtitle"]}</p>
+                                                                <Divider />
+                                                            </div>
+
+                                                            <ResponsiveContainer width="85%" height={280}>
+                                                                <BarChart width={400} height={250} data={chartData[index].data}>
+                                                                    <XAxis dataKey={chart["xAxis"]} tick={false} label={{ value: "Assignments" }} />/>
+                                                                    <YAxis label={{ value: "Count", angle: -90, position: "insideBottomLeft", offset: 12 }} />
+                                                                    <Tooltip />
+                                                                    <Legend verticalAlign="top" align="right" />
+                                                                    <ReferenceLine y={33} strokeWidth={4} stroke="#e0b13c" label={{ value: "Expected Submissions", position: "top" }} />
+                                                                    {chart["dataKey"].map(function (dk, index2) {
+                                                                        return (
+                                                                            <Bar key={index2} name="Num of Submission" dataKey={dk} fill="#8884d8" onClick={(data, index3) => comp.selectedAssignment(data)}>
+                                                                                {chartData[index].data.map((entry, index4) => (
+                                                                                    <Cell
+                                                                                        key={entry['assignment']}
+                                                                                        fill={entry.assignment == comp.state.selectedAssignment ? '#87f2de' : (entry.value < entry.expected ? '#d68995' : '#71afe2')}
+                                                                                    />
+                                                                                ))}
+                                                                            </Bar>
+                                                                        )
+
+                                                                    })}
+
+                                                                </BarChart>
+                                                            </ResponsiveContainer>
+                                                        </Paper>
+                                                    </Grid>
+                                                    :
+                                                    chart["chart"] == "chart08DDAdd" ?
+                                                        <Grid item xs={6}>
+                                                            <Paper>
+                                                                <div style={divStyle}>
+                                                                    <h2>{chart["title"]}</h2>
+                                                                    <p>{chart["subtitle"]}</p>
+                                                                    <Divider />
+                                                                </div>
+
+                                                                <ResponsiveContainer width="85%" height={280}>
+                                                                    <div align="center" style={{ height: "inherit", width: "auto" }}>
+
+                                                                        <div style={{ width: "90%", height: "inherit" }}>
+                                                                            <Typography variant="subheading" style={{ backgroundColor: "orange" }}>
+                                                                                <strong>Uncompleted</strong>
+                                                                            </Typography>
+
+                                                                            {chartData[index].additionalData.map(function (entry, index2) {
+                                                                                if (entry.assignment == chart["ddparam1"]) {
+                                                                                    if (entry.value == "All submitted") {
+                                                                                        return (
+                                                                                            <div>
+                                                                                                <h2>All submitted {chart["ddparam1"]}</h2>
                                                                                             </div>
+                                                                                        )
 
-                                                                                            <ResponsiveContainer width="90%" height={380}>
-                                                                                                <BarChart
-                                                                                                    // width={730}
-                                                                                                    // height={250}
-                                                                                                    data={chartData[index].data}
-                                                                                                    margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-                                                                                                >
-                                                                                                    <XAxis
-                                                                                                        dataKey={chart["xAxis"]}
-                                                                                                        label={{
-                                                                                                            value: "Student",
-                                                                                                            position: "insideBottom",
-                                                                                                        }
-                                                                                                        }
-                                                                                                        ticks={[0]}
-                                                                                                    />
-                                                                                                    <YAxis
-                                                                                                        dataKey={chart["yAxis"]}
-                                                                                                        label={{ value: "Number of Submissions", angle: -90, position: "insideBottomLeft" }}
-                                                                                                    />
+                                                                                    } else {
+                                                                                        var res = entry.value.split(", ")
+                                                                                        return (
+                                                                                            <ol style={{ margin: "0", height: "80%", overflow: "auto" }}>
+                                                                                                {res.map(function (name, index3) {
+                                                                                                    console.log(name)
+                                                                                                    return (
+                                                                                                        <li style={{ margin: "10px" }}>{name}</li>
+                                                                                                    )
+                                                                                                })}
+                                                                                            </ol>
+                                                                                        )
+                                                                                    }
+                                                                                }
+                                                                            })}
+                                                                        </div>
+                                                                    </div>
+                                                                </ResponsiveContainer>
+                                                            </Paper>
+                                                        </Grid>
+                                                        :
+                                                        chart["chart"] == "prediction" ?
+                                                            <Grid item xs={12}>
+                                                                <Paper>
+                                                                    <div style={divStyle}>
+                                                                        <h2>{chart["title"]}</h2>
+                                                                        <p>{chart["subtitle"]}</p>
+                                                                        <Divider />
+                                                                    </div>
 
-                                                                                                    <Tooltip />
+                                                                    <ResponsiveContainer width="85%" height={280}>
+                                                                        <BarChart
+                                                                            width={730} height={250}
+                                                                            data={chartData[index].data}
+                                                                            margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+                                                                        >
+                                                                            <XAxis
+                                                                                dataKey={chart["xAxis"]}
+                                                                                label={{ value: "Students", position: "insideBottom" }}
+                                                                                ticks={[0]}
+                                                                            />
+                                                                            <YAxis
+                                                                                dataKey={chart["yAxis"]}
+                                                                                label={{ value: "Number of Days to Submit", angle: -90, position: "insideBottomLeft" }}
+                                                                            />
 
-                                                                                                    {chart["dataKey"].map(function (dk, index2) {
-                                                                                                        return (
-                                                                                                            <Bar name="Number of Submissions" dataKey={dk} fill="#66CDAA">
-                                                                                                                {chartData[index].data.map((entry, index3) => (
-                                                                                                                    <Cell key={entry.student_name} fill={entry.value > comp.topStudentSubmissions(chartData[index].data) ? '#66CDAA' : '#3498DB'} />
-                                                                                                                ))}
-                                                                                                            </Bar>
-                                                                                                        )
-                                                                                                    })}
+                                                                            <Tooltip cursor={{ fill: 'red', fillOpacity: 0.1 }} />
 
-                                                                                                    <ReferenceLine strokeDasharray="3 3"
-                                                                                                        y={comp.topStudentSubmissions(chartData[index].data)}
-                                                                                                        strokeWidth={4} stroke="#e0b13c" label={{ value: "75 Percentile", position: "insideTop" }} />
-
-                                                                                                    <Legend verticalAlign="top" align="right" />
-                                                                                                </BarChart>
-                                                                                            </ResponsiveContainer>
-                                                                                        </Paper>
-                                                                                    </Grid>
-                                                                                    :
-                                                                                    chart["chart"] == "chart14" ?
-                                                                                        <Grid item xs={6}>
-                                                                                            <Paper>
-                                                                                                <div style={divStyle}>
-                                                                                                    <h2>{chart["title"]}</h2>
-                                                                                                    <p>{chart["subtitle"]}</p>
-                                                                                                    <Divider />
-                                                                                                </div>
-
-                                                                                                <ResponsiveContainer width="90%" height={380}>
-                                                                                                    <BarChart
-                                                                                                        data={chartData[index].data}
-                                                                                                        margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-                                                                                                    >
-                                                                                                        <XAxis
-                                                                                                            dataKey={chart["xAxis"]}
-                                                                                                            label={{
-                                                                                                                value: "Student",
-                                                                                                                position: "insideBottom",
-                                                                                                            }
-                                                                                                            }
-                                                                                                            ticks={[0]}
-
-                                                                                                        />
-                                                                                                        <YAxis
-                                                                                                            dataKey={chart["yAxis"]}
-                                                                                                            label={{ value: "Number of Days", angle: -90, position: "insideBottomLeft" }}
-                                                                                                        />
-
-                                                                                                        <Tooltip />
-
-                                                                                                        {chart["dataKey"].map(function (dk, index2) {
-                                                                                                            return (
-                                                                                                                <Bar name="Number of Days Taken" dataKey={dk} fill="#3498DB">
-                                                                                                                </Bar>
-                                                                                                            )
-                                                                                                        })}
-
-                                                                                                        <Legend verticalAlign="top" align="right" />
-                                                                                                    </BarChart>
-                                                                                                </ResponsiveContainer>
-                                                                                            </Paper>
-                                                                                        </Grid>
-                                                                                        :
-                                                                                        chart["chart"] == "chart08DD" ?
-                                                                                            <Grid item xs={6}>
-                                                                                                <Paper>
-                                                                                                    <div style={divStyle}>
-                                                                                                        <h2>{chart["title"]}</h2>
-                                                                                                        <p>{chart["subtitle"]}</p>
-                                                                                                        <Divider />
-                                                                                                    </div>
-
-                                                                                                    <ResponsiveContainer width="85%" height={280}>
-                                                                                                        <BarChart width={400} height={250} data={chartData[index].data}>
-                                                                                                            <XAxis dataKey={chart["xAxis"]} tick={false} label={{ value: "Assignments" }} />/>
-                                                                                                            <YAxis label={{ value: "Count", angle: -90, position: "insideBottomLeft", offset: 12 }} />
-                                                                                                            <Tooltip />
-                                                                                                            <Legend verticalAlign="top" align="right" />
-                                                                                                            <ReferenceLine y={33} strokeWidth={4} stroke="#e0b13c" label={{ value: "Expected Submissions", position: "top" }} />
-                                                                                                            <Bar name="Num of Submission" dataKey="value" fill="#8884d8" onClick={(data, index) => comp.selectedAssignment(data)}>
-                                                                                                                {chartData[index].data.map((entry, index2) => (
-                                                                                                                    <Cell
-                                                                                                                        key={entry['assignment']}
-                                                                                                                        fill={entry.assignment == comp.state.selectedAssignment ? '#87f2de' : (entry.value < entry.expected ? '#d68995' : '#71afe2')}
-                                                                                                                    />
-                                                                                                                ))}
-                                                                                                            </Bar>
-                                                                                                        </BarChart>
-                                                                                                    </ResponsiveContainer>
-                                                                                                </Paper>
-                                                                                            </Grid>
-                                                                                            :
-                                                                                            chart["chart"] == "chart08DDAdd" ?
-                                                                                                <Grid item xs={6}>
-                                                                                                    <Paper>
-                                                                                                        <div style={divStyle}>
-                                                                                                            <h2>{chart["title"]}</h2>
-                                                                                                            <p>{chart["subtitle"]}</p>
-                                                                                                            <Divider />
-                                                                                                        </div>
-
-                                                                                                        <ResponsiveContainer width="85%" height={280}>
-                                                                                                            <div align="center" style={{ height: "inherit", width: "auto" }}>
-
-                                                                                                                <div style={{ width: "90%", height: "inherit" }}>
-                                                                                                                    <Typography variant="subheading" style={{ backgroundColor: "orange" }}>
-                                                                                                                        <strong>Uncompleted</strong>
-                                                                                                                    </Typography>
-
-                                                                                                                    {chartData[index].additionaldata.map(function (entry, index2) {
-                                                                                                                        if (entry.assignment == chart["ddparam1"]) {
-                                                                                                                            if (entry.value == "All submitted") {
-                                                                                                                                return (
-                                                                                                                                    <div>
-                                                                                                                                        <h2>All submitted {chart["ddparam1"]}</h2>
-                                                                                                                                    </div>
-                                                                                                                                )
-
-                                                                                                                            } else {
-                                                                                                                                var res = entry.value.split(", ")
-                                                                                                                                return (
-                                                                                                                                    <ol style={{ height: "90%", overflow: "auto" }}>
-                                                                                                                                        {res.map(function (name, index3) {
-                                                                                                                                            console.log(name)
-                                                                                                                                            return (
-                                                                                                                                                <li style={{ margin: "10px" }}>{name}</li>
-                                                                                                                                            )
-                                                                                                                                        })}
-                                                                                                                                    </ol>
-                                                                                                                                )
-                                                                                                                            }
-                                                                                                                        }
-                                                                                                                    })}
-                                                                                                                </div>
-                                                                                                            </div>
-                                                                                                        </ResponsiveContainer>
-                                                                                                    </Paper>
-                                                                                                </Grid>
-                                                                                                :
-                                                                                                chart["chart"] == "prediction" ?
-                                                                                                <Grid item xs={12}>
-                                                                                                    <Paper>
-                                                                                                        <div style={divStyle}>
-                                                                                                            <h2>{chart["title"]}</h2>
-                                                                                                            <p>{chart["subtitle"]}</p>
-                                                                                                            <Divider />
-                                                                                                        </div>
-
-                                                                                                        <ResponsiveContainer width="85%" height={280}>
-                                                                                                                <BarChart
-                                                                                                                    width={730} height={250}
-                                                                                                                    data={chartData[index].data}
-                                                                                                                    margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-                                                                                                                >
-                                                                                                                    <XAxis
-                                                                                                                        dataKey={chart["xAxis"]}
-                                                                                                                        label={{ value: "Students", position: "insideBottom" }}
-                                                                                                                        ticks={[0]}
-                                                                                                                    />
-                                                                                                                    <YAxis
-                                                                                                                        dataKey={chart["yAxis"]}
-                                                                                                                        label={{ value: "Number of Days to Submit", angle: -90, position: "insideBottomLeft" }}
-                                                                                                                    />
-
-                                                                                                                    <Tooltip cursor={{ fill: 'red', fillOpacity: 0.1 }} />
-
-                                                                                                                    {chart["dataKey"].map(function (dk, index2) {
-                                                                                                                        return (
-                                                                                                                            <Bar name="Number of Days to Submit" dataKey={dk}
-                                                                                                                                onClick={(data, index3) => comp.selectedAssignment(data)}>
-                                                                                                                                {chartData[index].data.map((entry, index4) => (
-                                                                                                                                    <Cell
-                                                                                                                                        key={entry.assignment}
-                                                                                                                                        fill={entry.assignment == comp.state.selectedAssignment ? '#87f2de' : (entry.value > 5 ? '#d68995' : '#71afe2')}
-                                                                                                                                    />
-                                                                                                                                ))}
-                                                                                                                            </Bar>
-                                                                                                                        )
-                                                                                                                    })}
-                                                                                                                    <ReferenceLine y={5} strokeWidth={4} stroke="#e0b13c" strokeDasharray="3 3" label={{ value: "Expected Submissions", position: "top" }} />
-                                                                                                                </BarChart>
-                                                                                                        </ResponsiveContainer>
-                                                                                                    </Paper>
-                                                                                                </Grid>
-                                                                                                :
-                                                                                                <div align="center">
-                                                                                                    <h2>You have not added any charts to your Dashboard.</h2>
-                                                                                                </div>
+                                                                            {chart["dataKey"].map(function (dk, index2) {
+                                                                                return (
+                                                                                    <Bar name="Number of Days to Submit" dataKey={dk}
+                                                                                        onClick={(data, index3) => comp.selectedAssignment(data)}>
+                                                                                        {chartData[index].data.map((entry, index4) => (
+                                                                                            <Cell
+                                                                                                key={entry.assignment}
+                                                                                                fill={entry.assignment == comp.state.selectedAssignment ? '#87f2de' : (entry.value > 5 ? '#d68995' : '#71afe2')}
+                                                                                            />
+                                                                                        ))}
+                                                                                    </Bar>
+                                                                                )
+                                                                            })}
+                                                                            <ReferenceLine y={5} strokeWidth={4} stroke="#e0b13c" strokeDasharray="3 3" label={{ value: "Expected Submissions", position: "top" }} />
+                                                                        </BarChart>
+                                                                    </ResponsiveContainer>
+                                                                </Paper>
+                                                            </Grid>
+                                                            :
+                                                            <div align="center">
+                                                                <h2>You have not added any charts to your Dashboard.</h2>
+                                                            </div>
 
                             )
                         })
