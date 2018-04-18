@@ -299,7 +299,7 @@ class InstructorAssignmentType extends React.Component {
                         <Paper>
                             <div style={divStyle}>
                                 <h2>Submission Per Type</h2>
-                                <p>Monitor Percentage of Submissions for Each Assignment Type</p>
+                                <p>Monitor Submission Rate by Assignment Type</p>
                                 <Divider />
                             </div>
                             <ResponsiveContainer width="90%" height={280}>
@@ -343,7 +343,7 @@ class InstructorAssignmentType extends React.Component {
                             <Paper>
                                 <div style={divStyle}>
                                     <h2>Total Plays/ Fast-Forwards</h2>
-                                    <p>Identify PathProblem that Students Have Completed Comfortably</p>
+                                    <p>Identify Videos that Students Completed Comfortably</p>
                                     <Divider />
                                 </div>
 
@@ -374,7 +374,7 @@ class InstructorAssignmentType extends React.Component {
                             <Paper>
                                 <div style={divStyle}>
                                     <h2>Total Pauses/Playbacks</h2>
-                                    <p>Identify PathProblems that Students May Be Struggling With</p>
+                                    <p>Identify Videos that Students May Struggle With</p>
                                     <Divider />
                                 </div>
 

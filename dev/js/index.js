@@ -37,11 +37,13 @@ db.ref("/").on("value", data => {
 
 let update_data = function () {
 
-    let url = "https://xr9f801bi1.execute-api.us-west-2.amazonaws.com/prod/bt3103proj" // Instructor 
+    // let url = "https://xr9f801bi1.execute-api.us-west-2.amazonaws.com/prod/bt3103proj" // Instructor 
     // let url = "https://xcjnxteifi.execute-api.us-west-2.amazonaws.com/prod/bt3103prog-part2" // Instructor 
     // let url = "https://25o6knbtxb.execute-api.us-west-2.amazonaws.com/prod/bt3103proj-student1" // Student
+    let url = "https://hcvb86chkl.execute-api.us-west-2.amazonaws.com/prod/instructor_assignmentType"; // InstructorAssignmentType
+    console.log("fetching live data...")
     fetch(url, { mode: "no-cors" }).then(function (response) {
-        console.log("Updated chart data", response);
+        console.log("Fetched updated data", response);
     });
 };
 // Update the local time every 30 mins.
