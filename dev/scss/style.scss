@@ -165,6 +165,23 @@ h3, h4, p {
 	margin-left: 20px;
 }
 
+.googleSignInButton {
+	padding: 20px;
+	font-size: 20px;
+	background: #485172;
+	color: white;
+	outline: none;
+	border: none;
+	border-radius: 10px;
+}
+
+.googleSignInButton:hover {
+	background: #2e303a;
+	font-weight: bold;
+	cursor: pointer;
+	box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
 * {
 	// font-family: 'Roboto', sans-serif;
 	// font-family: 'Montserrat', sans-serif;

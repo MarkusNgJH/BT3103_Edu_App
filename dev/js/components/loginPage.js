@@ -52,19 +52,27 @@ class LoginPage extends React.Component {
     render() {
         return (
             <div>
-                <AppBar position="static" color="primary">
+                {/* <AppBar position="static" color="primary">
                     <Toolbar>
                         <Typography variant="title" color="inherit" align="center">
-                            Welcome to Edu App!
-          </Typography>
+                            
+                        </Typography>
                     </Toolbar>
-                </AppBar>
+                </AppBar> */}
 
-                <div style={{ width: '20%', height: 'auto', position: 'relative', margin: '0px auto', padding: '10px' }}>
+                <div align="center">
+                    <img src={ require('../../../public/EduSparksLogo_yel.png') } width="auto" style={{marginBottom: 0}} />
+                    <div style={{margin: 50}}>
+                        <button className="googleSignInButton" onClick={this.props.login}>Sign in with Google</button>
+                    </div>
+                </div>
+
+                {/* Old login form */}
+                {/* <div style={{ width: '20%', height: 'auto', position: 'relative', margin: '0px auto', padding: '10px' }}>
                     <FormControl className={styles.formControl} aria-describedby="name-helper-text">
                         <InputLabel htmlFor="name-helper">Email</InputLabel>
                         <Input id="email" placeholder="Enter your email here" />
-                        {/* <FormHelperText id="email-helper-text">Some important helper text</FormHelperText> */}
+                        <FormHelperText id="email-helper-text">Some important helper text</FormHelperText>
                     </FormControl>
 
                     <br /> <br />
@@ -92,7 +100,8 @@ class LoginPage extends React.Component {
 
                     <br /> <br />
                     <button style={{ float: 'right' }} onClick={this.props.login}>Log In</button>
-                </div>
+                </div> */}
+                
             </div>
         )
     }

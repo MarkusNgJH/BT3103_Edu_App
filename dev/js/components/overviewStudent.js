@@ -99,7 +99,7 @@ class StudentOverview extends Component {
                     :
                     <div>
                         <Grid container spacing={8}>
-                            <Grid item xs={12}>
+                            <Grid item xs={10} sm={8} md={6} lg={4} xl={3}>
                                 <Card>
                                     <CardContent>
                                         <div className="card-title" align="center">
