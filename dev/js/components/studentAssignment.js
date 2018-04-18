@@ -224,24 +224,24 @@ class studentAssignment extends React.Component {
 
                                     <XAxis dataKey="Name"
                                         type="category"
-                                        />
+                                    />
                                     {/* <Label value="Assignment Type" offset={0} position="insideBottom" /> */}
 
                                     <YAxis dataKey="Value"
                                         type="number"
                                         width={20}
-                                        // <Label value="Number of Submissions" angle={-90} offset={20} position="insideBottomLeft" />
+                                    // <Label value="Number of Submissions" angle={-90} offset={20} position="insideBottomLeft" />
                                     />
 
                                     <CartesianGrid strokeDasharray="3 3" />
                                     <Tooltip />
                                     <Bar name="Submission Rate (%)" dataKey="Value" fill="#8884d8" >
                                         {this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].studentAssignmentType.chart05.data.map((entry, index) => (
-                                        <Cell
-                                            key={entry['Name']}
-                                            fill={entry.Name == this.state.selectedAssignment ? '#87f2de' : (entry.Value < 100 ? '#d68995' : '#71afe2')}
-                                        />
-                                    ))}
+                                            <Cell
+                                                key={entry['Name']}
+                                                fill={entry.Name == this.state.selectedAssignment ? '#87f2de' : (entry.Value < 100 ? '#d68995' : '#71afe2')}
+                                            />
+                                        ))}
                                     </Bar>
                                 </BarChart>
                             </ResponsiveContainer>
@@ -268,16 +268,20 @@ class studentAssignment extends React.Component {
                                 >
                                     <Pie
                                         data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].studentAssignment.chart01.data}
-                                        dataKey="Value" outerRadius={100} fill="#8884d8" label
+                                        dataKey="Value" outerRadius={100} nameKey="Name"
                                         onClick={(data, index) => this.selectedAssignment(data)}
-                                        // onClick={(data, index) => console.log(data)}
-                                        >
-                                        {this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].studentAssignment.chart01.data.map((entry, index) => (
-                                            <Cell
-                                                key={entry['Name']}
-                                                fill={entry.Value < 1 ? '#d68995' : '#71afe2'}
-                                            />
-                                        ))}
+                                    // onClick={(data, index) => console.log(data)}
+                                    >
+                                        
+                                        {this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].studentAssignment.chart01.data.map(
+                                            function (entry, index) {
+                                                return (
+                                                    <Cell
+                                                        key={entry.Name}
+                                                        fill={entry.Name == "Uncompleted" ? "#d68995" : "#71afe2"}
+                                                    />
+                                                )
+                                            })}
                                     </Pie>
                                     <Tooltip />
                                 </PieChart>
@@ -349,7 +353,7 @@ class studentAssignment extends React.Component {
 
                                     <CartesianGrid strokeDasharray="3 3" />
                                     <Bar name="Number of Assignments" dataKey="Value" fill="#8884d8" />
-                                    <Tooltip cursor={{ fill: 'red', fillOpacity: 0.05 }}/>
+                                    <Tooltip cursor={{ fill: 'red', fillOpacity: 0.05 }} />
                                 </BarChart>
                             </ResponsiveContainer>
                             {/* {this.isFav("chart04") == true ?
@@ -371,7 +375,7 @@ class studentAssignment extends React.Component {
                                 <ResponsiveContainer width="90%" height={280}>
                                     <div align="center" style={{ height: "inherit", width: "auto" }}>
                                         <div style={{ float: "left", width: "50%", height: "inherit" }}>
-                                            <Typography variant="subheading" style={{backgroundColor:"lightgreen"}}>
+                                            <Typography variant="subheading" style={{ backgroundColor: "lightgreen" }}>
                                                 <strong>Completed</strong>
                                             </Typography>
 
@@ -387,7 +391,7 @@ class studentAssignment extends React.Component {
                                         </div>
 
                                         <div style={{ float: "left", width: "50%", height: "inherit" }}>
-                                            <Typography variant="subheading" style={{backgroundColor: "orange"}}>
+                                            <Typography variant="subheading" style={{ backgroundColor: "orange" }}>
                                                 <strong>Uncompleted</strong>
                                             </Typography>
 
