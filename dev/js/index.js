@@ -36,13 +36,9 @@ db.ref("/").on("value", data => {
 });
 
 let update_data = function () {
-
-    // let url = "https://xr9f801bi1.execute-api.us-west-2.amazonaws.com/prod/bt3103proj" // Instructor 
-    // let url = "https://xcjnxteifi.execute-api.us-west-2.amazonaws.com/prod/bt3103prog-part2" // Instructor 
-    // let url = "https://25o6knbtxb.execute-api.us-west-2.amazonaws.com/prod/bt3103proj-student1" // Student
-    let urlInstructorAssignmentType = "https://hcvb86chkl.execute-api.us-west-2.amazonaws.com/prod/instructor_assignmentType"; // InstructorAssignmentType
-    let urlInstructorAssignmentCat = "";
-    let urlInstructorIdentifier = "";
+    let urlInstructorAssignmentType = "https://hcvb86chkl.execute-api.us-west-2.amazonaws.com/prod/instructor_assignmentType";
+    let urlInstructorAssignmentCat = "https://d1pvj1k2kj.execute-api.us-west-2.amazonaws.com/prod/instructor_assignment";
+    let urlInstructorIdentifier = "https://wl70qbpfcd.execute-api.us-west-2.amazonaws.com/prod/instructor_student";
     let urlStudentAssignment = "https://60kp1426q6.execute-api.us-west-2.amazonaws.com/first/studentAssignment_populate";
     let urlStudentAssignmentType = "https://ez7lil7zde.execute-api.us-west-2.amazonaws.com/first/studentAssignmentType_populate";
     let urlAdminActivity = "https://7wkx465txa.execute-api.us-west-2.amazonaws.com/first/adminActivity";
@@ -51,12 +47,12 @@ let update_data = function () {
     fetch(urlInstructorAssignmentType, { mode: "no-cors" }).then(function (response) {
         console.log("updated urlInstructorAssignmentType", response);
     });
-    // fetch(urlInstructorAssignmentCat, { mode: "no-cors" }).then(function (response) {
-    //     console.log("updated urlInstructorAssignmentCat", response);
-    // });
-    // fetch(urlInstructorIdentifier, { mode: "no-cors" }).then(function (response) {
-    //     console.log("updated urlInstructorIdentifier", response);
-    // });
+    fetch(urlInstructorAssignmentCat, { mode: "no-cors" }).then(function (response) {
+        console.log("updated urlInstructorAssignmentCat", response);
+    });
+    fetch(urlInstructorIdentifier, { mode: "no-cors" }).then(function (response) {
+        console.log("updated urlInstructorIdentifier", response);
+    });
     fetch(urlStudentAssignment, { mode: "no-cors" }).then(function (response) {
         console.log("updated urlStudentAssignment", response);
     });
