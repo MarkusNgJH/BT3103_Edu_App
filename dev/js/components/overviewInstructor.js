@@ -35,7 +35,7 @@ const styles = {
     },
     buttonColorDefault: {
         color: "white",
-        background: 'linear-gradient(45deg, #F7D358 30%, #F5DA81 90%)',
+        background: 'linear-gradient(45deg, #FFBF00 30%, #FACC2E 90%)',
     },
     buttonColorSecondary: {
         color: "white",
