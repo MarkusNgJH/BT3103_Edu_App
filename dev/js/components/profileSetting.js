@@ -59,7 +59,7 @@ class profileSetting extends React.Component {
 
     handleUIDChange(e) {
         this.setState({ uid: e.target.value})
-        console.log('handleUIDChange')
+        // console.log('handleUIDChange')
         if(Object.keys(this.props.firebase.val).indexOf(e.target.value) > -1){
             this.setState({ course: Object.keys(this.props.firebase.val[e.target.value])[0]})
         }
@@ -67,7 +67,7 @@ class profileSetting extends React.Component {
 
     handleUIDChange2(e) {
         this.setState({ uid: e})
-        console.log('handleUIDChange')
+        // console.log('handleUIDChange ' + this.state.uid)
         if(Object.keys(this.props.firebase.val).indexOf(e) > -1){
             this.setState({ course: Object.keys(this.props.firebase.val[e])[0]})
         }
@@ -75,9 +75,9 @@ class profileSetting extends React.Component {
 
     handleChange = () => {
         this.props.changeUid(this.state.uid)
-        console.log("uid is: " + this.state.uid)
+        // console.log("uid is: " + this.state.uid)
         this.props.changecourse(this.state.course)
-        console.log("course is: " + this.state.course)
+        // console.log("course is: " + this.state.course)
     };
 
     handlecourseChange(e) {
@@ -93,8 +93,8 @@ class profileSetting extends React.Component {
     // how to change the state to the right directory
     viewCourses(){
         if(Object.keys(this.props.firebase).length != 0){
-            console.log("ViewCourses")
-            console.log(this.props.firebase)
+            // console.log("ViewCourses")
+            // console.log(this.props.firebase)
             var location = (Object.keys(this.props.firebase.val).indexOf(this.state.uid) > -1) ? this.state.uid : 'R6nSbDVly8PUnC6jQFcseDS9sgJ3'; 
             return (
                 // g8odN87wiURjfhqbw1HiMoFIwxn1
