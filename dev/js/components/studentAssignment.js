@@ -268,18 +268,20 @@ class studentAssignment extends React.Component {
                                 >
                                     <Pie
                                         data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].studentAssignment.chart01.data}
-                                        dataKey="Value" outerRadius={100} label
+                                        dataKey="Value" outerRadius={100} nameKey="Name"
                                         onClick={(data, index) => this.selectedAssignment(data)}
                                     // onClick={(data, index) => console.log(data)}
                                     >
+                                        
                                         {this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].studentAssignment.chart01.data.map(
-                                            (entry, index) => (
-                                                <Cell
-                                                    key={entry['Name']}
-                                                    fill={entry.Value < 1 ? '#d68995' : '#71afe2'}
-                                                />
-                                            )
-                                        )}
+                                            function (entry, index) {
+                                                return (
+                                                    <Cell
+                                                        key={entry.Name}
+                                                        fill={entry.Name == "Uncompleted" ? "#d68995" : "#71afe2"}
+                                                    />
+                                                )
+                                            })}
                                     </Pie>
                                     <Tooltip />
                                 </PieChart>

@@ -298,14 +298,14 @@ class InstructorAssignmentType extends React.Component {
                     <Grid item xs={12} sm={9} md={6}>
                         <Paper>
                             <div style={divStyle}>
-                            <div className="chartTopRow">
-                            <div className="blank"/>
-                                <h2>Submission Per Type</h2>
-                                {this.isFav("chart08") == true ?
-                                <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart08", "Chart has been removed!") }}>Remove</Button>
-                                :
-                                <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart08", "BarChart", "Submission Per Type", "Monitor Percentage of Submission Per Assignment Type", "Name", "Value", ["Value"], "Chart has been added!") }}>Favourite</Button>
-                                }
+                                <div className="chartTopRow">
+                                    <div className="blank" />
+                                    <h2>Submission Per Type</h2>
+                                    {this.isFav("chart08") == true ?
+                                        <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart08", "Chart has been removed!") }}>Remove</Button>
+                                        :
+                                        <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart08", "BarChart", "Submission Per Type", "Monitor Percentage of Submission Per Assignment Type", "Name", "Value", ["Value"], "Chart has been added!") }}>Favourite</Button>
+                                    }
                                 </div>
                                 <p>Monitor Submission Rate by Assignment Type</p>
                                 <Divider />
@@ -346,14 +346,14 @@ class InstructorAssignmentType extends React.Component {
                         <Grid item xs={6}>
                             <Paper>
                                 <div style={divStyle}>
-                                <div className="chartTopRow">
-                                <div className="blank"/>
-                                    <h2>Total Plays/ Fast-Forwards</h2>
-                                    {this.isFav("chart09") == true ?
-                                    <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart09", "Chart has been removed!") }}>Remove</Button>
-                                    :
-                                    <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart09", "BarChart", "Total Plays/ Fast-Forwards", "Which videos have my students watched and how is the pace for them?", "Name", "", ["plays", "rate"], "Chart has been added!") }}>Favourite</Button>
-                                    }
+                                    <div className="chartTopRow">
+                                        <div className="blank" />
+                                        <h2>Total Plays/ Fast-Forwards</h2>
+                                        {this.isFav("chart09") == true ?
+                                            <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart09", "Chart has been removed!") }}>Remove</Button>
+                                            :
+                                            <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart09", "BarChart", "Total Plays/ Fast-Forwards", "Which videos have my students watched and how is the pace for them?", "Name", "", ["plays", "rate"], "Chart has been added!") }}>Favourite</Button>
+                                        }
                                     </div>
                                     <p>Identify Videos that Students Completed Comfortably</p>
                                     <Divider />
@@ -381,14 +381,14 @@ class InstructorAssignmentType extends React.Component {
                         <Grid item xs={6}>
                             <Paper>
                                 <div style={divStyle}>
-                                <div className="chartTopRow">
-                                <div className="blank"/>
-                                    <h2>Total Pauses/Playbacks</h2>
-                                    {this.isFav("chart10") == true ?
-                                    <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart10", "Chart has been removed!") }}>Remove</Button>
-                                    :
-                                    <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart10", "BarChart", "Total Pauses/Playbacks", "Identify PathProblems that Students Students May Be Struggling With", "Name", "", ["pauses", "playbacks"], "Chart has been added!") }}>Favourite</Button>
-                                    }
+                                    <div className="chartTopRow">
+                                        <div className="blank" />
+                                        <h2>Total Pauses/Playbacks</h2>
+                                        {this.isFav("chart10") == true ?
+                                            <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart10", "Chart has been removed!") }}>Remove</Button>
+                                            :
+                                            <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart10", "BarChart", "Total Pauses/Playbacks", "Identify PathProblems that Students Students May Be Struggling With", "Name", "", ["pauses", "playbacks"], "Chart has been added!") }}>Favourite</Button>
+                                        }
                                     </div>
                                     <p>Identify Videos that Students May Struggle With</p>
                                     <Divider />
@@ -416,14 +416,14 @@ class InstructorAssignmentType extends React.Component {
                         <Grid item xs={6}>
                             <Paper>
                                 <div style={divStyle}>
-                                <div className="chartTopRow">
-                                <div className="blank"/>
-                                    <h2>Time period of video</h2>
-                                    {this.isFav("chart10DD") == true ?
-                                    <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart10DD", "Chart has been removed!") }}>Remove</Button>
-                                    :
-                                    <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart10DD", "BarChart", "Total Pauses/Playbacks", "Identify PathProblems that Students Students May Be Struggling With", "days_lapsed", "", ["value"], "Chart has been added!") }}>Favourite</Button>
-                                    }
+                                    <div className="chartTopRow">
+                                        <div className="blank" />
+                                        <h2>Time period of video</h2>
+                                        {this.isFav("chart10DD") == true ?
+                                            <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart10DD", "Chart has been removed!") }}>Remove</Button>
+                                            :
+                                            <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart10DD", "BarChart", "Total Pauses/Playbacks", "Identify PathProblems that Students Students May Be Struggling With", "days_lapsed", "", ["value"], "Chart has been added!") }}>Favourite</Button>
+                                        }
                                     </div>
                                     <p>Identify Which Parts Students Paused At For {comp.state.selectedVideo}</p>
                                     <Divider />
@@ -453,14 +453,14 @@ class InstructorAssignmentType extends React.Component {
                             {this.state.selectedAssignmentType ?
                                 <div>
                                     <div style={divStyle}>
-                                    <div className="chartTopRow">
-                                    <div className="blank"/>    
-                                        <h2>Total Submissions</h2>
-                                        {this.isFav("chart08DD") == true ?
-                                        <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart08DD", "Chart has been removed!") }}>Remove</Button>
-                                        :
-                                        <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart08DD", "BarChart", "Total Submissions", "Number of Submissions per " + this.state.selectedAssignmentType + "'s Assignment", "assignment", "", ["value"], "Chart has been added!") }}>Favourite</Button>
-                                        }
+                                        <div className="chartTopRow">
+                                            <div className="blank" />
+                                            <h2>Total Submissions</h2>
+                                            {this.isFav("chart08DD") == true ?
+                                                <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart08DD", "Chart has been removed!") }}>Remove</Button>
+                                                :
+                                                <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart08DD", "BarChart", "Total Submissions", "Number of Submissions per " + this.state.selectedAssignmentType + "'s Assignment", "assignment", "", ["value"], "Chart has been added!") }}>Favourite</Button>
+                                            }
                                         </div>
                                         <p>Number of Submissions for {this.state.selectedAssignmentType}'s Assignments</p>
                                         <Divider />
@@ -495,18 +495,19 @@ class InstructorAssignmentType extends React.Component {
                     {/* chart08DDAdd */}
                     {/* name List of those who did not submit assignment */}
                     {this.state.selectedAssignmentType ?
+                        this.state.selectedAssignment ? 
                         <Grid item xs={6}>
                             <Paper>
                                 <div>
                                     <div style={divStyle}>
-                                    <div className="chartTopRow">
-                                    <div className="blank"/>    
-                                        <h2>Name list of students</h2>
-                                        {this.isFav("chart08DDAdd") == true ?
-                                        <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart08DDAdd", "Chart has been removed!") }}>Remove</Button>
-                                        :
-                                        <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart08DDAdd", "BarChart", "Name list of students", "Name list of those who have not submitted " + this.state.selectedAssignment, "", "", [], "Chart has been added!", this.state.selectedAssignment) }}>Favourite</Button>
-                                        }
+                                        <div className="chartTopRow">
+                                            <div className="blank" />
+                                            <h2>Name list of students</h2>
+                                            {this.isFav("chart08DDAdd") == true ?
+                                                <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart08DDAdd", "Chart has been removed!") }}>Remove</Button>
+                                                :
+                                                <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart08DDAdd", "BarChart", "Name list of students", "Name list of those who have not submitted " + this.state.selectedAssignment, "", "", [], "Chart has been added!", this.state.selectedAssignment) }}>Favourite</Button>
+                                            }
                                         </div>
                                         <p>Identify Students Who Have Not Submitted {this.state.selectedVideo}</p>
                                         <Divider />
@@ -515,35 +516,37 @@ class InstructorAssignmentType extends React.Component {
                                     <ResponsiveContainer width="85%" height={280}>
                                         <div align="center" style={{ height: "inherit", width: "auto" }}>
 
-                                            <div style={{ width: "90%", height: "inherit", overflowY: "scroll"}}>
+                                            <div style={{ width: "90%", height: "inherit", overflowY: "scroll" }}>
                                                 <Typography variant="subheading" style={{ backgroundColor: "orange" }}>
                                                     <strong>Uncompleted</strong>
                                                 </Typography>
 
-                                                {this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignmentType.chart08.drillDowns[this.state.selectedAssignmentType].additionalData.map(function (entry, index) {
-                                                    // if (entry.assignment == comp.state.selectedVideo) {
-                                                        if (entry.value == "All submitted") {
-                                                            return (
-                                                                <div>
-                                                                    All submitted {entry.assignment}
-                                                                </div>
-                                                            )
+                                                {this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignmentType.chart08.drillDowns[this.state.selectedAssignmentType].additionalData.map(
+                                                    function (entry, index) {
+                                                        if (entry.assignment == comp.state.selectedAssignment) {
+                                                            if (entry.value == "All submitted") {
+                                                                return (
+                                                                    <div>
+                                                                        <br/>
+                                                                        All submitted {entry.assignment}
+                                                                    </div>
+                                                                )
 
-                                                        } else {
-                                                            var res = entry.value.split(", ")
-                                                            return (
-                                                                <ol style={{ height: "90%", overflow: "auto" }}>
-                                                                    {res.map(function (name, index2) {
-                                                                        console.log(name)
-                                                                        return (
-                                                                            <li style={{ margin: "10px" }}>{name}</li>
-                                                                        )
-                                                                    })}
-                                                                </ol>
-                                                            )
+                                                            } else {
+                                                                var res = entry.value.split(", ")
+                                                                return (
+                                                                    <ol style={{ height: "90%", overflow: "auto" }}>
+                                                                        {res.map(function (name, index2) {
+                                                                            console.log(name)
+                                                                            return (
+                                                                                <li style={{ margin: "10px" }}>{name}</li>
+                                                                            )
+                                                                        })}
+                                                                    </ol>
+                                                                )
+                                                            }
                                                         }
-                                                    // }
-                                                })}
+                                                    })}
                                             </div>
                                         </div>
                                     </ResponsiveContainer>
@@ -553,6 +556,8 @@ class InstructorAssignmentType extends React.Component {
                         </Grid>
                         :
                         <span></span>
+                    :
+                    <span></span>
                     }
 
                     {/* Word Cloud chart */}
@@ -567,11 +572,11 @@ class InstructorAssignmentType extends React.Component {
                                     </div>
 
                                     <ResponsiveContainer width="90%" height={350}>
-                                        <div id="wordclouddiv" style={{height: "100%", width: "100%"}}>
+                                        <div id="wordclouddiv" style={{ height: "100%", width: "100%" }}>
                                             {wordCloudArr.map(function (wordCloud, index) {
                                                 if (wordCloud.slice(0, -4) == comp.state.selectedVideo.split(" (")[0]) {
                                                     return (
-                                                        <img src={require('../../scss/' + wordCloud)} style={{height: "100%", width: "100%"}} />
+                                                        <img src={require('../../scss/' + wordCloud)} style={{ height: "100%", width: "100%" }} />
 
                                                     )
                                                 }
