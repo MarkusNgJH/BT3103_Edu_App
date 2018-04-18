@@ -93,7 +93,7 @@ class administratorPerformance extends React.Component {
                                 <Paper>
                                     <div style={divStyle}>
                                         <h2>Performance across Cohorts</h2>
-                                        <p>Assignments submission rate</p>
+                                        <p>Track Overall Assignments Submission Rate</p>
                                         <Divider />
                                     </div>
                                     <ResponsiveContainer width="90%" height={240}>
@@ -139,7 +139,7 @@ class administratorPerformance extends React.Component {
                         <Paper>
                             <div style={divStyle}>
                                 <h2>Performance by Individual Courses (%)</h2>
-                                <p>Assignments submission rate</p>
+                                <p>Assignments Submission Rate </p>
                                 <Divider />
                             </div>
                             <ResponsiveContainer width="90%" height={300}>

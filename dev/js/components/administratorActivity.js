@@ -228,11 +228,11 @@ class administratorActivity extends React.Component {
                                     <Brush />
                                 </LineChart>
                             </ResponsiveContainer>
-                            {this.isFav("chart05") == true ?
+                            {/* {this.isFav("chart05") == true ?
                                 <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart05", "Chart has been removed!") }}>Remove</Button>
                                 :
                                 <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart05", "LineChart", "Cohort activity across time", this.props.activeProfile.course, "Name", "Value", ["Value"], "Chart has been added!") }}>Favourite</Button>
-                            }
+                            } */}
                         </Paper>
                     </Grid>
 
@@ -283,7 +283,7 @@ class administratorActivity extends React.Component {
                                     <Line dataKey="West Spring Secondary School (NCC2018)" fill="#e56d49" stroke="#e56d49" />
                                 </LineChart>
                             </ResponsiveContainer>
-                            {this.isFav("chart06") == true ?
+                            {/* {this.isFav("chart06") == true ?
                                 <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart06", "Chart has been removed!") }}>Remove</Button>
                                 :
                                 <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => {
@@ -294,7 +294,7 @@ class administratorActivity extends React.Component {
                                             "Temasek JC - Junior (NCC2018)", "West Spring Secondary School (NCC2018)"],
                                         "Chart has been added!")
                                 }}>Favourite</Button>
-                            }
+                            } */}
                         </Paper>
                     </Grid>
                     {/* :
