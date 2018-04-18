@@ -83,7 +83,7 @@ class administratorActivity extends React.Component {
                 }
             }
         }
-        console.log(chartName, "is NOT in favourites");
+        // console.log(chartName, "is NOT in favourites");
         return false;
     }
 

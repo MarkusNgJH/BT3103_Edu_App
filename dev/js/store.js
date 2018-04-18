@@ -18,9 +18,9 @@ const reducerFirebase = (state = {}, action) => {
 const activeProfile = (state = { val: { uid: "R6nSbDVly8PUnC6jQFcseDS9sgJ3", course: "BT3103", role: "Instructor"}}, action) => {
   switch (action.type) {
     case 'UPDATE_ACTIVE_PROFILE':
-      console.log("UPDATE_ACTIVE_PROFILE")
-      console.log(action.payload)
-      console.log(state)
+      // console.log("UPDATE_ACTIVE_PROFILE")
+      // console.log(action.payload)
+      // console.log(state)
       return {
         ...state,
         val: action.payload
@@ -59,8 +59,8 @@ const myFavourites = (state = {favourites: []}, action) => {
 const activeLoader = (state = {showLoader: true}, action) => {
   switch (action.type) {
     case "SET_LOADER":
-    console.log("SET_LOADER")
-      console.log(action.payload)
+    // console.log("SET_LOADER")
+    //   console.log(action.payload)
       return {
         ...state,
         showLoader: action.payload
