@@ -60,12 +60,11 @@ const AxisLabel = ({
     );
 };
 
-var wordcloudProp = (imageName) => {
-    return (
-        // "./" + imageName
-        "/BT3103_Edu_App/dev/js/components/" + imageName
-    )
-}
+const wordCloudArr = [
+    "AWS Lambda Lab - Part 1.png", "AWS Lambda Lab - Part 2.png", "AWS Lambda Lab - Part 3.png",
+    "AWS Lambda Lab - Part 4.png", "AWS Lambda Lab - Part 5.png", "Introduction to AWS Lambda.png",
+    "Real-time Charts Tutorial.png"
+]
 
 var divStyle = {
     padding: "1px"
@@ -238,11 +237,6 @@ class InstructorAssignmentType extends React.Component {
         console.log("My favourites:", this.state.favourites)
         const { vertical, horizontal, snackOpen } = this.state;
         const multiple100 = (tick) => { return (tick * 100) }
-        const wordCloudArr = [
-            "AWS Lambda Lab - Part 1.png", "AWS Lambda Lab - Part 2.png", "AWS Lambda Lab - Part 3.png",
-            "AWS Lambda Lab - Part 4.png", "AWS Lambda Lab - Part 5.png", "Introduction to AWS Lambda.png",
-            "Real-time Charts Tutorial.png"
-        ]
         const comp = this;
         return (
             <div>
@@ -538,7 +532,7 @@ class InstructorAssignmentType extends React.Component {
                     {/* Word Cloud chart */}
                     {this.state.selectedAssignmentType == "PathProblem" ?
                         this.state.selectedAssignment ?
-                            <Grid item xs={6}>
+                            <Grid item xs={12}>
                                 <Paper>
                                     <div style={divStyle}>
                                         <h2>Word Cloud</h2>
@@ -546,19 +540,18 @@ class InstructorAssignmentType extends React.Component {
                                         <Divider />
                                     </div>
 
-                                    {/* <ResponsiveContainer width="90%" height={350}>
-                                        
-                                    </ResponsiveContainer> */}
-                                    {wordCloudArr.map(function (wordCloud, index) {
-                                        if (wordCloud.slice(0, -4) == comp.state.selectedAssignment.split(" (")[0]) {
-                                            console.log(wordcloudProp(wordCloud))
-                                            return (
-                                                <div id="wordmap2" key={index} align="center" >
-                                                    <img src={wordcloudProp(wordCloud)} />
-                                                </div>
-                                            )
-                                        }
-                                    })}
+                                    <ResponsiveContainer width="90%" height={350}>
+                                        <div id="wordclouddiv" style={{height: "100%", width: "100%"}}>
+                                            {wordCloudArr.map(function (wordCloud, index) {
+                                                if (wordCloud.slice(0, -4) == comp.state.selectedAssignment.split(" (")[0]) {
+                                                    return (
+                                                        <img src={require('../../scss/' + wordCloud)} style={{height: "100%", width: "100%"}} />
+
+                                                    )
+                                                }
+                                            })}
+                                        </div>
+                                    </ResponsiveContainer>
                                 </Paper>
                             </Grid>
                             :
