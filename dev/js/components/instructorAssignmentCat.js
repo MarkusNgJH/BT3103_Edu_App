@@ -72,6 +72,7 @@ class InstructorAssignmentCat extends React.Component {
         super(props);
         this.state = {
             selectedAssignment: "",
+            selectedAssignmentID: "",
             steps: ["InstructorAssignmentCat"],
             favourites: [],
             snackOpen: false,
@@ -85,25 +86,29 @@ class InstructorAssignmentCat extends React.Component {
     }
 
     selectedAssignment(data) {
-        if (this.state.selectedAssignment == "") {
-            this.setState({ selectedAssignment: data.assignment, steps: [...this.state.steps, data.assignment] })
-            store.dispatch({ type: "SET_LOADER", payload: true });
-            let url = 'https://d1pvj1k2kj.execute-api.us-west-2.amazonaws.com/prod/instructor_assignment?message=' + data.assignmentID;
-            fetch(url, { mode: "no-cors" }).then(function (response) {
-                console.log("Fetched ", url);
-            });
-        }
-        else {
-            var array = this.state.steps;
-            array.splice(-1, 1, data.assignment);
-            this.setState({ selectedAssignment: data.assignment, steps: array });
-            console.log(data.assignment);
-            store.dispatch({ type: "SET_LOADER", payload: true });
-            let url = 'https://d1pvj1k2kj.execute-api.us-west-2.amazonaws.com/prod/instructor_assignment?message=' + data.assignmentID;
-            fetch(url, { mode: "no-cors" }).then(function (response) {
-                console.log("Fetched ", url);
-            });
-        }
+        this.setState({
+            selectedAssignment: data.assignment,
+            selectedAssignmentID: data.assignmentID
+        });
+        // if (this.state.selectedAssignment == "") {
+        //     this.setState({ selectedAssignment: data, steps: [...this.state.steps, data.assignment] })
+        //     store.dispatch({ type: "SET_LOADER", payload: true });
+        //     let url = 'https://d1pvj1k2kj.execute-api.us-west-2.amazonaws.com/prod/instructor_assignment?message=' + data.assignmentID;
+        //     fetch(url, { mode: "no-cors" }).then(function (response) {
+        //         console.log("Fetched ", url);
+        //     });
+        // }
+        // else {
+        //     var array = this.state.steps;
+        //     array.splice(-1, 1, data.assignment);
+        //     this.setState({ selectedAssignment: data.assignment, steps: array });
+        //     console.log(data.assignment);
+        //     store.dispatch({ type: "SET_LOADER", payload: true });
+        //     let url = 'https://d1pvj1k2kj.execute-api.us-west-2.amazonaws.com/prod/instructor_assignment?message=' + data.assignmentID;
+        //     fetch(url, { mode: "no-cors" }).then(function (response) {
+        //         console.log("Fetched ", url);
+        //     });
+        // }
     }
 
     handleDelete() {
@@ -132,7 +137,7 @@ class InstructorAssignmentCat extends React.Component {
                 }
             }
         }
-        console.log(chartName, "is NOT in favourites");
+        // console.log(chartName, "is NOT in favourites");
         return false;
     }
 
@@ -245,7 +250,6 @@ class InstructorAssignmentCat extends React.Component {
                                     <Bar name="Number of Submissions" dataKey="value"
                                         onClick={(data, index) =>
                                             this.selectedAssignment(data)
-                                            // console.log(data)
                                         }>
                                         {this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignment.chart01.data.map((entry, index) => (
                                             <Cell
@@ -369,11 +373,11 @@ class InstructorAssignmentCat extends React.Component {
                                 <ResponsiveContainer width="90%" height={280}>
                                     <BarChart
                                         width={730} height={250}
-                                        data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].tempDDNode.chart02DD.data}
+                                        data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignment.chart01.drillDowns.chart02DD[this.state.selectedAssignmentID]}
                                         margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
                                     >
                                         <XAxis
-                                            dataKey="day_lapsed_from_assignmentX"
+                                            dataKey="day_lapsed"
                                             label={{ value: "Number of Days Elapsed", position: 'insideBottom', offset: -4 }}
                                         />
                                         <YAxis
@@ -409,7 +413,7 @@ class InstructorAssignmentCat extends React.Component {
                                 </div>
                                 <ResponsiveContainer width="90%" height={280}>
                                     <AreaChart width={730} height={250}
-                                        data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].tempDDNode.chart03DD.data}
+                                        data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignment.chart01.drillDowns.chart03DD[this.state.selectedAssignmentID]}
                                         margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
                                         <defs>
                                             <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">

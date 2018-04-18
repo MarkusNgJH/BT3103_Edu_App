@@ -30,7 +30,8 @@ import {
     Tooltip,
     Legend,
     Cell,
-    ResponsiveContainer
+    ResponsiveContainer,
+    ReferenceLine
 } from "recharts";
 import { BarChart, Bar } from "recharts";
 import { type } from 'os';
@@ -110,7 +111,7 @@ class InstructorAssignmentType extends React.Component {
                 }
             }
         }
-        console.log(chartName, "is NOT in favourites");
+        // console.log(chartName, "is NOT in favourites");
         return false;
     }
 
@@ -240,6 +241,7 @@ class InstructorAssignmentType extends React.Component {
         const comp = this;
         return (
             <div>
+                {/** Breadcrumb */}
                 <Paper className="chip_container" id="breadcrumbs">
                     <div className="chip">
                         InstructorAssignmentType
@@ -411,12 +413,13 @@ class InstructorAssignmentType extends React.Component {
                                 </div>
 
                                 <ResponsiveContainer width="85%" height={280}>
-                                    <BarChart width={400} height={250} data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].tempDDNode.chart10DD.data}>
-                                        <XAxis dataKey="days_lapsed" tick={false} label={{ value: "Time into video" }} />/>
-                                    <YAxis label={{ value: "Number of pauses", angle: -90, position: "insideBottomLeft", offset: 18 }} />
+                                    <BarChart width={400} height={250}
+                                        data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignmentType.chart10.drillDowns[this.state.selectedVideo]}>
+                                        <XAxis dataKey="Name" tick={false} label={{ value: "Time into video" }} />/>
+                                        <YAxis label={{ value: "Number of pauses", angle: -90, position: "insideBottomLeft", offset: 18 }} />
                                         <Tooltip />
                                         <Legend verticalAlign="top" align="right" />
-                                        <Bar name="# of pauses" dataKey="value" fill="#8884d8" ></Bar>
+                                        <Bar name="# of pauses" dataKey="Value" fill="#8884d8" ></Bar>
                                     </BarChart>
                                 </ResponsiveContainer>
                                 {this.isFav("chart10DD") == true ?
@@ -443,16 +446,18 @@ class InstructorAssignmentType extends React.Component {
                                     </div>
 
                                     <ResponsiveContainer width="85%" height={280}>
-                                        <BarChart width={400} height={250} data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].tempDDNode.chart08DD.data}>
+                                        <BarChart width={400} height={250}
+                                            data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignmentType.chart08.drillDowns[this.state.selectedAssignmentType].data}>
                                             <XAxis dataKey="assignment" tick={false} label={{ value: "Assignments" }} />/>
                                             <YAxis label={{ value: "Count", angle: -90, position: "insideBottomLeft", offset: 12 }} />
                                             <Tooltip />
                                             <Legend verticalAlign="top" align="right" />
+                                            <ReferenceLine y={33} strokeWidth={4} stroke="#e0b13c" label={{ value: "Expected Submissions", position: "top" }} />
                                             <Bar name="Num of Submission" dataKey="value" fill="#8884d8" onClick={(data, index) => this.selectedAssignment(data)}>
                                                 {this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].tempDDNode.chart08DD.data.map((entry, index) => (
                                                     <Cell
                                                         key={entry['assignment']}
-                                                        fill={entry.assignment == this.state.selectedAssignment ? '#87f2de' : (entry.value < entry.expected ? '#d68995' : '#71afe2')}
+                                                        fill={entry.value < entry.expected ? '#d68995' : '#71afe2'}
                                                     />
                                                 ))}
                                             </Bar>
@@ -472,30 +477,30 @@ class InstructorAssignmentType extends React.Component {
 
                     {/* chart08DDAdd */}
                     {/* name List of those who did not submit assignment */}
-                    {this.state.selectedAssignment ?
+                    {this.state.selectedAssignmentType ?
                         <Grid item xs={6}>
                             <Paper>
                                 <div>
                                     <div style={divStyle}>
                                         <h2>Name list of students</h2>
-                                        <p>Identify Students Who Have Not Submitted {this.state.selectedAssignment}</p>
+                                        <p>Identify Students Who Have Not Submitted {this.state.selectedVideo}</p>
                                         <Divider />
                                     </div>
 
                                     <ResponsiveContainer width="85%" height={280}>
                                         <div align="center" style={{ height: "inherit", width: "auto" }}>
 
-                                            <div style={{ width: "90%", height: "inherit" }}>
+                                            <div style={{ width: "90%", height: "inherit", overflowY: "scroll"}}>
                                                 <Typography variant="subheading" style={{ backgroundColor: "orange" }}>
                                                     <strong>Uncompleted</strong>
                                                 </Typography>
 
-                                                {this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].tempDDNode.chart08DD.additionaldata.map(function (entry, index) {
-                                                    if (entry.assignment == comp.state.selectedAssignment) {
+                                                {this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignmentType.chart08.drillDowns[this.state.selectedAssignmentType].additionalData.map(function (entry, index) {
+                                                    // if (entry.assignment == comp.state.selectedVideo) {
                                                         if (entry.value == "All submitted") {
                                                             return (
                                                                 <div>
-                                                                    <h2>All submitted {comp.state.selectedAssignment}</h2>
+                                                                    All submitted {entry.assignment}
                                                                 </div>
                                                             )
 
@@ -512,7 +517,7 @@ class InstructorAssignmentType extends React.Component {
                                                                 </ol>
                                                             )
                                                         }
-                                                    }
+                                                    // }
                                                 })}
                                             </div>
                                         </div>
@@ -531,19 +536,19 @@ class InstructorAssignmentType extends React.Component {
 
                     {/* Word Cloud chart */}
                     {this.state.selectedAssignmentType == "PathProblem" ?
-                        this.state.selectedAssignment ?
+                        this.state.selectedVideo ?
                             <Grid item xs={12}>
                                 <Paper>
                                     <div style={divStyle}>
                                         <h2>Word Cloud</h2>
-                                        <p>Identify Answers Which Most Students Give For {this.state.selectedAssignment}</p>
+                                        <p>Identify Answers Which Most Students Give For {this.state.selectedVideo}</p>
                                         <Divider />
                                     </div>
 
                                     <ResponsiveContainer width="90%" height={350}>
                                         <div id="wordclouddiv" style={{height: "100%", width: "100%"}}>
                                             {wordCloudArr.map(function (wordCloud, index) {
-                                                if (wordCloud.slice(0, -4) == comp.state.selectedAssignment.split(" (")[0]) {
+                                                if (wordCloud.slice(0, -4) == comp.state.selectedVideo.split(" (")[0]) {
                                                     return (
                                                         <img src={require('../../scss/' + wordCloud)} style={{height: "100%", width: "100%"}} />
 
