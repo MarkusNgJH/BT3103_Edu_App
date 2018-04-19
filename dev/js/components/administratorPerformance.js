@@ -195,7 +195,7 @@ class administratorPerformance extends React.Component {
                                         ticks={[0]}
                                     />
                                     <YAxis
-                                        dataKey="Completed"
+                                        type="number" domain={['auto', 'auto']}
                                         label={
                                             <AxisLabel axisType="yAxis" width={600} height={300}>
                                                 Submission Count

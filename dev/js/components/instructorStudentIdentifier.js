@@ -191,11 +191,11 @@ class instructorStudentIdentifier extends React.Component {
                                     />
                                     <YAxis
                                         dataKey="value"
-                                        label={{ value: "Number of Submissions", angle: -90, position: "insideBottomLeft" }}
+                                        label={{ value: "Submission Count", angle: -90, position: "insideBottomLeft" }}
                                     />
 
                                     <Tooltip />
-                                    <Bar name="Number of Submissions" dataKey="value" fill="#3498DB">
+                                    <Bar name="Submission Count" dataKey="value" fill="#3498DB">
                                         onClick={(data, index) => this.selectedAssignment(data.assignment)}>
                         {this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorStudentIdentifier.chart12.data.map((entry, index) => (
                                             <Cell key={entry.student_name} fill={entry.value < 20 ? '#d68995' : '#71afe2'} />
@@ -244,11 +244,11 @@ class instructorStudentIdentifier extends React.Component {
                                     />
                                     <YAxis
                                         dataKey="value"
-                                        label={{ value: "Number of Submissions", angle: -90, position: "insideBottomLeft" }}
+                                        label={{ value: "Submission Count", angle: -90, position: "insideBottomLeft" }}
                                     />
 
                                     <Tooltip />
-                                    <Bar name="Number of Submissions" dataKey="value" fill="#66CDAA">
+                                    <Bar name="Submission Count" dataKey="value" fill="#66CDAA">
                                         onClick={(data, index) => this.selectedAssignment(data.assignment)}>
                                         {this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorStudentIdentifier.chart13.data.map((entry, index) => (
                                             <Cell key={entry.student_name} fill={entry.value > this.topStudentSubmissions(this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorStudentIdentifier.chart13.data) ? '#66CDAA' : '#3498DB'} />

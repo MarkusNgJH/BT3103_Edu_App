@@ -230,7 +230,7 @@ class studentAssignment extends React.Component {
                                     <YAxis dataKey="Value"
                                         type="number"
                                         width={20}
-                                    // <Label value="Number of Submissions" angle={-90} offset={20} position="insideBottomLeft" />
+                                    // <Label value="Submission Count" angle={-90} offset={20} position="insideBottomLeft" />
                                     />
 
                                     <CartesianGrid strokeDasharray="3 3" />
