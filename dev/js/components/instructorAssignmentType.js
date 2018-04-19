@@ -18,6 +18,7 @@ import Paper from 'material-ui/Paper';
 import Close from 'material-ui-icons/Close';
 import Divider from 'material-ui/Divider';
 import Typography from 'material-ui/Typography';
+// import AccessAlarmIcon from '@material-ui/icons/AccessAlarm';
 
 import {
     PieChart,
@@ -307,7 +308,12 @@ class InstructorAssignmentType extends React.Component {
                             <div style={divStyle}>
                                 <div className="chartTopRow">
                                     <div className="blank" />
-                                    <h2>Submission Per Type</h2>
+                                    
+                                    <h2>Submission Per Type
+                                    <img src={require('../../../public/drilldownSmall.png')} height={20} style={{marginTop:"22px"}}/>    
+                                    </h2>
+                                    
+                                    
                                     {this.isFav("chart08") == true ?
                                         <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart08", "Chart has been removed!") }}>Remove</Button>
                                         :
@@ -357,7 +363,10 @@ class InstructorAssignmentType extends React.Component {
                                     <div style={divStyle}>
                                         <div className="chartTopRow">
                                             <div className="blank" />
-                                            <h2>Total Submissions</h2>
+                                            <h2>
+                                                Total Submissions
+                                                <img src={require('../../../public/drilldownSmall.png')} height={20} style={{marginTop:"22px"}}/>
+                                            </h2>
                                             {this.isFav("chart08DD") == true ?
                                                 <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart08DD", "Chart has been removed!") }}>Remove</Button>
                                                 :
@@ -504,7 +513,10 @@ class InstructorAssignmentType extends React.Component {
                                 <div style={divStyle}>
                                     <div className="chartTopRow">
                                         <div className="blank" />
-                                        <h2>Total Pauses/Playbacks</h2>
+                                        <h2>
+                                            Total Pauses/Playbacks
+                                            <img src={require('../../../public/drilldownSmall.png')} height={20} style={{marginTop:"22px"}}/>
+                                        </h2>
                                         {this.isFav("chart10") == true ?
                                             <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart10", "Chart has been removed!") }}>Remove</Button>
                                             :
