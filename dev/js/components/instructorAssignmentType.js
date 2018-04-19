@@ -175,11 +175,9 @@ class InstructorAssignmentType extends React.Component {
         else {
             var array = this.state.steps;
             array.splice(-1, 1, data.Name);
-            this.setState({ selectedAssignmentType: data.Name, steps: array })
+            this.setState({ selectedAssignmentType: data.Name, selectedAssignment: "", selectedVideo: "", steps: array })
         }
         console.log(this.state.steps)
-        // console.log(msg)
-        this.drilldown(msg)
     }
 
     selectedAssignment(data) {
@@ -202,8 +200,6 @@ class InstructorAssignmentType extends React.Component {
             array.splice(-1, 1, data.Name);
             this.setState({ selectedVideo: data.Name, steps: array })
         }
-        console.log(msg)
-        this.drilldown(msg)
     }
 
     backStep() {
@@ -229,12 +225,20 @@ class InstructorAssignmentType extends React.Component {
     handleClose = () => {
         this.setState({ snackOpen: false });
     };
+    
+    maxCount(val, arr) {
+        var max = val;
+        arr.map(function (entry, index) {
+            if (entry.Value > max) {
+                max = entry.Value
+            }
+        })
 
-    drilldown(chartName) {
-        var api = " https://hcvb86chkl.execute-api.us-west-2.amazonaws.com/prod/instructor_assignmentType?message=" + chartName
-        fetch(api, { mode: "no-cors" }).then(function (response) {
-            console.log("Fetched ", response);
-        });
+        if (max == val) {
+            return true
+        } else {
+            return false
+        }
     }
 
     render() {
@@ -539,7 +543,7 @@ class InstructorAssignmentType extends React.Component {
                                         {this.isFav("chart10DD") == true ?
                                             <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart10DD", "Chart has been removed!") }}>Remove</Button>
                                             :
-                                            <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart10DD", "BarChart", "Total Pauses/Playbacks", "Identify PathProblems that Students Students May Be Struggling With", "days_lapsed", "", ["value"], "Chart has been added!") }}>Favourite</Button>
+                                            <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart10DD", "BarChart", "Total Pauses/Playbacks", "Identify Which Parts Students Paused At For " + comp.state.selectedVideo, "Name", "", ["Value"], "Chart has been added!", comp.state.selectedVideo) }}>Favourite</Button>
                                         }
                                     </div>
                                     <p>Identify Which Parts Students Paused At For {comp.state.selectedVideo}</p>
@@ -553,10 +557,20 @@ class InstructorAssignmentType extends React.Component {
                                         <YAxis label={{ value: "Number of pauses", angle: -90, position: "insideBottomLeft", offset: 18 }} />
                                         <Tooltip />
                                         <Legend verticalAlign="top" align="right" />
-                                        <Bar name="# of pauses" dataKey="Value" fill="#8884d8" ></Bar>
+                                        <Bar name="# of pauses" dataKey="Value" fill="#8884d8" >
+                                            {this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignmentType.chart10.drillDowns[this.state.selectedVideo].map((entry, index4) => (
+                                                <Cell
+                                                    key={entry.Name}
+                                                    fill={
+                                                        comp.maxCount(entry.Value, this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignmentType.chart10.drillDowns[this.state.selectedVideo]) 
+                                                        == true ? 
+                                                        '#d68995' : '#71afe2'
+                                                    }
+                                                />
+                                            ))}
+                                        </Bar>
                                     </BarChart>
                                 </ResponsiveContainer>
-
                             </Paper>
                         </Grid>
                         :
