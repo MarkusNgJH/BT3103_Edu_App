@@ -556,18 +556,16 @@ class InstructorAssignmentCat extends React.Component {
                                     />
 
                                     <Tooltip cursor={{ fill: 'red', fillOpacity: 0.1 }} />
-                                    {/* <Legend verticalAlign="top" align="right" /> */}
                                     <Bar name="Number of Days to Submit" dataKey="value"
                                         onClick={(data, index) =>
                                             this.selectedAssignment(data)
-                                            // console.log(data)
                                         }>
-                                        {this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignment.prediction.data.map((entry, index) => (
-                                            <Cell
-                                                key={entry.assignment}
-                                                fill={entry.assignment == this.state.selectedAssignment ? '#87f2de' : (entry.value > 5 ? '#d68995' : '#71afe2')}
-                                            />
-                                        ))}
+                                            {this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignment.prediction.data.map((entry, index) => (
+                                                <Cell
+                                                    key={entry.assignment}
+                                                    fill={entry.assignment == this.state.selectedAssignment ? '#87f2de' : (entry.value > 5 ? '#d68995' : '#71afe2')}
+                                                />
+                                            ))}
                                     </Bar>
                                     <ReferenceLine y={5} strokeWidth={4} stroke="#e0b13c" strokeDasharray="3 3" label={{ value: "Expected Submissions", position: "top" }} />
                                     {/* <Line name="Expected number" type='monotone' dataKey='expected' stroke='#ff7300' dot={false} /> */}
