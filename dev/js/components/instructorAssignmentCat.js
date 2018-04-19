@@ -259,12 +259,12 @@ class InstructorAssignmentCat extends React.Component {
                                     />
                                     <YAxis
                                         dataKey="value"
-                                        label={{ value: "Number of Submissions", angle: -90, position: "insideBottomLeft" }}
+                                        label={{ value: "Submission Count", angle: -90, position: "insideBottomLeft" }}
                                     />
 
                                     <Tooltip cursor={{ fill: 'red', fillOpacity: 0.1 }} />
                                     {/* <Legend verticalAlign="top" align="right" /> */}
-                                    <Bar name="Number of Submissions" dataKey="value"
+                                    <Bar name="Submission Count" dataKey="value"
                                         onClick={(data, index) =>
                                             this.selectedAssignment(data)
                                         }>
@@ -366,12 +366,12 @@ class InstructorAssignmentCat extends React.Component {
                                         />
                                         <YAxis
                                             dataKey="value"
-                                            label={{ value: "Number of Submissions", angle: -90, position: "insideBottomLeft" }}
+                                            label={{ value: "Submission Count", angle: -90, position: "insideBottomLeft" }}
                                         />
 
                                         <Tooltip cursor={{ fill: 'red', fillOpacity: 0.05 }} />
                                         {/* <Legend verticalAlign="top" align="right" /> */}
-                                        <Bar name="Number of Submissions" dataKey="value" fill="#8884d8" />
+                                        <Bar name="Submission Count" dataKey="value" fill="#8884d8" />
                                     </BarChart>
                                 </ResponsiveContainer>
                             </Paper>
@@ -409,10 +409,10 @@ class InstructorAssignmentCat extends React.Component {
                                             </linearGradient>
                                         </defs>
                                         <XAxis label={{ value: "Date" }} dataKey="date_time" tick={false} />
-                                        <YAxis label={{ value: "Number of Submissions", angle: -90, position: "insideBottomLeft", offset: 12 }} />
+                                        <YAxis label={{ value: "Submission Count", angle: -90, position: "insideBottomLeft", offset: 12 }} />
                                         {/* <Legend verticalAlign="top" align="right" /> */}
                                         <Tooltip />
-                                        <Area name="Number of Submissions" type="monotone" dataKey="value" stroke="#8884d8" fillOpacity={1} fill="url(#colorUv)" />
+                                        <Area name="Submission Count" type="monotone" dataKey="value" stroke="#8884d8" fillOpacity={1} fill="url(#colorUv)" />
                                     </AreaChart>
                                 </ResponsiveContainer>
                             </Paper>
@@ -466,11 +466,11 @@ class InstructorAssignmentCat extends React.Component {
                                         />
                                         <YAxis
                                             dataKey="value"
-                                            label={{ value: "Number of Submissions", angle: -90, position: "insideBottomLeft" }}
+                                            label={{ value: "Submission Count", angle: -90, position: "insideBottomLeft" }}
                                         />
 
                                         <Tooltip />
-                                        <Bar name="Number of Submissions" dataKey="value" fill="#8884d8" />
+                                        <Bar name="Submission Count" dataKey="value" fill="#8884d8" />
                                     </BarChart>
                                 </ResponsiveContainer>
                             </Paper>
@@ -513,10 +513,10 @@ class InstructorAssignmentCat extends React.Component {
                                             </linearGradient>
                                         </defs>
                                         <XAxis label={{ value: "Date" }} dataKey="date_time" tick={false} />
-                                        <YAxis name="Date" label={{ value: "Number of Submissions", angle: -90, position: "insideBottomLeft", offset: 12 }} domain={[0, 36]} />
+                                        <YAxis name="Date" label={{ value: "Submission Count", angle: -90, position: "insideBottomLeft", offset: 12 }} domain={[0, 36]} />
                                         <ReferenceLine y={33} strokeWidth={4} stroke="#e0b13c" strokeDasharray="3 3" label={{ value: "Expected Submissions", position: "top" }} />
                                         <Tooltip />
-                                        <Area name="Number of Submissions" type="monotone" dataKey="value" stroke="#8884d8" fillOpacity={1} fill="url(#colorUv)" />
+                                        <Area name="Submission Count" type="monotone" dataKey="value" stroke="#8884d8" fillOpacity={1} fill="url(#colorUv)" />
                                     </AreaChart>
                                 </ResponsiveContainer>
                                 
@@ -555,7 +555,7 @@ class InstructorAssignmentCat extends React.Component {
                                     />
                                     <YAxis
                                         dataKey="value"
-                                        label={{ value: "Number of Days to Submit", angle: -90, position: "insideBottomLeft" }}
+                                        label={{ value: "Number of Days to Submit", angle: -90, position: "insideBottomLeft", fontSize: 12 }}
                                     />
 
                                     <Tooltip cursor={{ fill: 'red', fillOpacity: 0.1 }} />

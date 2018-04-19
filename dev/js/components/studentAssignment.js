@@ -206,10 +206,10 @@ class studentAssignment extends React.Component {
                     }
                 </Paper>
                 <Grid container spacing={24} direction="row" align="center" justify="space-between">
-                    <Grid item xs={12} sm={9} md={6} xl={4}>
+                    <Grid item xs={12} md={4}>
                         <Paper>
                             <div style={divStyle}>
-                                <h3>Assignment Type</h3>
+                                <h2>Assignment Type</h2>
                                 <p>Measure Submission Rate by Assignment Type</p>
                                 <Divider />
                             </div>
@@ -253,13 +253,13 @@ class studentAssignment extends React.Component {
                         </Paper>
                     </Grid>
 
-                    <Grid item xs={6}>  {/*chart01*/}
+                    <Grid item xs={12} md={3}>  {/*chart01*/}
                         <Paper>
                             <div style={divStyle}>
-                                <h3>
+                                <h2>
                                     Assignment Completion
                                     <img src={require('../../../public/drilldownSmall.png')} height={20} style={{marginTop:"5px"}}/>
-                                </h3>
+                                </h2>
                                 <p>Track Assignment by Completion Status</p>
                                 <Divider />
                             </div>
@@ -297,85 +297,15 @@ class studentAssignment extends React.Component {
                         </Paper>
                     </Grid>
 
-                    <Grid item xs={6} zeroMinWidth> {/*chart03*/}
-                        <Paper>
-                            <div style={divStyle}>
-                                <h3>Assignment Submission</h3>
-                                <p>Track Number of Submissions per Date</p>
-                                <Divider />
-                            </div>
-                            <ResponsiveContainer width="100%" height={280}>
-                                <LineChart
-                                    width={730}
-                                    height={250}
-                                    data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].studentAssignment.chart03.data}
-                                    margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-                                >
-                                    <XAxis dataKey="Name" hide={true}>
-                                        <Label value="Date" offset={-5} position="insideBottom" />
-                                    </XAxis>
-
-                                    <YAxis dataKey="Value">
-                                        <Label value="Number of Assignments Submitted" angle={-90} offset={0} position="insideBottomLeft" />
-                                    </YAxis>
-
-                                    <CartesianGrid strokeDasharray="3 3" />
-                                    <Tooltip />
-                                    <Line name="Assignments Submitted" dataKey="Value" fill="#8884d8" />
-                                </LineChart>
-                            </ResponsiveContainer>
-                            {/* {this.isFav("chart03") == true ?
-                                <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart03", "Chart has been removed!") }}>Remove</Button>
-                                :
-                                <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart03", "LineChart", "Chart03", "Date of Submissison", "name", "Value", ["Value"], "Chart has been added!") }}>Favourite</Button>
-                            } */}
-                        </Paper>
-                    </Grid>
-
-                    <Grid item xs={6} zeroMinWidth>
-                        <Paper>
-                            <div style={divStyle}>
-                                <h3>Assignment</h3>
-                                <p>Track Number of Days to Complete Assignments</p>
-                                <Divider />
-                            </div>
-                            <ResponsiveContainer width="100%" height={280}>
-                                <BarChart
-                                    width={730}
-                                    height={250}
-                                    data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].studentAssignment.chart04.data}
-                                    margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-                                >
-                                    <XAxis dataKey="Name">
-                                        <Label value="Number of Days Lapsed" offset={-3} position="insideBottom" />
-                                    </XAxis>
-
-                                    <YAxis dataKey="Value">
-                                        <Label value="Number of Assignments" angle={-90} offset={0} position="insideBottomLeft" />
-                                    </YAxis>
-
-                                    <CartesianGrid strokeDasharray="3 3" />
-                                    <Bar name="Number of Assignments" dataKey="Value" fill="#8884d8" />
-                                    <Tooltip cursor={{ fill: 'red', fillOpacity: 0.05 }} />
-                                </BarChart>
-                            </ResponsiveContainer>
-                            {/* {this.isFav("chart04") == true ?
-                                <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart04", "Chart has been removed!") }}>Remove</Button>
-                                :
-                                <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart04", "BarChart", "Chart04", "Time Lapse Since Work Done", "Name", "Value", ["Value"], "Chart has been added!") }}>Favourite</Button>
-                            } */}
-                        </Paper>
-                    </Grid>
-
                     {this.state.selectedAssignment ?
-                        <Grid item xs={6}> {/* chart02 */}
+                        <Grid item xs={12} md={5}> {/* chart02 */}
                             <Paper>
                                 <div style={divStyle}>
-                                    <h3>Assignment Status</h3>
+                                    <h2>Assignment Status</h2>
                                     <p>Identify Assignments by Status</p>
                                     <Divider />
                                 </div>
-                                <ResponsiveContainer width="90%" height={280}>
+                                <ResponsiveContainer width="98%" height={280}>
                                     <div align="center" style={{ height: "inherit", width: "auto" }}>
                                         <div style={{ float: "left", width: "50%", height: "inherit" }}>
                                             <Typography variant="subheading" style={{ backgroundColor: "lightgreen" }}>
@@ -398,7 +328,7 @@ class studentAssignment extends React.Component {
                                                 <strong>Uncompleted</strong>
                                             </Typography>
 
-                                            <ol style={{ height: "90%", overflow: "auto" }}>
+                                            <ol style={{ height: "90%", overflow: "auto", margin: "0", padding: "auto" }}>
                                                 {this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].studentAssignment.chart02.data.map(function (entry, index) {
                                                     if (entry.Value == 0) {
                                                         return (
@@ -418,8 +348,78 @@ class studentAssignment extends React.Component {
                             </Paper>
                         </Grid>
                         :
-                        <span></span>
+                        <Grid item xs={12} md={5}>
+                        </Grid>
                     }
+
+                    <Grid item xs={6} zeroMinWidth> {/*chart03*/}
+                        <Paper>
+                            <div style={divStyle}>
+                                <h2>Assignment Submission</h2>
+                                <p>Track Number of Submissions per Date</p>
+                                <Divider />
+                            </div>
+                            <ResponsiveContainer width="90%" height={280}>
+                                <LineChart
+                                    data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].studentAssignment.chart03.data}
+                                    // margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+                                >
+                                    <XAxis dataKey="Name" tick={false}>
+                                        <Label value="Date" offset={0} position="insideBottom" />
+                                    </XAxis>
+
+                                    <YAxis dataKey="Value">
+                                        <Label value="Number of Assignments Submitted" angle={-90} position="insideBottomLeft" fontSize={12}/>
+                                    </YAxis>
+
+                                    <CartesianGrid strokeDasharray="3 3" />
+                                    <Tooltip />
+                                    <Line name="Assignments Submitted" dataKey="Value" fill="#8884d8" />
+                                </LineChart>
+                            </ResponsiveContainer>
+                            {/* {this.isFav("chart03") == true ?
+                                <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart03", "Chart has been removed!") }}>Remove</Button>
+                                :
+                                <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart03", "LineChart", "Chart03", "Date of Submissison", "name", "Value", ["Value"], "Chart has been added!") }}>Favourite</Button>
+                            } */}
+                        </Paper>
+                    </Grid>
+
+                    <Grid item xs={6} zeroMinWidth>
+                        <Paper>
+                            <div style={divStyle}>
+                                <h2>Assignment</h2>
+                                <p>Track Number of Days to Complete Assignments</p>
+                                <Divider />
+                            </div>
+                            <ResponsiveContainer width="100%" height={280}>
+                                <BarChart
+                                    width={730}
+                                    height={250}
+                                    data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].studentAssignment.chart04.data}
+                                    margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+                                >
+                                    <XAxis dataKey="Name">
+                                        <Label value="Number of Days Lapsed" offset={-3} position="insideBottom" />
+                                    </XAxis>
+
+                                    <YAxis dataKey="Value">
+                                        <Label value="Number of Assignments" angle={-90} offset={0} position="insideBottomLeft" fontSize={12}/>
+                                    </YAxis>
+
+                                    <CartesianGrid strokeDasharray="3 3" />
+                                    <Bar name="Number of Assignments" dataKey="Value" fill="#8884d8" />
+                                    <Tooltip cursor={{ fill: 'red', fillOpacity: 0.05 }} />
+                                </BarChart>
+                            </ResponsiveContainer>
+                            {/* {this.isFav("chart04") == true ?
+                                <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart04", "Chart has been removed!") }}>Remove</Button>
+                                :
+                                <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart04", "BarChart", "Chart04", "Time Lapse Since Work Done", "Name", "Value", ["Value"], "Chart has been added!") }}>Favourite</Button>
+                            } */}
+                        </Paper>
+                    </Grid>
+
                 </Grid> {/*End of main Grid*/}
             </div>
         )
