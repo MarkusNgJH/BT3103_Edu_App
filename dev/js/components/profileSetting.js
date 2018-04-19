@@ -61,7 +61,8 @@ class profileSetting extends React.Component {
         this.setState({ uid: e.target.value})
         // console.log('handleUIDChange')
         if(Object.keys(this.props.firebase.val).indexOf(e.target.value) > -1){
-            this.setState({ course: Object.keys(this.props.firebase.val[e.target.value])[0]})
+            // this.setState({ course: Object.keys(this.props.firebase.val[e.target.value])[0]})
+            this.setState({ course: 'BT3103'})
         }
     }
 
@@ -69,7 +70,7 @@ class profileSetting extends React.Component {
         this.setState({ uid: e})
         // console.log('handleUIDChange ' + this.state.uid)
         if(Object.keys(this.props.firebase.val).indexOf(e) > -1){
-            this.setState({ course: Object.keys(this.props.firebase.val[e])[0]})
+            this.setState({ course: 'BT3103'})
         }
     }
 

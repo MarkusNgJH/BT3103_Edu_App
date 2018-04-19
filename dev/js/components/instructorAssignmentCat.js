@@ -232,7 +232,10 @@ class InstructorAssignmentCat extends React.Component {
                             <div style={divStyle}>
                                 <div className="chartTopRow">
                                     <div className="blank"/>
-                                    <h2>Assignment Submissions</h2>
+                                    <h2>
+                                        Assignment Submissions
+                                        <img src={require('../../../public/drilldownSmall.png')} height={20} style={{marginTop:"5px"}}/>
+                                    </h2>
                                     {this.isFav("chart01") == true ?
                                         <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart01", "Chart has been removed!") }}>Remove</Button>
                                         :
@@ -556,10 +559,7 @@ class InstructorAssignmentCat extends React.Component {
                                     />
 
                                     <Tooltip cursor={{ fill: 'red', fillOpacity: 0.1 }} />
-                                    <Bar name="Number of Days to Submit" dataKey="value"
-                                        onClick={(data, index) =>
-                                            this.selectedAssignment(data)
-                                        }>
+                                    <Bar name="Number of Days to Submit" dataKey="value">
                                             {this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignment.prediction.data.map((entry, index) => (
                                                 <Cell
                                                     key={entry.assignment}

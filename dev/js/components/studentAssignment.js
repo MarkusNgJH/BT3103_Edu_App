@@ -256,7 +256,10 @@ class studentAssignment extends React.Component {
                     <Grid item xs={6}>  {/*chart01*/}
                         <Paper>
                             <div style={divStyle}>
-                                <h3>Assignment</h3>
+                                <h3>
+                                    Assignment Completion
+                                    <img src={require('../../../public/drilldownSmall.png')} height={20} style={{marginTop:"5px"}}/>
+                                </h3>
                                 <p>Track Assignment by Completion Status</p>
                                 <Divider />
                             </div>
@@ -297,7 +300,7 @@ class studentAssignment extends React.Component {
                     <Grid item xs={6} zeroMinWidth> {/*chart03*/}
                         <Paper>
                             <div style={divStyle}>
-                                <h3>Assignment</h3>
+                                <h3>Assignment Submission</h3>
                                 <p>Track Number of Submissions per Date</p>
                                 <Divider />
                             </div>
@@ -368,7 +371,7 @@ class studentAssignment extends React.Component {
                         <Grid item xs={6}> {/* chart02 */}
                             <Paper>
                                 <div style={divStyle}>
-                                    <h3>Assignment</h3>
+                                    <h3>Assignment Status</h3>
                                     <p>Identify Assignments by Status</p>
                                     <Divider />
                                 </div>
