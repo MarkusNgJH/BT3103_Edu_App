@@ -234,7 +234,7 @@ class InstructorAssignmentCat extends React.Component {
                                     <div className="blank"/>
                                     <h2>
                                         Assignment Submissions
-                                        <img src={require('../../../public/drilldownSmall.png')} height={20} style={{marginTop:"22px"}}/>
+                                        <img src={require('../../../public/drilldownSmall.png')} height={20} style={{marginTop:"5px"}}/>
                                     </h2>
                                     {this.isFav("chart01") == true ?
                                         <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart01", "Chart has been removed!") }}>Remove</Button>

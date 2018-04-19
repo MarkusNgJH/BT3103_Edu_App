@@ -106,12 +106,6 @@ class DrawerItems extends React.Component {
                                         <h4 style={{ color: "#000" }}>Student Assignment</h4>
                                     </Link>
                                 </ListItem>
-                                <ListItem button onClick={this.props.handleDrawerClose.bind(this)} style={{ paddingLeft: "60px" }}>
-                                    <Link to="/StudentAssignmentType" style={{ textDecoration: "none" }}>
-                                        {/* <ListItemText primary="Student Assignment Type" /> */}
-                                        <h4 style={{ color: "#000" }}>Student Assignment Type</h4>
-                                    </Link>
-                                </ListItem>
                             </List>
                     }
                 </Collapse>
