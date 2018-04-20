@@ -311,8 +311,7 @@ class InstructorAssignmentType extends React.Component {
                         <Paper>
                             <div style={divStyle}>
                                 <div className="chartTopRow">
-                                    <div className="blank" />
-                                    <div className="chartTitleSubtitle">
+                                    <div className="chartTitleSubtitleLeft">
                                         <h2>
                                             Submission Per Type
                                             <img src={require('../../../public/drilldownSmall.png')} height={20} style={{marginTop:"5px"}}/>    
@@ -329,7 +328,7 @@ class InstructorAssignmentType extends React.Component {
                                 </div>
                                 <Divider />
                             </div>
-                            <ResponsiveContainer width="90%" height={240}>
+                            <ResponsiveContainer width="95%" height={240}>
                                 <BarChart
                                     width={730}
                                     height={250}
@@ -369,13 +368,12 @@ class InstructorAssignmentType extends React.Component {
                                 <div>
                                     <div style={divStyle}>
                                         <div className="chartTopRow">
-                                            <div className="blank" />
-                                            <div className="chartTitleSubtitle">
+                                            <div className="chartTitleSubtitleLeft">
                                                 <h2>
                                                     Total Submissions
                                                     <img src={require('../../../public/drilldownSmall.png')} height={20} style={{marginTop:"5px"}}/>
                                                 </h2>
-                                                <p>Number of Submissions for {this.state.selectedAssignmentType}'s Assignments</p>
+                                                <p>Submissions for {this.state.selectedAssignmentType} Assignments</p>
                                             </div>
                                             <div className="favButtonContainer">
                                                 {this.isFav("chart08DD") == true ?
@@ -388,11 +386,11 @@ class InstructorAssignmentType extends React.Component {
                                         <Divider />
                                     </div>
 
-                                    <ResponsiveContainer width="85%" height={240}>
+                                    <ResponsiveContainer width="95%" height={240}>
                                         <BarChart width={400} height={250}
                                             data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignmentType.chart08.drillDowns[this.state.selectedAssignmentType].data}>
-                                            <XAxis dataKey="assignment" tick={false} label={{ value: "Assignments" }} />/>
-                                            <YAxis label={{ value: "Count", angle: -90, position: "insideBottomLeft", offset: 12 }} />
+                                            <XAxis dataKey="assignment" tick={false} label={{ value: "Assignments", fontSize: 12 }} />/>
+                                            <YAxis label={{ value: "Count", angle: -90, position: "insideBottomLeft", offset: 12, fontSize: 12 }} />
                                             <Tooltip />
                                             <ReferenceLine y={33} strokeWidth={4} stroke="#e0b13c" label={{ value: "Expected Submissions", position: "top" }} />
                                             <Bar name="Num of Submission" dataKey="value" fill="#8884d8" onClick={(data, index) => this.selectedAssignment(data)}>
@@ -422,8 +420,7 @@ class InstructorAssignmentType extends React.Component {
                                     <div>
                                         <div style={divStyle}>
                                             <div className="chartTopRow">
-                                                <div className="blank" />
-                                                <div className="chartTitleSubtitle">
+                                                <div className="chartTitleSubtitleLeft">
                                                     <h2>Name List</h2>
                                                     <p>Students Who Have Not Submitted</p>
                                                 </div>
@@ -434,12 +431,11 @@ class InstructorAssignmentType extends React.Component {
                                                         <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart08DDAdd", "BarChart", "Name list of students", "Name list of those who have not submitted " + this.state.selectedAssignment, "", "", [], "Chart has been added!", this.state.selectedAssignment) }}>Favourite</Button>
                                                     }   
                                                 </div>
-                                                <div className="blank" />
                                             </div>
                                             <Divider />
                                         </div>
 
-                                        <ResponsiveContainer width="85%" height={240}>
+                                        <ResponsiveContainer width="95%" height={240}>
                                             <div align="center" style={{ height: "inherit", width: "auto" }}>
 
                                                 <div style={{ width: "90%", height: "inherit" }}>
@@ -488,9 +484,8 @@ class InstructorAssignmentType extends React.Component {
                             <Paper>
                                 <div style={divStyle}>
                                     <div className="chartTopRow">
-                                        <div className="blank" />
-                                        <div className="chartTitleSubtitle">
-                                            <h2>Total Plays/ Fast-Forwards</h2>
+                                        <div className="chartTitleSubtitleLeft">
+                                            <h2>Total Plays/Fast-Forwards</h2>
                                             <p>Identify Videos that Students Completed Comfortably</p>
                                         </div>
                                         <div className="favButtonContainer">
@@ -504,10 +499,10 @@ class InstructorAssignmentType extends React.Component {
                                     <Divider />
                                 </div>
 
-                                <ResponsiveContainer width="85%" height={240}>
+                                <ResponsiveContainer width="95%" height={240}>
                                     <BarChart width={400} height={250} data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignmentType.chart09.data}>
-                                        <XAxis dataKey="Name" tick={false} label={{ value: "Assignments" }} />/>
-                                        <YAxis label={{ value: "Count", angle: -90, position: "insideBottomLeft", offset: 12 }} />
+                                        <XAxis dataKey="Name" tick={false} label={{ value: "Assignments", fontSize: 12}} />/>
+                                        <YAxis label={{ value: "Count", angle: -90, position: "insideBottomLeft", offset: 12, fontSize: 12 }} />
                                         <Tooltip />
                                         <Legend verticalAlign="top" align="right" />
                                         <Bar name="# of Plays" dataKey="plays" fill="#8884d8" />
@@ -527,8 +522,7 @@ class InstructorAssignmentType extends React.Component {
                             <Paper>
                                 <div style={divStyle}>
                                     <div className="chartTopRow">
-                                        <div className="blank" />
-                                        <div className="chartTitleSubtitle">
+                                        <div className="chartTitleSubtitleLeft">
                                             <h2>
                                                 Total Pauses/Playbacks
                                                 <img src={require('../../../public/drilldownSmall.png')} height={20} style={{marginTop:"5px"}}/>
@@ -546,12 +540,12 @@ class InstructorAssignmentType extends React.Component {
                                     <Divider />
                                 </div>
 
-                                <ResponsiveContainer width="85%" height={240}>
+                                <ResponsiveContainer width="95%" height={240}>
                                     <BarChart
                                         width={400} height={250}
                                         data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignmentType.chart10.data}>
-                                        <XAxis dataKey="Name" tick={false} label={{ value: "Assignments" }} />/>
-                                        <YAxis label={{ value: "Count", angle: -90, position: "insideBottomLeft", offset: 12 }} />
+                                        <XAxis dataKey="Name" tick={false} label={{ value: "Assignments", fontSize: 12 }} />/>
+                                        <YAxis label={{ value: "Count", angle: -90, position: "insideBottomLeft", offset: 12, fontSize: 12 }} />
                                         <Tooltip />
                                         <Legend verticalAlign="top" align="right" />
                                         <Bar
@@ -574,16 +568,21 @@ class InstructorAssignmentType extends React.Component {
                         <div></div>
                     }
 
-                    {/* Chart 10DD */}
+                    {/* Number of Pauses by Time Period */}
                     {this.state.selectedVideo ?
                         <Grid item xs={12} md={4}>
                             <Paper>
                                 <div style={divStyle}>
                                     <div className="chartTopRow">
-                                        <div className="blank" />
-                                        <div className="chartTitleSubtitle">
+                                        <div className="chartTitleSubtitleLeft">
                                             <h2>Time Period of Video</h2>
-                                            <p>Identify Which Parts Students Paused At For {comp.state.selectedVideo}</p>
+                                            <p>Identify Which Parts Students Paused At For "
+                                            {comp.state.selectedVideo.length > 20 ?
+                                                comp.state.selectedVideo.substring(0, 16) + "..."
+                                            :
+                                                comp.state.selectedVideo
+                                            }
+                                            "</p>
                                         </div>
                                         <div className="favButtonContainer">
                                             {this.isFav("chart10DD") == true ?
@@ -596,13 +595,12 @@ class InstructorAssignmentType extends React.Component {
                                     <Divider />
                                 </div>
 
-                                <ResponsiveContainer width="85%" height={240}>
+                                <ResponsiveContainer width="95%" height={240}>
                                     <BarChart width={400} height={250}
                                         data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignmentType.chart10.drillDowns[this.state.selectedVideo]}>
-                                        <XAxis dataKey="Name" tick={false} label={{ value: "Time into video" }} />/>
-                                        <YAxis label={{ value: "Number of pauses", angle: -90, position: "insideBottomLeft", offset: 18 }} />
+                                        <XAxis dataKey="Name" tick={false} label={{ value: "Time into video", fontSize: 12 }} />/>
+                                        <YAxis label={{ value: "Number of pauses", angle: -90, position: "insideBottomLeft", offset: 18, fontSize: 12 }} />
                                         <Tooltip />
-                                        <Legend verticalAlign="top" align="right" />
                                         <Bar name="# of pauses" dataKey="Value" fill="#8884d8" >
                                             {this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignmentType.chart10.drillDowns[this.state.selectedVideo].map((entry, index4) => (
                                                 <Cell
@@ -626,15 +624,21 @@ class InstructorAssignmentType extends React.Component {
                     {/* Word Cloud chart */}
                     {this.state.selectedAssignmentType == "PathProblem" ?
                         this.state.selectedVideo ?
-                            <Grid item xs={12}>
+                            <Grid item xs={12} md={6}>
                                 <Paper>
                                     <div style={divStyle}>
                                         <h2>Word Cloud</h2>
-                                        <p>Identify Answers Which Most Students Give For {this.state.selectedVideo}</p>
+                                        <p>Identify Answers Which Most Students Give For "
+                                            {this.state.selectedVideo.length > 20 ?
+                                                this.state.selectedVideo.substring(0, 16) + "..."
+                                            :
+                                                this.state.selectedVideo
+                                            }
+                                        "</p>
                                         <Divider />
                                     </div>
 
-                                    <ResponsiveContainer width="90%" height={350}>
+                                    <ResponsiveContainer width="95%" height={350}>
                                         <div id="wordclouddiv" style={{ height: "100%", width: "100%" }}>
                                             {wordCloudArr.map(function (wordCloud, index) {
                                                 if (wordCloud.slice(0, -4) == comp.state.selectedVideo.split(" (")[0]) {
@@ -675,7 +679,6 @@ function mapStateToProps(state) {
         firebase: state.firebase,
         activeProfile: state.activeProfile.val,
         activeView: state.activeView,
-        usersTable: state.firebase.val.usersTable.usersTable,
         myFavourites: state.myFavourites.favourites
     };
 }

@@ -555,7 +555,7 @@ class InstructorAssignmentCat extends React.Component {
                     }
 
                     {/* prediction */}
-                    <Grid item xs={12}>
+                    {/* <Grid item xs={12}>
                         <Paper>
                             <div style={divStyle}>
                                 <div className="chartTopRow">
@@ -601,12 +601,11 @@ class InstructorAssignmentCat extends React.Component {
                                             ))}
                                     </Bar>
                                     <ReferenceLine y={5} strokeWidth={4} stroke="#e0b13c" strokeDasharray="3 3" label={{ value: "Expected Submissions", position: "top" }} />
-                                    {/* <Line name="Expected number" type='monotone' dataKey='expected' stroke='#ff7300' dot={false} /> */}
                                 </BarChart>
                             </ResponsiveContainer>
                             <div className="chartBottom" />
                         </Paper>
-                    </Grid>
+                    </Grid> */}
 
 
                     <Snackbar
@@ -632,7 +631,6 @@ function mapStateToProps(state) {
         firebase: state.firebase,
         activeProfile: state.activeProfile.val,
         activeView: state.activeView,
-        usersTable: state.firebase.val.usersTable.usersTable,
         myFavourites: state.myFavourites.favourites,
         activeLoader: state.activeLoader,
     };

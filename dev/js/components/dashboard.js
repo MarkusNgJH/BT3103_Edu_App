@@ -147,7 +147,7 @@ class Dashboard extends React.Component {
 
         return (
             <div>
-                <h1>{this.props.usersTable[activeUserId].userDisplayName}'s Dashboard</h1>
+                <h1>{this.props.firebase[this.props.activeProfile.uid][this.props.activeProfile.course].displayName}'s Dashboard</h1>
 
                 <Grid container spacing={24} direction="row" align="center">
 
@@ -875,7 +875,6 @@ class Dashboard extends React.Component {
 const mapStateToProps = state => {
     return {
         firebase: state.firebase.val,
-        usersTable: state.firebase.val.usersTable.usersTable,
         activeProfile: state.activeProfile.val,
         myFavourites: state.myFavourites.favourites
     }

@@ -126,6 +126,7 @@ class StudentOverview extends Component {
                                             <LinearProgress style={{ height: 20 }} className="progress-bar" variant="determinate" value={parseFloat(this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].studentAssignment.overallStats.stats01["Value"])} />
                                         </div>
 
+                                        <div style={{ padding: 10 }}/>
                                         <Divider />
 
                                         <div align="center">
@@ -141,12 +142,11 @@ class StudentOverview extends Component {
                                             <span style={{ color: "#000", margin: "auto", display: "inline-table", paddingLeft:"7px" }}>Percentile</span>
                                         </div>
                                     </CardContent>
-                                    <CardActions>
+                                    <CardActions className="cardButtonContainer">
                                         <Button
                                             onClick={() => this.handleClick('StudentAssignment')}
                                             component={Link} to="/studentAssignment"
                                             variant="raised" size="small"
-                                            style={{ left: "45%" }}
                                             className={this.buttonColor(
                                                 this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].studentAssignment.overallStats.stats02["Value"].slice(0,-1),
                                                 50

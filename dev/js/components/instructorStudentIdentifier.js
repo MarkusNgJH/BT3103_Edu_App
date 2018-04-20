@@ -378,7 +378,8 @@ class instructorStudentIdentifier extends React.Component {
                         </Paper>
                     </Grid>
 
-                    {/* Team Chart DD */}
+                    {this.state.selectedTeam != "" ?
+                    // Team DD
                     <Grid item xs={12} md={6}>
                         <Paper>
                             <div style={divStyle}>
@@ -389,11 +390,6 @@ class instructorStudentIdentifier extends React.Component {
                                     <p>Team {this.state.selectedTeam}</p>
                                 </div>
                                 <div className="favButtonContainer">
-                                    {this.isFav("chart14") == true ?
-                                    <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart14", "Chart has been removed!") }}>Remove</Button>
-                                    :
-                                    <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart14", "BarChart", "Submission Duration", "Identify Distribution of Time Taken for Submission", "student_name", "value", ["value"], "Chart has been added!") }}>Favourite</Button>
-                                    }
                                 </div>
                                 </div>
                                 <Divider />
@@ -420,10 +416,15 @@ class instructorStudentIdentifier extends React.Component {
 
                                     <Tooltip />
                                     <Bar name="Number of Days Taken" dataKey="Value" fill="#3498DB" />>
+                        
                                 </BarChart>
                             </ResponsiveContainer>
                         </Paper>
                     </Grid>
+                    :
+                    <Grid item xs={12} md={6}>
+                    </Grid>
+                    }
 
                     <Snackbar
                         anchorOrigin={{ vertical, horizontal }}
@@ -445,7 +446,6 @@ function mapStateToProps(state) {
         firebase: state.firebase,
         activeProfile: state.activeProfile.val,
         activeView: state.activeView,
-        usersTable: state.firebase.val.usersTable.usersTable,
         myFavourites: state.myFavourites.favourites
     };
 }
