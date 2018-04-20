@@ -9,9 +9,9 @@ How these values are delivered in our applications will be showcased in our user
 
 # Find Out More
 To view the project, go to: [https://bt3103-edu-app.firebaseapp.com/] <br/>
-To view the user guide, go to : [https://drive.google.com/open?id=1fG0EMZkRrvPSjMMezITxG9byHEcSZfVf] <br/>
+To view the user guide, go to : [https://tinyurl.com/EduSparksUserManual] <br/>
 To view the introduction video, go to : [https://youtu.be/M016S_MBbOc] <br/>
-To view the slides used in the introduction video, go to : [https://drive.google.com/open?id=1pfTm2kQLwrjqJu6ns2S2zhptqIuYFIag] <br/>
+To view the slides used in the introduction video, go to : [https://tinyurl.com/EduSparksSlides] <br/>
 
 # Project Group
 * Ang Kian Hwee
