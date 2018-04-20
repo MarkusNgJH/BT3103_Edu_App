@@ -231,10 +231,10 @@ class InstructorAssignmentCat extends React.Component {
                         <Paper>
                             <div style={divStyle}>
                                 <div className="chartTopRow">
-                                    <div className="blank"/>
+                                    <div className="blank" />
                                     <h2>
                                         Assignment Submissions
-                                        <img src={require('../../../public/drilldownSmall.png')} height={20} style={{marginTop:"5px"}}/>
+                                        <img src={require('../../../public/drilldownSmall.png')} height={20} style={{ marginTop: "5px" }} />
                                     </h2>
                                     {this.isFav("chart01") == true ?
                                         <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart01", "Chart has been removed!") }}>Remove</Button>
@@ -295,10 +295,10 @@ class InstructorAssignmentCat extends React.Component {
                                     <p>Students Who Have Not Submitted "
                                         {this.state.selectedAssignment.length > 20 ?
                                             this.state.selectedAssignment.substring(0, 16) + "..."
-                                        :
+                                            :
                                             this.state.selectedAssignment
                                         }
-                                    "</p>
+                                        "</p>
                                     <Divider />
                                 </div>
                                 <div style={{ height: 190 }}>
@@ -331,7 +331,7 @@ class InstructorAssignmentCat extends React.Component {
                                 </div>
                             </Paper>
                         </Grid>
-                    :
+                        :
                         <Grid item xs={12} md={3}>
                         </Grid>
                     }
@@ -342,7 +342,7 @@ class InstructorAssignmentCat extends React.Component {
                             <Paper>
                                 <div style={divStyle}>
                                     <div className="chartTopRow">
-                                        <div className="blank"/>
+                                        <div className="blank" />
                                         <h2>Submission Across Days</h2>
                                         {comp.isFav("chart02") == true ?
                                             <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart02", "Chart has been removed!") }}>Remove</Button>
@@ -387,7 +387,7 @@ class InstructorAssignmentCat extends React.Component {
                             <Paper>
                                 <div style={divStyle}>
                                     <div className="chartTopRow">
-                                        <div className="blank"/>
+                                        <div className="blank" />
                                         <h2>Submission Across Time</h2>
                                         {this.isFav("chart03") == true ?
                                             <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart03", "Chart has been removed!") }}>Remove</Button>
@@ -437,21 +437,21 @@ class InstructorAssignmentCat extends React.Component {
                             <Paper>
                                 <div style={divStyle}>
                                     <div className="chartTopRow">
-                                        <div className="blank"/>
+                                        <div className="blank" />
                                         <h2>Submission Across Days</h2>
                                         {this.isFav("chart04") == true ?
                                             <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart04", "Chart has been removed!") }}>Remove</Button>
-                                        :
+                                            :
                                             <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart04", "BarChart", "Submission Window", "Is there sufficient days to complete assignment " + this.state.selectedAssignment + "?", "day_lapsed_from_assignmentX", "value", ["value"], "Chart has been added!") }}>Favourite</Button>
                                         }
                                     </div>
                                     <p>Evaluate Whether Deadline is Reasonable for Assignment "
                                         {this.state.selectedAssignment.length > 30 ?
                                             this.state.selectedAssignment.substring(0, 26) + "..."
-                                        :
+                                            :
                                             this.state.selectedAssignment
                                         }
-                                    "</p>
+                                        "</p>
                                     <Divider />
                                 </div>
                                 <ResponsiveContainer width="90%" height={220}>
@@ -485,7 +485,7 @@ class InstructorAssignmentCat extends React.Component {
                             <Paper>
                                 <div style={divStyle}>
                                     <div className="chartTopRow">
-                                        <div className="blank"/>
+                                        <div className="blank" />
                                         <h2>Submission Across Time</h2>
                                         {this.isFav("chart06") == true ?
                                             <Button style={{ float: "right", margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart06", "Chart has been removed!") }}>Remove</Button>
@@ -496,10 +496,10 @@ class InstructorAssignmentCat extends React.Component {
                                     <p>Monitor Student's Submission over Time for "
                                         {this.state.selectedAssignment.length > 30 ?
                                             this.state.selectedAssignment.substring(0, 26) + "..."
-                                        :
+                                            :
                                             this.state.selectedAssignment
                                         }
-                                    "</p>
+                                        "</p>
                                     <Divider />
                                 </div>
                                 <ResponsiveContainer width="90%" height={220}>
@@ -519,7 +519,7 @@ class InstructorAssignmentCat extends React.Component {
                                         <Area name="Submission Count" type="monotone" dataKey="value" stroke="#8884d8" fillOpacity={1} fill="url(#colorUv)" />
                                     </AreaChart>
                                 </ResponsiveContainer>
-                                
+
                             </Paper>
                         </Grid>
                         :
@@ -531,7 +531,7 @@ class InstructorAssignmentCat extends React.Component {
                         <Paper>
                             <div style={divStyle}>
                                 <div className="chartTopRow">
-                                    <div className="blank"/>
+                                    <div className="blank" />
                                     <h2>Forecast Submissions Duration</h2>
                                     {this.isFav("prediction") == true ?
                                         <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("prediction", "Chart has been removed!") }}>Remove</Button>
@@ -560,12 +560,12 @@ class InstructorAssignmentCat extends React.Component {
 
                                     <Tooltip cursor={{ fill: 'red', fillOpacity: 0.1 }} />
                                     <Bar name="Number of Days to Submit" dataKey="value">
-                                            {this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignment.prediction.data.map((entry, index) => (
-                                                <Cell
-                                                    key={entry.assignment}
-                                                    fill={entry.assignment == this.state.selectedAssignment ? '#87f2de' : (entry.value > 5 ? '#d68995' : '#71afe2')}
-                                                />
-                                            ))}
+                                        {this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignment.prediction.data.map((entry, index) => (
+                                            <Cell
+                                                key={entry.assignment}
+                                                fill={entry.assignment == this.state.selectedAssignment ? '#87f2de' : (entry.value > 5 ? '#d68995' : '#71afe2')}
+                                            />
+                                        ))}
                                     </Bar>
                                     <ReferenceLine y={5} strokeWidth={4} stroke="#e0b13c" strokeDasharray="3 3" label={{ value: "Expected Submissions", position: "top" }} />
                                     {/* <Line name="Expected number" type='monotone' dataKey='expected' stroke='#ff7300' dot={false} /> */}
