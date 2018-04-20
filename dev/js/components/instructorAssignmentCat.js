@@ -558,7 +558,7 @@ class InstructorAssignmentCat extends React.Component {
                     }
 
                     {/* prediction */}
-                    {/* <Grid item xs={12}>
+                    <Grid item xs={12}>
                         <Paper>
                             <div style={divStyle}>
                                 <div className="chartTopRow">
@@ -608,7 +608,7 @@ class InstructorAssignmentCat extends React.Component {
                             </ResponsiveContainer>
                             <div className="chartBottom" />
                         </Paper>
-                    </Grid> */}
+                    </Grid>
 
 
                     <Snackbar
