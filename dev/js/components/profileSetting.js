@@ -59,6 +59,10 @@ class profileSetting extends React.Component {
 
     handleUIDChange(e) {
         this.setState({ uid: e.target.value, course: 'default'})
+        document.getElementById("pleaseSelect").selected = true;
+        // this.refs.viewForm.reset();
+        // $("#theForm")[0].reset()
+        // document.getElementById("myForm").reset();
         // console.log('handleUIDChange')
         // if(Object.keys(this.props.firebase.val).indexOf(e.target.value) > -1){
         //     // this.setState({ course: Object.keys(this.props.firebase.val[e.target.value])[0]})
@@ -68,6 +72,10 @@ class profileSetting extends React.Component {
 
     handleUIDChange2(e) {
         this.setState({ uid: e, course: 'default'})
+        document.getElementById("pleaseSelect").selected = true;
+        // this.refs.viewForm.reset();
+        // ReactDOM.findDOMNode(this.messageForm).reset()
+        // document.getElementById("myForm").reset();
         // console.log('handleUIDChange ' + this.state.uid)
         // if(Object.keys(this.props.firebase.val).indexOf(e) > -1){
         //     this.setState({ course: 'BT3103'})
@@ -204,11 +212,11 @@ class profileSetting extends React.Component {
                         </FormControl> */}
 
                         <br />
-                        <FormControl className={classNames(styles.margin, styles.textField)} placeholder="Select View">
+                        <FormControl className={classNames(styles.margin, styles.textField)} placeholder="Select View" id='myForm' className="form" ref={ form => this.messageForm = form }>
                             <label>
                                 Select your View Type:<br/> 
-                                <select name="course" onChange={this.handlecourseChange.bind(this)} onFocus={this.handlecourseChange.bind(this)} className="selectStyle">
-                                <option value="" disabled selected>Select View </option>
+                                <select id = "course" name="course" onChange={this.handlecourseChange.bind(this)} onFocus={this.handlecourseChange.bind(this)} className="selectStyle">
+                                <option id="pleaseSelect" value="" disabled selected>Select View </option>
                                 {this.viewCourses()}
                                 </select>
                             </label>
