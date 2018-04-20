@@ -67,9 +67,16 @@ class instructorStudentIdentifier extends React.Component {
             snackOpen: false,
             vertical: null,
             horizontal: null,
+            selectedTeam: ""
         }
         // this.state.favourites = this.props.usersTable[this.props.activeProfile.uid].favourites; // Pulls from fb, comment out this for launch
         this.state.favourites = this.props.myFavourites // pulls from local store, use this for demo
+    }
+
+    selectedTeam(data) {
+        this.setState({
+            selectedTeam: data["team_name"]
+        });
     }
 
     topStudentSubmissions(data) {
@@ -162,24 +169,29 @@ class instructorStudentIdentifier extends React.Component {
                         <Paper>
                             <div style={divStyle}>
                             <div className="chartTopRow">
-                            <div className="blank"/>
-                                <h2>Student Submissions</h2>
-                                {this.isFav("chart12") == true ?
-                                <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart12", "Chart has been removed!") }}>Remove</Button>
-                                :
-                                <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart12", "BarChart", "Student Submission", "Monitor Total Submission of Each Student", "Name", "", ["Value"], "Chart has been added!") }}>Favourite</Button>
-                                }
+                                <div className="blank"/>
+                                <div className="chartTitleSubtitle">
+                                    <h2>Student Submissions</h2>
+                                    <p>Monitor Total Submission of Each Student</p>
                                 </div>
-                                <p>Monitor Total Submission of Each Student</p>
-                            <Divider />
+                                <div className="favButtonContainer">
+                                    {this.isFav("chart12") == true ?
+                                    <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart12", "Chart has been removed!") }}>Remove</Button>
+                                    :
+                                    <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart12", "BarChart", "Student Submission", "Monitor Total Submission of Each Student", "Name", "", ["Value"], "Chart has been added!") }}>Favourite</Button>
+                                    }
+                                </div>
+                                </div>
+                                <Divider />
                             </div>
 
-                            <ResponsiveContainer width="90%" height={280}>
+                            <ResponsiveContainer width="90%" height={240}>
                                 <BarChart
                                     // width={730}
                                     // height={250}
                                     data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorStudentIdentifier.chart12.data}
                                     margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+                                    syncId="student"
                                 >
                                     <XAxis
                                         dataKey="student_name"
@@ -202,7 +214,6 @@ class instructorStudentIdentifier extends React.Component {
                                         ))}
                                     </ Bar>
                                     <ReferenceLine strokeDasharray="3 3" y={20} strokeWidth={4} stroke="#e0b13c" label={{ value: "Expectation", position: "insideTop" }} />
-                                    <Legend verticalAlign="top" align="right" />
                                 </BarChart>
                             </ ResponsiveContainer>
 
@@ -213,25 +224,30 @@ class instructorStudentIdentifier extends React.Component {
                     <Grid item xs={6}>
                         <Paper>
                             <div style={divStyle}>
-                                <div className="chartTopRow">
+                            <div className="chartTopRow">
                                 <div className="blank"/>
-                                <h2> Progress of Latest Assignment </h2>
+                                <div className="chartTitleSubtitle">
+                                    <h2>Progress in Code Combat</h2>
+                                    <p>Identify Possible Achievers</p>
+                                </div>
+                                <div className="favButtonContainer">
                                     {this.isFav("chart13") == true ?
                                     <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart13", "Chart has been removed!") }}>Remove</Button>
                                     :
                                     <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart13", "BarChart", "Progress of Latest Submission", "Identify Possible Achievers", "student_name", "value", ["value"], "Chart has been added!") }}>Favourite</Button>
                                     }
                                 </div>
-                                <p>Identify Possible Achievers</p>
+                                </div>
                                 <Divider />
                             </div>
 
-                            <ResponsiveContainer width="90%" height={280}>
+                            <ResponsiveContainer width="90%" height={240}>
                                 <BarChart
                                     // width={730}
                                     // height={250}
                                     data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorStudentIdentifier.chart13.data}
                                     margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+                                    syncId="student"
                                 >
                                     <XAxis
                                         dataKey="student_name"
@@ -244,7 +260,7 @@ class instructorStudentIdentifier extends React.Component {
                                     />
                                     <YAxis
                                         dataKey="value"
-                                        label={{ value: "Submission Count", angle: -90, position: "insideBottomLeft" }}
+                                        label={{ value: "Level Count", angle: -90, position: "insideBottomLeft" }}
                                     />
 
                                     <Tooltip />
@@ -257,7 +273,6 @@ class instructorStudentIdentifier extends React.Component {
                                     <ReferenceLine strokeDasharray="3 3"
                                         y={this.topStudentSubmissions(this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorStudentIdentifier.chart13.data)}
                                         strokeWidth={4} stroke="#e0b13c" label={{ value: "75 Percentile", position: "insideTop" }} />
-                                    <Legend verticalAlign="top" align="right" />
                                 </BarChart>
                             </ResponsiveContainer>
                         </Paper>
@@ -268,22 +283,27 @@ class instructorStudentIdentifier extends React.Component {
                         <Paper>
                             <div style={divStyle}>
                             <div className="chartTopRow">
-                            <div className="blank"/>
-                                <h2>Submission Duration</h2>
-                                {this.isFav("chart14") == true ?
-                                <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart14", "Chart has been removed!") }}>Remove</Button>
-                                :
-                                <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart14", "BarChart", "Submission Duration", "Identify Distribution of Time Taken for Submission", "student_name", "value", ["value"], "Chart has been added!") }}>Favourite</Button>
-                                }
+                                <div className="blank"/>
+                                <div className="chartTitleSubtitle">
+                                    <h2>Submission Duration</h2>
+                                    <p>Identify Time Taken by Each Student for Submission</p>
                                 </div>
-                                <p>Identify Time Taken by Each Student for Submission</p>
+                                <div className="favButtonContainer">
+                                    {this.isFav("chart14") == true ?
+                                    <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart14", "Chart has been removed!") }}>Remove</Button>
+                                    :
+                                    <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart14", "BarChart", "Submission Duration", "Identify Distribution of Time Taken for Submission", "student_name", "value", ["value"], "Chart has been added!") }}>Favourite</Button>
+                                    }
+                                </div>
+                                </div>
                                 <Divider />
                             </div>
 
-                            <ResponsiveContainer width="90%" height={280}>
+                            <ResponsiveContainer width="90%" height={240}>
                                 <BarChart
                                     data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorStudentIdentifier.chart14.data}
                                     margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+                                    syncId="student"
                                 >
                                     <XAxis
                                         dataKey="student_name"
@@ -302,7 +322,6 @@ class instructorStudentIdentifier extends React.Component {
 
                                     <Tooltip />
                                     <Bar name="Number of Days Taken" dataKey="value" fill="#3498DB" />>
-                                    <Legend verticalAlign="top" align="right" />
                                 </BarChart>
                             </ResponsiveContainer>
 
@@ -310,23 +329,27 @@ class instructorStudentIdentifier extends React.Component {
                     </Grid>
 
                     {/* chart 15 */}
-                    <Grid item xs={6}>
+                    <Grid item xs={12} md={6}>
                         <Paper>
                             <div style={divStyle}>
                             <div className="chartTopRow">
-                            <div className="blank"/>
-                                <h2>Submission Duration by Team</h2>
-                                {this.isFav("chart14") == true ?
-                                <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart14", "Chart has been removed!") }}>Remove</Button>
-                                :
-                                <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart14", "BarChart", "Submission Duration", "Identify Distribution of Time Taken for Submission", "student_name", "value", ["value"], "Chart has been added!") }}>Favourite</Button>
-                                }
+                                <div className="blank"/>
+                                <div className="chartTitleSubtitle">
+                                    <h2>Submission Duration by Team</h2>
+                                    <p>Identify Average Submission Time by Teams</p>
                                 </div>
-                                <p>Identify Average Submission Time by Teams</p>
+                                <div className="favButtonContainer">
+                                    {this.isFav("chart14") == true ?
+                                    <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart14", "Chart has been removed!") }}>Remove</Button>
+                                    :
+                                    <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart14", "BarChart", "Submission Duration", "Identify Distribution of Time Taken for Submission", "student_name", "value", ["value"], "Chart has been added!") }}>Favourite</Button>
+                                    }
+                                </div>
+                                </div>
                                 <Divider />
                             </div>
 
-                            <ResponsiveContainer width="90%" height={280}>
+                            <ResponsiveContainer width="90%" height={240}>
                                 <BarChart
                                     data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorStudentIdentifier.chart15.data}
                                     margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
@@ -346,11 +369,59 @@ class instructorStudentIdentifier extends React.Component {
                                     />
 
                                     <Tooltip />
-                                    <Bar name="Number of Days Taken" dataKey="value" fill="#3498DB" />>
-                                    <Legend verticalAlign="top" align="right" />
+                                    <Bar name="Number of Days Taken" dataKey="value" fill="#3498DB"
+                                    onClick={(data, index) => this.selectedTeam(data)}
+                                    />
                                 </BarChart>
                             </ResponsiveContainer>
 
+                        </Paper>
+                    </Grid>
+
+                    {/* Team Chart DD */}
+                    <Grid item xs={12} md={6}>
+                        <Paper>
+                            <div style={divStyle}>
+                            <div className="chartTopRow">
+                                <div className="blank"/>
+                                <div className="chartTitleSubtitle">
+                                    <h2>Submission Duration of Team Members</h2>
+                                    <p>Team {this.state.selectedTeam}</p>
+                                </div>
+                                <div className="favButtonContainer">
+                                    {this.isFav("chart14") == true ?
+                                    <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart14", "Chart has been removed!") }}>Remove</Button>
+                                    :
+                                    <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart14", "BarChart", "Submission Duration", "Identify Distribution of Time Taken for Submission", "student_name", "value", ["value"], "Chart has been added!") }}>Favourite</Button>
+                                    }
+                                </div>
+                                </div>
+                                <Divider />
+                            </div>
+
+                            <ResponsiveContainer width="90%" height={240}>
+                                <BarChart
+                                    data={this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorStudentIdentifier.chart15.additionaldata[this.state.selectedTeam]}
+                                    margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+                                >
+                                    <XAxis
+                                        dataKey="Name"
+                                        label={{
+                                            value: "Names",
+                                            position: "insideBottom",
+                                        }}
+                                        height={40}
+
+                                    />
+                                    <YAxis
+                                        dataKey="Value"
+                                        label={{ value: "Number of Days", angle: -90, position: "insideBottomLeft" }}
+                                    />
+
+                                    <Tooltip />
+                                    <Bar name="Number of Days Taken" dataKey="Value" fill="#3498DB" />>
+                                </BarChart>
+                            </ResponsiveContainer>
                         </Paper>
                     </Grid>
 

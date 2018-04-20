@@ -312,19 +312,21 @@ class InstructorAssignmentType extends React.Component {
                             <div style={divStyle}>
                                 <div className="chartTopRow">
                                     <div className="blank" />
-                                    
-                                    <h2>Submission Per Type
-                                    <img src={require('../../../public/drilldownSmall.png')} height={20} style={{marginTop:"5px"}}/>    
-                                    </h2>
-                                    
-                                    
-                                    {this.isFav("chart08") == true ?
-                                        <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart08", "Chart has been removed!") }}>Remove</Button>
-                                        :
-                                        <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart08", "BarChart", "Submission Per Type", "Monitor Percentage of Submission Per Assignment Type", "Name", "Value", ["Value"], "Chart has been added!") }}>Favourite</Button>
-                                    }
+                                    <div className="chartTitleSubtitle">
+                                        <h2>
+                                            Submission Per Type
+                                            <img src={require('../../../public/drilldownSmall.png')} height={20} style={{marginTop:"5px"}}/>    
+                                        </h2>
+                                        <p>Monitor Submission Rate by Assignment Type</p>
+                                    </div>
+                                    <div className="favButtonContainer">
+                                        {this.isFav("chart08") == true ?
+                                            <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart08", "Chart has been removed!") }}>Remove</Button>
+                                            :
+                                            <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart08", "BarChart", "Submission Per Type", "Monitor Percentage of Submission Per Assignment Type", "Name", "Value", ["Value"], "Chart has been added!") }}>Favourite</Button>
+                                        }
+                                    </div>
                                 </div>
-                                <p>Monitor Submission Rate by Assignment Type</p>
                                 <Divider />
                             </div>
                             <ResponsiveContainer width="90%" height={240}>
@@ -368,17 +370,21 @@ class InstructorAssignmentType extends React.Component {
                                     <div style={divStyle}>
                                         <div className="chartTopRow">
                                             <div className="blank" />
-                                            <h2>
-                                                Total Submissions
-                                                <img src={require('../../../public/drilldownSmall.png')} height={20} style={{marginTop:"5px"}}/>
-                                            </h2>
-                                            {this.isFav("chart08DD") == true ?
-                                                <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart08DD", "Chart has been removed!") }}>Remove</Button>
-                                                :
-                                                <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart08DD", "BarChart", "Total Submissions", "Number of Submissions per " + this.state.selectedAssignmentType + "'s Assignment", "assignment", "", ["value"], "Chart has been added!") }}>Favourite</Button>
-                                            }
+                                            <div className="chartTitleSubtitle">
+                                                <h2>
+                                                    Total Submissions
+                                                    <img src={require('../../../public/drilldownSmall.png')} height={20} style={{marginTop:"5px"}}/>
+                                                </h2>
+                                                <p>Number of Submissions for {this.state.selectedAssignmentType}'s Assignments</p>
+                                            </div>
+                                            <div className="favButtonContainer">
+                                                {this.isFav("chart08DD") == true ?
+                                                    <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart08DD", "Chart has been removed!") }}>Remove</Button>
+                                                    :
+                                                    <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart08DD", "BarChart", "Total Submissions", "Number of Submissions per " + this.state.selectedAssignmentType + "'s Assignment", "assignment", "", ["value"], "Chart has been added!") }}>Favourite</Button>
+                                                }
+                                            </div>
                                         </div>
-                                        <p>Number of Submissions for {this.state.selectedAssignmentType}'s Assignments</p>
                                         <Divider />
                                     </div>
 
@@ -417,14 +423,19 @@ class InstructorAssignmentType extends React.Component {
                                         <div style={divStyle}>
                                             <div className="chartTopRow">
                                                 <div className="blank" />
-                                                <h2>Name List</h2>
-                                                {this.isFav("chart08DDAdd") == true ?
-                                                    <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart08DDAdd", "Chart has been removed!") }}>Remove</Button>
-                                                    :
-                                                    <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart08DDAdd", "BarChart", "Name list of students", "Name list of those who have not submitted " + this.state.selectedAssignment, "", "", [], "Chart has been added!", this.state.selectedAssignment) }}>Favourite</Button>
-                                                }   
+                                                <div className="chartTitleSubtitle">
+                                                    <h2>Name List</h2>
+                                                    <p>Students Who Have Not Submitted</p>
+                                                </div>
+                                                <div className="favButtonContainer">
+                                                    {this.isFav("chart08DDAdd") == true ?
+                                                        <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart08DDAdd", "Chart has been removed!") }}>Remove</Button>
+                                                        :
+                                                        <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart08DDAdd", "BarChart", "Name list of students", "Name list of those who have not submitted " + this.state.selectedAssignment, "", "", [], "Chart has been added!", this.state.selectedAssignment) }}>Favourite</Button>
+                                                    }   
+                                                </div>
+                                                <div className="blank" />
                                             </div>
-                                            <p>Students Who Have Not Submitted</p>
                                             <Divider />
                                         </div>
 
@@ -478,14 +489,18 @@ class InstructorAssignmentType extends React.Component {
                                 <div style={divStyle}>
                                     <div className="chartTopRow">
                                         <div className="blank" />
-                                        <h2>Total Plays/ Fast-Forwards</h2>
-                                        {this.isFav("chart09") == true ?
-                                            <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart09", "Chart has been removed!") }}>Remove</Button>
-                                            :
-                                            <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart09", "BarChart", "Total Plays/ Fast-Forwards", "Which videos have my students watched and how is the pace for them?", "Name", "", ["plays", "rate"], "Chart has been added!") }}>Favourite</Button>
-                                        }
+                                        <div className="chartTitleSubtitle">
+                                            <h2>Total Plays/ Fast-Forwards</h2>
+                                            <p>Identify Videos that Students Completed Comfortably</p>
+                                        </div>
+                                        <div className="favButtonContainer">
+                                            {this.isFav("chart09") == true ?
+                                                <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart09", "Chart has been removed!") }}>Remove</Button>
+                                                :
+                                                <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart09", "BarChart", "Total Plays/ Fast-Forwards", "Which videos have my students watched and how is the pace for them?", "Name", "", ["plays", "rate"], "Chart has been added!") }}>Favourite</Button>
+                                            }
+                                        </div>
                                     </div>
-                                    <p>Identify Videos that Students Completed Comfortably</p>
                                     <Divider />
                                 </div>
 
@@ -513,17 +528,21 @@ class InstructorAssignmentType extends React.Component {
                                 <div style={divStyle}>
                                     <div className="chartTopRow">
                                         <div className="blank" />
-                                        <h2>
-                                            Total Pauses/Playbacks
-                                            <img src={require('../../../public/drilldownSmall.png')} height={20} style={{marginTop:"5px"}}/>
-                                        </h2>
-                                        {this.isFav("chart10") == true ?
-                                            <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart10", "Chart has been removed!") }}>Remove</Button>
-                                            :
-                                            <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart10", "BarChart", "Total Pauses/Playbacks", "Identify PathProblems that Students Students May Be Struggling With", "Name", "", ["pauses", "playbacks"], "Chart has been added!") }}>Favourite</Button>
-                                        }
+                                        <div className="chartTitleSubtitle">
+                                            <h2>
+                                                Total Pauses/Playbacks
+                                                <img src={require('../../../public/drilldownSmall.png')} height={20} style={{marginTop:"5px"}}/>
+                                            </h2>
+                                            <p>Identify Videos that Students May Struggle With</p>
+                                        </div>
+                                        <div className="favButtonContainer">
+                                            {this.isFav("chart10") == true ?
+                                                <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart10", "Chart has been removed!") }}>Remove</Button>
+                                                :
+                                                <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart10", "BarChart", "Total Pauses/Playbacks", "Identify PathProblems that Students Students May Be Struggling With", "Name", "", ["pauses", "playbacks"], "Chart has been added!") }}>Favourite</Button>
+                                            }
+                                        </div>
                                     </div>
-                                    <p>Identify Videos that Students May Struggle With</p>
                                     <Divider />
                                 </div>
 
@@ -562,14 +581,18 @@ class InstructorAssignmentType extends React.Component {
                                 <div style={divStyle}>
                                     <div className="chartTopRow">
                                         <div className="blank" />
-                                        <h2>Time Period of Video</h2>
-                                        {this.isFav("chart10DD") == true ?
-                                            <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart10DD", "Chart has been removed!") }}>Remove</Button>
-                                            :
-                                            <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart10DD", "BarChart", "Total Pauses/Playbacks", "Identify Which Parts Students Paused At For " + comp.state.selectedVideo, "Name", "", ["Value"], "Chart has been added!", comp.state.selectedVideo) }}>Favourite</Button>
-                                        }
+                                        <div className="chartTitleSubtitle">
+                                            <h2>Time Period of Video</h2>
+                                            <p>Identify Which Parts Students Paused At For {comp.state.selectedVideo}</p>
+                                        </div>
+                                        <div className="favButtonContainer">
+                                            {this.isFav("chart10DD") == true ?
+                                                <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart10DD", "Chart has been removed!") }}>Remove</Button>
+                                                :
+                                                <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart10DD", "BarChart", "Total Pauses/Playbacks", "Identify Which Parts Students Paused At For " + comp.state.selectedVideo, "Name", "", ["Value"], "Chart has been added!", comp.state.selectedVideo) }}>Favourite</Button>
+                                            }
+                                        </div>
                                     </div>
-                                    <p>Identify Which Parts Students Paused At For {comp.state.selectedVideo}</p>
                                     <Divider />
                                 </div>
 

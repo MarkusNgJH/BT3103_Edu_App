@@ -98,7 +98,7 @@ class StudentOverview extends Component {
                     <div><Loader /></div>
                     :
                     <div>
-                        <Grid container spacing={8}>
+                        <Grid container spacing={8} justify="center">
                             <Grid item xs={10} sm={8} md={6} lg={4} xl={3}>
                                 <Card>
                                     <CardContent>

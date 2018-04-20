@@ -78,7 +78,7 @@ h2 {
 h3, h4, p {
 	margin: 0;
 	padding: 0;
-	font-size: 12px;
+	font-size: 14px;
 }
 
 #main {
@@ -94,7 +94,7 @@ h3, h4, p {
 	display: flex;
 	align-items: center;
 	font-weight: bold;
-	font-size: 12px;
+	font-size: 14px;
 
 	button {
 		display: flex;
@@ -191,6 +191,22 @@ h3, h4, p {
 	justify-content: center;
 	align-items: center;
 	height: 100%;
+}
+
+.chartTitleSubtitle {
+	margin: 5px 0 5px 0;
+}
+
+.favButtonContainer {
+	// padding: 5px;
+}
+
+.chartTop {
+	padding: 5px;
+}
+
+.chartBottom {
+	padding: 5px;
 }
 
 * {
