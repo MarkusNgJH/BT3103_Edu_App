@@ -50,7 +50,7 @@ const styles = theme => ({
 class profileSetting extends React.Component {
     state = {
         uid: 'default',
-        course: 'BT3103',
+        course: 'default',
         snackOpen: false,
         vertical: null,
         horizontal: null,
@@ -58,20 +58,20 @@ class profileSetting extends React.Component {
     };
 
     handleUIDChange(e) {
-        this.setState({ uid: e.target.value})
+        this.setState({ uid: e.target.value, course: 'default'})
         // console.log('handleUIDChange')
-        if(Object.keys(this.props.firebase.val).indexOf(e.target.value) > -1){
-            // this.setState({ course: Object.keys(this.props.firebase.val[e.target.value])[0]})
-            this.setState({ course: 'BT3103'})
-        }
+        // if(Object.keys(this.props.firebase.val).indexOf(e.target.value) > -1){
+        //     // this.setState({ course: Object.keys(this.props.firebase.val[e.target.value])[0]})
+        //     this.setState({ course: 'BT3103'})
+        // }
     }
 
     handleUIDChange2(e) {
-        this.setState({ uid: e})
+        this.setState({ uid: e, course: 'default'})
         // console.log('handleUIDChange ' + this.state.uid)
-        if(Object.keys(this.props.firebase.val).indexOf(e) > -1){
-            this.setState({ course: 'BT3103'})
-        }
+        // if(Object.keys(this.props.firebase.val).indexOf(e) > -1){
+        //     this.setState({ course: 'BT3103'})
+        // }
     }
 
     handleChange = () => {
@@ -96,18 +96,27 @@ class profileSetting extends React.Component {
         if(Object.keys(this.props.firebase).length != 0){
             // console.log("ViewCourses")
             // console.log(this.props.firebase)
-            var location = (Object.keys(this.props.firebase.val).indexOf(this.state.uid) > -1) ? this.state.uid : 'R6nSbDVly8PUnC6jQFcseDS9sgJ3'; 
-            return (
-                // g8odN87wiURjfhqbw1HiMoFIwxn1
-                // R6nSbDVly8PUnC6jQFcseDS9sgJ3
-                Object.keys(this.props.firebase.val[location]).map((course) => {
-                    return(
-                        <option key={course} value={course}>
-                        {course}    
-                        </option>
-                    )
-                })
-            )
+            // console.log("find courses")
+            // console.log(ReactDOM.findDOMNode(this.select).value)
+            // var location = (Object.keys(this.props.firebase.val).indexOf(this.state.uid) > -1) ? this.state.uid : 'R6nSbDVly8PUnC6jQFcseDS9sgJ3'; 
+            if(this.state.uid != "default"){
+                return (
+                    // g8odN87wiURjfhqbw1HiMoFIwxn1
+                    // R6nSbDVly8PUnC6jQFcseDS9sgJ3
+                    
+                    Object.keys(this.props.firebase.val[this.state.uid]).map((course) => {
+                        return(
+                            <option key={course} value={course}>
+                            {course}    
+                            </option>
+                        )
+                    })
+                )
+            }
+            else{
+                <option value="Select View"> Select View </option>
+            }
+
         }
         else{
             return (
@@ -121,18 +130,54 @@ class profileSetting extends React.Component {
     handleClose = () => {
         this.setState({ snackOpen: false });
     };
+   
+        updateActiveProfile2 = (uid, c) => {
+            if(this.state.uid!="default" && this.state.course!="default"){
+                var userDetails = { uid: this.state.uid, course: this.state.course, role: this.props.firebase.val[this.state.uid][this.state.course]['User Type'] }
+                this.props.updateActiveProfile(userDetails)
+                var msg = "Updated user profile"
+                var r = this.props.firebase.val[this.state.uid][this.state.course]['User Type']
+                var newMsg = msg + ":\n" + " -UserId: " + uid + "\n" + " -Course: " + c + "\n" + " -Role: " + r
+                this.setState({
+                    snackOpen: true,
+                    vertical: 'bottom',
+                    horizontal: 'right',
+                    message: newMsg
+                })
+            }
+            else{
+                var newMsg = "Please Select User and View Type"
+                this.setState({
+                    snackOpen: true,
+                    vertical: 'bottom',
+                    horizontal: 'right',
+                    message: newMsg
+                })
+            }
+    
+        }
+    // updateActiveProfile2 = (userDetails, msg, uid, c, r) => {
+    //     this.props.updateActiveProfile(userDetails)
+    //     if(this.state.uid!="default" && this.state.course!="default"){
+    //         var newMsg = msg + ":\n" + " -UserId: " + uid + "\n" + " -Course: " + c + "\n" + " -Role: " + r
+    //         this.setState({
+    //             snackOpen: true,
+    //             vertical: 'bottom',
+    //             horizontal: 'right',
+    //             message: newMsg
+    //         })
+    //     }
+    //     else{
+    //         var newMsg = "Please Select User and View Type"
+    //         this.setState({
+    //             snackOpen: true,
+    //             vertical: 'bottom',
+    //             horizontal: 'right',
+    //             message: newMsg
+    //         })
+    //     }
 
-    updateActiveProfile2 = (userDetails, msg, uid, c, r) => {
-        this.props.updateActiveProfile(userDetails)
-
-        var newMsg = msg + ":\n" + " -UserId: " + uid + "\n" + " -Course: " + c + "\n" + " -Role: " + r
-        this.setState({
-            snackOpen: true,
-            vertical: 'bottom',
-            horizontal: 'right',
-            message: newMsg
-        })
-    }
+    // }
 
     buttonColor(val, threshold) {
         if (val > threshold) {
@@ -159,10 +204,11 @@ class profileSetting extends React.Component {
                         </FormControl> */}
 
                         <br />
-                        <FormControl className={classNames(styles.margin, styles.textField)}>
+                        <FormControl className={classNames(styles.margin, styles.textField)} placeholder="Select View">
                             <label>
                                 Select your View Type:<br/> 
                                 <select name="course" onChange={this.handlecourseChange.bind(this)} onFocus={this.handlecourseChange.bind(this)} className="selectStyle">
+                                <option value="" disabled selected>Select View </option>
                                 {this.viewCourses()}
                                 </select>
                             </label>
@@ -173,7 +219,7 @@ class profileSetting extends React.Component {
                         <Button 
                         variant="raised" 
                         style={{ align: 'center' }} 
-                        onClick={() => this.updateActiveProfile2({ uid: this.state.uid, course: this.state.course, role: this.props.firebase.val[this.state.uid][this.state.course]['User Type'] }, "Updated user profile", this.state.uid, this.state.course, this.props.firebase.val[this.state.uid][this.state.course]['User Type'])}
+                        onClick={() => this.updateActiveProfile2(this.state.uid, this.state.course)}
                         className={this.buttonColor(5,2)}
                         >
                         Submit
