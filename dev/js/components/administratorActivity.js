@@ -214,12 +214,8 @@ class administratorActivity extends React.Component {
                                 >
                                     <XAxis dataKey="Name" />
                                     <YAxis
-                                        dataKey="Value"
-                                        label={
-                                            <AxisLabel axisType="yAxis" width={600} height={300}>
-                                                Daily Total Activity
-                                            </AxisLabel>
-                                        }
+                                        dataKey="Value"        
+                                        label={{ value: "Number of Activities", angle: -90, position: "insideBottomLeft" }}
                                     />
                                     <CartesianGrid strokeDasharray="3 3" />
                                     <Tooltip cursor={{ stroke: 'orange', strokeWidth: 3 }} />
@@ -242,11 +238,7 @@ class administratorActivity extends React.Component {
                                 >
                                     <XAxis dataKey="Name" />
                                     <YAxis
-                                        label={
-                                            <AxisLabel axisType="yAxis" width={600} height={300}>
-                                                Daily Activities by Cohort
-                                        </AxisLabel>
-                                        }
+                                    label={{ value: "Number of Activities", angle: -90, position: "insideBottomLeft" }}
                                     />
                                     <CartesianGrid strokeDasharray="3 3" />
                                     <Tooltip cursor={{ stroke: 'orange', strokeWidth: 3 }} content ={CustomToolTip}/>
