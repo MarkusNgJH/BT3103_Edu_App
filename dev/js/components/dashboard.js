@@ -13,6 +13,7 @@ import Button from 'material-ui/Button';
 import Paper from 'material-ui/Paper';
 import Divider from 'material-ui/Divider';
 import Typography from 'material-ui/Typography';
+import Hidden from 'material-ui/Hidden';
 
 import {
     PieChart,
@@ -75,7 +76,7 @@ class Dashboard extends React.Component {
         }
     }
 
-    getChart(chartName, activeUserId, activeCourse, drilldownName = "", ddparam="") {
+    getChart(chartName, activeUserId, activeCourse, drilldownName = "", ddparam = "") {
         var courses = this.props.firebase[activeUserId]
         var chartDD = ["chart02DD", "chart03DD", "chart08DD", "chart10DD"]
         // Scan thru each course and find the correct chart 
@@ -84,9 +85,9 @@ class Dashboard extends React.Component {
                 for (var card in courses[activeCourse]) { // card = instructorAssignmentType 
                     for (var chart in courses[activeCourse][card]) { // chart = chart08
                         if (chartName.slice(0, 7) == chart || chartName == chart) {
-                            if ((chartDD.includes(chartName.slice(0, -3))) || (chartDD.includes(chartName))) { // chart08DD or chart08DDAdd
+                            if (chartName.indexOf("DD") != -1) { // chartXXDD or chartXXDDAdd charts
                                 for (var drilldown in courses[activeCourse][card][chart].drillDowns) { // CodeCombat_Problems, PathProblem, Profile, Text
-                                    console.log(drilldown)
+                                    console.log("DD is " + drilldown)
                                     if ((drilldownName == drilldown) || (ddparam == drilldown)) { // chartXXDDAdd charts or chartXXDD charts
                                         console.log(chartName.slice(-3))
                                         return courses[activeCourse][card][chart].drillDowns
@@ -95,7 +96,7 @@ class Dashboard extends React.Component {
 
                             } else { // normal or prediction charts 
                                 console.log(chartName + " Not a drilldown chart!~~")
-                                if(chartName == chart) {
+                                if (chartName == chart) {
                                     return courses[activeCourse][card][chart]
                                 }
                             }
@@ -835,12 +836,12 @@ class Dashboard extends React.Component {
                                                                                                                         {chart["dataKey"].map(function (dk, index2) {
                                                                                                                             return (
                                                                                                                                 <Bar name="# of pauses" fill="#71afe2" dataKey={dk}>
-                                                                                                                                {chartData[index][chart["ddparam1"]].map((entry, index4) => (
-                                                                                                                                    <Cell
-                                                                                                                                        key={entry.Name}
-                                                                                                                                        fill={comp.maxCount(entry.Value, chartData[index][chart["ddparam1"]]) == true ? '#d68995' : '#71afe2'}
-                                                                                                                                    />
-                                                                                                                                ))}
+                                                                                                                                    {chartData[index][chart["ddparam1"]].map((entry, index4) => (
+                                                                                                                                        <Cell
+                                                                                                                                            key={entry.Name}
+                                                                                                                                            fill={comp.maxCount(entry.Value, chartData[index][chart["ddparam1"]]) == true ? '#d68995' : '#71afe2'}
+                                                                                                                                        />
+                                                                                                                                    ))}
                                                                                                                                 </Bar>
                                                                                                                             )
                                                                                                                         })}
@@ -849,9 +850,100 @@ class Dashboard extends React.Component {
                                                                                                             </Paper>
                                                                                                         </Grid>
                                                                                                         :
-                                                                                                        <div align="center">
-                                                                                                            <h2>You have not added any charts to your Dashboard.</h2>
-                                                                                                        </div>
+                                                                                                        chart["chart"] == "chart01DD1" ?
+                                                                                                            <Grid item xs={6}>
+                                                                                                                <Paper>
+                                                                                                                    <div style={divStyle}>
+                                                                                                                        <div className="chartTopRow">
+                                                                                                                            <div className="blank" />
+                                                                                                                            <div className="chartTitleSubtitle">
+                                                                                                                                <h2>{chart["title"]}</h2>
+                                                                                                                                <p>{chart["subtitle"]}</p>
+                                                                                                                            </div>
+                                                                                                                            <div className="favButtonContainer">
+                                                                                                                            <Hidden>
+                                                                                                                                <Button disabled></Button>
+                                                                                                                            </Hidden>
+                                                                                                                            </div>
+                                                                                                                        </div>
+                                                                                                                        <Divider />
+                                                                                                                    </div>
+                                                                                                                    <div className="chartTop" />
+                                                                                                                    <ResponsiveContainer width="90%" height={220}>
+                                                                                                                        <BarChart
+                                                                                                                            width={730} height={250}
+                                                                                                                            data={chartData[index][chart["drilldown"]][chart["ddparam1"]]}
+                                                                                                                            margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+                                                                                                                        >
+                                                                                                                            <XAxis
+                                                                                                                                dataKey={chart["xAxis"]}
+                                                                                                                                label={{ value: "Number of Days Elapsed", position: 'insideBottom', offset: -4 }}
+                                                                                                                            />
+                                                                                                                            <YAxis
+                                                                                                                                dataKey={chart["yAxis"]}
+                                                                                                                                label={{ value: "Submission Count", angle: -90, position: "insideBottomLeft" }}
+                                                                                                                            />
+
+                                                                                                                            <Tooltip />
+                                                                                                                            {chart["dataKey"].map(function (dk, index) {
+                                                                                                                                return (
+                                                                                                                                    <Bar name="Submission Count" dataKey={dk} fill="#8884d8" />
+                                                                                                                                )
+                                                                                                                            })}
+                                                                                                                        </BarChart>
+                                                                                                                    </ResponsiveContainer>
+                                                                                                                    <div className="chartBottom" />
+                                                                                                                </Paper>
+                                                                                                            </Grid>
+                                                                                                            :
+                                                                                                            chart["chart"] == "chart01DD2" ? 
+                                                                                                            <Grid item xs={6}>
+                                                                                                                <Paper>
+                                                                                                                    <div style={divStyle}>
+                                                                                                                        <div className="chartTopRow">
+                                                                                                                            <div className="blank" />
+                                                                                                                            <div className="chartTitleSubtitle">
+                                                                                                                                <h2>{chart["title"]}</h2>
+                                                                                                                                <p>{chart["subtitle"]}</p>
+                                                                                                                            </div>
+                                                                                                                            <div className="favButtonContainer">
+                                                                                                                                <Hidden>
+                                                                                                                                    <Button disabled></Button>
+                                                                                                                                </Hidden>
+                                                                                                                            </div>
+                                                                                                                        </div>
+                                                                                                                        <Divider />
+                                                                                                                    </div>
+                                                                                                                    <div className="chartTop" />
+                                                                                                                    <ResponsiveContainer width="90%" height={220}>
+                                                                                                                        <AreaChart width={730} height={250}
+                                                                                                                                data={chartData[index][chart["drilldown"]][chart["ddparam1"]]}
+                                                                                                                            margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
+                                                                                                                            <defs>
+                                                                                                                                <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
+                                                                                                                                    <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8} />
+                                                                                                                                    <stop offset="95%" stopColor="#8884d8" stopOpacity={0} />
+                                                                                                                                </linearGradient>
+                                                                                                                            </defs>
+                                                                                                                            <XAxis label={{ value: "Date" }} dataKey={chart["xAxis"]} tick={false} />
+                                                                                                                            <YAxis name="Date" label={{ value: "Submission Count", angle: -90, position: "insideBottomLeft", offset: 12 }} domain={[0, 36]} />
+                                                                                                                            <ReferenceLine y={33} strokeWidth={4} stroke="#e0b13c" strokeDasharray="3 3" label={{ value: "Expected Submissions", position: "top" }} />
+                                                                                                                            <Tooltip />
+                                                                                                                            {chart["dataKey"].map(function (dk, index) {
+                                                                                                                                return (
+                                                                                                                                    <Area key={index} name="Submission Count" type="monotone" dataKey={dk} stroke="#8884d8" fillOpacity={1} fill="url(#colorUv)" />
+                                                                                                                                )
+                                                                                                                            })}
+                                                                                                                            
+                                                                                                                        </AreaChart>
+                                                                                                                    </ResponsiveContainer>
+                                                                                                                    <div className="chartBottom" />
+                                                                                                                </Paper>
+                                                                                                            </Grid>
+                                                                                                            :
+                                                                                                            <div align="center">
+                                                                                                                <h2>You have not added any charts to your Dashboard.</h2>
+                                                                                                            </div>
 
                             )
                         })

@@ -89,7 +89,7 @@ class InstructorAssignmentCat extends React.Component {
     selectedAssignment(data) {
         this.setState({
             selectedAssignment: data.assignment,
-            selectedAssignmentID: data.assignmentID
+            selectedAssignmentID: data.assignmentID,
         });
         // if (this.state.selectedAssignment == "") {
         //     this.setState({ selectedAssignment: data, steps: [...this.state.steps, data.assignment] })
@@ -142,7 +142,7 @@ class InstructorAssignmentCat extends React.Component {
         return false;
     }
 
-    addToFavourites(chart, type, title, subtitle, xAxis, yAxis, dataKey, message) {
+    addToFavourites(chart, type, title, subtitle, xAxis, yAxis, dataKey, message, drilldown="", ddparam1 = "") {
         console.log("Adding", chart);
         this.setState({
             snackOpen: true,
@@ -157,7 +157,9 @@ class InstructorAssignmentCat extends React.Component {
             subtitle: subtitle,
             xAxis: xAxis || "",
             yAxis: yAxis || "",
-            dataKey: dataKey
+            dataKey: dataKey,
+            ddparam1: ddparam1,
+            drilldown: drilldown
         })
 
         store.dispatch({
@@ -165,7 +167,6 @@ class InstructorAssignmentCat extends React.Component {
             payload: this.state.favourites
         })
         console.log("Successfully added", chart)
-        console.log("Updated favs:", this.state.favourites)
     }
 
     removeFromFavourites(chart, message) {
@@ -448,6 +449,7 @@ class InstructorAssignmentCat extends React.Component {
                         <span></span>
                     }
 
+                    {/* chart02DD */}
                     {/** Dynamic Drilldown: Submission Window*/}
                     {this.state.selectedAssignment ?
                         <Grid item xs={6}>
@@ -466,10 +468,10 @@ class InstructorAssignmentCat extends React.Component {
                                             "</p>
                                         </div>
                                         <div className="favButtonContainer">
-                                            {this.isFav("chart04") == true ?
-                                                <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart04", "Chart has been removed!") }}>Remove</Button>
+                                            {this.isFav("chart01DD1") == true ?
+                                                <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart01DD1", "Chart has been removed!") }}>Remove</Button>
                                             :
-                                                <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart04", "BarChart", "Submission Window", "Is there sufficient days to complete assignment " + this.state.selectedAssignment + "?", "day_lapsed_from_assignmentX", "value", ["value"], "Chart has been added!") }}>Favourite</Button>
+                                                <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart01DD1", "BarChart", "Submission Across Days", "Evaluate Whether Deadline is Reasonable for Assignment " + this.state.selectedAssignment, "days_lapsed", "value", ["value"], "Chart has been added!", "chart02DD", this.state.selectedAssignmentID) }}>Favourite</Button>
                                             }
                                         </div>
                                     </div>
@@ -502,6 +504,7 @@ class InstructorAssignmentCat extends React.Component {
                         <span></span>
                     }
 
+                    {/* chart03DD */}
                     {/** Dynamic Drilldown: Submission Across Time*/}
                     {this.state.selectedAssignment ?
                         <Grid item xs={6}>
@@ -520,10 +523,10 @@ class InstructorAssignmentCat extends React.Component {
                                             "</p>
                                         </div>
                                         <div className="favButtonContainer">
-                                            {this.isFav("chart06") == true ?
-                                                <Button style={{ float: "right", margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart06", "Chart has been removed!") }}>Remove</Button>
+                                            {this.isFav("chart01DD2") == true ?
+                                                <Button style={{ float: "right", margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart01DD2", "Chart has been removed!") }}>Remove</Button>
                                                 :
-                                                <Button style={{ float: "right", margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart06", "AreaChart", "Submission Across Time", "Monitor Student's Submission over Time for " + this.state.selectedAssignment + "?", "date_time", "", ["value"], "Chart has been added!") }}>Favourite</Button>
+                                                <Button style={{ float: "right", margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart01DD2", "AreaChart", "Submission Across Time", "Monitor Student's Submission over Time for " + this.state.selectedAssignment, "date_time", "", ["value"], "Chart has been added!", "chart03DD", this.state.selectedAssignmentID) }}>Favourite</Button>
                                             }
                                         </div>
                                     </div>

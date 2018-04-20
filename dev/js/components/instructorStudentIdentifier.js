@@ -106,7 +106,7 @@ class instructorStudentIdentifier extends React.Component {
         return false;
     }
 
-    addToFavourites(chart, type, title, subtitle, xAxis, yAxis, dataKey, message) {
+    addToFavourites(chart, type, title, subtitle, xAxis, yAxis, dataKey, message, drilldown, ddparam1 = "") {
         console.log("Adding", chart);
         this.setState({
             snackOpen: true,
@@ -121,7 +121,9 @@ class instructorStudentIdentifier extends React.Component {
             subtitle: subtitle,
             xAxis: xAxis || "",
             yAxis: yAxis || "",
-            dataKey: dataKey
+            dataKey: dataKey,
+            ddparam1: ddparam1,
+            drilldown: drilldown
         })
 
         store.dispatch({
@@ -129,7 +131,6 @@ class instructorStudentIdentifier extends React.Component {
             payload: this.state.favourites
         })
         console.log("Successfully added", chart)
-        console.log("Updated favs:", this.state.favourites)
     }
 
     removeFromFavourites(chart, message) {

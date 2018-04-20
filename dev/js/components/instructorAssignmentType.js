@@ -116,9 +116,11 @@ class InstructorAssignmentType extends React.Component {
         return false;
     }
 
-    addToFavourites(chart, type, title, subtitle, xAxis, yAxis, dataKey, message, ddparam1 = "") {
+    addToFavourites(chart, type, title, subtitle, xAxis, yAxis, dataKey, message, drilldown, ddparam1 = "") {
         console.log("Adding", chart);
-        var drilldown = this.state.selectedAssignmentType
+        if(drilldown == "") {
+            drilldown = this.state.selectedAssignmentType
+        }
         console.log("My drilldown is: " + drilldown)
         this.setState({
             snackOpen: true,
