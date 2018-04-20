@@ -93,7 +93,7 @@ class InstructorOverview extends Component {
                     <div><Loader /></div>
                     :
                     <div>
-                        <Grid container spacing={40} justify="center">
+                        <Grid container spacing={40} className="cards-container">
                             <Grid item xs={6} sm={4} xl={3}>
                                 <Card className="card" align="center">
                                     <CardContent align="center">
@@ -128,21 +128,22 @@ class InstructorOverview extends Component {
                                         </div>
 
                                     </CardContent>
-                                    <Button
-                                        onClick={() => { this.handleClick('instructorAssignmentCat') }}
-                                        component={Link} to="/instructorAssignmentCat"
-                                        variant="raised"
-                                        size="small"
-                                        style={{ position: "absolute", bottom:"5%", left: "14%"}}
-                                        className={this.buttonColor(
-                                            this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignment.overallStats["Current Submission"],
-                                            this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignment.overallStats["Total Expected Submission"] / 2)}
-                                    >
-                                        {this.chooseText(
-                                            this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignment.overallStats["Current Submission"],
-                                            this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignment.overallStats["Total Expected Submission"] / 2
-                                        )}
-                                    </Button>
+                                    <CardActions className="cardButtonContainer">
+                                        <Button
+                                            onClick={() => { this.handleClick('instructorAssignmentCat') }}
+                                            component={Link} to="/instructorAssignmentCat"
+                                            variant="raised"
+                                            size="small"
+                                            className={this.buttonColor(
+                                                this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignment.overallStats["Current Submission"],
+                                                this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignment.overallStats["Total Expected Submission"] / 2)}
+                                        >
+                                            {this.chooseText(
+                                                this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignment.overallStats["Current Submission"],
+                                                this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignment.overallStats["Total Expected Submission"] / 2
+                                            )}
+                                        </Button>
+                                    </CardActions>
                                 </Card>
                             </Grid>
 
@@ -171,26 +172,24 @@ class InstructorOverview extends Component {
                                                 this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignmentType.overallStats["Total Submissions"] / this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignmentType.overallStats["Expected Submissions Received"] * 100
                                             } />
                                         </div>
-                                        <div>
-                                            
-                                        </div> 
                                     </CardContent>
-                                    <Button
-                                        onClick={() => this.handleClick('instructorAssignmentType')}
-                                        component={Link} to="/instructorAssignmentType"
-                                        variant="raised" 
-                                        size="small"
-                                        style={{ position: "absolute", bottom: "5%", left: "48%" }}
-                                        className={this.buttonColor(
-                                            this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignmentType.overallStats["Total Submissions"],
-                                            this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignmentType.overallStats["Expected Submissions Received"] / 2
-                                        )}
-                                    >
-                                        {this.chooseText(
-                                            this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignmentType.overallStats["Total Submissions"],
-                                            this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignmentType.overallStats["Expected Submissions Received"] / 2
-                                        )}
-                                    </Button>
+                                    <CardActions className="cardButtonContainer">
+                                        <Button
+                                            onClick={() => this.handleClick('instructorAssignmentType')}
+                                            component={Link} to="/instructorAssignmentType"
+                                            variant="raised" 
+                                            size="small"
+                                            className={this.buttonColor(
+                                                this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignmentType.overallStats["Total Submissions"],
+                                                this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignmentType.overallStats["Expected Submissions Received"] / 2
+                                            )}
+                                        >
+                                            {this.chooseText(
+                                                this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignmentType.overallStats["Total Submissions"],
+                                                this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorAssignmentType.overallStats["Expected Submissions Received"] / 2
+                                            )}
+                                        </Button>
+                                    </CardActions>
                                 </Card>
                             </Grid>
 
@@ -208,7 +207,7 @@ class InstructorOverview extends Component {
                                         <div align="center">
                                             <div style={{ float: "left", width: "50%", paddingBottom: "20px" }}>
                                                 <Typography variant="subheading" align="center" style={{ padding: "10px" }}>
-                                                    <strong>Top </strong>
+                                                    <strong>Top</strong>
                                                 </Typography>
                                                 <Typography variant="subheading" align="center" >
                                                     {this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].instructorStudentIdentifier.overallStats["Top"][1]}
@@ -233,16 +232,17 @@ class InstructorOverview extends Component {
                                             </div>
                                         </div>
                                     </CardContent>
-                                    <Button
-                                        onClick={() => { this.handleClick('instructorStudentIdentifier') }}
-                                        component={Link} to="/instructorStudentIdentifier"
-                                        variant="raised"
-                                        size="small"
-                                        style={{ position: "absolute", bottom: "5%", right: "14%" }}
-                                        className={this.buttonColor(5,2)}
-                                    >
-                                        {this.chooseText(5, 2)}
-                                    </Button>
+                                    <CardActions className="cardButtonContainer">
+                                        <Button
+                                            onClick={() => { this.handleClick('instructorStudentIdentifier') }}
+                                            component={Link} to="/instructorStudentIdentifier"
+                                            variant="raised"
+                                            size="small"
+                                            className={this.buttonColor(5,2)}
+                                        >
+                                            {this.chooseText(5, 2)}
+                                        </Button>
+                                    </CardActions>
                                 </Card>
                             </Grid>
                         </Grid>

@@ -128,7 +128,6 @@ class AdminOverview extends Component {
                                     component={Link} to="/administratorPerformance"
                                     variant="raised" 
                                     size="small"
-                                    style={{marginTop: "20%"}}
                                     className={this.buttonColor(
                                         this.props.firebase.val[this.props.activeProfile.uid][this.props.activeProfile.course].adminPerformance.overallStats.stats02["Value"].slice(0,-1),
                                         50
@@ -168,7 +167,6 @@ class AdminOverview extends Component {
                                     component={Link} to="/administratorActivity"
                                     variant="raised"
                                     size="small"
-                                    style={{marginTop: "43%"}}
                                     className={this.buttonColor(5,2)}
                                 > 
                                     {this.chooseText(5, 2)}

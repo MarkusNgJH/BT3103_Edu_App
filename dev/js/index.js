@@ -11,13 +11,23 @@ import Favicon from 'react-favicon';
 //wrapping createStore in {} makes it usuable without declaring a var
 
 var config = {
-    apiKey: "AIzaSyDQQWrnzVTRzEpe22LQBtP16ic78AA1bag",
-    authDomain: "bt3103-education-app-2.firebaseapp.com",
-    databaseURL: "https://bt3103-education-app-2.firebaseio.com",
-    projectId: "bt3103-education-app-2",
-    storageBucket: "bt3103-education-app-2.appspot.com",
-    messagingSenderId: "821115163051"
+    apiKey: "AIzaSyCxq1LkoNLRvkRH5sW63B4NGWniVqQarWM",
+    authDomain: "edusparks-7f8bc.firebaseapp.com",
+    databaseURL: "https://edusparks-7f8bc.firebaseio.com",
+    projectId: "edusparks-7f8bc",
+    storageBucket: "edusparks-7f8bc.appspot.com",
+    messagingSenderId: "589628670686"
   };
+
+// old firebase
+// var config = {
+// apiKey: "AIzaSyDQQWrnzVTRzEpe22LQBtP16ic78AA1bag",
+// authDomain: "bt3103-education-app-2.firebaseapp.com",
+// databaseURL: "https://bt3103-education-app-2.firebaseio.com",
+// projectId: "bt3103-education-app-2",
+// storageBucket: "bt3103-education-app-2.appspot.com",
+// messagingSenderId: "821115163051"
+//   };
 
 try {
     firebase.initializeApp(config);
@@ -67,8 +77,8 @@ let update_data = function () {
     });
 };
 
-// Retrieve live data every minute.
-setInterval(update_data, 60000);
+// Retrieve live data every 2 hours.
+setInterval(update_data, 7200000);
 
 ReactDOM.render(
     <div>

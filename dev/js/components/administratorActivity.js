@@ -202,10 +202,9 @@ class administratorActivity extends React.Component {
                                 <h2>Total Activity Across Time</h2>
                                 <h4>Track Total Daily Activity </h4>
                                 <p>{this.props.activeProfile.course}</p>
-                                <Divider />
                             </div>
 
-                            <ResponsiveContainer width="90%" height={380}>
+                            <ResponsiveContainer width="90%" height={240}>
                                 <LineChart
                                     width={730}
                                     height={250}
@@ -215,12 +214,8 @@ class administratorActivity extends React.Component {
                                 >
                                     <XAxis dataKey="Name" />
                                     <YAxis
-                                        dataKey="Value"
-                                        label={
-                                            <AxisLabel axisType="yAxis" width={600} height={300}>
-                                                Daily Total Activity
-                                            </AxisLabel>
-                                        }
+                                        dataKey="Value"        
+                                        label={{ value: "Number of Activities", angle: -90, position: "insideBottomLeft" }}
                                     />
                                     <CartesianGrid strokeDasharray="3 3" />
                                     <Tooltip cursor={{ stroke: 'orange', strokeWidth: 3 }} />
@@ -228,24 +223,12 @@ class administratorActivity extends React.Component {
                                     <Brush />
                                 </LineChart>
                             </ResponsiveContainer>
-                            {/* {this.isFav("chart05") == true ?
-                                <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart05", "Chart has been removed!") }}>Remove</Button>
-                                :
-                                <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart05", "LineChart", "Cohort activity across time", this.props.activeProfile.course, "Name", "Value", ["Value"], "Chart has been added!") }}>Favourite</Button>
-                            } */}
-                        </Paper>
-                    </Grid>
-
-                    {/** CHART 06 */}
-                    {/* {this.state.selectedActivity == "2018-02-21" ? */}
-                    <Grid item xs={12}>
-                        <Paper>
+                            <div>
                             <div style={divStyle}>
                                 <h2>Cohort Activity Across Time</h2>
                                 <h4>Track Daily Activity by Course</h4>
-                                <Divider />
                             </div>
-                            <ResponsiveContainer width="90%" height={380}>
+                            <ResponsiveContainer width="90%" height={240}>
                                 <LineChart
                                     width={730}
                                     height={500}
@@ -255,11 +238,7 @@ class administratorActivity extends React.Component {
                                 >
                                     <XAxis dataKey="Name" />
                                     <YAxis
-                                        label={
-                                            <AxisLabel axisType="yAxis" width={600} height={300}>
-                                                Daily Activities by Cohort
-                                        </AxisLabel>
-                                        }
+                                    label={{ value: "Number of Activities", angle: -90, position: "insideBottomLeft" }}
                                     />
                                     <CartesianGrid strokeDasharray="3 3" />
                                     <Tooltip cursor={{ stroke: 'orange', strokeWidth: 3 }} content ={CustomToolTip}/>
@@ -283,6 +262,20 @@ class administratorActivity extends React.Component {
                                     <Line dataKey="West Spring Secondary School (NCC2018)" fill="#e56d49" stroke="#e56d49" />
                                 </LineChart>
                             </ResponsiveContainer>
+                            </div>
+                            {/* {this.isFav("chart05") == true ?
+                                <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart05", "Chart has been removed!") }}>Remove</Button>
+                                :
+                                <Button style={{ margin: "5px" }} size="small" color="secondary" variant="raised" onClick={() => { this.addToFavourites("chart05", "LineChart", "Cohort activity across time", this.props.activeProfile.course, "Name", "Value", ["Value"], "Chart has been added!") }}>Favourite</Button>
+                            } */}
+                        </Paper>
+                    </Grid>
+
+                    {/** CHART 06 */}
+                    {/* {this.state.selectedActivity == "2018-02-21" ? */}
+                    <Grid item xs={12}>
+                        <Paper>
+                            
                             {/* {this.isFav("chart06") == true ?
                                 <Button style={{ margin: "5px" }} size="small" color="primary" variant="raised" onClick={() => { this.removeFromFavourites("chart06", "Chart has been removed!") }}>Remove</Button>
                                 :
@@ -311,7 +304,6 @@ function mapStateToProps(state) {
         firebase: state.firebase,
         activeProfile: state.activeProfile.val,
         activeView: state.activeView,
-        usersTable: state.firebase.val.usersTable.usersTable,
         myFavourites: state.myFavourites.favourites
     };
 }
