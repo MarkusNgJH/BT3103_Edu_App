@@ -10,7 +10,7 @@ How these values are delivered in our applications will be showcased in our user
 # Find Out More
 To view the project, go to: [https://bt3103-edu-app.firebaseapp.com/] <br/>
 To view the user guide, go to : [] <br/>
-To view the introduction video, go to : [] <br/>
+To view the introduction video, go to : [https://youtu.be/M016S_MBbOc] <br/>
 
 # Project Group
 * Ang Kian Hwee
